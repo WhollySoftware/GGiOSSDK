@@ -45,5 +45,5 @@ I am trying to make live tracking sdk for all the developer so the can use easil
   # }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
+   s.frameworks = 'UIKit'
 end
