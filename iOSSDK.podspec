@@ -7,7 +7,7 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = 'iOSSDK'
+  s.name             = 'GGiOSSDK'
   s.version          = '0.1.0'
   s.summary          = 'A iOSSDK is the testing sdk'
 
@@ -21,11 +21,11 @@ Pod::Spec.new do |s|
 I am trying to make live tracking sdk for all the developer so the can use easily in all project.
                        DESC
 
-  s.homepage         = 'https://github.com/WhollySoftware/iOSSDK'
+  s.homepage         = 'https://github.com/WhollySoftware/GGiOSSDK'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'WhollySoftware' => 'whollysoftware@gmail.com' }
-  s.source           = { :git => 'https://github.com/WhollySoftware/iOSSDK.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/WhollySoftware/GGiOSSDK.git', :tag => s.version.to_s }
   s.social_media_url = 'https://whollysoftware.com'
 
   s.ios.deployment_target = '10.0'
