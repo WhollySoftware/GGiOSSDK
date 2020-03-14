@@ -9,7 +9,7 @@
 import UIKit
 
 
-class GGUserSessionDetail: AGObject {
+class GGUserSessionDetail: GGObject {
     
     static var isNewInstallled: Bool {
         get { return UserDefaults.standard.bool(forKey: "isUserLogin") }

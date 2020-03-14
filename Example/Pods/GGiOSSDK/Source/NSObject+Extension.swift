@@ -53,10 +53,10 @@ extension GGObject {
         var dict: [String: Any] = [:]
         for chiled in self.property() {
             
-            if chiled.value is AGObject.Type{
-                dict[chiled.label!] = (chiled.value as? AGObject)?.toDict ?? "{}"
+            if chiled.value is GGObject.Type{
+                dict[chiled.label!] = (chiled.value as? GGObject)?.toDict ?? "{}"
             }
-            else if let value = chiled.value as? Array<AGObject>{
+            else if let value = chiled.value as? Array<GGObject>{
                 dict[chiled.label!] = value.toDict
             }
             else{
@@ -115,7 +115,7 @@ public extension Dictionary {
     
     /// - Parameter prettify: set true to prettify data (default is false).
     /// - Returns: optional JSON Data (if applicable).
-    public func jsonData(prettify: Bool = false) -> Data? {
+    func jsonData(prettify: Bool = false) -> Data? {
         guard JSONSerialization.isValidJSONObject(self) else {
             return nil
         }

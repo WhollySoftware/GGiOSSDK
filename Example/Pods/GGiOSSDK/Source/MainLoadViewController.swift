@@ -6,10 +6,9 @@
 //
 
 import UIKit
-import AFNetworking
-import 
 class MainLoadViewController: UIViewController {
 
+    static var shared = MainLoadViewController()
     override func viewDidLoad() {
         super.viewDidLoad()
 
