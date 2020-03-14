@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'iOSSDK_Example' do
+  pod 'iOSSDK', :path => '../'
+
+  target 'iOSSDK_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
