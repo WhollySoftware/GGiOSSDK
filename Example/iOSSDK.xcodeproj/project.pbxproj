@@ -44,7 +44,7 @@
 		6B7241A93C4902A4659CE1E9 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		6F7114A14847EE4EFD68AA6C /* Pods-iOSSDK_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSSDK_Tests.release.xcconfig"; path = "Target Support Files/Pods-iOSSDK_Tests/Pods-iOSSDK_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		874BD15D3F08D78196C2E459 /* Pods_iOSSDK_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSSDK_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A71C78C5297951CEDC415BD7 /* iOSSDK.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = iOSSDK.podspec; path = ../iOSSDK.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A71C78C5297951CEDC415BD7 /* GGiOSSDK.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = GGiOSSDK.podspec; path = ../GGiOSSDK.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		BEEE5FE1A8AE10F59208C25D /* Pods-iOSSDK_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSSDK_Tests.debug.xcconfig"; path = "Target Support Files/Pods-iOSSDK_Tests/Pods-iOSSDK_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		CAD1DD32F67CEA460D4EA3AC /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,7 +132,7 @@
 		607FACF51AFB993E008FA782 /* Podspec Metadata */ = {
 			isa = PBXGroup;
 			children = (
-				A71C78C5297951CEDC415BD7 /* iOSSDK.podspec */,
+				A71C78C5297951CEDC415BD7 /* GGiOSSDK.podspec */,
 				6B7241A93C4902A4659CE1E9 /* README.md */,
 				CAD1DD32F67CEA460D4EA3AC /* LICENSE */,
 			);
