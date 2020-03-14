@@ -1,0 +1,22 @@
+{
+  "name": "iOSSDK",
+  "version": "0.1.0",
+  "summary": "A short description of iOSSDK.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/gauravgudaliya/iOSSDK",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "gauravgudaliya": "whollysoftware@gmail.com"
+  },
+  "source": {
+    "git": "https://github.com/gauravgudaliya/iOSSDK.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "iOSSDK/Classes/**/*"
+}

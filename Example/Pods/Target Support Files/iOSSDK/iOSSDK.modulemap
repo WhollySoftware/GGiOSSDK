@@ -1,0 +1,6 @@
+framework module iOSSDK {
+  umbrella header "iOSSDK-umbrella.h"
+
+  export *
+  module * { export * }
+}
