@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'GGiOSSDK'
-  s.version          = '0.1.1'
+  s.version          = '0.1.2'
   s.summary          = 'A iOSSDK is the testing sdk'
 
 # This description is used to generate tags and improve search results.
@@ -30,13 +30,15 @@ I am trying to make live tracking sdk for all the developer so the can use easil
 
   s.ios.deployment_target = '10.0'
 
-  s.source_files = 'Source/**/*.swift'
+  s.source_files = '*'
   s.swift_version = '5.0'
   s.platforms = {
       "ios":"10.0"
   }
-  s.dependency 'AFNetworking', '~> 2.3'
-  
+  s.dependency 'SwiftyJSON', '~> 4.0'
+  s.dependency 'MBProgressHUD'
+  s.dependency 'AlamofireNetworkActivityIndicator'
+  s.dependency 'IQKeyboardManagerSwift', '6.2.1'
   
   # s.resource_bundles = {
   #   'iOSSDK' => ['iOSSDK/Assets/*.png']

@@ -1,11 +1,10 @@
 use_frameworks!
 
 target 'iOSSDK_Example' do
-  pod 'iOSSDK', :path => '../'
-
-  target 'iOSSDK_Tests' do
-    inherit! :search_paths
-
-    
-  end
+  pod 'GGiOSSDK'
+  pod 'SwiftyJSON', '~> 4.0'
+  pod 'MBProgressHUD'
+  pod 'AlamofireNetworkActivityIndicator'
+  pod 'IQKeyboardManagerSwift', '6.2.1'
+  
 end

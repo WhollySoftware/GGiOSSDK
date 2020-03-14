@@ -1,16 +1,60 @@
 PODS:
-  - iOSSDK (0.1.0)
+  - AFNetworking (2.7.0):
+    - AFNetworking/NSURLConnection (= 2.7.0)
+    - AFNetworking/NSURLSession (= 2.7.0)
+    - AFNetworking/Reachability (= 2.7.0)
+    - AFNetworking/Security (= 2.7.0)
+    - AFNetworking/Serialization (= 2.7.0)
+    - AFNetworking/UIKit (= 2.7.0)
+  - AFNetworking/NSURLConnection (2.7.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.7.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.7.0)
+  - AFNetworking/Security (2.7.0)
+  - AFNetworking/Serialization (2.7.0)
+  - AFNetworking/UIKit (2.7.0):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - Alamofire (5.0.2)
+  - AlamofireNetworkActivityIndicator (3.0.1):
+    - Alamofire (~> 5.0)
+  - GGiOSSDK (0.1.0):
+    - AFNetworking (~> 2.3)
+  - IQKeyboardManagerSwift (6.2.1)
+  - MBProgressHUD (1.2.0)
+  - SwiftyJSON (4.3.0)
 
 DEPENDENCIES:
-  - iOSSDK (from `../`)
+  - AlamofireNetworkActivityIndicator
+  - GGiOSSDK
+  - IQKeyboardManagerSwift (= 6.2.1)
+  - MBProgressHUD
+  - SwiftyJSON (~> 4.0)
 
-EXTERNAL SOURCES:
-  iOSSDK:
-    :path: "../"
+SPEC REPOS:
+  trunk:
+    - AFNetworking
+    - Alamofire
+    - AlamofireNetworkActivityIndicator
+    - GGiOSSDK
+    - IQKeyboardManagerSwift
+    - MBProgressHUD
+    - SwiftyJSON
 
 SPEC CHECKSUMS:
-  iOSSDK: e29ea2e054e51c944c3fe251abbad86d1657794c
+  AFNetworking: 8dd5f9b9691e09186393069a12cc3b5ed7c8b511
+  Alamofire: 3ba7a4db18b4f62c4a1c0e1cb39d7f3d52e10ada
+  AlamofireNetworkActivityIndicator: f7d4cd8d12bcf61dc569cbe000b0c35e9c8d8d32
+  GGiOSSDK: 02f3a9a2b85a2cde3570974b0c9dc6914d5f2e77
+  IQKeyboardManagerSwift: 0f0ae8935360b4003e6ea1ac7c19898f01e2f7c7
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
+  SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 5ca6ffccf1590198b1cdd497ecbf8ab73a069055
+PODFILE CHECKSUM: bcaead3b95f6e6d70b84b68cf7eb68bd0ba2c0b9
 
 COCOAPODS: 1.8.4
