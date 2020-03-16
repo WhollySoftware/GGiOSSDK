@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'GGiOSSDK'
-  s.version          = '0.1.3'
-  s.summary          = 'A iOSSDK is the testing sdk 0.1.3'
+  s.version          = '0.1.4'
+  s.summary          = 'A iOSSDK is the testing sdk 0.1.4'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -37,7 +37,6 @@ I am trying to make live tracking sdk for all the developer so the can use easil
   }
   s.dependency 'SwiftyJSON', '~> 4.0'
   s.dependency 'MBProgressHUD'
-  s.dependency 'AlamofireNetworkActivityIndicator'
   s.dependency 'IQKeyboardManagerSwift', '6.2.1'
   
   # s.resource_bundles = {

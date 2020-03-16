@@ -56,6 +56,7 @@
 		7F7EC3FA241F7F4900BB2398 /* GGProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7EC3F3241F7F4900BB2398 /* GGProgress.swift */; };
 		7F7EC3FE241F9A3E00BB2398 /* GGView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7EC3FD241F9A3E00BB2398 /* GGView.swift */; };
 		7F7EC400241F9A4600BB2398 /* GGButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7EC3FF241F9A4600BB2398 /* GGButton.swift */; };
+		7F7EC402241F9F7500BB2398 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7EC401241F9F7500BB2398 /* ChatViewController.swift */; };
 		7F8D0D97241D37EB00C773AB /* GGiOSSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8D0D96241D37EB00C773AB /* GGiOSSDK.swift */; };
 		7F8D0D9E241D416200C773AB /* GGiOSSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7F8D0D9D241D416200C773AB /* GGiOSSDK.bundle */; };
 		7FBEED91241F56DC00605125 /* GGiOSSDK.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FBEED90241F56C900605125 /* GGiOSSDK.storyboard */; };
@@ -257,6 +258,7 @@
 		7F7EC3F3241F7F4900BB2398 /* GGProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GGProgress.swift; sourceTree = "<group>"; };
 		7F7EC3FD241F9A3E00BB2398 /* GGView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GGView.swift; sourceTree = "<group>"; };
 		7F7EC3FF241F9A4600BB2398 /* GGButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GGButton.swift; sourceTree = "<group>"; };
+		7F7EC401241F9F7500BB2398 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		7F8D0D96241D37EB00C773AB /* GGiOSSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GGiOSSDK.swift; sourceTree = "<group>"; };
 		7F8D0D9D241D416200C773AB /* GGiOSSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GGiOSSDK.bundle; sourceTree = "<group>"; };
 		7FBEED90241F56C900605125 /* GGiOSSDK.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GGiOSSDK.storyboard; sourceTree = "<group>"; };
@@ -484,12 +486,13 @@
 				7F7EC3FD241F9A3E00BB2398 /* GGView.swift */,
 				7F7303C3241D0B4D00073E0A /* GGObject+Helper.swift */,
 				7F7303C6241D0B4F00073E0A /* GGObject.swift */,
-				7F7303C5241D0B4E00073E0A /* MainLoadViewController.swift */,
 				7F7303C7241D0B5000073E0A /* NSObject+Extension.swift */,
 				7F7303C4241D0B4E00073E0A /* UserDetails.swift */,
 				7F7EC3F3241F7F4900BB2398 /* GGProgress.swift */,
 				7F8D0D96241D37EB00C773AB /* GGiOSSDK.swift */,
 				7FBEED90241F56C900605125 /* GGiOSSDK.storyboard */,
+				7F7303C5241D0B4E00073E0A /* MainLoadViewController.swift */,
+				7F7EC401241F9F7500BB2398 /* ChatViewController.swift */,
 				7F8D0D9D241D416200C773AB /* GGiOSSDK.bundle */,
 			);
 			path = Source;
@@ -1076,6 +1079,7 @@
 			files = (
 				7F7303C8241D0B5100073E0A /* GGObject+Helper.swift in Sources */,
 				5EBB00C9C5D81BD323252D671D7DDB7C /* GGiOSSDK-dummy.m in Sources */,
+				7F7EC402241F9F7500BB2398 /* ChatViewController.swift in Sources */,
 				7F7303CA241D0B5100073E0A /* MainLoadViewController.swift in Sources */,
 				7F8D0D97241D37EB00C773AB /* GGiOSSDK.swift in Sources */,
 				7F7303CC241D0B5100073E0A /* NSObject+Extension.swift in Sources */,

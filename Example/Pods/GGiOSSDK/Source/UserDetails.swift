@@ -41,25 +41,25 @@ class ValidateIdentity:GGObject{
     var agentOnline:Int  = 0
     var companyId:String  = ""
     var embeddedChat:EmbeddedChat  = EmbeddedChat()
-    var isBlocked:Int  = 0
+    var isBlocked:Bool  = false
     var messageID:String  = ""
     var name:String  = ""
     var visitorConnectedStatus:Int  = 0
     var visitorID:String  = ""
 }
 class EmbeddedChat:GGObject{
-    var isBlocked:Int  = 0
+    var isBlocked:Bool  = false
     var _id:String  = ""
     var displayForm:Int  = 0
-    var emailRequired:Int  = 0
-    var messageRequired:Int  = 0
-    var mobileRequired:Int  = 0
-    var offlineMessageOptions:Int  = 0
-    var offlineMsgShowMobileBox:Int  = 0
-    var offlineMsgShowSubjectBox:Int  = 0
-    var postChatPromptComments:Int  = 0
-    var showAgentPanel:Int  = 0
-    var showHeaderImg:Int  = 0
+    var emailRequired:Bool  = false
+    var messageRequired:Bool  = false
+    var mobileRequired:Bool  = false
+    var offlineMessageOptions:Bool  = false
+    var offlineMsgShowMobileBox:Bool  = false
+    var offlineMsgShowSubjectBox:Bool  = false
+    var postChatPromptComments:Bool  = false
+    var showAgentPanel:Bool  = false
+    var showHeaderImg:Bool  = false
     var offlineTxt:String  = ""
     var onHoldMsg:String  = ""
     var onlineTxt:String  = ""

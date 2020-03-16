@@ -7,25 +7,41 @@
 
 import UIKit
 import Alamofire
+import IQKeyboardManagerSwift
 class MainLoadViewController: UIViewController {
-
-    static var shared = MainLoadViewController()
+    @IBOutlet weak var btnStart: GGButton!
+    @IBOutlet weak var txtFullName: UITextField!
+    @IBOutlet weak var txtEmailAddress: UITextField!
+    @IBOutlet weak var txtMobile: UITextField!
+    @IBOutlet weak var txtTypeYourQuestion: UITextField!
+    @IBOutlet weak var txtSubject: UITextField!
+    
+    @IBOutlet weak var viewFullName: GGView!
+    @IBOutlet weak var viewEmailAddress: GGView!
+    @IBOutlet weak var viewMobile: GGView!
+    @IBOutlet weak var viewTypeYourQuestion: GGView!
+    @IBOutlet weak var viewSubject: GGView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "iOSSDK"
+        self.title = "Chat"
+        IQKeyboardManager.shared.enable = true
         var bundle = Bundle(for: GGiOSSDK.self)
         if let resourcePath = bundle.path(forResource: "GGiOSSDK", ofType: "bundle") {
             if let resourcesBundle = Bundle(path: resourcePath) {
                 bundle = resourcesBundle
             }
         }
-        
+        btnStart.action = {
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white,.font : UIFont.init(name: "AvenirLTStd-Black", size: 17.0) ?? UIFont.boldSystemFont(ofSize: 17)]
-        let backImage = UIImage(named: "IQButtonBarArrowLeft", in: bundle, compatibleWith: nil)
+        let backImage = UIImage(named: "back", in: bundle, compatibleWith: nil)
         self.navigationController?.navigationBar.backIndicatorImage = backImage
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
         self.navigationController?.navigationBar.tintColor = UIColor.white
-        self.navigationController?.navigationBar.barTintColor = UIColor.darkGray
+        self.navigationController?.navigationBar.barTintColor = UIColor(hexCode:0x322D33)
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
@@ -33,6 +49,15 @@ class MainLoadViewController: UIViewController {
         barItem.title = "Chat"
         navigationItem.leftBarButtonItem = barItem
         makePostCall()
+    }
+    func setupData(){
+        DispatchQueue.main.async {
+            self.viewEmailAddress.isHidden = !GGiOSSDK.shared.AllDetails.embeddedChat.emailRequired
+            self.viewMobile.isHidden = !GGiOSSDK.shared.AllDetails.embeddedChat.mobileRequired
+            self.viewTypeYourQuestion.isHidden = !GGiOSSDK.shared.AllDetails.embeddedChat.messageRequired
+         self.btnStart.setTitle(GGiOSSDK.shared.AllDetails.embeddedChat.startChatButtonTxt, for: .normal)
+            self.btnStart.backgroundColor = UIColor(hexCode:0x322D33)
+        }
     }
     func makePostCall() {
      let validateIdentityAPI: String = GGiOSSDK.shared.APIbaseURL + "validate-identity"
@@ -90,7 +115,7 @@ class MainLoadViewController: UIViewController {
             if receivedTodo["message"] as! String == "authorized"{
                 if let d = receivedTodo["data"] as? [String:AnyObject]{
                     GGiOSSDK.shared.AllDetails <= d
-                    debugPrint(GGiOSSDK.shared.AllDetails.embeddedChat.onHoldMsg)
+                    self.setupData()
                 }
             }else{
                
