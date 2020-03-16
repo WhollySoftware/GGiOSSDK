@@ -36,3 +36,35 @@ class GGApplication: NSObject {
         return Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String ?? ""
     }
 }
+class ValidateIdentity:GGObject{
+    var agentId:String = ""
+    var agentOnline:Int  = 0
+    var companyId:String  = ""
+    var embeddedChat:EmbeddedChat  = EmbeddedChat()
+    var isBlocked:Int  = 0
+    var messageID:String  = ""
+    var name:String  = ""
+    var visitorConnectedStatus:Int  = 0
+    var visitorID:String  = ""
+}
+class EmbeddedChat:GGObject{
+    var isBlocked:Int  = 0
+    var _id:String  = ""
+    var displayForm:Int  = 0
+    var emailRequired:Int  = 0
+    var messageRequired:Int  = 0
+    var mobileRequired:Int  = 0
+    var offlineMessageOptions:Int  = 0
+    var offlineMsgShowMobileBox:Int  = 0
+    var offlineMsgShowSubjectBox:Int  = 0
+    var postChatPromptComments:Int  = 0
+    var showAgentPanel:Int  = 0
+    var showHeaderImg:Int  = 0
+    var offlineTxt:String  = ""
+    var onHoldMsg:String  = ""
+    var onlineTxt:String  = ""
+    var preChatOfflineMessageTxt:String  = ""
+    var preChatOnlineMessageTxt:String  = ""
+    var sendButtonTxt:String  = ""
+    var startChatButtonTxt:String  = ""
+}

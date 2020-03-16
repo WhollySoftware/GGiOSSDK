@@ -133,7 +133,7 @@ public class GGObject: NSObject {
         default:
             if let subModelClass = classWith(className: name.realType) {
                 if isArrayType {
-                    if let subDict =  newValue as? [[String : AnyObject]]{
+                    if let subDict =  newValue as? [[String : Any]]{
                         let arraySubModels: [AnyObject] = subDict.map {
                             subModelClass.init(with: $0 as [String: AnyObject])
                         }
@@ -144,6 +144,13 @@ public class GGObject: NSObject {
                 else{
                     if let dict =  newValue as? [String : AnyObject]{
                         self.setValue(subModelClass.init(with: dict), forKey: forKey)
+                        return
+                    }
+                }
+            }else{
+                if forKey == "embeddedChat"{
+                    if let dict =  newValue as? [String : AnyObject]{
+                        self.setValue(EmbeddedChat.init(with: dict), forKey: forKey)
                         return
                     }
                 }

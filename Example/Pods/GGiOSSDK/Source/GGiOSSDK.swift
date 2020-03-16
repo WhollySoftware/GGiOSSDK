@@ -7,27 +7,33 @@
 
 import Foundation
 public class GGiOSSDK : NSObject {
-    @available(iOS 13.0, *)
-    @objc public static var windowScene: UIWindowScene?
     @objc public static let shared: GGiOSSDK = {
         return GGiOSSDK()
     }()
+    @available(iOS 13.0, *)
+    @objc public static var windowScene: UIWindowScene?
+    
+    var appSid = ""
+    var baseURL = "https://www.drdsh.live"
+    var APIbaseURL = "https://www.drdsh.live"+"/sdk/v1/"
+    var AllDetails:ValidateIdentity = ValidateIdentity()
     @objc public class func GGiOSSDKBundlePath() -> String {
         return Bundle(for: GGiOSSDK.self).path(forResource: "GGiOSSDK", ofType: "bundle")!
     }
-    @objc public class func presentChat(animated: Bool = true, completion: ((Bool) -> Void)? = nil) {
-        
-//        let vc = UIStoryboard(name: "GGiOSSDK", bundle: nil).instantiateViewController(withIdentifier: "MainLoadViewController") as! MainLoadViewController
-//        vc.modalPresentationStyle = .overFullScreen
-        let nav = UINavigationController(rootViewController: MainLoadViewController())
+    @objc public class func presentChat(appSid:String,animated: Bool = true, completion: ((Bool) -> Void)? = nil) {
+        GGiOSSDK.shared.appSid = appSid
+        let vc = UIStoryboard(name: "GGiOSSDK", bundle: Bundle(for: GGiOSSDK.self)).instantiateViewController(withIdentifier: "MainLoadViewController") as! MainLoadViewController
+        vc.modalPresentationStyle = .overFullScreen
+        let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .overFullScreen
         GGiOSSDK.shared.topViewController()?.present(nav, animated: true, completion: {
             completion?(true)
         })
-      //  Manager.sharedInstance.presentChat(animated: animated, completion: completion)
     }
     @objc public class func dismissChat(animated: Bool = true, completion: ((Bool) -> Void)? = nil) {
-        Manager.sharedInstance.dismissChat(animated: animated, completion: completion)
+        GGiOSSDK.shared.topViewController()?.dismiss(animated: true, completion: {
+             completion?(true)
+        })
     }
     func pushViewController(VC:UIViewController,animated: Bool){
         topViewController()?.navigationController?.pushViewController(VC, animated: animated)
@@ -54,46 +60,5 @@ public class GGiOSSDK : NSObject {
         }
         debugPrint(base as Any)
         return base
-    }
-}
-private class PassThroughWindow: UIWindow {
-    override public func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        return super.hitTest(point, with: event)
-    }
-}
-private class Manager : NSObject{
-    fileprivate let window = PassThroughWindow()
-    private var previousKeyWindow : UIWindow?
-    fileprivate let overlayViewController = MainLoadViewController()
-    static let sharedInstance: Manager = {
-        return Manager()
-    }()
-    override init() {
-        window.backgroundColor = UIColor.clear
-        window.frame = UIScreen.main.bounds
-        window.windowLevel = UIWindow.Level.normal + 1
-        window.rootViewController = overlayViewController
-        
-        super.init()
-        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { (notification) in
-            if let keyWindow = UIApplication.shared.keyWindow {
-                self.window.frame = keyWindow.frame
-            }
-        }
-    }
-    func presentChat(animated: Bool, completion: ((Bool) -> Void)? = nil) {
-        previousKeyWindow = UIApplication.shared.keyWindow
-        if #available(iOS 13.0, *) {
-            if GGiOSSDK.windowScene != nil {
-                window.windowScene = GGiOSSDK.windowScene
-            }
-        }
-        window.makeKeyAndVisible()
-    }
-    
-    func dismissChat(animated: Bool, completion: ((Bool) -> Void)? = nil) {
-        self.previousKeyWindow?.makeKeyAndVisible()
-        self.previousKeyWindow = nil
-        self.window.isHidden = true
     }
 }

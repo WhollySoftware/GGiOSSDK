@@ -11,16 +11,18 @@ import GGiOSSDK
 class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-     // mainload
-        // Do any additional setup after loading the view, typically from a nib.
+        
     }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        GGiOSSDK.presentChat(appSid: "5def86cf64be6d13f55f2034.5d96941bb5507599887b9c71829d5cffcdf55014")
+    }
     @IBAction func btnStartAction(_ sender:UIButton){
-        GGiOSSDK.presentChat()
+         GGiOSSDK.presentChat(appSid: "5def86cf64be6d13f55f2034.5d96941bb5507599887b9c71829d5cffcdf55014")
     }
     @IBAction func btnStopAction(_ sender:UIButton){
         
