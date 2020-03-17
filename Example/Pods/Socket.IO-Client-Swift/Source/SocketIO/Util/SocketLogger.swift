@@ -25,7 +25,7 @@
 import Foundation
 
 /// Represents a class will log client events.
-public protocol SocketLogger : class {
+public protocol SocketLogger : AnyObject {
     // MARK: Properties
 
     /// Whether to log or not
@@ -38,34 +38,33 @@ public protocol SocketLogger : class {
     /// - parameter message: The message being logged. Can include `%@` that will be replaced with `args`
     /// - parameter type: The type of entity that called for logging.
     /// - parameter args: Any args that should be inserted into the message. May be left out.
-    func log(_ message: String, type: String, args: Any...)
+    func log(_ message: @autoclosure () -> String, type: String)
 
     /// Error Messages
     ///
     /// - parameter message: The message being logged. Can include `%@` that will be replaced with `args`
     /// - parameter type: The type of entity that called for logging.
     /// - parameter args: Any args that should be inserted into the message. May be left out.
-    func error(_ message: String, type: String, args: Any...)
+    func error(_ message: @autoclosure () -> String, type: String)
 }
 
 public extension SocketLogger {
     /// Default implementation.
-    func log(_ message: String, type: String, args: Any...) {
-        abstractLog("LOG", message: message, type: type, args: args)
+    func log(_ message: @autoclosure () -> String, type: String) {
+        guard log else { return }
+
+        abstractLog("LOG", message: message(), type: type)
     }
 
     /// Default implementation.
-    func error(_ message: String, type: String, args: Any...) {
-        abstractLog("ERROR", message: message, type: type, args: args)
-    }
-
-    private func abstractLog(_ logType: String, message: String, type: String, args: [Any]) {
+    func error(_ message: @autoclosure () -> String, type: String) {
         guard log else { return }
 
-        let newArgs = args.map({arg -> CVarArg in String(describing: arg)})
-        let messageFormat = String(format: message, arguments: newArgs)
+        abstractLog("ERROR", message: message(), type: type)
+    }
 
-        NSLog("\(logType) \(type): %@", messageFormat)
+    private func abstractLog(_ logType: String, message: @autoclosure () -> String, type: String) {
+        NSLog("\(logType) \(type): %@", message())
     }
 }
 

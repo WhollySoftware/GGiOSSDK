@@ -23,7 +23,7 @@
 //  THE SOFTWARE.
 
 import Foundation
-import StarscreamSocketIO
+import Starscream
 
 enum JSONError : Error {
     case notArray
@@ -38,11 +38,11 @@ extension Array {
 
 extension CharacterSet {
     static var allowedURLCharacterSet: CharacterSet {
-        return CharacterSet(charactersIn: "!*'();:@&=+$,/?%#[]\" {}").inverted
+        return CharacterSet(charactersIn: "!*'();:@&=+$,/?%#[]\" {}^|").inverted
     }
 }
 
-extension NSDictionary {
+extension Dictionary where Key == String, Value == Any {
     private static func keyValueToSocketIOClientOption(key: String, value: Any) -> SocketIOClientOption? {
         switch (key, value) {
         case let ("connectParams", params as [String: Any]):
@@ -63,8 +63,6 @@ extension NSDictionary {
             return .log(log)
         case let ("logger", logger as SocketLogger):
             return .logger(logger)
-        case let ("nsp", nsp as String):
-            return .nsp(nsp)
         case let ("path", path as String):
             return .path(path)
         case let ("reconnects", reconnects as Bool):
@@ -73,6 +71,10 @@ extension NSDictionary {
             return .reconnectAttempts(attempts)
         case let ("reconnectWait", wait as Int):
             return .reconnectWait(wait)
+        case let ("reconnectWaitMax", wait as Int):
+            return .reconnectWaitMax(wait)
+        case let ("randomizationFactor", factor as Double):
+            return .randomizationFactor(factor)
         case let ("secure", secure as Bool):
             return .secure(secure)
         case let ("security", security as SSLSecurity):
@@ -83,6 +85,8 @@ extension NSDictionary {
             return .sessionDelegate(delegate)
         case let ("compress", compress as Bool):
             return compress ? .compress : nil
+        case let ("enableSOCKSProxy", enable as Bool):
+            return .enableSOCKSProxy(enable)
         default:
             return nil
         }
@@ -92,7 +96,7 @@ extension NSDictionary {
         var options = [] as SocketIOClientConfiguration
 
         for (rawKey, value) in self {
-            if let key = rawKey as? String, let opt = NSDictionary.keyValueToSocketIOClientOption(key: key, value: value) {
+            if let opt = Dictionary.keyValueToSocketIOClientOption(key: rawKey, value: value) {
                 options.insert(opt)
             }
         }
@@ -111,9 +115,9 @@ extension String {
         return array
     }
 
-    func toNSDictionary() throws -> NSDictionary {
+    func toDictionary() throws -> [String: Any] {
         guard let binData = data(using: .utf16, allowLossyConversion: false) else { return [:] }
-        guard let json = try JSONSerialization.jsonObject(with: binData, options: .allowFragments) as? NSDictionary else {
+        guard let json = try JSONSerialization.jsonObject(with: binData, options: .allowFragments) as? [String: Any] else {
             throw JSONError.notNSDictionary
         }
 
