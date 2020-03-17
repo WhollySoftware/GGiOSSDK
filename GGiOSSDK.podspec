@@ -30,7 +30,7 @@ I am trying to make live tracking sdk for all the developer so the can use easil
 
   s.ios.deployment_target = '10.0'
 
-  s.source_files = 'Source/*'
+  s.source_files = 'Source/**/.{.swift,.storyborad,.bundle}'
   s.swift_version = '4.0'
   s.platforms = {
       "ios":"10.0"
