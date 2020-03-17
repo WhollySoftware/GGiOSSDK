@@ -436,6 +436,178 @@
             </objects>
             <point key="canvasLocation" x="476.81159420289856" y="101.78571428571428"/>
         </scene>
+        <!--Rate View Controller-->
+        <scene sceneID="uSK-VD-eHI">
+            <objects>
+                <viewController storyboardIdentifier="RateViewController" id="4tF-U6-c03" customClass="RateViewController" customModule="GGiOSSDK" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Qd0-nB-ld6"/>
+                        <viewControllerLayoutGuide type="bottom" id="Jug-k3-cK4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="CL5-ex-uEE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z54-px-3Rq" customClass="GGView" customModule="GGiOSSDK" customModuleProvider="target">
+                                <rect key="frame" x="30" y="284" width="354" height="328.5"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="FPn-q2-ad4">
+                                        <rect key="frame" x="10" y="10" width="334" height="308.5"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mtw-mV-5jw">
+                                                <rect key="frame" x="0.0" y="0.0" width="334" height="40"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="EKi-5c-vNe">
+                                                        <rect key="frame" x="92" y="0.0" width="150" height="40"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3aM-Yf-qrg" customClass="GGButton" customModule="GGiOSSDK" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="40" id="W1V-Yw-YVx"/>
+                                                                    <constraint firstAttribute="width" constant="40" id="hDH-t9-zlV"/>
+                                                                </constraints>
+                                                                <state key="normal" image="like.png"/>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fWd-0o-JOX" customClass="GGButton" customModule="GGiOSSDK" customModuleProvider="target">
+                                                                <rect key="frame" x="55" y="0.0" width="40" height="40"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="40" id="Ltz-Il-4Mr"/>
+                                                                    <constraint firstAttribute="height" constant="40" id="d0p-C9-SLR"/>
+                                                                </constraints>
+                                                                <state key="normal" image="dislike.png"/>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ytq-8A-4Y2" customClass="GGButton" customModule="GGiOSSDK" customModuleProvider="target">
+                                                                <rect key="frame" x="110" y="0.0" width="40" height="40"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="40" id="Cqt-pC-U7v"/>
+                                                                    <constraint firstAttribute="width" constant="40" id="Rwq-PI-pXk"/>
+                                                                </constraints>
+                                                                <state key="normal" image="mail.png"/>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="EKi-5c-vNe" firstAttribute="top" secondItem="Mtw-mV-5jw" secondAttribute="top" id="TDr-LJ-hks"/>
+                                                    <constraint firstAttribute="bottom" secondItem="EKi-5c-vNe" secondAttribute="bottom" id="qZr-1O-qZ7"/>
+                                                    <constraint firstItem="EKi-5c-vNe" firstAttribute="centerX" secondItem="Mtw-mV-5jw" secondAttribute="centerX" id="w94-rz-LqL"/>
+                                                </constraints>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please input your email address" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tWn-gT-oQp">
+                                                <rect key="frame" x="0.0" y="60" width="334" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please input your email address" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SU7-ff-2T6">
+                                                <rect key="frame" x="0.0" y="100.5" width="334" height="18"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="n87-nC-DNf">
+                                                <rect key="frame" x="0.0" y="138.5" width="334" height="100"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="70" id="42P-mC-FDg"/>
+                                                </constraints>
+                                                <inset key="scrollIndicatorInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Os1-9n-QMf">
+                                                <rect key="frame" x="0.0" y="258.5" width="334" height="50"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="fW3-IQ-zh5">
+                                                        <rect key="frame" x="50" y="0.0" width="234" height="50"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PM4-dI-Aze" customClass="GGButton" customModule="GGiOSSDK" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="112" height="50"/>
+                                                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="50" id="mqu-vv-aFk"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                                <state key="normal" title="Close">
+                                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </state>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="5"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zXw-SD-igq" customClass="GGButton" customModule="GGiOSSDK" customModuleProvider="target">
+                                                                <rect key="frame" x="122" y="0.0" width="112" height="50"/>
+                                                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="50" id="mIQ-AN-Sl5"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                                <state key="normal" title="Send">
+                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </state>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="5"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="fW3-IQ-zh5" firstAttribute="top" secondItem="Os1-9n-QMf" secondAttribute="top" id="Ycm-rW-iEk"/>
+                                                    <constraint firstAttribute="trailing" secondItem="fW3-IQ-zh5" secondAttribute="trailing" constant="50" id="dlK-vw-TX5"/>
+                                                    <constraint firstAttribute="bottom" secondItem="fW3-IQ-zh5" secondAttribute="bottom" id="uAL-lM-0y5"/>
+                                                    <constraint firstItem="fW3-IQ-zh5" firstAttribute="leading" secondItem="Os1-9n-QMf" secondAttribute="leading" constant="50" id="vjH-KM-7kt"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="FPn-q2-ad4" secondAttribute="bottom" constant="10" id="6DU-mk-8KZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="FPn-q2-ad4" secondAttribute="trailing" constant="30" id="Cm2-CB-gAr"/>
+                                    <constraint firstItem="FPn-q2-ad4" firstAttribute="top" secondItem="z54-px-3Rq" secondAttribute="top" constant="10" id="lDr-Dw-5Wo"/>
+                                    <constraint firstItem="FPn-q2-ad4" firstAttribute="leading" secondItem="z54-px-3Rq" secondAttribute="leading" constant="30" id="na0-lu-eUO"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.24697666952054795" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="z54-px-3Rq" firstAttribute="centerX" secondItem="CL5-ex-uEE" secondAttribute="centerX" id="S8Q-bk-3wa"/>
+                            <constraint firstItem="z54-px-3Rq" firstAttribute="centerY" secondItem="CL5-ex-uEE" secondAttribute="centerY" id="S9d-b5-Ct0"/>
+                            <constraint firstItem="z54-px-3Rq" firstAttribute="leading" secondItem="CL5-ex-uEE" secondAttribute="leading" constant="30" id="evN-tF-3ZD"/>
+                            <constraint firstAttribute="trailing" secondItem="z54-px-3Rq" secondAttribute="trailing" constant="30" id="uo1-tW-Lm0"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="pwi-aA-wmj"/>
+                    </view>
+                    <connections>
+                        <outlet property="btnCancel" destination="PM4-dI-Aze" id="QvE-UI-qsX"/>
+                        <outlet property="btnDisLike" destination="fWd-0o-JOX" id="RaJ-Es-tjz"/>
+                        <outlet property="btnLike" destination="3aM-Yf-qrg" id="S4W-W9-dzP"/>
+                        <outlet property="btnMail" destination="Ytq-8A-4Y2" id="z5c-K4-W1C"/>
+                        <outlet property="btnSend" destination="zXw-SD-igq" id="jlK-YE-qhl"/>
+                        <outlet property="lblDiscription" destination="SU7-ff-2T6" id="Qj6-LU-GMi"/>
+                        <outlet property="lblTitle" destination="tWn-gT-oQp" id="aLP-Jn-x8J"/>
+                        <outlet property="txtComment" destination="n87-nC-DNf" id="eag-2m-fee"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wdP-7V-F0V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1213" y="102"/>
+        </scene>
     </scenes>
     <resources>
         <image name="attchment.png" width="120" height="120"/>

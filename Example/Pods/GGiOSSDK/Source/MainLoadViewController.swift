@@ -114,6 +114,7 @@ class MainLoadViewController: UIViewController {
           }
             if receivedTodo["message"] as! String == "authorized"{
                 if let d = receivedTodo["data"] as? [String:AnyObject]{
+                    print("Response : " + receivedTodo.description)
                     GGiOSSDK.shared.AllDetails <= d
                     self.setupData()
                 }

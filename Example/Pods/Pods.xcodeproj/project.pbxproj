@@ -59,6 +59,7 @@
 		7F7EC402241F9F7500BB2398 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7EC401241F9F7500BB2398 /* ChatViewController.swift */; };
 		7F8D0D97241D37EB00C773AB /* GGiOSSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8D0D96241D37EB00C773AB /* GGiOSSDK.swift */; };
 		7F8D0D9E241D416200C773AB /* GGiOSSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7F8D0D9D241D416200C773AB /* GGiOSSDK.bundle */; };
+		7FAB490724207DE0004E9D4C /* RateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FAB490624207DE0004E9D4C /* RateViewController.swift */; };
 		7FBEED91241F56DC00605125 /* GGiOSSDK.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FBEED90241F56C900605125 /* GGiOSSDK.storyboard */; };
 		883A69C645CD1F1EBECAC18296F09375 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3CA4B3010C524E9B6E0E0F5AC379829 /* QuartzCore.framework */; };
 		8AA44036AC4EB273AF93BD8FABA4F839 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F3CA4B3010C524E9B6E0E0F5AC379829 /* QuartzCore.framework */; };
@@ -261,6 +262,7 @@
 		7F7EC401241F9F7500BB2398 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		7F8D0D96241D37EB00C773AB /* GGiOSSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GGiOSSDK.swift; sourceTree = "<group>"; };
 		7F8D0D9D241D416200C773AB /* GGiOSSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GGiOSSDK.bundle; sourceTree = "<group>"; };
+		7FAB490624207DE0004E9D4C /* RateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateViewController.swift; sourceTree = "<group>"; };
 		7FBEED90241F56C900605125 /* GGiOSSDK.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GGiOSSDK.storyboard; sourceTree = "<group>"; };
 		8797E689897CF2FE5C1F1AC086B07E7C /* MBProgressHUD-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD-umbrella.h"; sourceTree = "<group>"; };
 		88B3787F96CBA95E130CE71AEA49CA46 /* AlamofireNetworkActivityIndicator-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "AlamofireNetworkActivityIndicator-Info.plist"; sourceTree = "<group>"; };
@@ -493,6 +495,7 @@
 				7FBEED90241F56C900605125 /* GGiOSSDK.storyboard */,
 				7F7303C5241D0B4E00073E0A /* MainLoadViewController.swift */,
 				7F7EC401241F9F7500BB2398 /* ChatViewController.swift */,
+				7FAB490624207DE0004E9D4C /* RateViewController.swift */,
 				7F8D0D9D241D416200C773AB /* GGiOSSDK.bundle */,
 			);
 			path = Source;
@@ -1083,6 +1086,7 @@
 				7F7303CA241D0B5100073E0A /* MainLoadViewController.swift in Sources */,
 				7F8D0D97241D37EB00C773AB /* GGiOSSDK.swift in Sources */,
 				7F7303CC241D0B5100073E0A /* NSObject+Extension.swift in Sources */,
+				7FAB490724207DE0004E9D4C /* RateViewController.swift in Sources */,
 				7F7EC400241F9A4600BB2398 /* GGButton.swift in Sources */,
 				7F7303C9241D0B5100073E0A /* UserDetails.swift in Sources */,
 				7F7EC3FE241F9A3E00BB2398 /* GGView.swift in Sources */,

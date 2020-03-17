@@ -45,7 +45,15 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         self.navigationController?.popViewController(animated: true)
     }
     @objc func dissmissView(){
-        self.dismiss(animated: true, completion: nil)
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "RateViewController") as! RateViewController
+        vc.successHandler = {
+            self.dismiss(animated: true) {
+                
+            }
+        }
+        self.present(vc, animated: true) {
+            
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

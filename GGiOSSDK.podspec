@@ -38,7 +38,7 @@ I am trying to make live tracking sdk for all the developer so the can use easil
   s.dependency 'SwiftyJSON', '~> 4.0'
   s.dependency 'MBProgressHUD'
   s.dependency 'IQKeyboardManagerSwift', '6.2.1'
-  
+  s.dependency 'Socket.IO-Client-Swift', '~> 11.1.3'
   # s.resource_bundles = {
   #   'iOSSDK' => ['iOSSDK/Assets/*.png']
   # }
