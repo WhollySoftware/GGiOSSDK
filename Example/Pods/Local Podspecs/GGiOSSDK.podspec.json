@@ -1,7 +1,7 @@
 {
   "name": "GGiOSSDK",
-  "version": "0.1.4",
-  "summary": "A iOSSDK is the testing sdk 0.1.4",
+  "version": "0.1.5",
+  "summary": "A iOSSDK is the testing sdk 0.1.5",
   "description": "I am trying to make live tracking sdk for all the developer so the can use easily in all project.",
   "homepage": "https://github.com/WhollySoftware/GGiOSSDK",
   "license": {
@@ -13,13 +13,13 @@
   },
   "source": {
     "git": "https://github.com/WhollySoftware/GGiOSSDK.git",
-    "tag": "0.1.4"
+    "tag": "0.1.5"
   },
   "social_media_url": "https://whollysoftware.com",
   "platforms": {
     "ios": "10.0"
   },
-  "source_files": "Source/*.{swift,storyborad,bundle}",
+  "source_files": "Source/*.{swift}",
   "swift_versions": "4.0",
   "dependencies": {
     "SwiftyJSON": [
@@ -33,6 +33,11 @@
     ],
     "Socket.IO-Client-Swift": [
 
+    ]
+  },
+  "resource_bundles": {
+    "GGiOSSDK": [
+      "Resources/*.{storyborad,bundle}"
     ]
   },
   "frameworks": "UIKit",
