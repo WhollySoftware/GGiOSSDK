@@ -1,11 +1,8 @@
 PODS:
-  - Alamofire (5.0.2)
-  - AlamofireNetworkActivityIndicator (3.0.1):
-    - Alamofire (~> 5.0)
-  - GGiOSSDK (0.1.2):
-    - AlamofireNetworkActivityIndicator
+  - GGiOSSDK (0.1.4):
     - IQKeyboardManagerSwift (= 6.2.1)
     - MBProgressHUD
+    - Socket.IO-Client-Swift
     - SwiftyJSON (~> 4.0)
   - IQKeyboardManagerSwift (6.2.1)
   - MBProgressHUD (1.2.0)
@@ -15,7 +12,7 @@ PODS:
   - SwiftyJSON (4.3.0)
 
 DEPENDENCIES:
-  - GGiOSSDK
+  - GGiOSSDK (from `../`)
   - IQKeyboardManagerSwift (= 6.2.1)
   - MBProgressHUD
   - Socket.IO-Client-Swift
@@ -23,25 +20,24 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
-    - Alamofire
-    - AlamofireNetworkActivityIndicator
-    - GGiOSSDK
     - IQKeyboardManagerSwift
     - MBProgressHUD
     - Socket.IO-Client-Swift
     - Starscream
     - SwiftyJSON
 
+EXTERNAL SOURCES:
+  GGiOSSDK:
+    :path: "../"
+
 SPEC CHECKSUMS:
-  Alamofire: 3ba7a4db18b4f62c4a1c0e1cb39d7f3d52e10ada
-  AlamofireNetworkActivityIndicator: f7d4cd8d12bcf61dc569cbe000b0c35e9c8d8d32
-  GGiOSSDK: c191c74053dd7c5c1a12754a8aa2bdf1c3d4cf8a
+  GGiOSSDK: d4bbeb33d9c8818ecc155760b545eac60d2d7c9c
   IQKeyboardManagerSwift: 0f0ae8935360b4003e6ea1ac7c19898f01e2f7c7
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 8ef9485d58c90fc36a51535eea70e643429b263b
+PODFILE CHECKSUM: 3b6bc1bdbbc9ad5aa7c9ecc889de2cb4fd586afb
 
 COCOAPODS: 1.8.4
