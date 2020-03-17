@@ -30,7 +30,7 @@ I am trying to make live tracking sdk for all the developer so the can use easil
 
   s.ios.deployment_target = '10.0'
 
-  s.source_files = 'Source/**/.{.swift,.storyborad,.bundle}'
+  s.source_files = 'Source/*.{swift,storyborad,bundle}'
   s.swift_version = '4.0'
   s.platforms = {
       "ios":"10.0"
@@ -38,7 +38,7 @@ I am trying to make live tracking sdk for all the developer so the can use easil
   s.dependency 'SwiftyJSON', '~> 4.0'
   s.dependency 'MBProgressHUD'
   s.dependency 'IQKeyboardManagerSwift', '6.2.1'
-  s.dependency 'Socket.IO-Client-Swift', '~> 11.1.3'
+  s.dependency 'Socket.IO-Client-Swift'
   # s.resource_bundles = {
   #   'iOSSDK' => ['iOSSDK/Assets/*.png']
   # }

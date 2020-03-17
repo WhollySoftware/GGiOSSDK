@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 import IQKeyboardManagerSwift
 class MainLoadViewController: UIViewController {
     @IBOutlet weak var btnStart: GGButton!
