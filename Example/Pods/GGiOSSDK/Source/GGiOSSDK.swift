@@ -11,9 +11,6 @@ public class GGiOSSDK : NSObject {
     @objc public static let shared: GGiOSSDK = {
         return GGiOSSDK()
     }()
-    @available(iOS 13.0, *)
-    @objc public static var windowScene: UIWindowScene?
-    
     var appSid = ""
     var baseURL = "https://www.drdsh.live"
     var APIbaseURL = "https://www.drdsh.live"+"/sdk/v1/"
