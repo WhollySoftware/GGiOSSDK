@@ -9,13 +9,16 @@ PODS:
     - SwiftyJSON (~> 4.0)
   - IQKeyboardManagerSwift (6.2.1)
   - MBProgressHUD (1.2.0)
+  - Socket.IO-Client-Swift (11.1.3):
+    - StarscreamSocketIO (~> 8.0.5)
+  - StarscreamSocketIO (8.0.7)
   - SwiftyJSON (4.3.0)
 
 DEPENDENCIES:
-  - AlamofireNetworkActivityIndicator
   - GGiOSSDK
   - IQKeyboardManagerSwift (= 6.2.1)
   - MBProgressHUD
+  - Socket.IO-Client-Swift (~> 11.1.3)
   - SwiftyJSON (~> 4.0)
 
 SPEC REPOS:
@@ -25,6 +28,8 @@ SPEC REPOS:
     - GGiOSSDK
     - IQKeyboardManagerSwift
     - MBProgressHUD
+    - Socket.IO-Client-Swift
+    - StarscreamSocketIO
     - SwiftyJSON
 
 SPEC CHECKSUMS:
@@ -33,8 +38,10 @@ SPEC CHECKSUMS:
   GGiOSSDK: c191c74053dd7c5c1a12754a8aa2bdf1c3d4cf8a
   IQKeyboardManagerSwift: 0f0ae8935360b4003e6ea1ac7c19898f01e2f7c7
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
+  Socket.IO-Client-Swift: b8e59ddc16bc3609ca2f49a4b50253f095d535c8
+  StarscreamSocketIO: 00b54e4208481ca5cef089545353aaf126bae16d
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: bcaead3b95f6e6d70b84b68cf7eb68bd0ba2c0b9
+PODFILE CHECKSUM: 22d13ec944163979b52c84d3fde8bc12fbbaceef
 
 COCOAPODS: 1.8.4
