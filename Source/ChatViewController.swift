@@ -46,8 +46,9 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     @objc func dissmissView(){
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "RateViewController") as! RateViewController
+        vc.modalPresentationStyle = .overFullScreen
         vc.successHandler = {
-            self.dismiss(animated: true) {
+            self.dismiss(animated: false) {
                 
             }
         }

@@ -14,6 +14,7 @@ class RateViewController: UIViewController {
     @IBOutlet weak var btnMail: GGButton!
     @IBOutlet weak var btnSend: GGButton!
     @IBOutlet weak var btnCancel: GGButton!
+    @IBOutlet weak var btnCancel1: GGButton!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblDiscription: UILabel!
     @IBOutlet weak var txtComment: UITextView!
@@ -50,6 +51,11 @@ class RateViewController: UIViewController {
                 
             })
         }
+        btnCancel1.action = {
+           self.dismiss(animated: false, completion: {
+               
+           })
+       }
         btnDisLike.action = {
             
         }

@@ -1,7 +1,7 @@
 {
   "name": "GGiOSSDK",
-  "version": "0.1.8",
-  "summary": "A iOSSDK is the testing sdk 0.1.8",
+  "version": "0.1.9",
+  "summary": "A iOSSDK is the testing sdk 0.1.9",
   "description": "I am trying to make live tracking sdk for all the developer so the can use easily in all project.",
   "homepage": "https://github.com/WhollySoftware/GGiOSSDK",
   "license": {
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/WhollySoftware/GGiOSSDK.git",
-    "tag": "0.1.8"
+    "tag": "0.1.9"
   },
   "social_media_url": "https://whollysoftware.com",
   "platforms": {
@@ -37,7 +37,7 @@
   },
   "resource_bundles": {
     "GGiOSSDK": [
-      "Resources/*.{bundle,png}"
+      "Resources/*.png"
     ]
   },
   "frameworks": "UIKit",

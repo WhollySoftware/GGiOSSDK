@@ -1,5 +1,5 @@
 PODS:
-  - GGiOSSDK (0.1.8):
+  - GGiOSSDK (0.1.9):
     - IQKeyboardManagerSwift (= 6.2.1)
     - MBProgressHUD
     - Socket.IO-Client-Swift
@@ -31,7 +31,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  GGiOSSDK: 26e7061190078e8e14467c41c987dbe459e5ada7
+  GGiOSSDK: a6bb4f34fa8c33be15d014fb98bcbade42b84050
   IQKeyboardManagerSwift: 0f0ae8935360b4003e6ea1ac7c19898f01e2f7c7
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
