@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'GGiOSSDK'
-  s.version          = '0.1.6'
-  s.summary          = 'A iOSSDK is the testing sdk 0.1.6'
+  s.version          = '0.1.7'
+  s.summary          = 'A iOSSDK is the testing sdk 0.1.7'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -30,7 +30,7 @@ I am trying to make live tracking sdk for all the developer so the can use easil
 
   s.ios.deployment_target = '10.0'
 
-  s.source_files = 'Source/*.{swift}'
+  s.source_files = 'Source/*.{swift,storyboard}'
   s.swift_version = '4.0'
   s.platforms = {
       "ios":"10.0"
@@ -40,7 +40,7 @@ I am trying to make live tracking sdk for all the developer so the can use easil
   s.dependency 'IQKeyboardManagerSwift', '6.2.1'
   s.dependency 'Socket.IO-Client-Swift'
    s.resource_bundles = {
-     'GGiOSSDK' => ['Resources/*.{storyboard,bundle}']
+     'GGiOSSDK' => ['Resources/*.{bundle}']
    }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
