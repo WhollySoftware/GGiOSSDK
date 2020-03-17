@@ -40,7 +40,7 @@ I am trying to make live tracking sdk for all the developer so the can use easil
   s.dependency 'IQKeyboardManagerSwift', '6.2.1'
   s.dependency 'Socket.IO-Client-Swift'
    s.resource_bundles = {
-     'GGiOSSDK' => ['Resources/*.png']
+     'GGiOSSDK' => ['Resources/*.{bundle,png}']
    }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'

@@ -48,7 +48,6 @@ class ValidateIdentity:GGObject{
     var visitorID:String  = ""
 }
 class EmbeddedChat:GGObject{
-    var isBlocked:Bool  = false
     var _id:String  = ""
     var displayForm:Int  = 0
     var emailRequired:Bool  = false
