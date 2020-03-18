@@ -9,7 +9,7 @@ import UIKit
 
 class WatingViewController: UIViewController {
 
-     @IBOutlet weak var btnSend: GGButton!
+    @IBOutlet weak var btnSend: GGButton!
     @IBOutlet weak var txtMsg: UITextField!
     @IBOutlet weak var lblMsg: UILabel!
     

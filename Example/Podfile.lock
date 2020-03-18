@@ -15,7 +15,7 @@ DEPENDENCIES:
   - GGiOSSDK (from `../`)
   - IQKeyboardManagerSwift (= 6.2.1)
   - MBProgressHUD
-  - Socket.IO-Client-Swift
+  - Socket.IO-Client-Swift (= 15.2.0)
   - SwiftyJSON (~> 4.0)
 
 SPEC REPOS:
@@ -38,6 +38,6 @@ SPEC CHECKSUMS:
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 3b6bc1bdbbc9ad5aa7c9ecc889de2cb4fd586afb
+PODFILE CHECKSUM: 164b8de6ed4b48d3e0b6e2b236b78517c8e2fdf5
 
 COCOAPODS: 1.8.4

@@ -5,5 +5,5 @@ target 'iOSSDK_Example' do
   pod 'SwiftyJSON', '~> 4.0'
   pod 'MBProgressHUD'
   pod 'IQKeyboardManagerSwift', '6.2.1'
-  pod 'Socket.IO-Client-Swift'
+  pod 'Socket.IO-Client-Swift', '15.2.0'
 end
