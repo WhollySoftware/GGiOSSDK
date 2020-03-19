@@ -48,6 +48,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "RateViewController") as! RateViewController
         vc.modalPresentationStyle = .overFullScreen
         vc.successHandler = {
+            CommonSocket.shared.disConnect()
             self.dismiss(animated: false) {
                 
             }

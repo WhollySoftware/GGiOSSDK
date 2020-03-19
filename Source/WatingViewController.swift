@@ -32,6 +32,7 @@ class WatingViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     @objc func dissmissView(){
+        CommonSocket.shared.disConnect()
         self.dismiss(animated: true, completion: nil)
     }
 

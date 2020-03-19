@@ -115,6 +115,9 @@ class MainLoadViewController: UIViewController {
                 if let d = receivedTodo["data"] as? [String:AnyObject]{
                     print("Response : " + receivedTodo.description)
                     GGiOSSDK.shared.AllDetails <= d
+                    CommonSocket.shared.initSocket { (status) in
+                        CommonSocket.shared.startChatRequest(data: [["dc_vid":GGiOSSDK.shared.AllDetails.visitorID]])
+                    }
                     self.setupData()
                 }
             }else{
@@ -136,6 +139,7 @@ class MainLoadViewController: UIViewController {
       task.resume()
     }
     @objc func dissmissView(){
+        CommonSocket.shared.disConnect()
         self.dismiss(animated: true, completion: nil)
     }
 }
