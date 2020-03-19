@@ -90,15 +90,70 @@ class CommonSocket: NSObject {
         manager.defaultSocket.disconnect()
         //socket = SocketManager(socketURL: URL(string: "https://www.drdsh.live")!, config: [.log(true), .compress]).defaultSocket
     }
-//    func onChangeGroupName(completion: @escaping([String:AnyObject]) -> Void)
-//    {
-//        socket.on("") { (resp, emitter) in
-//            print(resp)
-//            if let t = resp[0] as? [String:AnyObject]{
-//                completion(t)
-//            }
-//        }
-//    }
+    func ipBlocked(completion: @escaping([String:AnyObject]) -> Void)
+    {
+        self.manager.defaultSocket.on("ipBlocked") { (resp, emitter) in
+            print(resp)
+            if let t = resp[0] as? [String:AnyObject]{
+                completion(t)
+            }
+        }
+    }
+    func totalOnlineAgents(completion: @escaping([String:AnyObject]) -> Void)
+    {
+        self.manager.defaultSocket.on("totalOnlineAgents") { (resp, emitter) in
+            print(resp)
+            if let t = resp[0] as? [String:AnyObject]{
+                completion(t)
+            }
+        }
+    }
+    func agentAcceptedChatRequest(completion: @escaping([String:AnyObject]) -> Void)
+    {
+        self.manager.defaultSocket.on("agentAcceptedChatRequest") { (resp, emitter) in
+            print(resp)
+            if let t = resp[0] as? [String:AnyObject]{
+                completion(t)
+            }
+        }
+    }
+    func agentSendNewMessage(completion: @escaping([String:AnyObject]) -> Void)
+    {
+        self.manager.defaultSocket.on("agentSendNewMessage") { (resp, emitter) in
+            print(resp)
+            if let t = resp[0] as? [String:AnyObject]{
+                completion(t)
+            }
+        }
+    }
+    func agentChatSessionTerminated(completion: @escaping([String:AnyObject]) -> Void)
+    {
+        self.manager.defaultSocket.on("agentChatSessionTerminated") { (resp, emitter) in
+            print(resp)
+            if let t = resp[0] as? [String:AnyObject]{
+                completion(t)
+            }
+        }
+    }
+    func agentTypingListener(completion: @escaping([String:AnyObject]) -> Void)
+    {
+        self.manager.defaultSocket.on("agentTypingListener") { (resp, emitter) in
+            print(resp)
+            if let t = resp[0] as? [String:AnyObject]{
+                completion(t)
+            }
+        }
+    }
+    func newAgentAcceptedChatRequest(completion: @escaping([String:AnyObject]) -> Void)
+    {
+        self.manager.defaultSocket.on("newAgentAcceptedChatRequest") { (resp, emitter) in
+            print(resp)
+            if let t = resp[0] as? [String:AnyObject]{
+                completion(t)
+            }
+        }
+    }
+
     func startChatRequest(data: [Any])
     {
         if !isConnected()

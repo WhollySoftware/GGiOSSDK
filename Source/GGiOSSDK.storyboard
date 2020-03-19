@@ -234,13 +234,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="B3T-1R-BiU">
-                                <rect key="frame" x="-57" y="75" width="374" height="425"/>
+                                <rect key="frame" x="30" y="64" width="354" height="425"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LFc-tY-rmH" customClass="GGView" customModule="GGiOSSDK" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="354" height="50"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Full Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GjZ-uo-KVX">
-                                                <rect key="frame" x="10" y="0.0" width="354" height="50"/>
+                                                <rect key="frame" x="10" y="0.0" width="334" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -266,10 +266,10 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GCm-Xx-PSS" customClass="GGView" customModule="GGiOSSDK" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="65" width="374" height="50"/>
+                                        <rect key="frame" x="0.0" y="65" width="354" height="50"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="33n-Y3-5SH">
-                                                <rect key="frame" x="10" y="0.0" width="354" height="50"/>
+                                                <rect key="frame" x="10" y="0.0" width="334" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -295,10 +295,10 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jCP-iZ-QE8" customClass="GGView" customModule="GGiOSSDK" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="130" width="374" height="50"/>
+                                        <rect key="frame" x="0.0" y="130" width="354" height="50"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mobile" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l9d-sI-fW0">
-                                                <rect key="frame" x="10" y="0.0" width="354" height="50"/>
+                                                <rect key="frame" x="10" y="0.0" width="334" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -324,10 +324,10 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ynU-3J-KXx" customClass="GGView" customModule="GGiOSSDK" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="195" width="374" height="50"/>
+                                        <rect key="frame" x="0.0" y="195" width="354" height="50"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Subject" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="avD-Fo-WNM">
-                                                <rect key="frame" x="10" y="0.0" width="354" height="50"/>
+                                                <rect key="frame" x="10" y="0.0" width="334" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -353,10 +353,10 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lse-7k-wpP" customClass="GGView" customModule="GGiOSSDK" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="260" width="374" height="100"/>
+                                        <rect key="frame" x="0.0" y="260" width="354" height="100"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Type your Question or message" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mg0-Bb-JKP">
-                                                <rect key="frame" x="10" y="0.0" width="354" height="100"/>
+                                                <rect key="frame" x="10" y="0.0" width="334" height="100"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
@@ -382,10 +382,10 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kMf-WD-brh">
-                                        <rect key="frame" x="0.0" y="375" width="374" height="50"/>
+                                        <rect key="frame" x="0.0" y="375" width="354" height="50"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N75-9E-AMD" customClass="GGButton" customModule="GGiOSSDK" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="374" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="354" height="50"/>
                                                 <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                 <state key="normal" title="Start Chat">
@@ -515,13 +515,157 @@
                                         <rect key="frame" x="0.0" y="60" width="414" height="722"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" id="t2d-1x-Ene">
-                                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReceiverTableViewCell" rowHeight="93" id="eSt-2V-md9" customClass="ReceiverTableViewCell" customModule="GGiOSSDK" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="414" height="93"/>
                                                 <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="t2d-1x-Ene" id="fKk-hG-1li">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eSt-2V-md9" id="QhE-q1-M43">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="93"/>
                                                     <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hL4-YW-fkO">
+                                                            <rect key="frame" x="10" y="10" width="40" height="40"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="40" id="fbj-Fo-4Ap"/>
+                                                                <constraint firstAttribute="height" constant="40" id="gDN-bu-Xfy"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Agent Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hu3-xt-W3d">
+                                                            <rect key="frame" x="60" y="10" width="344" height="17"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="17" id="4Uc-U1-lyU"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mZA-L2-dbu">
+                                                            <rect key="frame" x="60" y="32" width="100" height="51"/>
+                                                            <subviews>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="lis-Gr-v2L">
+                                                                    <rect key="frame" x="10" y="5" width="80" height="41"/>
+                                                                    <subviews>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Agent Name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u3R-38-v81">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="24"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Agent Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f2H-UB-iFV">
+                                                                            <rect key="frame" x="0.0" y="24" width="80" height="17"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="17" id="cGe-IK-mmq"/>
+                                                                            </constraints>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                    </subviews>
+                                                                </stackView>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="trailing" secondItem="lis-Gr-v2L" secondAttribute="trailing" constant="10" id="XRE-2j-rQa"/>
+                                                                <constraint firstAttribute="bottom" secondItem="lis-Gr-v2L" secondAttribute="bottom" constant="5" id="bmK-fP-ptZ"/>
+                                                                <constraint firstItem="lis-Gr-v2L" firstAttribute="top" secondItem="mZA-L2-dbu" secondAttribute="top" constant="5" id="i7d-14-lsS"/>
+                                                                <constraint firstItem="lis-Gr-v2L" firstAttribute="leading" secondItem="mZA-L2-dbu" secondAttribute="leading" constant="10" id="yFs-Y3-thm"/>
+                                                            </constraints>
+                                                        </view>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mZA-L2-dbu" secondAttribute="trailing" constant="10" id="4tT-qD-zUw"/>
+                                                        <constraint firstItem="mZA-L2-dbu" firstAttribute="leading" secondItem="hL4-YW-fkO" secondAttribute="trailing" constant="10" id="9Ya-Pr-TOa"/>
+                                                        <constraint firstItem="hL4-YW-fkO" firstAttribute="top" secondItem="QhE-q1-M43" secondAttribute="top" constant="10" id="BTY-rR-Os4"/>
+                                                        <constraint firstItem="hu3-xt-W3d" firstAttribute="leading" secondItem="hL4-YW-fkO" secondAttribute="trailing" constant="10" id="CiH-ee-E9H"/>
+                                                        <constraint firstItem="hu3-xt-W3d" firstAttribute="top" secondItem="QhE-q1-M43" secondAttribute="top" constant="10" id="IXY-ZK-geV"/>
+                                                        <constraint firstItem="hL4-YW-fkO" firstAttribute="leading" secondItem="QhE-q1-M43" secondAttribute="leading" constant="10" id="aRH-oY-aYo"/>
+                                                        <constraint firstItem="mZA-L2-dbu" firstAttribute="top" secondItem="hu3-xt-W3d" secondAttribute="bottom" constant="5" id="iBq-ab-GGw"/>
+                                                        <constraint firstAttribute="bottom" secondItem="mZA-L2-dbu" secondAttribute="bottom" constant="10" id="ioe-Xb-8B7"/>
+                                                        <constraint firstAttribute="trailing" secondItem="hu3-xt-W3d" secondAttribute="trailing" constant="10" id="kIg-G6-vbm"/>
+                                                    </constraints>
                                                 </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="backView" destination="mZA-L2-dbu" id="sUg-Qf-dd4"/>
+                                                    <outlet property="imgProfile" destination="hL4-YW-fkO" id="hZt-Rf-hca"/>
+                                                    <outlet property="lblMessage" destination="u3R-38-v81" id="EYk-gS-Q1A"/>
+                                                    <outlet property="lblName" destination="hu3-xt-W3d" id="WRZ-bF-0w6"/>
+                                                    <outlet property="lblTime" destination="f2H-UB-iFV" id="Zag-PC-kCk"/>
+                                                </connections>
+                                            </tableViewCell>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SenderTableViewCell" rowHeight="93" id="4oh-BT-GXP" customClass="SenderTableViewCell" customModule="GGiOSSDK" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="121" width="414" height="93"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4oh-BT-GXP" id="wCP-rn-zdc">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="93"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZoT-6g-QB1">
+                                                            <rect key="frame" x="364" y="10" width="40" height="40"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="40" id="Bfq-yz-GkH"/>
+                                                                <constraint firstAttribute="height" constant="40" id="SDp-iT-vOz"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Agent Name" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z0B-BW-PMo">
+                                                            <rect key="frame" x="10" y="10" width="344" height="17"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="17" id="gGx-Ak-5ap"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dWb-d2-xGF">
+                                                            <rect key="frame" x="254" y="32" width="100" height="51"/>
+                                                            <subviews>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="2Mz-ES-K5Z">
+                                                                    <rect key="frame" x="10" y="5" width="80" height="41"/>
+                                                                    <subviews>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Agent Name" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PYi-c0-ZtD">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="24"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Agent Name" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EY3-DS-cXb">
+                                                                            <rect key="frame" x="0.0" y="24" width="80" height="17"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="17" id="fCm-J9-ph7"/>
+                                                                            </constraints>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                    </subviews>
+                                                                </stackView>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="trailing" secondItem="2Mz-ES-K5Z" secondAttribute="trailing" constant="10" id="FuJ-eV-pJp"/>
+                                                                <constraint firstItem="2Mz-ES-K5Z" firstAttribute="top" secondItem="dWb-d2-xGF" secondAttribute="top" constant="5" id="Of8-dW-cag"/>
+                                                                <constraint firstItem="2Mz-ES-K5Z" firstAttribute="leading" secondItem="dWb-d2-xGF" secondAttribute="leading" constant="10" id="fH2-Lg-ah8"/>
+                                                                <constraint firstAttribute="bottom" secondItem="2Mz-ES-K5Z" secondAttribute="bottom" constant="5" id="fNA-gn-itf"/>
+                                                            </constraints>
+                                                        </view>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="dWb-d2-xGF" secondAttribute="bottom" constant="10" id="Fja-tg-pi3"/>
+                                                        <constraint firstItem="ZoT-6g-QB1" firstAttribute="leading" secondItem="dWb-d2-xGF" secondAttribute="trailing" constant="10" id="PGC-h4-MzM"/>
+                                                        <constraint firstItem="ZoT-6g-QB1" firstAttribute="leading" secondItem="z0B-BW-PMo" secondAttribute="trailing" constant="10" id="R0c-cT-wQ4"/>
+                                                        <constraint firstAttribute="trailing" secondItem="ZoT-6g-QB1" secondAttribute="trailing" constant="10" id="Xpg-NC-46R"/>
+                                                        <constraint firstItem="z0B-BW-PMo" firstAttribute="leading" secondItem="wCP-rn-zdc" secondAttribute="leading" constant="10" id="iDK-kn-d2k"/>
+                                                        <constraint firstItem="dWb-d2-xGF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wCP-rn-zdc" secondAttribute="leading" constant="10" id="jpb-Jg-IzI"/>
+                                                        <constraint firstItem="z0B-BW-PMo" firstAttribute="top" secondItem="wCP-rn-zdc" secondAttribute="top" constant="10" id="pEf-Ah-sQ2"/>
+                                                        <constraint firstItem="dWb-d2-xGF" firstAttribute="top" secondItem="z0B-BW-PMo" secondAttribute="bottom" constant="5" id="sMU-BQ-e86"/>
+                                                        <constraint firstItem="ZoT-6g-QB1" firstAttribute="top" secondItem="wCP-rn-zdc" secondAttribute="top" constant="10" id="t7T-C0-9is"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="backView" destination="dWb-d2-xGF" id="ErY-wV-xKc"/>
+                                                    <outlet property="imgProfile" destination="ZoT-6g-QB1" id="5Ek-yJ-MXA"/>
+                                                    <outlet property="lblMessage" destination="PYi-c0-ZtD" id="mjV-se-82C"/>
+                                                    <outlet property="lblName" destination="z0B-BW-PMo" id="215-4i-p1c"/>
+                                                    <outlet property="lblTime" destination="EY3-DS-cXb" id="Vo9-Rt-F6u"/>
+                                                </connections>
                                             </tableViewCell>
                                         </prototypes>
                                         <connections>

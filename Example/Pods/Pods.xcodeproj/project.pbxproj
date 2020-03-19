@@ -60,6 +60,7 @@
 		760B6F006C2C0461B3A665D619766593 /* attchment.png in Resources */ = {isa = PBXBuildFile; fileRef = EE207A412B5D57C255E0F501BFB5159A /* attchment.png */; };
 		77CE50B1E9A3CE8EBBB95D05D95E804D /* GGObject+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BB28ADCF150BDDDB1CB3D44218DF22 /* GGObject+Helper.swift */; };
 		7F96884624224F140033C772 /* CommonSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F96884524224F140033C772 /* CommonSocket.swift */; };
+		7FB70B3C24238BA4008F9CF1 /* AGImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB70B3B24238BA4008F9CF1 /* AGImagePickerController.swift */; };
 		8430476AAB482DA86BD0BD9F41A0D336 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 623B497C8B0DC52D25418BAF176777A7 /* QuartzCore.framework */; };
 		8A4C62F9F15CF775572C1C57387E7E1F /* back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14A39BFDD91E5B674FA1EA17E0C7E33B /* back@3x.png */; };
 		8D5AEA9FFC49DE8F170A224904E2927B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66647C9ECFFF6681841EDFD82F901D57 /* Foundation.framework */; };
@@ -209,7 +210,7 @@
 		0C3BC374E97CF23A4A8EA7BC3E55F358 /* MBProgressHUD-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD-dummy.m"; sourceTree = "<group>"; };
 		0C56CCC57D9FFB631D03BC07B8FAE9FD /* SocketEngine.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketEngine.swift; path = Source/SocketIO/Engine/SocketEngine.swift; sourceTree = "<group>"; };
 		0EE5F0E567DA4FC3D75B61AD54B883CD /* WebSocket.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WebSocket.swift; path = Sources/Starscream/WebSocket.swift; sourceTree = "<group>"; };
-		111DEE473ADFDD32C621B72B9F3F1BD6 /* ChatViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ChatViewController.swift; path = Source/ChatViewController.swift; sourceTree = "<group>"; };
+		111DEE473ADFDD32C621B72B9F3F1BD6 /* ChatViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		12CE1EF1D64883D176EBC381710A5908 /* Socket.IO-Client-Swift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Socket.IO-Client-Swift-dummy.m"; sourceTree = "<group>"; };
 		145E0B2162DCA5789E9F7CCE5C97A1B1 /* SwiftyJSON.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyJSON.xcconfig; sourceTree = "<group>"; };
 		14A39BFDD91E5B674FA1EA17E0C7E33B /* back@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "back@3x.png"; path = "Resources/back@3x.png"; sourceTree = "<group>"; };
@@ -223,12 +224,12 @@
 		1CE5546671DAD2D72D7EC185522AADFE /* IQKeyboardReturnKeyHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IQKeyboardReturnKeyHandler.swift; path = IQKeyboardManagerSwift/IQKeyboardReturnKeyHandler.swift; sourceTree = "<group>"; };
 		244F59C32DC6908223658AADA9F00AAD /* IQTitleBarButtonItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IQTitleBarButtonItem.swift; path = IQKeyboardManagerSwift/IQToolbar/IQTitleBarButtonItem.swift; sourceTree = "<group>"; };
 		2521291B2D018769F63DBECA8D690610 /* IQKeyboardManagerSwift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "IQKeyboardManagerSwift-umbrella.h"; sourceTree = "<group>"; };
-		25422A76DBDACC325942D946F438B66A /* MainLoadViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MainLoadViewController.swift; path = Source/MainLoadViewController.swift; sourceTree = "<group>"; };
+		25422A76DBDACC325942D946F438B66A /* MainLoadViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MainLoadViewController.swift; sourceTree = "<group>"; };
 		26050939252B858569C10AC02F336031 /* SocketEngineSpec.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketEngineSpec.swift; path = Source/SocketIO/Engine/SocketEngineSpec.swift; sourceTree = "<group>"; };
 		2659FE8A31D44CB2C7723940A08FDD0F /* IQKeyboardManagerConstantsInternal.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IQKeyboardManagerConstantsInternal.swift; path = IQKeyboardManagerSwift/Constants/IQKeyboardManagerConstantsInternal.swift; sourceTree = "<group>"; };
 		2830662DAF845754A2E79BEAAD2BC0BC /* IQToolbar.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IQToolbar.swift; path = IQKeyboardManagerSwift/IQToolbar/IQToolbar.swift; sourceTree = "<group>"; };
 		2B16104B2C7B8E98FEB78D517DA205AD /* MBProgressHUD-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD-prefix.pch"; sourceTree = "<group>"; };
-		2E0D26B8F2CD7760C902A6D39410A479 /* GGiOSSDK.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GGiOSSDK.swift; path = Source/GGiOSSDK.swift; sourceTree = "<group>"; };
+		2E0D26B8F2CD7760C902A6D39410A479 /* GGiOSSDK.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GGiOSSDK.swift; sourceTree = "<group>"; };
 		2E5C9FA00F689773F1E5817CB0C8430A /* SwiftyJSON-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-umbrella.h"; sourceTree = "<group>"; };
 		30E2B31C50641726D47246856DEACD2C /* MBProgressHUD.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		31ECC9D61509EB84B8E484F96127CC21 /* SocketEngineWebsocket.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketEngineWebsocket.swift; path = Source/SocketIO/Engine/SocketEngineWebsocket.swift; sourceTree = "<group>"; };
@@ -250,13 +251,13 @@
 		4DBE69C0E87D3E93D2C341C311DAA84C /* GGiOSSDK.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GGiOSSDK.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		50C0B0879B7086918A819F704BF40B4B /* SocketIO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SocketIO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		53BB251CF10CE4E72A9580F293B9696C /* MBProgressHUD-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "MBProgressHUD-Info.plist"; sourceTree = "<group>"; };
-		54BB28ADCF150BDDDB1CB3D44218DF22 /* GGObject+Helper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "GGObject+Helper.swift"; path = "Source/GGObject+Helper.swift"; sourceTree = "<group>"; };
+		54BB28ADCF150BDDDB1CB3D44218DF22 /* GGObject+Helper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "GGObject+Helper.swift"; sourceTree = "<group>"; };
 		555031F6FF98198F7781574C78A99821 /* IQTextView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IQTextView.swift; path = IQKeyboardManagerSwift/IQTextView/IQTextView.swift; sourceTree = "<group>"; };
 		55AD4C39586579B72CB669436730DEB9 /* SocketIOClientSpec.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketIOClientSpec.swift; path = Source/SocketIO/Client/SocketIOClientSpec.swift; sourceTree = "<group>"; };
 		56263E399E89AA1173F2168A1197E956 /* SocketStringReader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketStringReader.swift; path = Source/SocketIO/Util/SocketStringReader.swift; sourceTree = "<group>"; };
 		5B3D0739EE6D22D44C5A5501BB6F8B24 /* GGiOSSDK.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = GGiOSSDK.xcconfig; sourceTree = "<group>"; };
 		5D7654712E989624D877081ED04D195A /* Pods-iOSSDK_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-iOSSDK_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		5F6F48EE6C1EECD785303CE30C0C0201 /* UserDetails.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UserDetails.swift; path = Source/UserDetails.swift; sourceTree = "<group>"; };
+		5F6F48EE6C1EECD785303CE30C0C0201 /* UserDetails.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = UserDetails.swift; sourceTree = "<group>"; };
 		61F869FB8664FF4685554673204AF8F2 /* Pods-iOSSDK_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-iOSSDK_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		623B497C8B0DC52D25418BAF176777A7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		641DCD6CBA988D3E77AEE57ACEB36551 /* Pods-iOSSDK_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-iOSSDK_Example-umbrella.h"; sourceTree = "<group>"; };
@@ -267,7 +268,7 @@
 		6BDBB5EBAAD1F39B7C9A40F57318E5F5 /* GGiOSSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GGiOSSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C12A5268DFA9BE644BB12907049B8BA /* Starscream-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Starscream-umbrella.h"; sourceTree = "<group>"; };
 		6DED3CCB63693F20609C20CE568FC212 /* ResourceBundle-GGiOSSDK-GGiOSSDK-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-GGiOSSDK-GGiOSSDK-Info.plist"; sourceTree = "<group>"; };
-		70BD6531275D23F39421C40AD57D3944 /* GGObject.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GGObject.swift; path = Source/GGObject.swift; sourceTree = "<group>"; };
+		70BD6531275D23F39421C40AD57D3944 /* GGObject.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GGObject.swift; sourceTree = "<group>"; };
 		715C8BE47B3D989C046B560B8DF80716 /* GGiOSSDK.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = GGiOSSDK.modulemap; sourceTree = "<group>"; };
 		72113458F4650522E1A15B3AEC211EB9 /* IQKeyboardManagerSwift.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = IQKeyboardManagerSwift.xcconfig; sourceTree = "<group>"; };
 		7219E08D9D989763413E307D29710C97 /* SocketRawView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketRawView.swift; path = Source/SocketIO/Client/SocketRawView.swift; sourceTree = "<group>"; };
@@ -278,6 +279,7 @@
 		7DE19CD0358C0A1DCD3F39ACC678D131 /* IQUIView+IQKeyboardToolbar.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "IQUIView+IQKeyboardToolbar.swift"; path = "IQKeyboardManagerSwift/IQToolbar/IQUIView+IQKeyboardToolbar.swift"; sourceTree = "<group>"; };
 		7F7D41AA6B6909D208D5927E375DF7B6 /* SocketManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketManager.swift; path = Source/SocketIO/Manager/SocketManager.swift; sourceTree = "<group>"; };
 		7F96884524224F140033C772 /* CommonSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonSocket.swift; sourceTree = "<group>"; };
+		7FB70B3B24238BA4008F9CF1 /* AGImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGImagePickerController.swift; sourceTree = "<group>"; };
 		8247F3B4B0B3EF96194705BE7AB19A37 /* Socket.IO-Client-Swift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Socket.IO-Client-Swift-umbrella.h"; sourceTree = "<group>"; };
 		891B2270823847ED23F2ECFC28F935EC /* Starscream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Starscream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		89A9FD159041CD13DD147B59CB9F1C1B /* Starscream-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Starscream-dummy.m"; sourceTree = "<group>"; };
@@ -286,19 +288,19 @@
 		8C6B7183F1725F38949E22528582039A /* SwiftyJSON.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SwiftyJSON.modulemap; sourceTree = "<group>"; };
 		8D8E2937C4F978C113112BC0FF0382A6 /* SwiftyJSON-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftyJSON-dummy.m"; sourceTree = "<group>"; };
 		93CE8048C12AF7C99C45E65B7CD4F1A2 /* IQUIView+Hierarchy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "IQUIView+Hierarchy.swift"; path = "IQKeyboardManagerSwift/Categories/IQUIView+Hierarchy.swift"; sourceTree = "<group>"; };
-		9583D7E718965E9A312F58435A7DECA8 /* GGProgress.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GGProgress.swift; path = Source/GGProgress.swift; sourceTree = "<group>"; };
+		9583D7E718965E9A312F58435A7DECA8 /* GGProgress.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GGProgress.swift; sourceTree = "<group>"; };
 		969C6CDB911CF33B0F7C978360C8B7D9 /* SocketEnginePollable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketEnginePollable.swift; path = Source/SocketIO/Engine/SocketEnginePollable.swift; sourceTree = "<group>"; };
 		96FB90B1C44A7B2BFDE85A8CA6BE28EF /* SwiftyJSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = Source/SwiftyJSON/SwiftyJSON.swift; sourceTree = "<group>"; };
 		977FCA69AB4841F9A1528CAD5EC65CBC /* IQKeyboardManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IQKeyboardManager.swift; path = IQKeyboardManagerSwift/IQKeyboardManager.swift; sourceTree = "<group>"; };
 		97AA81B4B6744EADC7D9350C6EDA4EE7 /* IQInvocation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IQInvocation.swift; path = IQKeyboardManagerSwift/IQToolbar/IQInvocation.swift; sourceTree = "<group>"; };
 		9A1F4F4E0D5D403535103F3B67AEE4F9 /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C172D44449CFBA3E94F7A923D12E96F /* MBProgressHUD.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MBProgressHUD.xcconfig; sourceTree = "<group>"; };
-		9C5EE3936BF147AC07461136478DE8A8 /* RateViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RateViewController.swift; path = Source/RateViewController.swift; sourceTree = "<group>"; };
+		9C5EE3936BF147AC07461136478DE8A8 /* RateViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RateViewController.swift; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9E1B85DEC08DE632D35630BC0A439B96 /* Socket.IO-Client-Swift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Socket.IO-Client-Swift.modulemap"; sourceTree = "<group>"; };
 		A1BF0E53DFDA00000AA36C8DAA95BA74 /* IQKeyboardManagerSwift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = IQKeyboardManagerSwift.modulemap; sourceTree = "<group>"; };
 		A1EF986FAF1FFAF8D2524CF27F7EAC1D /* SSLSecurity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SSLSecurity.swift; path = Sources/Starscream/SSLSecurity.swift; sourceTree = "<group>"; };
-		A40FF2E49C9EDFFF17EC2CA359B00015 /* WatingViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WatingViewController.swift; path = Source/WatingViewController.swift; sourceTree = "<group>"; };
+		A40FF2E49C9EDFFF17EC2CA359B00015 /* WatingViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WatingViewController.swift; sourceTree = "<group>"; };
 		A5B504C391D6F60A62D3E0469BE31502 /* Socket.IO-Client-Swift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Socket.IO-Client-Swift-prefix.pch"; sourceTree = "<group>"; };
 		A7A61ED6E63F72D336C8336B6B12BF89 /* SocketAckManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketAckManager.swift; path = Source/SocketIO/Ack/SocketAckManager.swift; sourceTree = "<group>"; };
 		A7D7FFE726A3A30F3EEBC282C221FAC0 /* SocketPacket.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketPacket.swift; path = Source/SocketIO/Parse/SocketPacket.swift; sourceTree = "<group>"; };
@@ -312,8 +314,8 @@
 		C2923919F217D4B2200417D093C432CE /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		C404EE5FECDB61332209EB57DC19A71C /* SocketExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketExtensions.swift; path = Source/SocketIO/Util/SocketExtensions.swift; sourceTree = "<group>"; };
 		C4CA046F3B33FFF58BEDCCD14A93D3B4 /* IQKeyboardManagerSwift-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "IQKeyboardManagerSwift-Info.plist"; sourceTree = "<group>"; };
-		C4EFB80C683B6143A44BB6D90A91A154 /* NSObject+Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSObject+Extension.swift"; path = "Source/NSObject+Extension.swift"; sourceTree = "<group>"; };
-		C500A1AE34F2833843D4E7C65C745434 /* GGButton.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GGButton.swift; path = Source/GGButton.swift; sourceTree = "<group>"; };
+		C4EFB80C683B6143A44BB6D90A91A154 /* NSObject+Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
+		C500A1AE34F2833843D4E7C65C745434 /* GGButton.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GGButton.swift; sourceTree = "<group>"; };
 		C96BC75F01EDA56D2BD43FD8F49F0643 /* IQPreviousNextView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = IQPreviousNextView.swift; path = IQKeyboardManagerSwift/IQToolbar/IQPreviousNextView.swift; sourceTree = "<group>"; };
 		CAF8D37FAD477A1DE9F9A05E71AAE2E7 /* SocketEventHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketEventHandler.swift; path = Source/SocketIO/Client/SocketEventHandler.swift; sourceTree = "<group>"; };
 		CCCF02000027986C83E8370B825FD9D5 /* like.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = like.png; path = Resources/like.png; sourceTree = "<group>"; };
@@ -321,7 +323,7 @@
 		CF81F72EC84405EF58A37043A96D5DC3 /* back@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "back@2x.png"; path = "Resources/back@2x.png"; sourceTree = "<group>"; };
 		D55250264E34E9A61D0A6A2F27E5A5DA /* Starscream-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Starscream-prefix.pch"; sourceTree = "<group>"; };
 		D64BC6119DED528203BBFC4965027EAF /* IQKeyboardManagerSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IQKeyboardManagerSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D9A8FA8BCF296E432BE8833DF01F8248 /* GGView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GGView.swift; path = Source/GGView.swift; sourceTree = "<group>"; };
+		D9A8FA8BCF296E432BE8833DF01F8248 /* GGView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GGView.swift; sourceTree = "<group>"; };
 		DAA0EAA3E1F3CDBFD6EC52EFDC3E797A /* SocketIOStatus.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketIOStatus.swift; path = Source/SocketIO/Client/SocketIOStatus.swift; sourceTree = "<group>"; };
 		DF32D380D74041B10F22042BC8590BB3 /* SocketManagerSpec.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketManagerSpec.swift; path = Source/SocketIO/Manager/SocketManagerSpec.swift; sourceTree = "<group>"; };
 		E23C076BA70925415F490FEDB215DA92 /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -578,6 +580,36 @@
 			path = SwiftyJSON;
 			sourceTree = "<group>";
 		};
+		7FB70B3F2423900C008F9CF1 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				7F96884524224F140033C772 /* CommonSocket.swift */,
+				C500A1AE34F2833843D4E7C65C745434 /* GGButton.swift */,
+				2E0D26B8F2CD7760C902A6D39410A479 /* GGiOSSDK.swift */,
+				70BD6531275D23F39421C40AD57D3944 /* GGObject.swift */,
+				54BB28ADCF150BDDDB1CB3D44218DF22 /* GGObject+Helper.swift */,
+				9583D7E718965E9A312F58435A7DECA8 /* GGProgress.swift */,
+				D9A8FA8BCF296E432BE8833DF01F8248 /* GGView.swift */,
+				C4EFB80C683B6143A44BB6D90A91A154 /* NSObject+Extension.swift */,
+				5F6F48EE6C1EECD785303CE30C0C0201 /* UserDetails.swift */,
+				7FB70B3B24238BA4008F9CF1 /* AGImagePickerController.swift */,
+			);
+			name = Helper;
+			path = Source/Helper;
+			sourceTree = "<group>";
+		};
+		7FB70B4024239023008F9CF1 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				111DEE473ADFDD32C621B72B9F3F1BD6 /* ChatViewController.swift */,
+				A40FF2E49C9EDFFF17EC2CA359B00015 /* WatingViewController.swift */,
+				25422A76DBDACC325942D946F438B66A /* MainLoadViewController.swift */,
+				9C5EE3936BF147AC07461136478DE8A8 /* RateViewController.swift */,
+			);
+			name = ViewController;
+			path = Source/ViewController;
+			sourceTree = "<group>";
+		};
 		917972C457A74EEE9D97FA27F43B7D78 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -603,20 +635,9 @@
 		A37ED39F6ED93E727B8B711542E2D80A /* GGiOSSDK */ = {
 			isa = PBXGroup;
 			children = (
-				7F96884524224F140033C772 /* CommonSocket.swift */,
-				111DEE473ADFDD32C621B72B9F3F1BD6 /* ChatViewController.swift */,
-				C500A1AE34F2833843D4E7C65C745434 /* GGButton.swift */,
 				156579857CEE763B367607EBB6BEEECF /* GGiOSSDK.storyboard */,
-				2E0D26B8F2CD7760C902A6D39410A479 /* GGiOSSDK.swift */,
-				70BD6531275D23F39421C40AD57D3944 /* GGObject.swift */,
-				54BB28ADCF150BDDDB1CB3D44218DF22 /* GGObject+Helper.swift */,
-				9583D7E718965E9A312F58435A7DECA8 /* GGProgress.swift */,
-				D9A8FA8BCF296E432BE8833DF01F8248 /* GGView.swift */,
-				25422A76DBDACC325942D946F438B66A /* MainLoadViewController.swift */,
-				C4EFB80C683B6143A44BB6D90A91A154 /* NSObject+Extension.swift */,
-				9C5EE3936BF147AC07461136478DE8A8 /* RateViewController.swift */,
-				5F6F48EE6C1EECD785303CE30C0C0201 /* UserDetails.swift */,
-				A40FF2E49C9EDFFF17EC2CA359B00015 /* WatingViewController.swift */,
+				7FB70B4024239023008F9CF1 /* ViewController */,
+				7FB70B3F2423900C008F9CF1 /* Helper */,
 				CD156B2055801AD3645F7C6C1CA7B8DF /* Pod */,
 				4502E4130059BAB929C979FACE991995 /* Resources */,
 				0687A0146FCA369D386972BC96958F3C /* Support Files */,
@@ -1085,6 +1106,7 @@
 				08288029A17B0B5855C222EB18B8FD58 /* GGiOSSDK-dummy.m in Sources */,
 				4B368CD6C0CA1CFE7D85B510747BD25F /* GGiOSSDK.storyboard in Sources */,
 				7F96884624224F140033C772 /* CommonSocket.swift in Sources */,
+				7FB70B3C24238BA4008F9CF1 /* AGImagePickerController.swift in Sources */,
 				E3D9EEF7EF9317CE534620F50E2E5E2B /* GGiOSSDK.swift in Sources */,
 				77CE50B1E9A3CE8EBBB95D05D95E804D /* GGObject+Helper.swift in Sources */,
 				37E9E8CD0DEB563AEB1B5B171C9D3879 /* GGObject.swift in Sources */,

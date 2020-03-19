@@ -138,6 +138,29 @@ class MainLoadViewController: UIViewController {
       }
       task.resume()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        CommonSocket.shared.ipBlocked { data in
+            
+        }
+        CommonSocket.shared.totalOnlineAgents { data in
+            
+        }
+        CommonSocket.shared.agentAcceptedChatRequest { data in
+            
+        }
+        CommonSocket.shared.agentSendNewMessage { data in
+            
+        }
+        CommonSocket.shared.agentChatSessionTerminated { data in
+            
+        }
+        CommonSocket.shared.agentTypingListener { data in
+            
+        }
+        CommonSocket.shared.newAgentAcceptedChatRequest { data in
+            
+        }
+    }
     @objc func dissmissView(){
         CommonSocket.shared.disConnect()
         self.dismiss(animated: true, completion: nil)
