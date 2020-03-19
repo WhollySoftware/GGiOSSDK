@@ -26,7 +26,7 @@ I am trying to make live tracking sdk for all the developer so the can use easil
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'WhollySoftware' => 'whollysoftware@gmail.com' }
   s.source           = { :git => 'https://github.com/WhollySoftware/GGiOSSDK.git', :tag => s.version.to_s }
-  s.social_media_url = 'https://whollysoftware.com'
+#  s.social_media_url = 'https://whollysoftware.com'
 
   s.ios.deployment_target = '10.0'
 
