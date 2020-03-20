@@ -11,6 +11,19 @@ import UIKit
 
 class GGUserSessionDetail: GGObject {
     
+    var name: String {
+        get { return UserDefaults.standard.string(forKey: "name") ?? "" }
+        set { UserDefaults.standard.set(newValue, forKey: "name") }
+    }
+    var mobile: String {
+        get { return UserDefaults.standard.string(forKey: "mobile") ?? "" }
+        set { UserDefaults.standard.set(newValue, forKey: "mobile") }
+    }
+    var email: String {
+        get { return UserDefaults.standard.string(forKey: "email") ?? "" }
+        set { UserDefaults.standard.set(newValue, forKey: "email") }
+    }
+    
     static var shared = GGUserSessionDetail()
     override init() {
         super.init()
@@ -63,4 +76,32 @@ class EmbeddedChat:GGObject{
     var preChatOnlineMessageTxt:String  = ""
     var sendButtonTxt:String  = ""
     var startChatButtonTxt:String  = ""
+}
+class MessageModel:GGObject{
+    var __v:Int  = 0
+    var _id:String  = ""
+    var agent_id:String  = ""
+    var isBlocked:String  = ""
+    var attachment_file:String  = ""
+    var company_id:String  = ""
+    var file_size:String  = ""
+    var file_type:String  = ""
+    var formatted_file_size:Int  = 0
+    var isDeleted:Int  = 0
+    var isSystem:Int  = 0
+    var isTransfer:Int  = 0
+    var isWelcome:Int  = 0
+    var is_attachment:Int  = 0
+    var localId:String  = ""
+    var message:String  = ""
+    var new_agent_id:String  = ""
+    var send_by:Int  = 0
+    var updatedAt:String  = ""
+    var visitor_id:VisitorIdModel  = VisitorIdModel()
+    var visitor_message_id:String  = ""
+}
+class VisitorIdModel:GGObject{
+    var name:String  = ""
+    var _id:String  = ""
+    
 }

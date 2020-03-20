@@ -429,6 +429,31 @@
                                                     <outlet property="lblTime" destination="EY3-DS-cXb" id="Vo9-Rt-F6u"/>
                                                 </connections>
                                             </tableViewCell>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="systemTableViewCell" rowHeight="93" id="aBP-oD-TMf" customClass="systemTableViewCell" customModule="GGiOSSDK" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="214" width="414" height="93"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aBP-oD-TMf" id="u6K-yD-1CH">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="93"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Agent Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5kO-qV-6tI">
+                                                            <rect key="frame" x="10" y="10" width="394" height="73"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="5kO-qV-6tI" firstAttribute="leading" secondItem="u6K-yD-1CH" secondAttribute="leading" constant="20" id="OMj-Or-JPf"/>
+                                                        <constraint firstAttribute="trailing" secondItem="5kO-qV-6tI" secondAttribute="trailing" constant="20" id="ee4-Xy-QiB"/>
+                                                        <constraint firstAttribute="bottom" secondItem="5kO-qV-6tI" secondAttribute="bottom" constant="10" id="k76-g5-SkQ"/>
+                                                        <constraint firstItem="5kO-qV-6tI" firstAttribute="top" secondItem="u6K-yD-1CH" secondAttribute="top" constant="10" id="tiI-5P-2cd"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="lblMessage" destination="5kO-qV-6tI" id="5uc-EG-RGW"/>
+                                                </connections>
+                                            </tableViewCell>
                                         </prototypes>
                                         <connections>
                                             <outlet property="dataSource" destination="VNX-Ov-BDt" id="v1U-cN-KeW"/>

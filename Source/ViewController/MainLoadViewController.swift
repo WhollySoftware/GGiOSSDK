@@ -23,9 +23,9 @@ class MainLoadViewController: UIViewController {
         super.viewDidLoad()
         self.title = "Chat"
         
-        self.txtFullName.text = GGiOSSDK.shared.AllDetails.name
-        self.txtMobile.text = ""
-        self.txtEmailAddress.text = ""
+        self.txtFullName.text = GGUserSessionDetail.shared.name
+        self.txtMobile.text = GGUserSessionDetail.shared.mobile
+        self.txtEmailAddress.text = GGUserSessionDetail.shared.email
         self.txtTypeYourQuestion.text = ""
         
         IQKeyboardManager.shared.enable = true
@@ -74,14 +74,17 @@ class MainLoadViewController: UIViewController {
             "ipAddress": "192.168.1.2",
             "browser": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:73.0)",
             "domain": "drdsh.live",
-            //"name": "Virendra Kumar",
-            //"email": "virendra@htf.sa",
-            //"mobile": "9990418225",
             //"fullUrl": "https://www.drdsh.live/contact/us",
             //"metaTitle": "Contact Us",
             //"resolution": "750x300",
            //"visitorID" : "5e637ccae4cb961e36dfb5a5"
         ]
+        if GGiOSSDK.shared.AllDetails.visitorID != ""{
+            newTodo["visitorID"] = GGiOSSDK.shared.AllDetails.visitorID
+             newTodo["name"] = GGUserSessionDetail.shared.name
+             newTodo["email"] = GGUserSessionDetail.shared.email
+             newTodo["mobile"] = GGUserSessionDetail.shared.mobile
+        }
         if getIFAddresses().count > 0{
             newTodo["ipAddress"] = getIFAddresses()[0]
         }
@@ -121,14 +124,11 @@ class MainLoadViewController: UIViewController {
                 if let d = receivedTodo["data"] as? [String:AnyObject]{
                     print("Response : " + receivedTodo.description)
                     GGiOSSDK.shared.AllDetails <= d
-                    GGiOSSDK.shared.AllDetails.name = self.txtFullName.text!
-                    GGiOSSDK.shared.AllDetails.mobile = self.txtMobile.text!
-                    GGiOSSDK.shared.AllDetails.email = self.txtEmailAddress.text!
                     var newTodo: [String: Any] =  GGiOSSDK.shared.AllDetails.toDict
                     newTodo["embeddedChat"] = GGiOSSDK.shared.AllDetails.embeddedChat.toDict
                     UserDefaults.standard.setValue(newTodo, forKey: "AllDetails")
                     
-                    if GGiOSSDK.shared.AllDetails.visitorConnectedStatus == 1{
+                    if GGiOSSDK.shared.AllDetails.visitorConnectedStatus == 1 || GGiOSSDK.shared.AllDetails.visitorConnectedStatus == 2{
                         DispatchQueue.main.async {
                             let vc = self.storyboard?.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
                             self.navigationController?.pushViewController(vc, animated: false)
@@ -255,9 +255,9 @@ class MainLoadViewController: UIViewController {
                     GGiOSSDK.shared.AllDetails.agentOnline = d["agentOnline"] as? Int ?? 0
                     GGiOSSDK.shared.AllDetails.visitorConnectedStatus = d["visitorConnectedStatus"] as? Int ?? 0
                     GGiOSSDK.shared.AllDetails.messageID = d["messageID"] as? String ?? ""
-                    GGiOSSDK.shared.AllDetails.name = self.txtFullName.text!
-                    GGiOSSDK.shared.AllDetails.mobile = self.txtMobile.text!
-                    GGiOSSDK.shared.AllDetails.email = self.txtEmailAddress.text!
+                    GGUserSessionDetail.shared.name = self.txtFullName.text!
+                    GGUserSessionDetail.shared.mobile = self.txtMobile.text!
+                    GGUserSessionDetail.shared.email = self.txtEmailAddress.text!
                     var newTodo: [String: Any] =  GGiOSSDK.shared.AllDetails.toDict
                     newTodo["embeddedChat"] = GGiOSSDK.shared.AllDetails.embeddedChat.toDict
                     UserDefaults.standard.setValue(newTodo, forKey: "AllDetails")

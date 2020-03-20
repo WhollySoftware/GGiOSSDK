@@ -28,34 +28,6 @@ class CommonSocket: NSObject {
             print("socket disconnected \(data)")
         }
         manager.defaultSocket.connect()
-        manager.defaultSocket.on("ipBlocked") { (resp, emitter) in
-            print(resp)
-            NotificationCenter.default.post(name: NSNotification.Name("ipBlocked"), object: self, userInfo: ["data": resp])
-        }
-        manager.defaultSocket.on("totalOnlineAgents") { (resp, emitter) in
-            print(resp)
-            NotificationCenter.default.post(name: NSNotification.Name("totalOnlineAgents"), object: self, userInfo: ["data": resp])
-        }
-        manager.defaultSocket.on("agentAcceptedChatRequest") { (resp, emitter) in
-            print(resp)
-            NotificationCenter.default.post(name: NSNotification.Name("agentAcceptedChatRequest"), object: self, userInfo: ["data": resp])
-        }
-        manager.defaultSocket.on("agentSendNewMessage") { (resp, emitter) in
-            print(resp)
-            NotificationCenter.default.post(name: NSNotification.Name("agentSendNewMessage"), object: self, userInfo: ["data": resp])
-        }
-        manager.defaultSocket.on("agentChatSessionTerminated") { (resp, emitter) in
-            print(resp)
-            NotificationCenter.default.post(name: NSNotification.Name("agentChatSessionTerminated"), object: self, userInfo: ["data": resp])
-        }
-        manager.defaultSocket.on("agentTypingListener") { (resp, emitter) in
-            print(resp)
-            NotificationCenter.default.post(name: NSNotification.Name("agentTypingListener"), object: self, userInfo: ["data": resp])
-        }
-        manager.defaultSocket.on("newAgentAcceptedChatRequest") { (resp, emitter) in
-            print(resp)
-            NotificationCenter.default.post(name: NSNotification.Name("newAgentAcceptedChatRequest"), object: self, userInfo: ["data": resp])
-        }
         manager.defaultSocket.on(clientEvent: .connect) {data, ack in
             if ack.expected {
                 print("connect inside \(data) ack")
