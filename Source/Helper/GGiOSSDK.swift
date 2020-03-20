@@ -19,6 +19,9 @@ public class GGiOSSDK : NSObject {
         return Bundle(for: GGiOSSDK.self).path(forResource: "GGiOSSDK", ofType: "bundle")!
     }
     @objc public class func presentChat(appSid:String,animated: Bool = true, completion: ((Bool) -> Void)? = nil) {
+        if let data = UserDefaults.standard.object(forKey: "AllDetails") as? [String :AnyObject]{
+            GGiOSSDK.shared.AllDetails <= data
+        }
         GGiOSSDK.shared.appSid = appSid
         let vc = UIStoryboard(name: "GGiOSSDK", bundle: Bundle(for: GGiOSSDK.self)).instantiateViewController(withIdentifier: "MainLoadViewController") as! MainLoadViewController
         vc.modalPresentationStyle = .overFullScreen

@@ -8,7 +8,7 @@
 import UIKit
 import MobileCoreServices
 
-class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate {
 
     @IBOutlet weak var btnSend: GGButton!
     @IBOutlet weak var btnLike: GGButton!
@@ -18,11 +18,26 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var agentView: UIView!
+    @IBOutlet weak var messageView: UIView!
+    @IBOutlet weak var typingView: UIView!
+    @IBOutlet weak var lblTyping: UILabel!
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var txtMessage: UITextField!
+    var timer:Timer = Timer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.agentView.isHidden = true
+        timer = Timer(timeInterval: 120, target: self, selector: #selector(invitationMaxWaitTimeExceeded), userInfo: nil, repeats: false)
+        RunLoop.main.add(timer, forMode: RunLoopMode.commonModes)
+        if GGiOSSDK.shared.AllDetails.visitorConnectedStatus != 2{
+            CommonSocket.shared.startChatRequest(data: [["dc_vid":GGiOSSDK.shared.AllDetails.visitorID]])
+        }else if GGiOSSDK.shared.AllDetails.visitorConnectedStatus == 2{
+            CommonSocket.shared.startChatRequest(data: [["dc_vid":GGiOSSDK.shared.AllDetails.visitorID]])
+        }
+        CommonSocket.shared.visitorLoadChatHistory(data: [["mid":GGiOSSDK.shared.AllDetails.messageID]]) { (data) in
+            debugPrint(data)
+        }
         var bundle = Bundle(for: GGiOSSDK.self)
         if let resourcePath = bundle.path(forResource: "GGiOSSDK", ofType: "bundle") {
             if let resourcesBundle = Bundle(path: resourcePath) {
@@ -43,13 +58,13 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Chat Close", style: .plain, target: self, action: #selector(dissmissView))
         
         btnSend.action = {
-            
+            CommonSocket.shared.updateVisitorRating(data: [["mid":GGiOSSDK.shared.AllDetails.messageID,"vid":GGiOSSDK.shared.AllDetails.visitorID,"feedback":"bad"]])
         }
         btnLike.action = {
-            
+            CommonSocket.shared.updateVisitorRating(data: [["mid":GGiOSSDK.shared.AllDetails.messageID,"vid":GGiOSSDK.shared.AllDetails.visitorID,"feedback":"good"]])
         }
         btnDisLike.action = {
-            
+            CommonSocket.shared.updateVisitorRating(data: [["mid":GGiOSSDK.shared.AllDetails.messageID,"vid":GGiOSSDK.shared.AllDetails.visitorID,"feedback":"bad"]])
         }
         btnMail.action = {
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "RateViewController") as! RateViewController
@@ -66,43 +81,66 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
            AGImagePickerController(with: self, allowsEditing: false, media: .both, iPadSetup: self.btnAttachment)
         }
     }
+    @objc func invitationMaxWaitTimeExceeded(){
+        timer.invalidate()
+        CommonSocket.shared.invitationMaxWaitTimeExceeded(data: [["vid":GGiOSSDK.shared.AllDetails.visitorID,"form":GGiOSSDK.shared.AllDetails.embeddedChat.displayForm]]) { (data) in
+            debugPrint(data)
+            
+        }
+    }
     @objc func backAction(){
+        self.timer.invalidate()
         self.navigationController?.popViewController(animated: true)
     }
     @objc func dissmissView(){
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "RateViewController") as! RateViewController
-        vc.modalPresentationStyle = .overFullScreen
-        vc.successHandler = {
-            CommonSocket.shared.disConnect()
-            self.dismiss(animated: false) {
+        self.timer.invalidate()
+        if GGiOSSDK.shared.AllDetails.embeddedChat.postChatPromptComments{
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "RateViewController") as! RateViewController
+            vc.modalPresentationStyle = .overFullScreen
+            vc.successHandler = {
+                CommonSocket.shared.disConnect()
+                self.dismiss(animated: false) {
+                    
+                }
+            }
+            self.present(vc, animated: true) {
                 
             }
+        }else{
+            CommonSocket.shared.visitorEndChatSession(data: [["id":GGiOSSDK.shared.AllDetails.companyId,"vid":GGiOSSDK.shared.AllDetails.visitorID,"name":GGiOSSDK.shared.AllDetails.name]]) { (data) in
+                debugPrint(data)
+                CommonSocket.shared.disConnect()
+                self.dismiss(animated: false) {
+                    
+                }
+            }
         }
-        self.present(vc, animated: true) {
-            
-        }
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         CommonSocket.shared.ipBlocked { data in
-            
+            self.timer.invalidate()
         }
         CommonSocket.shared.totalOnlineAgents { data in
             
         }
         CommonSocket.shared.agentAcceptedChatRequest { data in
-            
+            self.timer.invalidate()
+            self.agentView.isHidden = false
         }
         CommonSocket.shared.agentSendNewMessage { data in
             
         }
         CommonSocket.shared.agentChatSessionTerminated { data in
-            
+            self.timer.invalidate()
+            self.agentView.isHidden = true
+            self.messageView.isHidden = true
         }
         CommonSocket.shared.agentTypingListener { data in
-            
+             self.typingView.isHidden = false
         }
         CommonSocket.shared.newAgentAcceptedChatRequest { data in
-            
+            self.agentView.isHidden = false
         }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -117,7 +155,17 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             let cell = tableView.dequeueReusableCell(withIdentifier: "ReceiverTableViewCell", for: indexPath) as! ReceiverTableViewCell
             return cell
         }
-    }    
+    }
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        CommonSocket.shared.visitorTyping(data: [["vid":GGiOSSDK.shared.AllDetails.visitorID,"id":GGiOSSDK.shared.AllDetails.companyId,"agent_id":GGiOSSDK.shared.AllDetails.agentId,"ts":1,"message":GGiOSSDK.shared.AllDetails.name+" start typing...","stop":false]])
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        CommonSocket.shared.visitorTyping(data: [["vid":GGiOSSDK.shared.AllDetails.visitorID,"id":GGiOSSDK.shared.AllDetails.companyId,"agent_id":GGiOSSDK.shared.AllDetails.agentId,"ts":0,"message":GGiOSSDK.shared.AllDetails.name+" is typing...","stop":true]])
+    }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        CommonSocket.shared.visitorTyping(data: [["vid":GGiOSSDK.shared.AllDetails.visitorID,"id":GGiOSSDK.shared.AllDetails.companyId,"agent_id":GGiOSSDK.shared.AllDetails.agentId,"ts":2,"message":GGiOSSDK.shared.AllDetails.name+" is typing...","stop":false]])
+        return true
+    }
 }
 extension ChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     

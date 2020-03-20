@@ -11,11 +11,6 @@ import UIKit
 
 class GGUserSessionDetail: GGObject {
     
-    static var isNewInstallled: Bool {
-        get { return UserDefaults.standard.bool(forKey: "isUserLogin") }
-        set { UserDefaults.standard.set(newValue, forKey: "isUserLogin") }
-    }
-    
     static var shared = GGUserSessionDetail()
     override init() {
         super.init()
@@ -44,6 +39,8 @@ class ValidateIdentity:GGObject{
     var isBlocked:Bool  = false
     var messageID:String  = ""
     var name:String  = ""
+    var email:String  = ""
+    var mobile:String  = ""
     var visitorConnectedStatus:Int  = 0
     var visitorID:String  = ""
 }

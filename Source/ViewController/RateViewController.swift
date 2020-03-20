@@ -22,13 +22,14 @@ class RateViewController: UIViewController {
     var successHandler:(()->Void)?
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.btnCancel.isHidden = type == 0
+        self.btnCancel.isHidden = type != 2
+        self.btnDisLike.isHidden = type == 2
+        self.btnLike.isHidden = type == 2
+        self.btnMail.isHidden = type != 2
         txtComment.layer.borderWidth = 1
         txtComment.layer.borderColor = UIColor.lightGray.cgColor
         txtComment.text = ""
-//        self.lblTitle.text = "Rate your chat experience"
-//        self.lblDiscription.text = "To help us serve you better, please provide some information concerning your chat experience."
-        
+
        var bundle = Bundle(for: GGiOSSDK.self)
         if let resourcePath = bundle.path(forResource: "GGiOSSDK", ofType: "bundle") {
             if let resourcesBundle = Bundle(path: resourcePath) {
@@ -39,9 +40,28 @@ class RateViewController: UIViewController {
         btnDisLike.setImage(UIImage(named: "dislike", in: bundle, compatibleWith: nil), for: .normal)
         btnMail.setImage(UIImage(named: "mail", in: bundle, compatibleWith: nil), for: .normal)
         btnSend.action = {
-            self.dismiss(animated: false, completion: {
-                self.successHandler?()
-            })
+            if self.type == 2{
+                if self.txtComment.text == ""{
+                    let alert = UIAlertController(title: "Error", message: "Please enter email", preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                    GGiOSSDK.shared.topViewController()?.present(alert, animated: true, completion: nil)
+                }else{
+                    CommonSocket.shared.emailChatTranscript(data: [["mid":GGiOSSDK.shared.AllDetails.messageID,"vid":GGiOSSDK.shared.AllDetails.visitorID,"email":self.txtComment.text!]]) { (data) in
+                        debugPrint(data)
+                        self.dismiss(animated: false, completion: {
+                            self.successHandler?()
+                        })
+                    }
+                }
+            }else{
+                CommonSocket.shared.visitorEndChatSession(data: [["id":GGiOSSDK.shared.AllDetails.messageID,"vid":GGiOSSDK.shared.AllDetails.visitorID,"name":GGiOSSDK.shared.AllDetails.name,"comment":GGiOSSDK.shared.AllDetails.companyId,"feedback":""]]) { (data) in
+                    debugPrint(data)
+                    self.dismiss(animated: false, completion: {
+                        self.successHandler?()
+                    })
+                }
+            }
+            
         }
         btnLike.action = {
             
