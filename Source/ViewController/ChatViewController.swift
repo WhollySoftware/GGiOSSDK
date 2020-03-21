@@ -38,6 +38,8 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         if GGiOSSDK.shared.AllDetails.visitorConnectedStatus != 2{
             CommonSocket.shared.startChatRequest(data: [["dc_vid":GGiOSSDK.shared.AllDetails.visitorID]])
         }else if GGiOSSDK.shared.AllDetails.visitorConnectedStatus == 2{
+            self.agentView.isHidden = false
+            self.lblName.text = GGiOSSDK.shared.AgentDetail.agent_name
             CommonSocket.shared.visitorJoinAgentRoom(data: [["vid":GGiOSSDK.shared.AllDetails.visitorID,"agent_id":GGiOSSDK.shared.AllDetails.agentId]])
         }
         CommonSocket.shared.visitorLoadChatHistory(data: [["mid":GGiOSSDK.shared.AllDetails.messageID]]) { (data) in
@@ -45,9 +47,14 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                 if let arrDic = data[0] as? [[String:AnyObject]]{
                     self.list <= arrDic
                     self.table.reloadData()
+                    self.table.scroll(to: .bottom, animated: true)
                 }
             }
             debugPrint(data)
+        }
+        CommonSocket.shared.agentDetail = { t in
+            self.lblName.text = GGiOSSDK.shared.AgentDetail.agent_name
+            self.table.reloadData()
         }
         var bundle = Bundle(for: GGiOSSDK.self)
         if let resourcePath = bundle.path(forResource: "GGiOSSDK", ofType: "bundle") {
@@ -78,6 +85,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                         m <= t
                         self.list.append(m)
                         self.table.reloadData()
+                        self.table.scroll(to: .bottom, animated: true)
                     }
                 }
                 debugPrint(data)
@@ -108,7 +116,8 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         timer.invalidate()
         CommonSocket.shared.invitationMaxWaitTimeExceeded(data: [["vid":GGiOSSDK.shared.AllDetails.visitorID,"form":GGiOSSDK.shared.AllDetails.embeddedChat.displayForm]]) { (data) in
             debugPrint(data)
-            
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "OfflineViewController") as! OfflineViewController
+            self.navigationController?.pushViewController(vc, animated: false)
         }
     }
     @objc func backAction(){
@@ -144,17 +153,26 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         CommonSocket.shared.ipBlocked { data in
             debugPrint(data)
             self.timer.invalidate()
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "OfflineViewController") as! OfflineViewController
+            self.navigationController?.pushViewController(vc, animated: false)
         }
         CommonSocket.shared.totalOnlineAgents { data in
             debugPrint(data)
         }
         CommonSocket.shared.agentAcceptedChatRequest { data in
             debugPrint(data)
+            GGiOSSDK.shared.AgentDetail <= data
             self.timer.invalidate()
             self.agentView.isHidden = false
+            self.lblName.text = GGiOSSDK.shared.AgentDetail.agent_name
         }
         CommonSocket.shared.agentSendNewMessage { data in
             debugPrint(data)
+            var m:MessageModel = MessageModel()
+            m <= data
+            self.list.append(m)
+            self.table.reloadData()
+            self.table.scroll(to: .bottom, animated: true)
         }
         CommonSocket.shared.agentChatSessionTerminated { data in
             debugPrint(data)
@@ -176,20 +194,23 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if self.list[indexPath.row].isSystem == 1{
+        if self.list[indexPath.row].isSystem == 1 || self.list[indexPath.row].isWelcome == 1 || self.list[indexPath.row].isDeleted == 1 || self.list[indexPath.row].isTransfer == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "systemTableViewCell", for: indexPath) as! systemTableViewCell
             cell.lblMessage.text = self.list[indexPath.row].message
+            cell.lblMessage.textAlignment = .left
             return cell
         }
-        if self.list[indexPath.row].visitor_id._id != GGiOSSDK.shared.AllDetails.visitorID{
+        if self.list[indexPath.row].send_by == 2{
             let cell = tableView.dequeueReusableCell(withIdentifier: "SenderTableViewCell", for: indexPath) as! SenderTableViewCell
             cell.lblName.text = GGUserSessionDetail.shared.name
             cell.lblMessage.text = self.list[indexPath.row].message
+            cell.lblTime.text = self.list[indexPath.row].updatedAt.toUTCDate(format: .shipmentSendDate)?.timePassed()
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "ReceiverTableViewCell", for: indexPath) as! ReceiverTableViewCell
-            cell.lblName.text = self.agentName
+            cell.lblName.text = GGiOSSDK.shared.AgentDetail.agent_name
             cell.lblMessage.text = self.list[indexPath.row].message
+             cell.lblTime.text = self.list[indexPath.row].updatedAt.toUTCDate(format: .shipmentSendDate)?.timePassed()
             return cell
         }
     }
@@ -296,18 +317,13 @@ class systemTableViewCell:UITableViewCell{
     @IBOutlet weak var lblMessage: UILabel!
 }
 public enum DateFormatterType: String {
-    case shipmentSendDate = "yyyy-MM-dd HH:mm:ss"
+    case shipmentSendDate = "yyyy-MM-ddTHH:mm:ss.sssZ"
     case shipmentDisplayDate = "dd-MM-yyyy hh:mm a"
     case orderDisplayDate = "MMM dd, yyyy hh:mm a"
-    case date = "dd-MM-yyyy"
-    case dateMMM = "dd MMM, yyyy"
-    case dateTimeMM = "dd MMM, HH:mm"
-    case time = "hh:mm a"
-    case senddate = "yyyy-MM-dd"
 }
-
+//2020-03-21T10:03:54.679Z
 extension Date {
-    
+   
     // Initializes Date from string and format
     public init?(fromUTCString string: String, format: DateFormatterType) {
         self.init(fromUTCString: string, format: format.rawValue)
@@ -316,7 +332,8 @@ extension Date {
     public init?(fromUTCString string: String, format: String) {
         let formatter = DateFormatter()
         formatter.dateFormat = format
-        formatter.timeZone = TimeZone(identifier: "Asia/Riyadh")!
+         formatter.locale = Locale(identifier: "ar_DZ")
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         if let date = formatter.date(from: string) {
             self = date
         } else {
@@ -402,5 +419,31 @@ extension Date {
         let now = Date()
         let ageComponents = Calendar.current.dateComponents([.year], from: self, to: now)
         return ageComponents.year ?? 0
+    }
+}
+
+extension UITableView {
+    func scroll(to: ScrollsTo, animated: Bool) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300)) {
+            let numberOfSections = self.numberOfSections
+            let numberOfRows = self.numberOfRows(inSection: numberOfSections-1)
+            
+            guard numberOfRows > 0 else { return }
+            switch to{
+            case .top:
+                let indexPath = IndexPath(row: 0, section: 0)
+                self.scrollToRow(at: indexPath, at: .top, animated: animated)
+                break
+                
+            case .bottom:
+                let indexPath = IndexPath(row: numberOfRows-1, section: (numberOfSections-1))
+                self.scrollToRow(at: indexPath, at: .bottom, animated: animated)
+                break
+            }
+        }
+    }
+    
+    enum ScrollsTo {
+        case top,bottom
     }
 }

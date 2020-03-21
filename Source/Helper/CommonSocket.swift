@@ -13,6 +13,7 @@ class CommonSocket: NSObject {
 
     static let shared = CommonSocket()
     
+    var agentDetail:(([String:AnyObject])->Void)?
     var manager = SocketManager(socketURL: URL(string: "https://www.drdsh.live")!, config: [.log(true), .compress,.enableSOCKSProxy(true)])
     
     func initSocket(completion: @escaping(Bool) -> Void) {
@@ -125,7 +126,30 @@ class CommonSocket: NSObject {
             }
         }
     }
-
+    func joinVisitorsRoom(data: [Any], completion: @escaping([String:AnyObject]) -> Void)
+    {
+        if !isConnected()
+        {
+            initSocket(completion: { (result) in
+                self.manager.defaultSocket.emitWithAck("joinVisitorsRoom", with: data).timingOut(after: 0) {resp in
+                    print(resp)
+                    if let t = resp[0] as? [String:AnyObject]{
+                        self.agentDetail?(t)
+                        completion(t)
+                    }
+                }
+            })
+            return
+        }
+        manager.defaultSocket.emitWithAck("joinVisitorsRoom", with: data).timingOut(after: 0) {resp in
+            print(resp)
+             print(resp)
+            if let t = resp[0] as? [String:AnyObject]{
+                self.agentDetail?(t)
+                completion(t)
+            }
+        }
+    }
     func startChatRequest(data: [Any])
     {
         if !isConnected()

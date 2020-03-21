@@ -15,6 +15,7 @@ public class GGiOSSDK : NSObject {
     var baseURL = "https://www.drdsh.live"
     var APIbaseURL = "https://www.drdsh.live"+"/sdk/v1/"
     var AllDetails:ValidateIdentity = ValidateIdentity()
+    var AgentDetail:AgentModel = AgentModel()
     @objc public class func GGiOSSDKBundlePath() -> String {
         return Bundle(for: GGiOSSDK.self).path(forResource: "GGiOSSDK", ofType: "bundle")!
     }

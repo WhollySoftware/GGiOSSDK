@@ -135,7 +135,18 @@ class MainLoadViewController: UIViewController {
                         }
                     }
                     CommonSocket.shared.initSocket { (status) in
-                        CommonSocket.shared.startChatRequest(data: [["dc_vid":GGiOSSDK.shared.AllDetails.visitorID]])
+                        var strStatus = ""
+                        if GGiOSSDK.shared.AllDetails.visitorConnectedStatus == 2{
+                            strStatus = "ignore_request"
+                        }else{
+                            strStatus = "site_visitor"
+                        }
+                        CommonSocket.shared.joinVisitorsRoom(data: [["dc_id":GGiOSSDK.shared.AllDetails.companyId,"dc_name":GGiOSSDK.shared.AllDetails.name,"dc_vid":GGiOSSDK.shared.AllDetails.visitorID,"dc_online":strStatus]]){ data in
+                            if GGiOSSDK.shared.AllDetails.visitorConnectedStatus == 2{
+                                GGiOSSDK.shared.AgentDetail <= data
+                            }
+                            debugPrint(data)
+                        }
                     }
                     self.setupData()
                 }
@@ -260,6 +271,7 @@ class MainLoadViewController: UIViewController {
                     GGUserSessionDetail.shared.email = self.txtEmailAddress.text!
                     var newTodo: [String: Any] =  GGiOSSDK.shared.AllDetails.toDict
                     newTodo["embeddedChat"] = GGiOSSDK.shared.AllDetails.embeddedChat.toDict
+                    CommonSocket.shared.startChatRequest(data: [["dc_vid":GGiOSSDK.shared.AllDetails.visitorID]])
                     UserDefaults.standard.setValue(newTodo, forKey: "AllDetails")
                     DispatchQueue.main.async {
                         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
