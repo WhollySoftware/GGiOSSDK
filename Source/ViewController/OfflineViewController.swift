@@ -25,6 +25,10 @@ class OfflineViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.txtFullName.text = GGUserSessionDetail.shared.name
+        self.txtMobile.text = GGUserSessionDetail.shared.mobile
+        self.txtEmailAddress.text = GGUserSessionDetail.shared.email
+        
         var bundle = Bundle(for: GGiOSSDK.self)
         if let resourcePath = bundle.path(forResource: "GGiOSSDK", ofType: "bundle") {
             if let resourcesBundle = Bundle(path: resourcePath) {
@@ -48,8 +52,14 @@ class OfflineViewController: UIViewController {
         }
     }
     @objc func dissmissView(){
-        CommonSocket.shared.disConnect()
-        self.dismiss(animated: true, completion: nil)
+        for controller in self.navigationController!.viewControllers as Array {
+            if controller.isKind(of: MainLoadViewController.self) {
+                self.navigationController!.popToViewController(controller, animated: true)
+                break
+            }
+        }
+        //self.dismiss(animated: true, completion: nil)
+        
     }
     func SendOfflineMsg() {
      let validateIdentityAPI: String = GGiOSSDK.shared.APIbaseURL + "send/offline/message"

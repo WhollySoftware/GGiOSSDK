@@ -26,7 +26,7 @@ class MainLoadViewController: UIViewController {
         self.txtFullName.text = GGUserSessionDetail.shared.name
         self.txtMobile.text = GGUserSessionDetail.shared.mobile
         self.txtEmailAddress.text = GGUserSessionDetail.shared.email
-        self.txtTypeYourQuestion.text = ""
+        
         
         IQKeyboardManager.shared.enable = true
         var bundle = Bundle(for: GGiOSSDK.self)
@@ -299,6 +299,7 @@ class MainLoadViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.txtTypeYourQuestion.text = ""
     }
     @objc func dissmissView(){
         CommonSocket.shared.disConnect()

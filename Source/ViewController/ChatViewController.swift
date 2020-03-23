@@ -66,6 +66,9 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         btnSend.setImage(UIImage(named: "send", in: bundle, compatibleWith: nil), for: .normal)
         btnLike.setImage(UIImage(named: "like", in: bundle, compatibleWith: nil), for: .normal)
         btnDisLike.setImage(UIImage(named: "dislike", in: bundle, compatibleWith: nil), for: .normal)
+        btnLike.setImage(UIImage(named: "selectedlike", in: bundle, compatibleWith: nil), for: .selected)
+        btnDisLike.setImage(UIImage(named: "selecteddislike", in: bundle, compatibleWith: nil), for: .selected)
+        
         btnMail.setImage(UIImage(named: "mail", in: bundle, compatibleWith: nil), for: .normal)
         btnAttachment.setImage(UIImage(named: "attchment", in: bundle, compatibleWith: nil), for: .normal)
         imgView.image = UIImage(named: "user", in: bundle, compatibleWith: nil)
@@ -78,7 +81,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         btnSend.action = {
             let text = self.txtMessage.text!
             self.txtMessage.text! = ""
-            CommonSocket.shared.sendVisitorMessage(data: [["dc_id":GGiOSSDK.shared.AllDetails.companyId,"dc_mid":GGiOSSDK.shared.AllDetails.messageID,"dc_vid":GGiOSSDK.shared.AllDetails.visitorID,"dc_agent_id":GGiOSSDK.shared.AllDetails.agentId,"message":text,"is_attachment":0,"attachment_file":"","file_type":"","file_size":""]]){ data in
+            CommonSocket.shared.sendVisitorMessage(data: [["dc_id":GGiOSSDK.shared.AllDetails.companyId,"dc_mid":GGiOSSDK.shared.AllDetails.messageID,"dc_vid":GGiOSSDK.shared.AllDetails.visitorID,"dc_agent_id":GGiOSSDK.shared.AllDetails.agentId,"message":text,"is_attachment":0,"attachment_file":"","file_type":"","file_size":"","send_by": 2]]){ data in
                 var m:MessageModel = MessageModel()
                 if data.count > 0{
                     if let t = data[0] as? [String:AnyObject]{
@@ -93,9 +96,13 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         }
         btnLike.action = {
             CommonSocket.shared.updateVisitorRating(data: [["mid":GGiOSSDK.shared.AllDetails.messageID,"vid":GGiOSSDK.shared.AllDetails.visitorID,"feedback":"good"]])
+            self.btnLike.isSelected = true
+            self.btnDisLike.isSelected = false
         }
         btnDisLike.action = {
             CommonSocket.shared.updateVisitorRating(data: [["mid":GGiOSSDK.shared.AllDetails.messageID,"vid":GGiOSSDK.shared.AllDetails.visitorID,"feedback":"bad"]])
+            self.btnLike.isSelected = false
+            self.btnDisLike.isSelected = true
         }
         btnMail.action = {
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "RateViewController") as! RateViewController
@@ -122,7 +129,8 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     @objc func backAction(){
         self.timer.invalidate()
-        self.navigationController?.popViewController(animated: true)
+       let vc = self.storyboard?.instantiateViewController(withIdentifier: "OfflineViewController") as! OfflineViewController
+        self.navigationController?.pushViewController(vc, animated: false)
     }
     @objc func dissmissView(){
         self.timer.invalidate()
@@ -130,10 +138,9 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "RateViewController") as! RateViewController
             vc.modalPresentationStyle = .overFullScreen
             vc.successHandler = {
-                CommonSocket.shared.disConnect()
-                self.dismiss(animated: false) {
-                    
-                }
+//                CommonSocket.shared.disConnect()
+                self.agentView.isHidden = true
+                self.messageView.isHidden = true
             }
             self.present(vc, animated: true) {
                 
@@ -141,10 +148,9 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         }else{
             CommonSocket.shared.visitorEndChatSession(data: [["id":GGiOSSDK.shared.AllDetails.companyId,"vid":GGiOSSDK.shared.AllDetails.visitorID,"name":GGiOSSDK.shared.AllDetails.name]]) { (data) in
                 debugPrint(data)
-                CommonSocket.shared.disConnect()
-                self.dismiss(animated: false) {
-                    
-                }
+//                CommonSocket.shared.disConnect()
+                self.agentView.isHidden = true
+                self.messageView.isHidden = true
             }
         }
         
@@ -161,10 +167,14 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         }
         CommonSocket.shared.agentAcceptedChatRequest { data in
             debugPrint(data)
+            GGiOSSDK.shared.AllDetails.agentId = data["agent_id"] as! String
             GGiOSSDK.shared.AgentDetail <= data
+             GGiOSSDK.shared.AgentDetail.agent_name = data["name"] as! String
+             GGiOSSDK.shared.AgentDetail.visitor_message_id = data["mid"] as! String
             self.timer.invalidate()
             self.agentView.isHidden = false
             self.lblName.text = GGiOSSDK.shared.AgentDetail.agent_name
+            CommonSocket.shared.visitorJoinAgentRoom(data: [["vid":GGiOSSDK.shared.AllDetails.visitorID,"agent_id":GGiOSSDK.shared.AllDetails.agentId]])
         }
         CommonSocket.shared.agentSendNewMessage { data in
             debugPrint(data)
@@ -237,7 +247,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
                     debugPrint(url.pathExtension)
                     if let base64String = try? Data(contentsOf: url).base64EncodedString() {
                         print(base64String)
-                        CommonSocket.shared.sendVisitorMessage(data: [["dc_id":GGiOSSDK.shared.AllDetails.companyId,"dc_mid":GGiOSSDK.shared.AllDetails.messageID,"dc_vid":GGiOSSDK.shared.AllDetails.visitorID,"dc_agent_id":GGiOSSDK.shared.AllDetails.agentId,"message":url.lastPathComponent,"is_attachment":1,"attachment_file":base64String,"file_type":url.pathExtension,"file_size":url.fileSize]]){ data in
+                        CommonSocket.shared.sendVisitorMessage(data: [["dc_id":GGiOSSDK.shared.AllDetails.companyId,"dc_mid":GGiOSSDK.shared.AllDetails.messageID,"dc_vid":GGiOSSDK.shared.AllDetails.visitorID,"dc_agent_id":GGiOSSDK.shared.AllDetails.agentId,"send_by": 2,"message":url.lastPathComponent,"is_attachment":1,"attachment_file":base64String,"file_type":url.pathExtension,"file_size":url.fileSize]]){ data in
                             var m:MessageModel = MessageModel()
                             if data.count > 0{
                                 if let t = data[0] as? [String:AnyObject]{

@@ -26,6 +26,13 @@ class RateViewController: UIViewController {
         self.btnDisLike.isHidden = type == 2
         self.btnLike.isHidden = type == 2
         self.btnMail.isHidden = type != 2
+        
+        if self.type == 2{
+            lblTitle.text = "Please input your email address"
+        }else{
+            lblTitle.text = "Rate your chat experience"
+        }
+        lblDiscription.text = "To help us server you better, please provide some information concerning your chat experience."
         txtComment.layer.borderWidth = 1
         txtComment.layer.borderColor = UIColor.lightGray.cgColor
         txtComment.text = ""
@@ -38,11 +45,18 @@ class RateViewController: UIViewController {
         }
         btnLike.setImage(UIImage(named: "like", in: bundle, compatibleWith: nil), for: .normal)
         btnDisLike.setImage(UIImage(named: "dislike", in: bundle, compatibleWith: nil), for: .normal)
+        btnLike.setImage(UIImage(named: "selectedlike", in: bundle, compatibleWith: nil), for: .selected)
+        btnDisLike.setImage(UIImage(named: "selecteddislike", in: bundle, compatibleWith: nil), for: .selected)
+        
         btnMail.setImage(UIImage(named: "mail", in: bundle, compatibleWith: nil), for: .normal)
         btnSend.action = {
             if self.type == 2{
                 if self.txtComment.text == ""{
                     let alert = UIAlertController(title: "Error", message: "Please enter email", preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                    GGiOSSDK.shared.topViewController()?.present(alert, animated: true, completion: nil)
+                }else if !self.txtComment.text.isValidEmail{
+                    let alert = UIAlertController(title: "Error", message: "Please enter valid email", preferredStyle: UIAlertController.Style.alert)
                     alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
                     GGiOSSDK.shared.topViewController()?.present(alert, animated: true, completion: nil)
                 }else{
@@ -54,7 +68,14 @@ class RateViewController: UIViewController {
                     }
                 }
             }else{
-                CommonSocket.shared.visitorEndChatSession(data: [["id":GGiOSSDK.shared.AllDetails.messageID,"vid":GGiOSSDK.shared.AllDetails.visitorID,"name":GGiOSSDK.shared.AllDetails.name,"comment":GGiOSSDK.shared.AllDetails.companyId,"feedback":""]]) { (data) in
+               
+                var feedback = ""
+                if self.btnLike.isSelected{
+                    feedback = "good"
+                }else if self.btnDisLike.isSelected{
+                    feedback = "bad"
+                }
+                CommonSocket.shared.visitorEndChatSession(data: [["id":GGiOSSDK.shared.AllDetails.messageID,"vid":GGiOSSDK.shared.AllDetails.visitorID,"name":GGiOSSDK.shared.AllDetails.name,"comment":self.txtComment.text!,"feedback":feedback]]) { (data) in
                     debugPrint(data)
                     self.dismiss(animated: false, completion: {
                         self.successHandler?()
@@ -64,7 +85,8 @@ class RateViewController: UIViewController {
             
         }
         btnLike.action = {
-            
+            self.btnLike.isSelected = true
+            self.btnDisLike.isSelected = false
         }
         btnCancel.action = {
             self.dismiss(animated: false, completion: {
@@ -77,10 +99,23 @@ class RateViewController: UIViewController {
            })
        }
         btnDisLike.action = {
-            
+            self.btnLike.isSelected = false
+            self.btnDisLike.isSelected = true
         }
         btnMail.action = {
             
         }
     }
+}
+extension String {
+   var isValidEmail: Bool {
+      let regularExpressionForEmail = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+      let testEmail = NSPredicate(format:"SELF MATCHES %@", regularExpressionForEmail)
+      return testEmail.evaluate(with: self)
+   }
+   var isValidPhone: Bool {
+      let regularExpressionForPhone = "^\\d{3}-\\d{3}-\\d{4}$"
+      let testPhone = NSPredicate(format:"SELF MATCHES %@", regularExpressionForPhone)
+      return testPhone.evaluate(with: self)
+   }
 }
