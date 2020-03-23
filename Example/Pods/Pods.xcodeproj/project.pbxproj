@@ -61,8 +61,8 @@
 		77CE50B1E9A3CE8EBBB95D05D95E804D /* GGObject+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BB28ADCF150BDDDB1CB3D44218DF22 /* GGObject+Helper.swift */; };
 		7F96884624224F140033C772 /* CommonSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F96884524224F140033C772 /* CommonSocket.swift */; };
 		7FB70B3C24238BA4008F9CF1 /* AGImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB70B3B24238BA4008F9CF1 /* AGImagePickerController.swift */; };
-		7FD003962428CE6200779333 /* selecteddislike.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FD003942428CE6100779333 /* selecteddislike.png */; };
-		7FD003972428CE6200779333 /* selectedlike.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FD003952428CE6200779333 /* selectedlike.png */; };
+		7FD0039B2428DA3E00779333 /* selecteddislike.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FD003982428DA3E00779333 /* selecteddislike.png */; };
+		7FD0039D2428DA3E00779333 /* selectedlike.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FD003992428DA3E00779333 /* selectedlike.png */; };
 		7FE269C6242486300012341A /* OfflineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE269C5242486300012341A /* OfflineViewController.swift */; };
 		8430476AAB482DA86BD0BD9F41A0D336 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 623B497C8B0DC52D25418BAF176777A7 /* QuartzCore.framework */; };
 		8A4C62F9F15CF775572C1C57387E7E1F /* back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14A39BFDD91E5B674FA1EA17E0C7E33B /* back@3x.png */; };
@@ -282,8 +282,8 @@
 		7F7D41AA6B6909D208D5927E375DF7B6 /* SocketManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketManager.swift; path = Source/SocketIO/Manager/SocketManager.swift; sourceTree = "<group>"; };
 		7F96884524224F140033C772 /* CommonSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonSocket.swift; sourceTree = "<group>"; };
 		7FB70B3B24238BA4008F9CF1 /* AGImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGImagePickerController.swift; sourceTree = "<group>"; };
-		7FD003942428CE6100779333 /* selecteddislike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selecteddislike.png; sourceTree = "<group>"; };
-		7FD003952428CE6200779333 /* selectedlike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selectedlike.png; sourceTree = "<group>"; };
+		7FD003982428DA3E00779333 /* selecteddislike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = selecteddislike.png; path = Resources/selecteddislike.png; sourceTree = "<group>"; };
+		7FD003992428DA3E00779333 /* selectedlike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = selectedlike.png; path = Resources/selectedlike.png; sourceTree = "<group>"; };
 		7FE269C5242486300012341A /* OfflineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineViewController.swift; sourceTree = "<group>"; };
 		8247F3B4B0B3EF96194705BE7AB19A37 /* Socket.IO-Client-Swift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Socket.IO-Client-Swift-umbrella.h"; sourceTree = "<group>"; };
 		891B2270823847ED23F2ECFC28F935EC /* Starscream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Starscream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -522,8 +522,8 @@
 				3E53CCF1EA710DAF59A8C157E70E8054 /* mail.png */,
 				F4871CC65900E89FAF88C4BC6A479A3D /* send.png */,
 				F8E325CA3720E0FB835BECD04ACE2EAC /* user.png */,
-				7FD003942428CE6100779333 /* selecteddislike.png */,
-				7FD003952428CE6200779333 /* selectedlike.png */,
+				7FD003982428DA3E00779333 /* selecteddislike.png */,
+				7FD003992428DA3E00779333 /* selectedlike.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1035,12 +1035,12 @@
 				2E77C841AFC62F0FCD9ED1DF792EBA85 /* back@2x.png in Resources */,
 				8A4C62F9F15CF775572C1C57387E7E1F /* back@3x.png in Resources */,
 				EA6A4A6EB55B18947DF617260A7070CB /* dislike.png in Resources */,
-				7FD003962428CE6200779333 /* selecteddislike.png in Resources */,
+				7FD0039B2428DA3E00779333 /* selecteddislike.png in Resources */,
 				DA2F49C6B790436127BCB25872B662EF /* like.png in Resources */,
 				141D35B969F2C4672982782DE18FA52E /* mail.png in Resources */,
 				2220F566042D1C5C650C928EFF32546B /* send.png in Resources */,
 				EC5005C5FD46C2D7E30E0ECB2EE14796 /* user.png in Resources */,
-				7FD003972428CE6200779333 /* selectedlike.png in Resources */,
+				7FD0039D2428DA3E00779333 /* selectedlike.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
