@@ -208,7 +208,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X4t-aT-3cO" customClass="GGView" customModule="GGiOSSDK" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9g4-Ru-vYi">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9g4-Ru-vYi" customClass="GGImageViewPopup" customModule="GGiOSSDK" customModuleProvider="target">
                                                 <rect key="frame" x="20" y="10" width="40" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="40" id="608-aq-gzk"/>
@@ -277,14 +277,14 @@
                                         <rect key="frame" x="0.0" y="60" width="414" height="692"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReceiverTableViewCell" rowHeight="93" id="eSt-2V-md9" customClass="ReceiverTableViewCell" customModule="GGiOSSDK" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ReceiverTableViewCell" rowHeight="93" id="eSt-2V-md9" customClass="ReceiverTableViewCell" customModule="GGiOSSDK" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="414" height="93"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eSt-2V-md9" id="QhE-q1-M43">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="93"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hL4-YW-fkO">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hL4-YW-fkO" customClass="GGImageViewPopup" customModule="GGiOSSDK" customModuleProvider="target">
                                                             <rect key="frame" x="10" y="10" width="40" height="40"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="40" id="fbj-Fo-4Ap"/>
@@ -307,16 +307,16 @@
                                                                     <rect key="frame" x="10" y="5" width="200" height="41"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Agent Name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u3R-38-v81">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="200" height="0.0"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="200" height="24"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MxP-DJ-0fr">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="200" height="24"/>
-                                                                            <color key="backgroundColor" red="1" green="0.29411764709999999" blue="0.35686274509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MxP-DJ-0fr" customClass="GGImageViewPopup" customModule="GGiOSSDK" customModuleProvider="target">
+                                                                            <rect key="frame" x="0.0" y="24" width="200" height="200"/>
+                                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <constraints>
-                                                                                <constraint firstAttribute="width" secondItem="MxP-DJ-0fr" secondAttribute="height" id="YyD-Gy-BNp"/>
+                                                                                <constraint firstAttribute="height" constant="200" id="rLf-LF-VnM"/>
                                                                             </constraints>
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Agent Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f2H-UB-iFV">
@@ -364,14 +364,14 @@
                                                     <outlet property="lblTime" destination="f2H-UB-iFV" id="Zag-PC-kCk"/>
                                                 </connections>
                                             </tableViewCell>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SenderTableViewCell" rowHeight="93" id="4oh-BT-GXP" customClass="SenderTableViewCell" customModule="GGiOSSDK" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="SenderTableViewCell" rowHeight="93" id="4oh-BT-GXP" customClass="SenderTableViewCell" customModule="GGiOSSDK" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="121" width="414" height="93"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4oh-BT-GXP" id="wCP-rn-zdc">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="93"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZoT-6g-QB1">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZoT-6g-QB1" customClass="GGImageViewPopup" customModule="GGiOSSDK" customModuleProvider="target">
                                                             <rect key="frame" x="364" y="10" width="40" height="40"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="40" id="Bfq-yz-GkH"/>
@@ -394,13 +394,20 @@
                                                                     <rect key="frame" x="10" y="5" width="200" height="41"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Agent Name" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PYi-c0-ZtD">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="200" height="0.0"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="200" height="24"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
+                                                                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hAt-nZ-8un" customClass="GGImageViewPopup" customModule="GGiOSSDK" customModuleProvider="target">
+                                                                            <rect key="frame" x="0.0" y="41" width="200" height="200"/>
+                                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="200" id="5v1-Oh-pBU"/>
+                                                                            </constraints>
+                                                                        </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Agent Name" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EY3-DS-cXb">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="200" height="17"/>
+                                                                            <rect key="frame" x="0.0" y="24" width="200" height="17"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="17" id="fCm-J9-ph7"/>
                                                                             </constraints>
@@ -408,13 +415,6 @@
                                                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hAt-nZ-8un">
-                                                                            <rect key="frame" x="0.0" y="17" width="200" height="24"/>
-                                                                            <color key="backgroundColor" red="0.98039215690000003" green="0.30196078430000001" blue="0.56078431370000004" alpha="1" colorSpace="calibratedRGB"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="width" secondItem="hAt-nZ-8un" secondAttribute="height" id="OO6-eG-m6u"/>
-                                                                            </constraints>
-                                                                        </imageView>
                                                                     </subviews>
                                                                 </stackView>
                                                             </subviews>
@@ -451,7 +451,7 @@
                                                     <outlet property="lblTime" destination="EY3-DS-cXb" id="Vo9-Rt-F6u"/>
                                                 </connections>
                                             </tableViewCell>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="systemTableViewCell" rowHeight="93" id="aBP-oD-TMf" customClass="systemTableViewCell" customModule="GGiOSSDK" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="systemTableViewCell" rowHeight="93" id="aBP-oD-TMf" customClass="systemTableViewCell" customModule="GGiOSSDK" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="214" width="414" height="93"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aBP-oD-TMf" id="u6K-yD-1CH">
@@ -756,9 +756,9 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="FPn-q2-ad4" secondAttribute="bottom" constant="10" id="6DU-mk-8KZ"/>
+                                    <constraint firstAttribute="bottom" secondItem="FPn-q2-ad4" secondAttribute="bottom" constant="20" id="6DU-mk-8KZ"/>
                                     <constraint firstAttribute="trailing" secondItem="FPn-q2-ad4" secondAttribute="trailing" constant="30" id="Cm2-CB-gAr"/>
-                                    <constraint firstItem="FPn-q2-ad4" firstAttribute="top" secondItem="z54-px-3Rq" secondAttribute="top" constant="10" id="lDr-Dw-5Wo"/>
+                                    <constraint firstItem="FPn-q2-ad4" firstAttribute="top" secondItem="z54-px-3Rq" secondAttribute="top" constant="20" id="lDr-Dw-5Wo"/>
                                     <constraint firstItem="FPn-q2-ad4" firstAttribute="leading" secondItem="z54-px-3Rq" secondAttribute="leading" constant="30" id="na0-lu-eUO"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>

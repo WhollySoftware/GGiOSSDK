@@ -7,7 +7,7 @@
 
 import UIKit
 import MobileCoreServices
-
+let imageCache = NSCache<NSString, UIImage>()
 class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate {
 
     @IBOutlet weak var btnSend: GGButton!
@@ -26,7 +26,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     var timer:Timer = Timer()
     var list:[MessageModel] = []
     var agentName = "Agent"
-    let imageCache = NSCache<NSString, UIImage>()
+    var CloseBarItem : UIBarButtonItem?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.agentView.isHidden = true
@@ -36,27 +36,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             RunLoop.main.add(timer, forMode: RunLoopMode.commonModes)
         }
         
-        if GGiOSSDK.shared.AllDetails.visitorConnectedStatus != 2{
-            CommonSocket.shared.startChatRequest(data: [["dc_vid":GGiOSSDK.shared.AllDetails.visitorID]])
-        }else if GGiOSSDK.shared.AllDetails.visitorConnectedStatus == 2{
-            self.agentView.isHidden = false
-            self.lblName.text = GGiOSSDK.shared.AgentDetail.agent_name
-            CommonSocket.shared.visitorJoinAgentRoom(data: [["vid":GGiOSSDK.shared.AllDetails.visitorID,"agent_id":GGiOSSDK.shared.AllDetails.agentId]])
-        }
-        CommonSocket.shared.visitorLoadChatHistory(data: [["mid":GGiOSSDK.shared.AllDetails.messageID]]) { (data) in
-            if data.count > 0{
-                if let arrDic = data[0] as? [[String:AnyObject]]{
-                    self.list <= arrDic
-                    self.table.reloadData()
-                    self.table.scroll(to: .bottom, animated: true)
-                }
-            }
-            debugPrint(data)
-        }
-        CommonSocket.shared.agentDetail = { t in
-            self.lblName.text = GGiOSSDK.shared.AgentDetail.agent_name
-            self.table.reloadData()
-        }
+        
         var bundle = Bundle(for: GGiOSSDK.self)
         if let resourcePath = bundle.path(forResource: "GGiOSSDK", ofType: "bundle") {
             if let resourcesBundle = Bundle(path: resourcePath) {
@@ -77,8 +57,31 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         let backImage = UIImage(named: "back", in: bundle, compatibleWith: nil)
         let barItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(backAction))
         navigationItem.leftBarButtonItem = barItem
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Chat Close", style: .plain, target: self, action: #selector(dissmissView))
-        
+        self.CloseBarItem = UIBarButtonItem(title: "Chat Close", style: .plain, target: self, action: #selector(dissmissView))
+        navigationItem.rightBarButtonItem = self.CloseBarItem
+        self.navigationItem.rightBarButtonItem = nil
+        if GGiOSSDK.shared.AllDetails.visitorConnectedStatus != 2{
+            CommonSocket.shared.startChatRequest(data: [["dc_vid":GGiOSSDK.shared.AllDetails.visitorID]])
+        }else if GGiOSSDK.shared.AllDetails.visitorConnectedStatus == 2{
+            self.agentView.isHidden = false
+            self.lblName.text = GGiOSSDK.shared.AgentDetail.agent_name
+            self.navigationItem.rightBarButtonItem = self.CloseBarItem
+            CommonSocket.shared.visitorJoinAgentRoom(data: [["vid":GGiOSSDK.shared.AllDetails.visitorID,"agent_id":GGiOSSDK.shared.AllDetails.agentId]])
+        }
+        CommonSocket.shared.visitorLoadChatHistory(data: [["mid":GGiOSSDK.shared.AllDetails.messageID]]) { (data) in
+            if data.count > 0{
+                if let arrDic = data[0] as? [[String:AnyObject]]{
+                    self.list <= arrDic
+                    self.table.reloadData()
+                    self.table.scroll(to: .bottom, animated: true)
+                }
+            }
+            debugPrint(data)
+        }
+        CommonSocket.shared.agentDetail = { t in
+            self.lblName.text = GGiOSSDK.shared.AgentDetail.agent_name
+            self.table.reloadData()
+        }
         btnSend.action = {
             let text = self.txtMessage.text!
             self.txtMessage.text! = ""
@@ -137,6 +140,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             self.timer.invalidate()
             self.agentView.isHidden = false
             self.lblName.text = GGiOSSDK.shared.AgentDetail.agent_name
+            self.navigationItem.rightBarButtonItem = self.CloseBarItem
         }
         CommonSocket.shared.agentSendNewMessage { data in
             debugPrint(data)
@@ -163,7 +167,13 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         }
         CommonSocket.shared.newAgentAcceptedChatRequest { data in
             debugPrint(data)
+            GGiOSSDK.shared.AllDetails.agentId = data["agent_id"] as! String
+            GGiOSSDK.shared.AgentDetail <= data
+            GGiOSSDK.shared.AgentDetail.agent_name = data["name"] as! String
+            GGiOSSDK.shared.AgentDetail.visitor_message_id = data["mid"] as! String
+            self.timer.invalidate()
             self.agentView.isHidden = false
+            self.lblName.text = GGiOSSDK.shared.AgentDetail.agent_name
         }
     }
     @objc func invitationMaxWaitTimeExceeded(){
@@ -188,6 +198,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
 //                CommonSocket.shared.disConnect()
                 self.agentView.isHidden = true
                 self.messageView.isHidden = true
+                self.navigationItem.rightBarButtonItem = nil
             }
             self.present(vc, animated: true) {
                 
@@ -198,6 +209,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
 //                CommonSocket.shared.disConnect()
                 self.agentView.isHidden = true
                 self.messageView.isHidden = true
+                self.navigationItem.rightBarButtonItem = nil
             }
         }
         
@@ -220,22 +232,10 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             cell.lblTime.text = self.list[indexPath.row].updatedAt.toUTCDate(format: .shipmentSendDate)?.timePassed()
             cell.imgAttachment.isHidden = self.list[indexPath.row].is_attachment == 0
             cell.lblMessage.isHidden = self.list[indexPath.row].is_attachment == 1
-//            if self.list[indexPath.row].is_attachment == 1{
-//                let strUrl = GGiOSSDK.shared.AttachmentbaseURL+self.list[indexPath.row].attachment_file
-//                if let cachedImage = imageCache.object(forKey: NSString(string: strUrl)) {
-//                      cell.imgAttachment.image = cachedImage
-//                }else{
-//                      DispatchQueue.global(qos: .background).async {
-//                          let url = URL(string:strUrl)
-//                          let data = try? Data(contentsOf: url!)
-//                          let image: UIImage = UIImage(data: data!)!
-//                          DispatchQueue.main.async {
-//                              self.imageCache.setObject(image, forKey:strUrl as NSString)
-//                               cell.imgAttachment.image = image
-//                          }
-//                      }
-//                }
-//            }
+            if self.list[indexPath.row].is_attachment == 1{
+                let strUrl = GGiOSSDK.shared.AttachmentbaseURL+self.list[indexPath.row].attachment_file
+                cell.imgAttachment.setImage(urlString: strUrl)
+            }
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "ReceiverTableViewCell", for: indexPath) as! ReceiverTableViewCell
@@ -244,22 +244,10 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
              cell.lblTime.text = self.list[indexPath.row].updatedAt.toUTCDate(format: .shipmentSendDate)?.timePassed()
             cell.imgAttachment.isHidden = self.list[indexPath.row].is_attachment == 0
             cell.lblMessage.isHidden = self.list[indexPath.row].is_attachment == 1
-//            if self.list[indexPath.row].is_attachment == 1{
-//                let strUrl = GGiOSSDK.shared.AttachmentbaseURL+self.list[indexPath.row].attachment_file
-//                if let cachedImage = imageCache.object(forKey: NSString(string: strUrl)) {
-//                      cell.imgAttachment.image = cachedImage
-//                }else{
-//                      DispatchQueue.global(qos: .background).async {
-//                          let url = URL(string:strUrl)
-//                          let data = try? Data(contentsOf: url!)
-//                          let image: UIImage = UIImage(data: data!)!
-//                          DispatchQueue.main.async {
-//                              self.imageCache.setObject(image, forKey:strUrl as NSString)
-//                               cell.imgAttachment.image = image
-//                          }
-//                      }
-//                }
-//            }
+            if self.list[indexPath.row].is_attachment == 1{
+                let strUrl = GGiOSSDK.shared.AttachmentbaseURL+self.list[indexPath.row].attachment_file
+                 cell.imgAttachment.setImage(urlString: strUrl)
+            }
             return cell
         }
     }
@@ -293,6 +281,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
                                     m <= t
                                     self.list.append(m)
                                     self.table.reloadData()
+                                    self.table.scroll(to: .bottom, animated: true)
                                 }
                             }
                             debugPrint(data)
@@ -311,7 +300,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
 
 class SenderTableViewCell:UITableViewCell{
     @IBOutlet weak var imgProfile: UIImageView!
-    @IBOutlet weak var imgAttachment: UIImageView!
+    @IBOutlet weak var imgAttachment: GGImageViewPopup!
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblMessage: UILabel!
     @IBOutlet weak var lblTime: UILabel!
@@ -338,7 +327,7 @@ class SenderTableViewCell:UITableViewCell{
 }
 class ReceiverTableViewCell:UITableViewCell{
     @IBOutlet weak var imgProfile: UIImageView!
-    @IBOutlet weak var imgAttachment: UIImageView!
+    @IBOutlet weak var imgAttachment: GGImageViewPopup!
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblMessage: UILabel!
     @IBOutlet weak var lblTime: UILabel!
@@ -496,5 +485,96 @@ extension UITableView {
     
     enum ScrollsTo {
         case top,bottom
+    }
+}
+extension UIImageView{
+    func setImage(urlString:String){
+        self.image = UIImage(named: "user")
+        if let cachedImage = imageCache.object(forKey: NSString(string: urlString)) {
+              self.image =  cachedImage
+        }else{
+              DispatchQueue.global(qos: .background).async {
+                  let url = URL(string:urlString)
+                  let data = try? Data(contentsOf: url!)
+                  let image1: UIImage = UIImage(data: data!)!
+                  DispatchQueue.main.async {
+                      imageCache.setObject(image1, forKey:urlString as NSString)
+                       self.image = image1
+                  }
+              }
+        }
+    }
+}
+class GGImageViewPopup: UIImageView {
+    var tempRect: CGRect?
+    var bgView: UIView!
+    
+    var animated: Bool = true
+    var intDuration = 0.25
+    //MARK: Life cycle
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(popUpImageToFullScreen))
+        self.addGestureRecognizer(tapGesture)
+        self.isUserInteractionEnabled = true
+        //        fatalError("init(coder:) has not been implemented")
+    }
+    
+    //MARK: Actions of Gestures
+    @objc func exitFullScreen () {
+        let imageV = bgView.subviews[0] as! UIImageView
+        
+        UIView.animate(withDuration: intDuration, animations: {
+                imageV.frame = self.tempRect!
+                self.bgView.alpha = 0
+            }, completion: { (bol) in
+                self.bgView.removeFromSuperview()
+        })
+    }
+    
+    @objc func popUpImageToFullScreen() {
+        
+        if let window = UIApplication.shared.delegate?.window {
+            let parentView = self.findParentViewController(self)!.view
+            
+            bgView = UIView(frame: UIScreen.main.bounds)
+            bgView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(exitFullScreen)))
+            bgView.alpha = 0
+            bgView.backgroundColor = UIColor.black
+            let imageV = UIImageView(image: self.image)
+            let point = self.convert(self.bounds, to: parentView)
+            imageV.frame = point
+            tempRect = point
+            imageV.contentMode = .scaleAspectFit
+            self.bgView.addSubview(imageV)
+            window?.addSubview(bgView)
+            
+            if animated {
+                UIView.animate(withDuration: intDuration, animations: {
+                    self.bgView.alpha = 1
+                    imageV.frame = CGRect(x: 0, y: 0, width: (parentView?.frame.width)!, height: (parentView?.frame.width)!)
+                    imageV.center = (parentView?.center)!
+                })
+            }
+        }
+    }
+    
+    func findParentViewController(_ view: UIView) -> UIViewController? {
+        var parentResponder: UIResponder? = self
+        while parentResponder != nil {
+            parentResponder = parentResponder!.next
+            if let viewController = parentResponder as? UIViewController {
+                return viewController
+            }
+        }
+        return nil
     }
 }
