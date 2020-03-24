@@ -14,6 +14,7 @@ public class GGiOSSDK : NSObject {
     var appSid = ""
     var baseURL = "https://www.drdsh.live"
     var APIbaseURL = "https://www.drdsh.live"+"/sdk/v1/"
+    var AttachmentbaseURL = "https://www.drdsh.live"+"/uploads/m/"
     var AllDetails:ValidateIdentity = ValidateIdentity()
     var AgentDetail:AgentModel = AgentModel()
     @objc public class func GGiOSSDKBundlePath() -> String {

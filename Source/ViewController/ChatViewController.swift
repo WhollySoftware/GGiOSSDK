@@ -26,6 +26,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     var timer:Timer = Timer()
     var list:[MessageModel] = []
     var agentName = "Agent"
+    let imageCache = NSCache<NSString, UIImage>()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.agentView.isHidden = true
@@ -81,7 +82,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         btnSend.action = {
             let text = self.txtMessage.text!
             self.txtMessage.text! = ""
-            CommonSocket.shared.sendVisitorMessage(data: [["dc_id":GGiOSSDK.shared.AllDetails.companyId,"dc_mid":GGiOSSDK.shared.AllDetails.messageID,"dc_vid":GGiOSSDK.shared.AllDetails.visitorID,"dc_agent_id":GGiOSSDK.shared.AllDetails.agentId,"message":text,"is_attachment":0,"attachment_file":"","file_type":"","file_size":"","send_by": 2]]){ data in
+            CommonSocket.shared.sendVisitorMessage(data: [["dc_id":GGiOSSDK.shared.AllDetails.companyId,"dc_mid":GGiOSSDK.shared.AllDetails.messageID,"dc_vid":GGiOSSDK.shared.AllDetails.visitorID,"dc_agent_id":GGiOSSDK.shared.AllDetails.agentId,"message":text,"is_attachment":0,"attachment_file":"","file_type":"","file_size":"","send_by": 2,"dc_name":GGiOSSDK.shared.AllDetails.name]]){ data in
                 var m:MessageModel = MessageModel()
                 if data.count > 0{
                     if let t = data[0] as? [String:AnyObject]{
@@ -117,6 +118,52 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         }
         btnAttachment.action = {
            AGImagePickerController(with: self, allowsEditing: true, media: .both, iPadSetup: self.btnAttachment)
+        }
+        CommonSocket.shared.ipBlocked { data in
+            debugPrint(data)
+            self.timer.invalidate()
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "OfflineViewController") as! OfflineViewController
+            self.navigationController?.pushViewController(vc, animated: false)
+        }
+        CommonSocket.shared.totalOnlineAgents { data in
+            debugPrint(data)
+        }
+        CommonSocket.shared.agentAcceptedChatRequest { data in
+            debugPrint(data)
+            GGiOSSDK.shared.AllDetails.agentId = data["agent_id"] as! String
+            GGiOSSDK.shared.AgentDetail <= data
+             GGiOSSDK.shared.AgentDetail.agent_name = data["name"] as! String
+             GGiOSSDK.shared.AgentDetail.visitor_message_id = data["mid"] as! String
+            self.timer.invalidate()
+            self.agentView.isHidden = false
+            self.lblName.text = GGiOSSDK.shared.AgentDetail.agent_name
+        }
+        CommonSocket.shared.agentSendNewMessage { data in
+            debugPrint(data)
+            var m:MessageModel = MessageModel()
+            m <= data
+            self.list.append(m)
+            self.table.reloadData()
+            self.table.scroll(to: .bottom, animated: true)
+        }
+        CommonSocket.shared.agentChatSessionTerminated { data in
+            debugPrint(data)
+            self.timer.invalidate()
+            self.agentView.isHidden = true
+            self.messageView.isHidden = true
+        }
+        CommonSocket.shared.agentTypingListener { data in
+            if (data["stop"] as! Int) == 1{
+                self.typingView.isHidden = true
+            }else{
+                 self.lblTyping.text = data["message"] as? String ?? ""
+                self.typingView.isHidden = false
+            }
+            self.lblTyping.text = data["message"] as? String ?? ""
+        }
+        CommonSocket.shared.newAgentAcceptedChatRequest { data in
+            debugPrint(data)
+            self.agentView.isHidden = false
         }
     }
     @objc func invitationMaxWaitTimeExceeded(){
@@ -155,50 +202,6 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         }
         
     }
-    override func viewWillAppear(_ animated: Bool) {
-        CommonSocket.shared.ipBlocked { data in
-            debugPrint(data)
-            self.timer.invalidate()
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "OfflineViewController") as! OfflineViewController
-            self.navigationController?.pushViewController(vc, animated: false)
-        }
-        CommonSocket.shared.totalOnlineAgents { data in
-            debugPrint(data)
-        }
-        CommonSocket.shared.agentAcceptedChatRequest { data in
-            debugPrint(data)
-            GGiOSSDK.shared.AllDetails.agentId = data["agent_id"] as! String
-            GGiOSSDK.shared.AgentDetail <= data
-             GGiOSSDK.shared.AgentDetail.agent_name = data["name"] as! String
-             GGiOSSDK.shared.AgentDetail.visitor_message_id = data["mid"] as! String
-            self.timer.invalidate()
-            self.agentView.isHidden = false
-            self.lblName.text = GGiOSSDK.shared.AgentDetail.agent_name
-            CommonSocket.shared.visitorJoinAgentRoom(data: [["vid":GGiOSSDK.shared.AllDetails.visitorID,"agent_id":GGiOSSDK.shared.AllDetails.agentId]])
-        }
-        CommonSocket.shared.agentSendNewMessage { data in
-            debugPrint(data)
-            var m:MessageModel = MessageModel()
-            m <= data
-            self.list.append(m)
-            self.table.reloadData()
-            self.table.scroll(to: .bottom, animated: true)
-        }
-        CommonSocket.shared.agentChatSessionTerminated { data in
-            debugPrint(data)
-            self.timer.invalidate()
-            self.agentView.isHidden = true
-            self.messageView.isHidden = true
-        }
-        CommonSocket.shared.agentTypingListener { data in
-            debugPrint(data)
-             self.typingView.isHidden = false
-        }
-        CommonSocket.shared.newAgentAcceptedChatRequest { data in
-            debugPrint(data)
-            self.agentView.isHidden = false
-        }
-    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.list.count
     }
@@ -215,12 +218,48 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             cell.lblName.text = GGUserSessionDetail.shared.name
             cell.lblMessage.text = self.list[indexPath.row].message
             cell.lblTime.text = self.list[indexPath.row].updatedAt.toUTCDate(format: .shipmentSendDate)?.timePassed()
+            cell.imgAttachment.isHidden = self.list[indexPath.row].is_attachment == 0
+            cell.lblMessage.isHidden = self.list[indexPath.row].is_attachment == 1
+//            if self.list[indexPath.row].is_attachment == 1{
+//                let strUrl = GGiOSSDK.shared.AttachmentbaseURL+self.list[indexPath.row].attachment_file
+//                if let cachedImage = imageCache.object(forKey: NSString(string: strUrl)) {
+//                      cell.imgAttachment.image = cachedImage
+//                }else{
+//                      DispatchQueue.global(qos: .background).async {
+//                          let url = URL(string:strUrl)
+//                          let data = try? Data(contentsOf: url!)
+//                          let image: UIImage = UIImage(data: data!)!
+//                          DispatchQueue.main.async {
+//                              self.imageCache.setObject(image, forKey:strUrl as NSString)
+//                               cell.imgAttachment.image = image
+//                          }
+//                      }
+//                }
+//            }
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "ReceiverTableViewCell", for: indexPath) as! ReceiverTableViewCell
             cell.lblName.text = GGiOSSDK.shared.AgentDetail.agent_name
             cell.lblMessage.text = self.list[indexPath.row].message
              cell.lblTime.text = self.list[indexPath.row].updatedAt.toUTCDate(format: .shipmentSendDate)?.timePassed()
+            cell.imgAttachment.isHidden = self.list[indexPath.row].is_attachment == 0
+            cell.lblMessage.isHidden = self.list[indexPath.row].is_attachment == 1
+//            if self.list[indexPath.row].is_attachment == 1{
+//                let strUrl = GGiOSSDK.shared.AttachmentbaseURL+self.list[indexPath.row].attachment_file
+//                if let cachedImage = imageCache.object(forKey: NSString(string: strUrl)) {
+//                      cell.imgAttachment.image = cachedImage
+//                }else{
+//                      DispatchQueue.global(qos: .background).async {
+//                          let url = URL(string:strUrl)
+//                          let data = try? Data(contentsOf: url!)
+//                          let image: UIImage = UIImage(data: data!)!
+//                          DispatchQueue.main.async {
+//                              self.imageCache.setObject(image, forKey:strUrl as NSString)
+//                               cell.imgAttachment.image = image
+//                          }
+//                      }
+//                }
+//            }
             return cell
         }
     }
@@ -247,7 +286,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
                     debugPrint(url.pathExtension)
                     if let base64String = try? Data(contentsOf: url).base64EncodedString() {
                         print(base64String)
-                        CommonSocket.shared.sendVisitorMessage(data: [["dc_id":GGiOSSDK.shared.AllDetails.companyId,"dc_mid":GGiOSSDK.shared.AllDetails.messageID,"dc_vid":GGiOSSDK.shared.AllDetails.visitorID,"dc_agent_id":GGiOSSDK.shared.AllDetails.agentId,"send_by": 2,"message":url.lastPathComponent,"is_attachment":1,"attachment_file":base64String,"file_type":url.pathExtension,"file_size":url.fileSize]]){ data in
+                        CommonSocket.shared.sendVisitorMessage(data: [["dc_id":GGiOSSDK.shared.AllDetails.companyId,"dc_mid":GGiOSSDK.shared.AllDetails.messageID,"dc_vid":GGiOSSDK.shared.AllDetails.visitorID,"dc_agent_id":GGiOSSDK.shared.AllDetails.agentId,"send_by": 2,"message":url.lastPathComponent,"is_attachment":1,"attachment_file":base64String,"file_type":url.pathExtension,"file_size":url.fileSize,"dc_name":GGiOSSDK.shared.AllDetails.name]]){ data in
                             var m:MessageModel = MessageModel()
                             if data.count > 0{
                                 if let t = data[0] as? [String:AnyObject]{
@@ -272,6 +311,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
 
 class SenderTableViewCell:UITableViewCell{
     @IBOutlet weak var imgProfile: UIImageView!
+    @IBOutlet weak var imgAttachment: UIImageView!
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblMessage: UILabel!
     @IBOutlet weak var lblTime: UILabel!
@@ -298,6 +338,7 @@ class SenderTableViewCell:UITableViewCell{
 }
 class ReceiverTableViewCell:UITableViewCell{
     @IBOutlet weak var imgProfile: UIImageView!
+    @IBOutlet weak var imgAttachment: UIImageView!
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblMessage: UILabel!
     @IBOutlet weak var lblTime: UILabel!

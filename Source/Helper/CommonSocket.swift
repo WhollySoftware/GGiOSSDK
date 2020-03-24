@@ -14,7 +14,7 @@ class CommonSocket: NSObject {
     static let shared = CommonSocket()
     
     var agentDetail:(([String:AnyObject])->Void)?
-    var manager = SocketManager(socketURL: URL(string: "https://www.drdsh.live")!, config: [.log(true), .compress,.enableSOCKSProxy(true)])
+    var manager = SocketManager(socketURL: URL(string: "https://www.drdsh.live")!, config: [.log(false), .compress])
     
     func initSocket(completion: @escaping(Bool) -> Void) {
         manager.defaultSocket.disconnect()
@@ -28,7 +28,6 @@ class CommonSocket: NSObject {
         manager.defaultSocket.on(clientEvent: .disconnect) {data, ack in
             print("socket disconnected \(data)")
         }
-        manager.defaultSocket.connect()
         manager.defaultSocket.on(clientEvent: .connect) {data, ack in
             if ack.expected {
                 print("connect inside \(data) ack")
