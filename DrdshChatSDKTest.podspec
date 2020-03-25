@@ -29,7 +29,7 @@ I am trying to make live tracking sdk for all the developer so the can use easil
 
   s.ios.deployment_target = '10.0'
 
-  s.source_files = 'Source/*.{swift,storyboard}'
+  s.source_files = 'DrdshChatSDKTest/Classes/**/*'
   s.swift_version = '4.0'
   s.platforms = {
       "ios":"10.0"
@@ -39,7 +39,7 @@ I am trying to make live tracking sdk for all the developer so the can use easil
   s.dependency 'IQKeyboardManagerSwift', '6.2.1'
   s.dependency 'Socket.IO-Client-Swift', '15.2.0'
    s.resource_bundles = {
-     'DrdshChatSDKTest' => ['Resources/*.png']
+     'DrdshChatSDKTest' => ['DrdshChatSDKTest/Assets/*.png']
    }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
