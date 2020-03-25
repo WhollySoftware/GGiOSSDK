@@ -49,7 +49,7 @@ extension Dictionary where Key: CustomStringConvertible, Value: AnyObject {
 }
 
 public extension Mirror {
-    public func proparty() -> [String]{
+    func proparty() -> [String]{
         return self.children.map {
             $0.label!
         }

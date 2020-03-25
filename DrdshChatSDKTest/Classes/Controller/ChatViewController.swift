@@ -288,7 +288,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
          picker.dismiss(animated: true) {
-            if let possibleImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+            if (info[UIImagePickerControllerEditedImage] as? UIImage) != nil {
                 if #available(iOS 11.0, *) {
                     let url = info[UIImagePickerControllerImageURL] as! URL
                     print("Img size = \((Double(url.fileSize) / 1000.00).rounded()) KB")

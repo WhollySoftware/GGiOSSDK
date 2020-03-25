@@ -131,9 +131,7 @@ class OfflineViewController: UIViewController {
               return
           }
             if receivedTodo["message"] as! String == "authorized"{
-                if let d = receivedTodo["data"] as? [String:AnyObject]{
-                    print("Response : " + receivedTodo.description)
-                }
+                 print("Response : " + receivedTodo.description)
             }else{
                
                 DispatchQueue.main.async {
