@@ -1,5 +1,5 @@
 PODS:
-  - DrdshChatSDKTest (1.0.3):
+  - DrdshChatSDKTest (1.0.4):
     - IQKeyboardManagerSwift (= 6.2.1)
     - MBProgressHUD
     - Socket.IO-Client-Swift (= 15.2.0)
@@ -31,7 +31,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  DrdshChatSDKTest: e13349392ece9de61f832145aae8217b98fcf95b
+  DrdshChatSDKTest: 69f88be824964a839a0159da9620bbd80c1b6ecb
   IQKeyboardManagerSwift: 0f0ae8935360b4003e6ea1ac7c19898f01e2f7c7
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
