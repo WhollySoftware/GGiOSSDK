@@ -64,6 +64,55 @@ public class GGiOSSDK : NSObject {
         debugPrint(base as Any)
         return base
     }
+    func APICallMain(url:String,newTodo: [String: Any],successHanlder:([String: Any])->Void?,errorHanlder:()->Void?) {
+      var todosUrlRequest = URLRequest(url: URL(string: url)!)
+      todosUrlRequest.httpMethod = "POST"
+      let jsonTodo: Data
+      do {
+        jsonTodo = try JSONSerialization.data(withJSONObject: newTodo, options: [])
+        todosUrlRequest.httpBody = jsonTodo
+      } catch {
+        print("Error: cannot create JSON from todo")
+        return
+      }
+      todosUrlRequest.setValue("XMLHttpRequest", forHTTPHeaderField: "X-Requested-With")
+      todosUrlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+      todosUrlRequest.setValue("en", forHTTPHeaderField: "locale")
+      let session = URLSession.shared
+        GGProgress.shared.showProgress(isFullLoader:false)
+      var successHanlder1 = successHanlder
+      var errorHanlder1 = errorHanlder
+      let task = session.dataTask(with: todosUrlRequest) {
+        (data, response, error) in
+        DispatchQueue.main.async {
+            GGProgress.shared.hideProgress()
+        }
+        guard error == nil else {
+            errorHanlder1()
+          print("error calling POST on /todos/1",error!)
+          return
+        }
+        guard let responseData = data else {
+            errorHanlder1()
+          print("Error: did not receive data")
+          return
+        }
+        do {
+          guard let receivedTodo = try JSONSerialization.jsonObject(with: responseData,
+            options: []) as? [String: Any] else {
+                errorHanlder1()
+              print("Could not get JSON from responseData as dictionary")
+              return
+          }
+           successHanlder1(receivedTodo)
+        } catch  {
+            errorHanlder1()
+          print("error parsing response from POST on /todos")
+          return
+        }
+      }
+      task.resume()
+    }
 }
 
 public extension UIColor {

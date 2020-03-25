@@ -15,20 +15,22 @@ class GGProgress: NSObject {
     
     var hub: MBProgressHUD!
     
-    func showProgress(with title: String = "", file: String = #function){
+    func showProgress(with title: String = "", file: String = #function,isFullLoader:Bool=true){
         DispatchQueue.main.async {
             self.hideProgress()
             debugPrint("GGProgress : \(file) strat")
             self.hub = MBProgressHUD.showAdded(to: UIApplication.shared.keyWindow!, animated: true)
             self.hub.label.text = title
             self.hub.contentColor = UIColor.white
-            if #available(iOS 13.0, *) {
-                self.hub.backgroundView.blurEffectStyle = .systemUltraThinMaterialDark
-            } else {
-                self.hub.backgroundView.blurEffectStyle = .regular
+            if isFullLoader{
+                if #available(iOS 13.0, *) {
+                    self.hub.backgroundView.blurEffectStyle = .systemUltraThinMaterialDark
+                } else {
+                    self.hub.backgroundView.blurEffectStyle = .regular
+                }
+                self.hub.backgroundColor = UIColor.white
+                self.hub.bezelView.color = UIColor.black
             }
-            self.hub.backgroundColor = UIColor.white
-            self.hub.bezelView.color = UIColor.black
         }
     }
     

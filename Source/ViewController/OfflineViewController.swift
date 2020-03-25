@@ -88,7 +88,7 @@ class OfflineViewController: UIViewController {
       todosUrlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
       todosUrlRequest.setValue("en", forHTTPHeaderField: "locale")
       let session = URLSession.shared
-      GGProgress.shared.showProgress()
+        GGProgress.shared.showProgress(isFullLoader:false)
       let task = session.dataTask(with: todosUrlRequest) {
         (data, response, error) in
         DispatchQueue.main.async {
