@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'DrdshChatSDKTest'
-  s.version          = '1.0.3'
-  s.summary          = 'A DrdshChatSDKTest is the testing sdk 1.0.3'
+  s.version          = '1.0.4'
+  s.summary          = 'A DrdshChatSDKTest is the testing sdk 1.0.4'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -29,7 +29,7 @@ I am trying to make live tracking sdk for all the developer so the can use easil
 
   s.ios.deployment_target = '10.0'
 
-  s.source_files = 'DrdshChatSDKTest/Classes/**/*'
+  s.source_files = 'DrdshChatSDKTest/**/*'
   s.swift_version = '4.0'
   s.platforms = {
       "ios":"10.0"

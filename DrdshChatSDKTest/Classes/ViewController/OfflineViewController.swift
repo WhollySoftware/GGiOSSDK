@@ -29,7 +29,7 @@ class OfflineViewController: UIViewController {
         self.txtMobile.text = GGUserSessionDetail.shared.mobile
         self.txtEmailAddress.text = GGUserSessionDetail.shared.email
         
-        let barItem = UIBarButtonItem(image:  DrdshChatSDK.shared.config.backImage, style: .plain, target: self, action: #selector(dissmissView))
+        let barItem = UIBarButtonItem(image:  DrdshChatSDKTest.shared.config.backImage, style: .plain, target: self, action: #selector(dissmissView))
         barItem.title = "Chat"
         navigationItem.leftBarButtonItem = barItem
         self.setupData()
@@ -37,10 +37,10 @@ class OfflineViewController: UIViewController {
     }
     func setupData(){
         DispatchQueue.main.async {
-            self.viewEmailAddress.isHidden = !DrdshChatSDK.shared.AllDetails.embeddedChat.emailRequired
-            self.viewMobile.isHidden = !DrdshChatSDK.shared.AllDetails.embeddedChat.mobileRequired
-            self.viewTypeYourQuestion.isHidden = !DrdshChatSDK.shared.AllDetails.embeddedChat.messageRequired
-         self.btnStart.setTitle(DrdshChatSDK.shared.AllDetails.embeddedChat.startChatButtonTxt, for: .normal)
+            self.viewEmailAddress.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.emailRequired
+            self.viewMobile.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.mobileRequired
+            self.viewTypeYourQuestion.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.messageRequired
+         self.btnStart.setTitle(DrdshChatSDKTest.shared.AllDetails.embeddedChat.startChatButtonTxt, for: .normal)
             self.btnStart.backgroundColor = UIColor(hexCode:0x322D33)
         }
     }
@@ -54,13 +54,13 @@ class OfflineViewController: UIViewController {
         //self.dismiss(animated: true, completion: nil)
     }
     func SendOfflineMsg() {
-     let validateIdentityAPI: String = DrdshChatSDK.shared.APIbaseURL + "send/offline/message"
+     let validateIdentityAPI: String = DrdshChatSDKTest.shared.APIbaseURL + "send/offline/message"
       var todosUrlRequest = URLRequest(url: URL(string: validateIdentityAPI)!)
       todosUrlRequest.httpMethod = "POST"
       let newTodo: [String: Any] = [
-            "appSid" : DrdshChatSDK.shared.appSid,
+            "appSid" : DrdshChatSDKTest.shared.appSid,
             "locale" : "en",
-            "visitorID":DrdshChatSDK.shared.AllDetails.visitorID,
+            "visitorID":DrdshChatSDKTest.shared.AllDetails.visitorID,
             "subject" : self.txtSubject.text!,
             "name": self.txtFullName.text!,
             "mobile": self.txtMobile.text!,
@@ -110,7 +110,7 @@ class OfflineViewController: UIViewController {
                     self.dismiss(animated: true) {
                         let alert = UIAlertController(title: "Error", message: receivedTodo["message"] as? String ?? "", preferredStyle: UIAlertController.Style.alert)
                         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-                        DrdshChatSDK.shared.topViewController()?.present(alert, animated: true, completion: nil)
+                        DrdshChatSDKTest.shared.topViewController()?.present(alert, animated: true, completion: nil)
                     }
                 }
                 print("Response : " + receivedTodo.description)
