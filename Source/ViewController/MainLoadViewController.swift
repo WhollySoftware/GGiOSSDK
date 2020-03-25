@@ -27,19 +27,13 @@ class MainLoadViewController: UIViewController {
         self.txtMobile.text = GGUserSessionDetail.shared.mobile
         self.txtEmailAddress.text = GGUserSessionDetail.shared.email
         
-        
         IQKeyboardManager.shared.enable = true
-        var bundle = Bundle(for: GGiOSSDK.self)
-        if let resourcePath = bundle.path(forResource: "GGiOSSDK", ofType: "bundle") {
-            if let resourcesBundle = Bundle(path: resourcePath) {
-                bundle = resourcesBundle
-            }
-        }
         btnStart.action = {
             self.startChat()
         }
+
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white,.font : UIFont.init(name: "AvenirLTStd-Black", size: 17.0) ?? UIFont.boldSystemFont(ofSize: 17)]
-        let backImage = UIImage(named: "back", in: bundle, compatibleWith: nil)
+        let backImage = GGiOSSDK.shared.config.backImage
         self.navigationController?.navigationBar.backIndicatorImage = backImage
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
         self.navigationController?.navigationBar.tintColor = UIColor.white

@@ -9,8 +9,8 @@ import UIKit
 
 class OfflineViewController: UIViewController {
 
-    @IBOutlet weak var btnStart: GGButton!
-    @IBOutlet weak var txtFullName: UITextField!
+   @IBOutlet weak var btnStart: GGButton!
+   @IBOutlet weak var txtFullName: UITextField!
    @IBOutlet weak var txtEmailAddress: UITextField!
    @IBOutlet weak var txtMobile: UITextField!
    @IBOutlet weak var txtTypeYourQuestion: UITextField!
@@ -29,14 +29,7 @@ class OfflineViewController: UIViewController {
         self.txtMobile.text = GGUserSessionDetail.shared.mobile
         self.txtEmailAddress.text = GGUserSessionDetail.shared.email
         
-        var bundle = Bundle(for: GGiOSSDK.self)
-        if let resourcePath = bundle.path(forResource: "GGiOSSDK", ofType: "bundle") {
-            if let resourcesBundle = Bundle(path: resourcePath) {
-                bundle = resourcesBundle
-            }
-        }
-        let backImage = UIImage(named: "back", in: bundle, compatibleWith: nil)
-        let barItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(dissmissView))
+        let barItem = UIBarButtonItem(image:  GGiOSSDK.shared.config.backImage, style: .plain, target: self, action: #selector(dissmissView))
         barItem.title = "Chat"
         navigationItem.leftBarButtonItem = barItem
         self.setupData()
@@ -59,7 +52,6 @@ class OfflineViewController: UIViewController {
             }
         }
         //self.dismiss(animated: true, completion: nil)
-        
     }
     func SendOfflineMsg() {
      let validateIdentityAPI: String = GGiOSSDK.shared.APIbaseURL + "send/offline/message"

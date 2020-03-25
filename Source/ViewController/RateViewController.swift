@@ -38,19 +38,13 @@ class RateViewController: UIViewController {
         txtComment.layer.borderWidth = 1
         txtComment.layer.borderColor = UIColor.lightGray.cgColor
         txtComment.text = ""
-
-       var bundle = Bundle(for: GGiOSSDK.self)
-        if let resourcePath = bundle.path(forResource: "GGiOSSDK", ofType: "bundle") {
-            if let resourcesBundle = Bundle(path: resourcePath) {
-                bundle = resourcesBundle
-            }
-        }
-        btnLike.setImage(UIImage(named: "like", in: bundle, compatibleWith: nil), for: .normal)
-        btnDisLike.setImage(UIImage(named: "dislike", in: bundle, compatibleWith: nil), for: .normal)
-        btnLike.setImage(UIImage(named: "selectedlike", in: bundle, compatibleWith: nil), for: .selected)
-        btnDisLike.setImage(UIImage(named: "selecteddislike", in: bundle, compatibleWith: nil), for: .selected)
         
-        btnMail.setImage(UIImage(named: "mail", in: bundle, compatibleWith: nil), for: .normal)
+        btnSend.setImage(GGiOSSDK.shared.config.sendMessageImage, for: .normal)
+        btnLike.setImage(GGiOSSDK.shared.config.likeImage, for: .normal)
+        btnDisLike.setImage(GGiOSSDK.shared.config.disLikeImage, for: .normal)
+        btnLike.setImage(GGiOSSDK.shared.config.likeSelctedImage, for: .selected)
+        btnDisLike.setImage(GGiOSSDK.shared.config.disLikeSelctedImage, for: .selected)
+        btnMail.setImage(GGiOSSDK.shared.config.mailImage, for: .normal)named: "mail", in: bundle, compatibleWith: nil), for: .normal)
         btnSend.action = {
             if self.type == 2{
                 if self.txtComment.text == ""{

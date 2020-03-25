@@ -35,27 +35,18 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             timer = Timer(timeInterval: 120, target: self, selector: #selector(invitationMaxWaitTimeExceeded), userInfo: nil, repeats: false)
             RunLoop.main.add(timer, forMode: RunLoopMode.commonModes)
         }
-        
-        
-        var bundle = Bundle(for: GGiOSSDK.self)
-        if let resourcePath = bundle.path(forResource: "GGiOSSDK", ofType: "bundle") {
-            if let resourcesBundle = Bundle(path: resourcePath) {
-                bundle = resourcesBundle
-            }
-        }
         self.table.tableFooterView = UIView()
-        btnSend.setImage(UIImage(named: "send", in: bundle, compatibleWith: nil), for: .normal)
-        btnLike.setImage(UIImage(named: "like", in: bundle, compatibleWith: nil), for: .normal)
-        btnDisLike.setImage(UIImage(named: "dislike", in: bundle, compatibleWith: nil), for: .normal)
-        btnLike.setImage(UIImage(named: "selectedlike", in: bundle, compatibleWith: nil), for: .selected)
-        btnDisLike.setImage(UIImage(named: "selecteddislike", in: bundle, compatibleWith: nil), for: .selected)
+        btnSend.setImage(GGiOSSDK.shared.config.sendMessageImage, for: .normal)
+        btnLike.setImage(GGiOSSDK.shared.config.likeImage, for: .normal)
+        btnDisLike.setImage(GGiOSSDK.shared.config.disLikeImage, for: .normal)
+        btnLike.setImage(GGiOSSDK.shared.config.likeSelctedImage, for: .selected)
+        btnDisLike.setImage(GGiOSSDK.shared.config.disLikeSelctedImage, for: .selected)
         
-        btnMail.setImage(UIImage(named: "mail", in: bundle, compatibleWith: nil), for: .normal)
-        btnAttachment.setImage(UIImage(named: "attchment", in: bundle, compatibleWith: nil), for: .normal)
-        imgView.image = UIImage(named: "user", in: bundle, compatibleWith: nil)
+        btnMail.setImage(GGiOSSDK.shared.config.mailImage, for: .normal)
+        btnAttachment.setImage(GGiOSSDK.shared.config.attachmentImage, for: .normal)
+        imgView.image = GGiOSSDK.shared.config.userPlaceHolderImage
         
-        let backImage = UIImage(named: "back", in: bundle, compatibleWith: nil)
-        let barItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(backAction))
+        let barItem = UIBarButtonItem(image: GGiOSSDK.shared.config.backImage, style: .plain, target: self, action: #selector(backAction))
         navigationItem.leftBarButtonItem = barItem
         self.CloseBarItem = UIBarButtonItem(title: "Chat Close", style: .plain, target: self, action: #selector(dissmissView))
         navigationItem.rightBarButtonItem = self.CloseBarItem
