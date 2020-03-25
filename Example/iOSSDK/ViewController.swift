@@ -19,16 +19,20 @@ class ViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        DrdshChatSDKTest.presentChat(appSid: "5def86cf64be6d13f55f2034.5d96941bb5507599887b9c71829d5cffcdf55014")
+        let sdkCongig = DrdshChatSDKConfiguration()
+        sdkCongig.appSid = "5def86cf64be6d13f55f2034.5d96941bb5507599887b9c71829d5cffcdf55014"
+        DrdshChatSDKTest.presentChat(config: sdkCongig)
     }
     deinit {
         
     }
     @IBAction func btnStartAction(_ sender:UIButton){
-         DrdshChatSDKTest.presentChat(appSid: "5def86cf64be6d13f55f2034.5d96941bb5507599887b9c71829d5cffcdf55014")
+         DrdshChatSDKTest.presentChat(config: DrdshChatSDKConfiguration())
     }
     @IBAction func btnStopAction(_ sender:UIButton){
-        
+        let sdkCongig = DrdshChatSDKConfiguration()
+        sdkCongig.appSid = "5def86cf64be6d13f55f2034.5d96941bb5507599887b9c71829d5cffcdf55014"
+        DrdshChatSDKTest.presentChat(config: sdkCongig)
     }
 }
 

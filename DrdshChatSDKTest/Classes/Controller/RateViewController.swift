@@ -26,7 +26,9 @@ class RateViewController: UIViewController {
         self.btnDisLike.isHidden = type == 2
         self.btnLike.isHidden = type == 2
         self.btnMail.isHidden = type != 2
-        
+        if DrdshChatSDKTest.shared.config.local == "ar"{
+            self.txtComment.textAlignment = .right
+        }
         if self.type == 2{
             lblTitle.text = "Please input your email address"
             txtComment.autocapitalizationType = .none
@@ -38,7 +40,7 @@ class RateViewController: UIViewController {
         txtComment.layer.borderWidth = 1
         txtComment.layer.borderColor = UIColor.lightGray.cgColor
         txtComment.text = ""
-        
+        self.btnSend.backgroundColor = DrdshChatSDKTest.shared.config.mainColor
         btnSend.setImage(DrdshChatSDKTest.shared.config.sendMessageImage, for: .normal)
         btnLike.setImage(DrdshChatSDKTest.shared.config.likeImage, for: .normal)
         btnDisLike.setImage(DrdshChatSDKTest.shared.config.disLikeImage, for: .normal)

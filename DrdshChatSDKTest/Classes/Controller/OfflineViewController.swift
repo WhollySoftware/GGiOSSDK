@@ -28,7 +28,13 @@ class OfflineViewController: UIViewController {
         self.txtFullName.text = GGUserSessionDetail.shared.name
         self.txtMobile.text = GGUserSessionDetail.shared.mobile
         self.txtEmailAddress.text = GGUserSessionDetail.shared.email
-        
+        if DrdshChatSDKTest.shared.config.local == "ar"{
+            self.txtFullName.textAlignment = .right
+            self.txtMobile.textAlignment = .right
+            self.txtEmailAddress.textAlignment = .right
+            self.txtSubject.textAlignment = .right
+            self.txtTypeYourQuestion.textAlignment = .right
+        }
         let barItem = UIBarButtonItem(image:  DrdshChatSDKTest.shared.config.backImage, style: .plain, target: self, action: #selector(dissmissView))
         barItem.title = "Chat"
         navigationItem.leftBarButtonItem = barItem
@@ -41,7 +47,7 @@ class OfflineViewController: UIViewController {
             self.viewMobile.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.mobileRequired
             self.viewTypeYourQuestion.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.messageRequired
          self.btnStart.setTitle(DrdshChatSDKTest.shared.AllDetails.embeddedChat.startChatButtonTxt, for: .normal)
-            self.btnStart.backgroundColor = UIColor(hexCode:0x322D33)
+            self.btnStart.backgroundColor = DrdshChatSDKTest.shared.config.mainColor
         }
     }
     @objc func dissmissView(){
@@ -58,8 +64,8 @@ class OfflineViewController: UIViewController {
       var todosUrlRequest = URLRequest(url: URL(string: validateIdentityAPI)!)
       todosUrlRequest.httpMethod = "POST"
       let newTodo: [String: Any] = [
-            "appSid" : DrdshChatSDKTest.shared.appSid,
-            "locale" : "en",
+            "appSid" : DrdshChatSDKTest.shared.config.appSid,
+            "locale" : DrdshChatSDKTest.shared.config.local,
             "visitorID":DrdshChatSDKTest.shared.AllDetails.visitorID,
             "subject" : self.txtSubject.text!,
             "name": self.txtFullName.text!,

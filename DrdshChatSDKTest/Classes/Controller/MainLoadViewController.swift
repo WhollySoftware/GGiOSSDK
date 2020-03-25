@@ -27,7 +27,15 @@ class MainLoadViewController: UIViewController {
         self.txtMobile.text = GGUserSessionDetail.shared.mobile
         self.txtEmailAddress.text = GGUserSessionDetail.shared.email
         
+        if DrdshChatSDKTest.shared.config.local == "ar"{
+            self.txtFullName.textAlignment = .right
+            self.txtMobile.textAlignment = .right
+            self.txtEmailAddress.textAlignment = .right
+            self.txtTypeYourQuestion.textAlignment = .right
+        }
+        
         IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.toolbarDoneBarButtonItemText = "Done"
         btnStart.action = {
             self.startChat()
         }
@@ -37,7 +45,7 @@ class MainLoadViewController: UIViewController {
         self.navigationController?.navigationBar.backIndicatorImage = backImage
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
         self.navigationController?.navigationBar.tintColor = UIColor.white
-        self.navigationController?.navigationBar.barTintColor = UIColor(hexCode:0x322D33)
+        self.navigationController?.navigationBar.barTintColor = DrdshChatSDKTest.shared.config.mainColor
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
@@ -52,7 +60,7 @@ class MainLoadViewController: UIViewController {
             self.viewMobile.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.mobileRequired
             self.viewTypeYourQuestion.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.messageRequired
          self.btnStart.setTitle(DrdshChatSDKTest.shared.AllDetails.embeddedChat.startChatButtonTxt, for: .normal)
-            self.btnStart.backgroundColor = UIColor(hexCode:0x322D33)
+            self.btnStart.backgroundColor = DrdshChatSDKTest.shared.config.mainColor
         }
     }
     func makePostCall() {
@@ -60,18 +68,14 @@ class MainLoadViewController: UIViewController {
       var todosUrlRequest = URLRequest(url: URL(string: validateIdentityAPI)!)
       todosUrlRequest.httpMethod = "POST"
       var newTodo: [String: Any] = [
-            "appSid" : DrdshChatSDKTest.shared.appSid,
-            "locale" : "en",
+            "appSid" : DrdshChatSDKTest.shared.config.appSid,
+            "locale" : DrdshChatSDKTest.shared.config.local,
             "expandWidth": self.view.frame.width.description,
             "expendHeight": self.view.frame.height.description,
             "deviceID": UIDevice.current.identifierForVendor?.uuidString ?? "",
             "ipAddress": "192.168.1.2",
             "browser": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:73.0)",
-            "domain": "drdsh.live",
-            //"fullUrl": "https://www.drdsh.live/contact/us",
-            //"metaTitle": "Contact Us",
-            //"resolution": "750x300",
-           //"visitorID" : "5e637ccae4cb961e36dfb5a5"
+            "domain": "drdsh.live"
         ]
         if DrdshChatSDKTest.shared.AllDetails.visitorID != ""{
             newTodo["visitorID"] = DrdshChatSDKTest.shared.AllDetails.visitorID
@@ -216,8 +220,8 @@ class MainLoadViewController: UIViewController {
       var todosUrlRequest = URLRequest(url: URL(string: validateIdentityAPI)!)
       todosUrlRequest.httpMethod = "POST"
       let newTodo: [String: Any] = [
-            "appSid" : DrdshChatSDKTest.shared.appSid,
-            "locale" : "en",
+            "appSid" : DrdshChatSDKTest.shared.config.appSid,
+            "locale" : DrdshChatSDKTest.shared.config.local,
             "visitorID":DrdshChatSDKTest.shared.AllDetails.visitorID,
             "name": self.txtFullName.text!,
             "mobile": self.txtMobile.text!,

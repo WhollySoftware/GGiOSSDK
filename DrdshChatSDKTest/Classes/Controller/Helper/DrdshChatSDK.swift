@@ -11,7 +11,6 @@ public class DrdshChatSDKTest : NSObject {
     @objc public static let shared: DrdshChatSDKTest = {
         return DrdshChatSDKTest()
     }()
-    var appSid = ""
     var baseURL = "https://www.drdsh.live"
     var APIbaseURL = "https://www.drdsh.live"+"/sdk/v1/"
     var AttachmentbaseURL = "https://www.drdsh.live"+"/uploads/m/"
@@ -28,19 +27,27 @@ public class DrdshChatSDKTest : NSObject {
         
         return Bundle(for: DrdshChatSDKTest.self).path(forResource: "DrdshChatSDK", ofType: "bundle")!
     }
-    @objc public class func presentChat(appSid:String,config: DrdshChatSDKConfiguration = DrdshChatSDKConfiguration(),animated: Bool = true, completion: ((Bool) -> Void)? = nil) {
+    @objc public class func presentChat(config: DrdshChatSDKConfiguration,animated: Bool = true, completion: ((Bool) -> Void)? = nil) {
         if let data = UserDefaults.standard.object(forKey: "AllDetails") as? [String :AnyObject]{
             DrdshChatSDKTest.shared.AllDetails <= data
         }
-        DrdshChatSDKTest.shared.appSid = appSid
         DrdshChatSDKTest.shared.config = config
-        let vc = UIStoryboard(name: "DrdshChatSDK", bundle: Bundle(for: DrdshChatSDKTest.self)).instantiateViewController(withIdentifier: "MainLoadViewController") as! MainLoadViewController
-        vc.modalPresentationStyle = .overFullScreen
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .overFullScreen
-        DrdshChatSDKTest.shared.topViewController()?.present(nav, animated: true, completion: {
-            completion?(true)
-        })
+        if DrdshChatSDKTest.shared.config.appSid == ""{
+            let alert = UIAlertController(title: "Error", message: "appSid can not be blank", preferredStyle: UIAlertController.Style.alert)
+          alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+          DrdshChatSDKTest.shared.topViewController()?.present(alert, animated: true, completion: {
+             
+          })
+           
+        }else{
+            let vc = UIStoryboard(name: "DrdshChatSDK", bundle: Bundle(for: DrdshChatSDKTest.self)).instantiateViewController(withIdentifier: "MainLoadViewController") as! MainLoadViewController
+            vc.modalPresentationStyle = .overFullScreen
+            let nav = UINavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .overFullScreen
+            DrdshChatSDKTest.shared.topViewController()?.present(nav, animated: true, completion: {
+                completion?(true)
+            })
+        }
     }
     @objc public class func dismissChat(animated: Bool = true, completion: ((Bool) -> Void)? = nil) {
         DrdshChatSDKTest.shared.topViewController()?.dismiss(animated: true, completion: {
@@ -124,15 +131,18 @@ public class DrdshChatSDKTest : NSObject {
 //    }
 }
 public class DrdshChatSDKConfiguration : NSObject {
-    var backImage:UIImage = UIImage()
-    var likeImage:UIImage = UIImage()
-    var disLikeImage:UIImage = UIImage()
-    var likeSelctedImage:UIImage = UIImage()
-    var disLikeSelctedImage:UIImage = UIImage()
-    var mailImage:UIImage = UIImage()
-    var attachmentImage:UIImage = UIImage()
-    var sendMessageImage:UIImage = UIImage()
-    var userPlaceHolderImage:UIImage = UIImage()
+    public var appSid:String = ""
+    public var local:String = "en"
+    public var mainColor:UIColor = UIColor(hexCode:0x322D33)
+    public var backImage:UIImage = UIImage()
+    public var likeImage:UIImage = UIImage()
+    public var disLikeImage:UIImage = UIImage()
+    public var likeSelctedImage:UIImage = UIImage()
+    public var disLikeSelctedImage:UIImage = UIImage()
+    public var mailImage:UIImage = UIImage()
+    public var attachmentImage:UIImage = UIImage()
+    public var sendMessageImage:UIImage = UIImage()
+    public var userPlaceHolderImage:UIImage = UIImage()
     public override init() {
         var bundle = Bundle(for: DrdshChatSDKTest.self)
         if let resourcePath = bundle.path(forResource: "DrdshChatSDKTest", ofType: "bundle") {

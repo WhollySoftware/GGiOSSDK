@@ -29,6 +29,12 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     var CloseBarItem : UIBarButtonItem?
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if DrdshChatSDKTest.shared.config.local == "ar"{
+            self.lblName.textAlignment = .right
+            self.lblTyping.textAlignment = .right
+            self.txtMessage.textAlignment = .right
+        }
         self.agentView.isHidden = true
         self.typingView.isHidden = true
         if DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus == 1{
@@ -226,6 +232,9 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             let cell = tableView.dequeueReusableCell(withIdentifier: "systemTableViewCell", for: indexPath) as! systemTableViewCell
             cell.lblMessage.text = self.list[indexPath.row].message
             cell.lblMessage.textAlignment = .left
+            if DrdshChatSDKTest.shared.config.local == "ar"{
+                cell.lblMessage.textAlignment = .right
+            }
             return cell
         }
         if self.list[indexPath.row].send_by == 2{
@@ -324,11 +333,14 @@ class SenderTableViewCell:UITableViewCell{
         self.backView.clipsToBounds = true
         if #available(iOS 11.0, *) {
             self.backView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner,.layerMaxXMaxYCorner]
+            if DrdshChatSDKTest.shared.config.local == "ar"{
+                self.backView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMaxYCorner,.layerMaxXMaxYCorner]
+            }
         } else {
             
         }
        self.backView.backgroundColor = UIColor(hexCode:0xE7E7E7)
-       self.lblMessage.textColor = UIColor(hexCode:0x322D33)
+       self.lblMessage.textColor = DrdshChatSDKTest.shared.config.mainColor
        self.lblTime.textColor = UIColor(hexCode:0x666666)
     }
 }
@@ -349,14 +361,19 @@ class ReceiverTableViewCell:UITableViewCell{
         imgProfile.image = UIImage(named: "user", in: bundle, compatibleWith: nil)
         self.backView.layer.cornerRadius = 10
         self.backView.clipsToBounds = true
+       
         if #available(iOS 11.0, *) {
+           
             self.backView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMaxYCorner,.layerMaxXMaxYCorner]
+            if DrdshChatSDKTest.shared.config.local == "ar"{
+               self.backView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner,.layerMaxXMaxYCorner]
+            }
         } else {
             
         }
-        self.backView.backgroundColor = UIColor(hexCode:0x322D33)
-               self.lblMessage.textColor = UIColor.white
-               self.lblTime.textColor = UIColor(hexCode:0x666666)
+        self.backView.backgroundColor = DrdshChatSDKTest.shared.config.mainColor
+        self.lblMessage.textColor = UIColor.white
+        self.lblTime.textColor = UIColor(hexCode:0x666666)
         
     }
 }
@@ -497,6 +514,7 @@ extension UITableView {
 extension UIImageView{
     func setImage(urlString:String){
         self.image = UIImage(named: "user")
+        if urlString == ""{return}
         if let cachedImage = imageCache.object(forKey: NSString(string: urlString)) {
               self.image =  cachedImage
         }else{
