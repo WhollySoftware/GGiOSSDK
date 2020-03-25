@@ -54,7 +54,7 @@ open class AGImagePickerController: NSObject {
         
         self.sourceType = type
         isAllowsEditing = allowsEditing
-        checkPermission()
+        setupAlertController()
     }
     
     func checkPermission() {

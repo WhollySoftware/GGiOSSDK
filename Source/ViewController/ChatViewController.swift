@@ -63,8 +63,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         if GGiOSSDK.shared.AllDetails.visitorConnectedStatus != 2{
             CommonSocket.shared.startChatRequest(data: [["dc_vid":GGiOSSDK.shared.AllDetails.visitorID]])
         }else if GGiOSSDK.shared.AllDetails.visitorConnectedStatus == 2{
-            self.agentView.isHidden = false
-            self.lblName.text = GGiOSSDK.shared.AgentDetail.agent_name
+            self.setAgentDetail()
             self.navigationItem.rightBarButtonItem = self.CloseBarItem
             CommonSocket.shared.visitorJoinAgentRoom(data: [["vid":GGiOSSDK.shared.AllDetails.visitorID,"agent_id":GGiOSSDK.shared.AllDetails.agentId]])
         }
@@ -79,7 +78,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             debugPrint(data)
         }
         CommonSocket.shared.agentDetail = { t in
-            self.lblName.text = GGiOSSDK.shared.AgentDetail.agent_name
+            self.setAgentDetail()
             self.table.reloadData()
         }
         btnSend.action = {
@@ -95,7 +94,6 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                         self.table.scroll(to: .bottom, animated: true)
                     }
                 }
-                debugPrint(data)
             }
         }
         btnLike.action = {
@@ -123,8 +121,12 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
            AGImagePickerController(with: self, allowsEditing: true, media: .both, iPadSetup: self.btnAttachment)
         }
         CommonSocket.shared.ipBlocked { data in
-            debugPrint(data)
+            if GGiOSSDK.shared.AllDetails.visitorConnectedStatus == 2{
+                GGiOSSDK.shared.AllDetails.visitorConnectedStatus = 0
+            }
             self.timer.invalidate()
+            self.agentView.isHidden = true
+            self.messageView.isHidden = true
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "OfflineViewController") as! OfflineViewController
             self.navigationController?.pushViewController(vc, animated: false)
         }
@@ -132,26 +134,29 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             debugPrint(data)
         }
         CommonSocket.shared.agentAcceptedChatRequest { data in
-            debugPrint(data)
-            GGiOSSDK.shared.AllDetails.agentId = data["agent_id"] as! String
+            GGiOSSDK.shared.AllDetails.visitorConnectedStatus = 2
             GGiOSSDK.shared.AgentDetail <= data
+            GGiOSSDK.shared.AllDetails.agentId = data["agent_id"] as! String
              GGiOSSDK.shared.AgentDetail.agent_name = data["name"] as! String
              GGiOSSDK.shared.AgentDetail.visitor_message_id = data["mid"] as! String
-            self.timer.invalidate()
-            self.agentView.isHidden = false
-            self.lblName.text = GGiOSSDK.shared.AgentDetail.agent_name
+            self.setAgentDetail()
             self.navigationItem.rightBarButtonItem = self.CloseBarItem
         }
         CommonSocket.shared.agentSendNewMessage { data in
-            debugPrint(data)
             var m:MessageModel = MessageModel()
             m <= data
-            self.list.append(m)
-            self.table.reloadData()
-            self.table.scroll(to: .bottom, animated: true)
+            if self.list.first(where: { (model) -> Bool in
+                model._id == m._id
+            }) == nil{
+                self.list.append(m)
+                self.table.reloadData()
+                self.table.scroll(to: .bottom, animated: true)
+            }
         }
         CommonSocket.shared.agentChatSessionTerminated { data in
-            debugPrint(data)
+            if GGiOSSDK.shared.AllDetails.visitorConnectedStatus == 2{
+                GGiOSSDK.shared.AllDetails.visitorConnectedStatus = 0
+            }
             self.timer.invalidate()
             self.agentView.isHidden = true
             self.messageView.isHidden = true
@@ -166,15 +171,20 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             self.lblTyping.text = data["message"] as? String ?? ""
         }
         CommonSocket.shared.newAgentAcceptedChatRequest { data in
-            debugPrint(data)
             GGiOSSDK.shared.AllDetails.agentId = data["agent_id"] as! String
             GGiOSSDK.shared.AgentDetail <= data
             GGiOSSDK.shared.AgentDetail.agent_name = data["name"] as! String
             GGiOSSDK.shared.AgentDetail.visitor_message_id = data["mid"] as! String
             self.timer.invalidate()
-            self.agentView.isHidden = false
-            self.lblName.text = GGiOSSDK.shared.AgentDetail.agent_name
+            self.setAgentDetail()
         }
+    }
+    func setAgentDetail(){
+        self.timer.invalidate()
+        let strProdile = GGiOSSDK.shared.AgentDetail.agent_image
+        imgView.setImage(urlString: strProdile)
+        self.agentView.isHidden = false
+        self.lblName.text = GGiOSSDK.shared.AgentDetail.agent_name
     }
     @objc func invitationMaxWaitTimeExceeded(){
         timer.invalidate()
@@ -185,9 +195,14 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         }
     }
     @objc func backAction(){
-        self.timer.invalidate()
-       let vc = self.storyboard?.instantiateViewController(withIdentifier: "OfflineViewController") as! OfflineViewController
-        self.navigationController?.pushViewController(vc, animated: false)
+        if GGiOSSDK.shared.AllDetails.visitorConnectedStatus == 2{
+            CommonSocket.shared.disConnect()
+            self.dismiss(animated: true, completion: nil)
+        }else{
+            self.timer.invalidate()
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "OfflineViewController") as! OfflineViewController
+             self.navigationController?.pushViewController(vc, animated: false)
+        }
     }
     @objc func dissmissView(){
         self.timer.invalidate()
@@ -195,7 +210,6 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "RateViewController") as! RateViewController
             vc.modalPresentationStyle = .overFullScreen
             vc.successHandler = {
-//                CommonSocket.shared.disConnect()
                 self.agentView.isHidden = true
                 self.messageView.isHidden = true
                 self.navigationItem.rightBarButtonItem = nil
@@ -205,8 +219,6 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             }
         }else{
             CommonSocket.shared.visitorEndChatSession(data: [["id":GGiOSSDK.shared.AllDetails.companyId,"vid":GGiOSSDK.shared.AllDetails.visitorID,"name":GGiOSSDK.shared.AllDetails.name]]) { (data) in
-                debugPrint(data)
-//                CommonSocket.shared.disConnect()
                 self.agentView.isHidden = true
                 self.messageView.isHidden = true
                 self.navigationItem.rightBarButtonItem = nil
@@ -227,6 +239,8 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         }
         if self.list[indexPath.row].send_by == 2{
             let cell = tableView.dequeueReusableCell(withIdentifier: "SenderTableViewCell", for: indexPath) as! SenderTableViewCell
+            let strProdile = GGiOSSDK.shared.AttachmentbaseURL+self.list[indexPath.row].agent_image
+            cell.imgProfile.setImage(urlString: strProdile)
             cell.lblName.text = GGUserSessionDetail.shared.name
             cell.lblMessage.text = self.list[indexPath.row].message
             cell.lblTime.text = self.list[indexPath.row].updatedAt.toUTCDate(format: .shipmentSendDate)?.timePassed()
@@ -239,7 +253,9 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "ReceiverTableViewCell", for: indexPath) as! ReceiverTableViewCell
-            cell.lblName.text = GGiOSSDK.shared.AgentDetail.agent_name
+            let strProdile = GGiOSSDK.shared.AttachmentbaseURL+self.list[indexPath.row].agent_image
+            cell.imgProfile.setImage(urlString: strProdile)
+            cell.lblName.text = self.list[indexPath.row].agent_name
             cell.lblMessage.text = self.list[indexPath.row].message
              cell.lblTime.text = self.list[indexPath.row].updatedAt.toUTCDate(format: .shipmentSendDate)?.timePassed()
             cell.imgAttachment.isHidden = self.list[indexPath.row].is_attachment == 0

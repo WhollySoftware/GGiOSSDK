@@ -29,6 +29,8 @@ class RateViewController: UIViewController {
         
         if self.type == 2{
             lblTitle.text = "Please input your email address"
+            txtComment.autocapitalizationType = .none
+            txtComment.autocorrectionType = .no
         }else{
             lblTitle.text = "Rate your chat experience"
         }

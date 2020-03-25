@@ -315,7 +315,6 @@
 		B2A3ACA63BD49C40DBE99567A9FC6B56 /* IQKeyboardManagerSwift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "IQKeyboardManagerSwift-prefix.pch"; sourceTree = "<group>"; };
 		B9A758B546E32DB57C455B8B973309F2 /* Compression.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Compression.swift; path = Sources/Starscream/Compression.swift; sourceTree = "<group>"; };
 		BB94AE72FA495529AFB8B47D1723270A /* SwiftyJSON-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SwiftyJSON-Info.plist"; sourceTree = "<group>"; };
-		C2923919F217D4B2200417D093C432CE /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		C404EE5FECDB61332209EB57DC19A71C /* SocketExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketExtensions.swift; path = Source/SocketIO/Util/SocketExtensions.swift; sourceTree = "<group>"; };
 		C4CA046F3B33FFF58BEDCCD14A93D3B4 /* IQKeyboardManagerSwift-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "IQKeyboardManagerSwift-Info.plist"; sourceTree = "<group>"; };
 		C4EFB80C683B6143A44BB6D90A91A154 /* NSObject+Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
@@ -333,9 +332,7 @@
 		E23C076BA70925415F490FEDB215DA92 /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5F9A241A7294EBE8ACA0E3D05F2924D /* SocketIOClientConfiguration.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketIOClientConfiguration.swift; path = Source/SocketIO/Client/SocketIOClientConfiguration.swift; sourceTree = "<group>"; };
 		E6C03979A75CE9D97E291380144DA93B /* SocketAnyEvent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketAnyEvent.swift; path = Source/SocketIO/Client/SocketAnyEvent.swift; sourceTree = "<group>"; };
-		E8A5B948DD6A19FD574A45670FF53927 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EBA42DC53070405918FD185A22B1D3EF /* Pods-iOSSDK_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-iOSSDK_Example-Info.plist"; sourceTree = "<group>"; };
-		EBBBBDFCD975AD70CD733ADC5BBE1F6B /* GGiOSSDK.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = GGiOSSDK.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		EBE9A5DA48FB893C61375F9B1A1685AE /* IQUITextFieldView+Additions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "IQUITextFieldView+Additions.swift"; path = "IQKeyboardManagerSwift/Categories/IQUITextFieldView+Additions.swift"; sourceTree = "<group>"; };
 		ED3B54263B911570FE8D058D850D1A6F /* SocketAckEmitter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketAckEmitter.swift; path = Source/SocketIO/Ack/SocketAckEmitter.swift; sourceTree = "<group>"; };
 		EE207A412B5D57C255E0F501BFB5159A /* attchment.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = attchment.png; path = Resources/attchment.png; sourceTree = "<group>"; };
@@ -644,7 +641,6 @@
 				156579857CEE763B367607EBB6BEEECF /* GGiOSSDK.storyboard */,
 				7FB70B4024239023008F9CF1 /* ViewController */,
 				7FB70B3F2423900C008F9CF1 /* Helper */,
-				CD156B2055801AD3645F7C6C1CA7B8DF /* Pod */,
 				4502E4130059BAB929C979FACE991995 /* Resources */,
 				0687A0146FCA369D386972BC96958F3C /* Support Files */,
 			);
@@ -739,16 +735,6 @@
 			);
 			name = "Pods-iOSSDK_Example";
 			path = "Target Support Files/Pods-iOSSDK_Example";
-			sourceTree = "<group>";
-		};
-		CD156B2055801AD3645F7C6C1CA7B8DF /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				EBBBBDFCD975AD70CD733ADC5BBE1F6B /* GGiOSSDK.podspec */,
-				C2923919F217D4B2200417D093C432CE /* LICENSE */,
-				E8A5B948DD6A19FD574A45670FF53927 /* README.md */,
-			);
-			name = Pod;
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {

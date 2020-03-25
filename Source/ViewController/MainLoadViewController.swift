@@ -144,6 +144,9 @@ class MainLoadViewController: UIViewController {
                         CommonSocket.shared.joinVisitorsRoom(data: [["dc_id":GGiOSSDK.shared.AllDetails.companyId,"dc_name":GGiOSSDK.shared.AllDetails.name,"dc_vid":GGiOSSDK.shared.AllDetails.visitorID,"dc_online":strStatus]]){ data in
                             if GGiOSSDK.shared.AllDetails.visitorConnectedStatus == 2{
                                 GGiOSSDK.shared.AgentDetail <= data
+                                GGiOSSDK.shared.AllDetails.agentId = data["agent_id"] as! String
+                                 GGiOSSDK.shared.AgentDetail.agent_name = data["name"] as! String
+                                 GGiOSSDK.shared.AgentDetail.visitor_message_id = data["mid"] as! String
                             }
                             debugPrint(data)
                         }

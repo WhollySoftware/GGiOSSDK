@@ -80,8 +80,9 @@ class EmbeddedChat:GGObject{
 class MessageModel:GGObject{
     var __v:Int  = 0
     var _id:String  = ""
-    var agent_id:VisitorIdModel  = VisitorIdModel()
     var isBlocked:String  = ""
+    var agent_image:String  = ""
+    var agent_name:String  = ""
     var attachment_file:String  = ""
     var company_id:String  = ""
     var file_size:String  = ""
@@ -95,11 +96,14 @@ class MessageModel:GGObject{
     var localId:String  = ""
     var message:String  = ""
     var new_agent_id:String  = ""
+    var new_agent_image:String  = ""
+    var new_agent_name:String  = ""
     var send_by:Int  = 0
     var updatedAt:String  = ""
     var visitor_id:VisitorIdModel  = VisitorIdModel()
     var visitor_message_id:String  = ""
 }
+
 class VisitorIdModel:GGObject{
     var name:String  = ""
     var _id:String  = ""
@@ -111,6 +115,7 @@ class AgentModel:GGObject{
     var _id:String  = ""
     var account_id:String  = ""
     var agent_id:String  = ""
+    var agent_image:String  = ""
     var agent_name:String  = ""
     var company_id:String  = ""
     var message:String  = ""
