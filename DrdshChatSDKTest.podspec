@@ -29,7 +29,7 @@ I am trying to make live tracking sdk for all the developer so the can use easil
 
   s.ios.deployment_target = '10.0'
 
-  s.source_files = 'DrdshChatSDKTest/**/*'
+  s.source_files = 'DrdshChatSDKTest/Classes/**/*'
   s.swift_version = '4.0'
   s.platforms = {
       "ios":"10.0"
