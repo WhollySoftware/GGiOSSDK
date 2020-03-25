@@ -1,6 +1,6 @@
 //
 //  ChatViewController.swift
-//  GGiOSSDK
+//  DrdshChatSDK
 //
 //  Created by Gaurav Gudaliya R on 16/03/20.
 //
@@ -31,34 +31,34 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         super.viewDidLoad()
         self.agentView.isHidden = true
         self.typingView.isHidden = true
-        if GGiOSSDK.shared.AllDetails.visitorConnectedStatus == 1{
+        if DrdshChatSDK.shared.AllDetails.visitorConnectedStatus == 1{
             timer = Timer(timeInterval: 120, target: self, selector: #selector(invitationMaxWaitTimeExceeded), userInfo: nil, repeats: false)
             RunLoop.main.add(timer, forMode: RunLoopMode.commonModes)
         }
         self.table.tableFooterView = UIView()
-        btnSend.setImage(GGiOSSDK.shared.config.sendMessageImage, for: .normal)
-        btnLike.setImage(GGiOSSDK.shared.config.likeImage, for: .normal)
-        btnDisLike.setImage(GGiOSSDK.shared.config.disLikeImage, for: .normal)
-        btnLike.setImage(GGiOSSDK.shared.config.likeSelctedImage, for: .selected)
-        btnDisLike.setImage(GGiOSSDK.shared.config.disLikeSelctedImage, for: .selected)
+        btnSend.setImage(DrdshChatSDK.shared.config.sendMessageImage, for: .normal)
+        btnLike.setImage(DrdshChatSDK.shared.config.likeImage, for: .normal)
+        btnDisLike.setImage(DrdshChatSDK.shared.config.disLikeImage, for: .normal)
+        btnLike.setImage(DrdshChatSDK.shared.config.likeSelctedImage, for: .selected)
+        btnDisLike.setImage(DrdshChatSDK.shared.config.disLikeSelctedImage, for: .selected)
         
-        btnMail.setImage(GGiOSSDK.shared.config.mailImage, for: .normal)
-        btnAttachment.setImage(GGiOSSDK.shared.config.attachmentImage, for: .normal)
-        imgView.image = GGiOSSDK.shared.config.userPlaceHolderImage
+        btnMail.setImage(DrdshChatSDK.shared.config.mailImage, for: .normal)
+        btnAttachment.setImage(DrdshChatSDK.shared.config.attachmentImage, for: .normal)
+        imgView.image = DrdshChatSDK.shared.config.userPlaceHolderImage
         
-        let barItem = UIBarButtonItem(image: GGiOSSDK.shared.config.backImage, style: .plain, target: self, action: #selector(backAction))
+        let barItem = UIBarButtonItem(image: DrdshChatSDK.shared.config.backImage, style: .plain, target: self, action: #selector(backAction))
         navigationItem.leftBarButtonItem = barItem
         self.CloseBarItem = UIBarButtonItem(title: "Chat Close", style: .plain, target: self, action: #selector(dissmissView))
         navigationItem.rightBarButtonItem = self.CloseBarItem
         self.navigationItem.rightBarButtonItem = nil
-        if GGiOSSDK.shared.AllDetails.visitorConnectedStatus != 2{
-            CommonSocket.shared.startChatRequest(data: [["dc_vid":GGiOSSDK.shared.AllDetails.visitorID]])
-        }else if GGiOSSDK.shared.AllDetails.visitorConnectedStatus == 2{
+        if DrdshChatSDK.shared.AllDetails.visitorConnectedStatus != 2{
+            CommonSocket.shared.startChatRequest(data: [["dc_vid":DrdshChatSDK.shared.AllDetails.visitorID]])
+        }else if DrdshChatSDK.shared.AllDetails.visitorConnectedStatus == 2{
             self.setAgentDetail()
             self.navigationItem.rightBarButtonItem = self.CloseBarItem
-            CommonSocket.shared.visitorJoinAgentRoom(data: [["vid":GGiOSSDK.shared.AllDetails.visitorID,"agent_id":GGiOSSDK.shared.AllDetails.agentId]])
+            CommonSocket.shared.visitorJoinAgentRoom(data: [["vid":DrdshChatSDK.shared.AllDetails.visitorID,"agent_id":DrdshChatSDK.shared.AllDetails.agentId]])
         }
-        CommonSocket.shared.visitorLoadChatHistory(data: [["mid":GGiOSSDK.shared.AllDetails.messageID]]) { (data) in
+        CommonSocket.shared.visitorLoadChatHistory(data: [["mid":DrdshChatSDK.shared.AllDetails.messageID]]) { (data) in
             if data.count > 0{
                 if let arrDic = data[0] as? [[String:AnyObject]]{
                     self.list <= arrDic
@@ -75,7 +75,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         btnSend.action = {
             let text = self.txtMessage.text!
             self.txtMessage.text! = ""
-            CommonSocket.shared.sendVisitorMessage(data: [["dc_id":GGiOSSDK.shared.AllDetails.companyId,"dc_mid":GGiOSSDK.shared.AllDetails.messageID,"dc_vid":GGiOSSDK.shared.AllDetails.visitorID,"dc_agent_id":GGiOSSDK.shared.AllDetails.agentId,"message":text,"is_attachment":0,"attachment_file":"","file_type":"","file_size":"","send_by": 2,"dc_name":GGiOSSDK.shared.AllDetails.name]]){ data in
+            CommonSocket.shared.sendVisitorMessage(data: [["dc_id":DrdshChatSDK.shared.AllDetails.companyId,"dc_mid":DrdshChatSDK.shared.AllDetails.messageID,"dc_vid":DrdshChatSDK.shared.AllDetails.visitorID,"dc_agent_id":DrdshChatSDK.shared.AllDetails.agentId,"message":text,"is_attachment":0,"attachment_file":"","file_type":"","file_size":"","send_by": 2,"dc_name":DrdshChatSDK.shared.AllDetails.name]]){ data in
                 var m:MessageModel = MessageModel()
                 if data.count > 0{
                     if let t = data[0] as? [String:AnyObject]{
@@ -88,12 +88,12 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             }
         }
         btnLike.action = {
-            CommonSocket.shared.updateVisitorRating(data: [["mid":GGiOSSDK.shared.AllDetails.messageID,"vid":GGiOSSDK.shared.AllDetails.visitorID,"feedback":"good"]])
+            CommonSocket.shared.updateVisitorRating(data: [["mid":DrdshChatSDK.shared.AllDetails.messageID,"vid":DrdshChatSDK.shared.AllDetails.visitorID,"feedback":"good"]])
             self.btnLike.isSelected = true
             self.btnDisLike.isSelected = false
         }
         btnDisLike.action = {
-            CommonSocket.shared.updateVisitorRating(data: [["mid":GGiOSSDK.shared.AllDetails.messageID,"vid":GGiOSSDK.shared.AllDetails.visitorID,"feedback":"bad"]])
+            CommonSocket.shared.updateVisitorRating(data: [["mid":DrdshChatSDK.shared.AllDetails.messageID,"vid":DrdshChatSDK.shared.AllDetails.visitorID,"feedback":"bad"]])
             self.btnLike.isSelected = false
             self.btnDisLike.isSelected = true
         }
@@ -112,8 +112,8 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
            AGImagePickerController(with: self, allowsEditing: true, media: .both, iPadSetup: self.btnAttachment)
         }
         CommonSocket.shared.ipBlocked { data in
-            if GGiOSSDK.shared.AllDetails.visitorConnectedStatus == 2{
-                GGiOSSDK.shared.AllDetails.visitorConnectedStatus = 0
+            if DrdshChatSDK.shared.AllDetails.visitorConnectedStatus == 2{
+                DrdshChatSDK.shared.AllDetails.visitorConnectedStatus = 0
             }
             self.timer.invalidate()
             self.agentView.isHidden = true
@@ -125,11 +125,11 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             debugPrint(data)
         }
         CommonSocket.shared.agentAcceptedChatRequest { data in
-            GGiOSSDK.shared.AllDetails.visitorConnectedStatus = 2
-            GGiOSSDK.shared.AgentDetail <= data
-            GGiOSSDK.shared.AllDetails.agentId = data["agent_id"] as! String
-             GGiOSSDK.shared.AgentDetail.agent_name = data["name"] as! String
-             GGiOSSDK.shared.AgentDetail.visitor_message_id = data["mid"] as! String
+            DrdshChatSDK.shared.AllDetails.visitorConnectedStatus = 2
+            DrdshChatSDK.shared.AgentDetail <= data
+            DrdshChatSDK.shared.AllDetails.agentId = data["agent_id"] as! String
+             DrdshChatSDK.shared.AgentDetail.agent_name = data["name"] as! String
+             DrdshChatSDK.shared.AgentDetail.visitor_message_id = data["mid"] as! String
             self.setAgentDetail()
             self.navigationItem.rightBarButtonItem = self.CloseBarItem
         }
@@ -145,8 +145,8 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             }
         }
         CommonSocket.shared.agentChatSessionTerminated { data in
-            if GGiOSSDK.shared.AllDetails.visitorConnectedStatus == 2{
-                GGiOSSDK.shared.AllDetails.visitorConnectedStatus = 0
+            if DrdshChatSDK.shared.AllDetails.visitorConnectedStatus == 2{
+                DrdshChatSDK.shared.AllDetails.visitorConnectedStatus = 0
             }
             self.timer.invalidate()
             self.agentView.isHidden = true
@@ -162,31 +162,31 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             self.lblTyping.text = data["message"] as? String ?? ""
         }
         CommonSocket.shared.newAgentAcceptedChatRequest { data in
-            GGiOSSDK.shared.AllDetails.agentId = data["agent_id"] as! String
-            GGiOSSDK.shared.AgentDetail <= data
-            GGiOSSDK.shared.AgentDetail.agent_name = data["name"] as! String
-            GGiOSSDK.shared.AgentDetail.visitor_message_id = data["mid"] as! String
+            DrdshChatSDK.shared.AllDetails.agentId = data["agent_id"] as! String
+            DrdshChatSDK.shared.AgentDetail <= data
+            DrdshChatSDK.shared.AgentDetail.agent_name = data["name"] as! String
+            DrdshChatSDK.shared.AgentDetail.visitor_message_id = data["mid"] as! String
             self.timer.invalidate()
             self.setAgentDetail()
         }
     }
     func setAgentDetail(){
         self.timer.invalidate()
-        let strProdile = GGiOSSDK.shared.AgentDetail.agent_image
+        let strProdile = DrdshChatSDK.shared.AgentDetail.agent_image
         imgView.setImage(urlString: strProdile)
         self.agentView.isHidden = false
-        self.lblName.text = GGiOSSDK.shared.AgentDetail.agent_name
+        self.lblName.text = DrdshChatSDK.shared.AgentDetail.agent_name
     }
     @objc func invitationMaxWaitTimeExceeded(){
         timer.invalidate()
-        CommonSocket.shared.invitationMaxWaitTimeExceeded(data: [["vid":GGiOSSDK.shared.AllDetails.visitorID,"form":GGiOSSDK.shared.AllDetails.embeddedChat.displayForm]]) { (data) in
+        CommonSocket.shared.invitationMaxWaitTimeExceeded(data: [["vid":DrdshChatSDK.shared.AllDetails.visitorID,"form":DrdshChatSDK.shared.AllDetails.embeddedChat.displayForm]]) { (data) in
             debugPrint(data)
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "OfflineViewController") as! OfflineViewController
             self.navigationController?.pushViewController(vc, animated: false)
         }
     }
     @objc func backAction(){
-        if GGiOSSDK.shared.AllDetails.visitorConnectedStatus == 2{
+        if DrdshChatSDK.shared.AllDetails.visitorConnectedStatus == 2{
             CommonSocket.shared.disConnect()
             self.dismiss(animated: true, completion: nil)
         }else{
@@ -197,7 +197,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     @objc func dissmissView(){
         self.timer.invalidate()
-        if GGiOSSDK.shared.AllDetails.embeddedChat.postChatPromptComments{
+        if DrdshChatSDK.shared.AllDetails.embeddedChat.postChatPromptComments{
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "RateViewController") as! RateViewController
             vc.modalPresentationStyle = .overFullScreen
             vc.successHandler = {
@@ -209,7 +209,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                 
             }
         }else{
-            CommonSocket.shared.visitorEndChatSession(data: [["id":GGiOSSDK.shared.AllDetails.companyId,"vid":GGiOSSDK.shared.AllDetails.visitorID,"name":GGiOSSDK.shared.AllDetails.name]]) { (data) in
+            CommonSocket.shared.visitorEndChatSession(data: [["id":DrdshChatSDK.shared.AllDetails.companyId,"vid":DrdshChatSDK.shared.AllDetails.visitorID,"name":DrdshChatSDK.shared.AllDetails.name]]) { (data) in
                 self.agentView.isHidden = true
                 self.messageView.isHidden = true
                 self.navigationItem.rightBarButtonItem = nil
@@ -230,7 +230,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         }
         if self.list[indexPath.row].send_by == 2{
             let cell = tableView.dequeueReusableCell(withIdentifier: "SenderTableViewCell", for: indexPath) as! SenderTableViewCell
-            let strProdile = GGiOSSDK.shared.AttachmentbaseURL+self.list[indexPath.row].agent_image
+            let strProdile = DrdshChatSDK.shared.AttachmentbaseURL+self.list[indexPath.row].agent_image
             cell.imgProfile.setImage(urlString: strProdile)
             cell.lblName.text = GGUserSessionDetail.shared.name
             cell.lblMessage.text = self.list[indexPath.row].message
@@ -238,13 +238,13 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             cell.imgAttachment.isHidden = self.list[indexPath.row].is_attachment == 0
             cell.lblMessage.isHidden = self.list[indexPath.row].is_attachment == 1
             if self.list[indexPath.row].is_attachment == 1{
-                let strUrl = GGiOSSDK.shared.AttachmentbaseURL+self.list[indexPath.row].attachment_file
+                let strUrl = DrdshChatSDK.shared.AttachmentbaseURL+self.list[indexPath.row].attachment_file
                 cell.imgAttachment.setImage(urlString: strUrl)
             }
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "ReceiverTableViewCell", for: indexPath) as! ReceiverTableViewCell
-            let strProdile = GGiOSSDK.shared.AttachmentbaseURL+self.list[indexPath.row].agent_image
+            let strProdile = DrdshChatSDK.shared.AttachmentbaseURL+self.list[indexPath.row].agent_image
             cell.imgProfile.setImage(urlString: strProdile)
             cell.lblName.text = self.list[indexPath.row].agent_name
             cell.lblMessage.text = self.list[indexPath.row].message
@@ -252,20 +252,20 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             cell.imgAttachment.isHidden = self.list[indexPath.row].is_attachment == 0
             cell.lblMessage.isHidden = self.list[indexPath.row].is_attachment == 1
             if self.list[indexPath.row].is_attachment == 1{
-                let strUrl = GGiOSSDK.shared.AttachmentbaseURL+self.list[indexPath.row].attachment_file
+                let strUrl = DrdshChatSDK.shared.AttachmentbaseURL+self.list[indexPath.row].attachment_file
                  cell.imgAttachment.setImage(urlString: strUrl)
             }
             return cell
         }
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        CommonSocket.shared.visitorTyping(data: [["vid":GGiOSSDK.shared.AllDetails.visitorID,"id":GGiOSSDK.shared.AllDetails.companyId,"agent_id":GGiOSSDK.shared.AllDetails.agentId,"ts":1,"message":GGUserSessionDetail.shared.name+" start typing...","stop":false]])
+        CommonSocket.shared.visitorTyping(data: [["vid":DrdshChatSDK.shared.AllDetails.visitorID,"id":DrdshChatSDK.shared.AllDetails.companyId,"agent_id":DrdshChatSDK.shared.AllDetails.agentId,"ts":1,"message":GGUserSessionDetail.shared.name+" start typing...","stop":false]])
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
-        CommonSocket.shared.visitorTyping(data: [["vid":GGiOSSDK.shared.AllDetails.visitorID,"id":GGiOSSDK.shared.AllDetails.companyId,"agent_id":GGiOSSDK.shared.AllDetails.agentId,"ts":0,"message":GGUserSessionDetail.shared.name+" is typing...","stop":true]])
+        CommonSocket.shared.visitorTyping(data: [["vid":DrdshChatSDK.shared.AllDetails.visitorID,"id":DrdshChatSDK.shared.AllDetails.companyId,"agent_id":DrdshChatSDK.shared.AllDetails.agentId,"ts":0,"message":GGUserSessionDetail.shared.name+" is typing...","stop":true]])
     }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        CommonSocket.shared.visitorTyping(data: [["vid":GGiOSSDK.shared.AllDetails.visitorID,"id":GGiOSSDK.shared.AllDetails.companyId,"agent_id":GGiOSSDK.shared.AllDetails.agentId,"ts":2,"message":GGUserSessionDetail.shared.name+" is typing...","stop":false]])
+        CommonSocket.shared.visitorTyping(data: [["vid":DrdshChatSDK.shared.AllDetails.visitorID,"id":DrdshChatSDK.shared.AllDetails.companyId,"agent_id":DrdshChatSDK.shared.AllDetails.agentId,"ts":2,"message":GGUserSessionDetail.shared.name+" is typing...","stop":false]])
         return true
     }
 }
@@ -281,7 +281,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
                     debugPrint(url.pathExtension)
                     if let base64String = try? Data(contentsOf: url).base64EncodedString() {
                         print(base64String)
-                        CommonSocket.shared.sendVisitorMessage(data: [["dc_id":GGiOSSDK.shared.AllDetails.companyId,"dc_mid":GGiOSSDK.shared.AllDetails.messageID,"dc_vid":GGiOSSDK.shared.AllDetails.visitorID,"dc_agent_id":GGiOSSDK.shared.AllDetails.agentId,"send_by": 2,"message":url.lastPathComponent,"is_attachment":1,"attachment_file":base64String,"file_type":url.pathExtension,"file_size":url.fileSize,"dc_name":GGiOSSDK.shared.AllDetails.name]]){ data in
+                        CommonSocket.shared.sendVisitorMessage(data: [["dc_id":DrdshChatSDK.shared.AllDetails.companyId,"dc_mid":DrdshChatSDK.shared.AllDetails.messageID,"dc_vid":DrdshChatSDK.shared.AllDetails.visitorID,"dc_agent_id":DrdshChatSDK.shared.AllDetails.agentId,"send_by": 2,"message":url.lastPathComponent,"is_attachment":1,"attachment_file":base64String,"file_type":url.pathExtension,"file_size":url.fileSize,"dc_name":DrdshChatSDK.shared.AllDetails.name]]){ data in
                             var m:MessageModel = MessageModel()
                             if data.count > 0{
                                 if let t = data[0] as? [String:AnyObject]{
@@ -313,8 +313,8 @@ class SenderTableViewCell:UITableViewCell{
     @IBOutlet weak var lblTime: UILabel!
     @IBOutlet weak var backView: UIView!
     override func awakeFromNib() {
-        var bundle = Bundle(for: GGiOSSDK.self)
-        if let resourcePath = bundle.path(forResource: "GGiOSSDK", ofType: "bundle") {
+        var bundle = Bundle(for: DrdshChatSDK.self)
+        if let resourcePath = bundle.path(forResource: "DrdshChatSDK", ofType: "bundle") {
             if let resourcesBundle = Bundle(path: resourcePath) {
                 bundle = resourcesBundle
             }
@@ -340,8 +340,8 @@ class ReceiverTableViewCell:UITableViewCell{
     @IBOutlet weak var lblTime: UILabel!
     @IBOutlet weak var backView: UIView!
     override func awakeFromNib() {
-        var bundle = Bundle(for: GGiOSSDK.self)
-        if let resourcePath = bundle.path(forResource: "GGiOSSDK", ofType: "bundle") {
+        var bundle = Bundle(for: DrdshChatSDK.self)
+        if let resourcePath = bundle.path(forResource: "DrdshChatSDK", ofType: "bundle") {
             if let resourcesBundle = Bundle(path: resourcePath) {
                 bundle = resourcesBundle
             }

@@ -28,7 +28,7 @@
 		6B7241A93C4902A4659CE1E9 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		7FB70B3A24238AA2008F9CF1 /* iOSSDK_Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iOSSDK_Example.entitlements; sourceTree = "<group>"; };
 		874BD15D3F08D78196C2E459 /* Pods_iOSSDK_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSSDK_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A71C78C5297951CEDC415BD7 /* GGiOSSDK.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = GGiOSSDK.podspec; path = ../GGiOSSDK.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A71C78C5297951CEDC415BD7 /* DrdshChatSDKTest.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = DrdshChatSDKTest.podspec; path = ../DrdshChatSDKTest.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		CAD1DD32F67CEA460D4EA3AC /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,7 +89,7 @@
 		607FACF51AFB993E008FA782 /* Podspec Metadata */ = {
 			isa = PBXGroup;
 			children = (
-				A71C78C5297951CEDC415BD7 /* GGiOSSDK.podspec */,
+				A71C78C5297951CEDC415BD7 /* DrdshChatSDKTest.podspec */,
 				6B7241A93C4902A4659CE1E9 /* README.md */,
 				CAD1DD32F67CEA460D4EA3AC /* LICENSE */,
 			);

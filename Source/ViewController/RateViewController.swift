@@ -1,6 +1,6 @@
 //
 //  RateViewController.swift
-//  GGiOSSDK
+//  DrdshChatSDK
 //
 //  Created by Gaurav Gudaliya R on 17/03/20.
 //
@@ -39,24 +39,24 @@ class RateViewController: UIViewController {
         txtComment.layer.borderColor = UIColor.lightGray.cgColor
         txtComment.text = ""
         
-        btnSend.setImage(GGiOSSDK.shared.config.sendMessageImage, for: .normal)
-        btnLike.setImage(GGiOSSDK.shared.config.likeImage, for: .normal)
-        btnDisLike.setImage(GGiOSSDK.shared.config.disLikeImage, for: .normal)
-        btnLike.setImage(GGiOSSDK.shared.config.likeSelctedImage, for: .selected)
-        btnDisLike.setImage(GGiOSSDK.shared.config.disLikeSelctedImage, for: .selected)
-        btnMail.setImage(GGiOSSDK.shared.config.mailImage, for: .normal)named: "mail", in: bundle, compatibleWith: nil), for: .normal)
+        btnSend.setImage(DrdshChatSDK.shared.config.sendMessageImage, for: .normal)
+        btnLike.setImage(DrdshChatSDK.shared.config.likeImage, for: .normal)
+        btnDisLike.setImage(DrdshChatSDK.shared.config.disLikeImage, for: .normal)
+        btnLike.setImage(DrdshChatSDK.shared.config.likeSelctedImage, for: .selected)
+        btnDisLike.setImage(DrdshChatSDK.shared.config.disLikeSelctedImage, for: .selected)
+        btnMail.setImage(DrdshChatSDK.shared.config.mailImage, for: .normal)
         btnSend.action = {
             if self.type == 2{
                 if self.txtComment.text == ""{
                     let alert = UIAlertController(title: "Error", message: "Please enter email", preferredStyle: UIAlertController.Style.alert)
                     alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-                    GGiOSSDK.shared.topViewController()?.present(alert, animated: true, completion: nil)
+                    DrdshChatSDK.shared.topViewController()?.present(alert, animated: true, completion: nil)
                 }else if !self.txtComment.text.isValidEmail{
                     let alert = UIAlertController(title: "Error", message: "Please enter valid email", preferredStyle: UIAlertController.Style.alert)
                     alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-                    GGiOSSDK.shared.topViewController()?.present(alert, animated: true, completion: nil)
+                    DrdshChatSDK.shared.topViewController()?.present(alert, animated: true, completion: nil)
                 }else{
-                    CommonSocket.shared.emailChatTranscript(data: [["mid":GGiOSSDK.shared.AllDetails.messageID,"vid":GGiOSSDK.shared.AllDetails.visitorID,"email":self.txtComment.text!]]) { (data) in
+                    CommonSocket.shared.emailChatTranscript(data: [["mid":DrdshChatSDK.shared.AllDetails.messageID,"vid":DrdshChatSDK.shared.AllDetails.visitorID,"email":self.txtComment.text!]]) { (data) in
                         debugPrint(data)
                         self.dismiss(animated: false, completion: {
                             self.successHandler?()
@@ -71,7 +71,7 @@ class RateViewController: UIViewController {
                 }else if self.btnDisLike.isSelected{
                     feedback = "bad"
                 }
-                CommonSocket.shared.visitorEndChatSession(data: [["id":GGiOSSDK.shared.AllDetails.messageID,"vid":GGiOSSDK.shared.AllDetails.visitorID,"name":GGiOSSDK.shared.AllDetails.name,"comment":self.txtComment.text!,"feedback":feedback]]) { (data) in
+                CommonSocket.shared.visitorEndChatSession(data: [["id":DrdshChatSDK.shared.AllDetails.messageID,"vid":DrdshChatSDK.shared.AllDetails.visitorID,"name":DrdshChatSDK.shared.AllDetails.name,"comment":self.txtComment.text!,"feedback":feedback]]) { (data) in
                     debugPrint(data)
                     self.dismiss(animated: false, completion: {
                         self.successHandler?()

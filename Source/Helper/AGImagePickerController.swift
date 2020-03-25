@@ -275,12 +275,12 @@ class AGAlertBuilder: UIAlertController {
         if let time = delayTime {
             let dispatchTime = DispatchTime.now() + time
             DispatchQueue.main.asyncAfter(deadline: dispatchTime) {
-                GGiOSSDK.shared.topViewController()?.present(self, animated: animated, completion: completion)
+                DrdshChatSDK.shared.topViewController()?.present(self, animated: animated, completion: completion)
             }
         }
         else{
             DispatchQueue.main.async {
-                GGiOSSDK.shared.topViewController()?.present(self, animated: animated, completion: completion)
+                DrdshChatSDK.shared.topViewController()?.present(self, animated: animated, completion: completion)
             }
         }
         

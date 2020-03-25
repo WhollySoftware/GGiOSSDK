@@ -1,15 +1,15 @@
 //
-//  GGiOSSDK.swift
-//  GGiOSSDK
+//  DrdshChatSDK.swift
+//  DrdshChatSDK
 //
 //  Created by Gaurav Gudaliya R on 14/03/20.
 //
 
 import Foundation
 
-public class GGiOSSDK : NSObject {
-    @objc public static let shared: GGiOSSDK = {
-        return GGiOSSDK()
+public class DrdshChatSDK : NSObject {
+    @objc public static let shared: DrdshChatSDK = {
+        return DrdshChatSDK()
     }()
     var appSid = ""
     var baseURL = "https://www.drdsh.live"
@@ -17,33 +17,33 @@ public class GGiOSSDK : NSObject {
     var AttachmentbaseURL = "https://www.drdsh.live"+"/uploads/m/"
     var AllDetails:ValidateIdentity = ValidateIdentity()
     var AgentDetail:AgentModel = AgentModel()
-    var config = GGiOSSDKConfiguration()
-    @objc public class func GGiOSSDKBundlePath() -> String {
-        var bundle = Bundle(for: GGiOSSDK.self)
-        if let resourcePath = bundle.path(forResource: "GGiOSSDK", ofType: "bundle") {
+    var config = DrdshChatSDKConfiguration()
+    @objc public class func DrdshChatSDKBundlePath() -> String {
+        var bundle = Bundle(for: DrdshChatSDK.self)
+        if let resourcePath = bundle.path(forResource: "DrdshChatSDK", ofType: "bundle") {
             if let resourcesBundle = Bundle(path: resourcePath) {
                 bundle = resourcesBundle
             }
         }
         
-        return Bundle(for: GGiOSSDK.self).path(forResource: "GGiOSSDK", ofType: "bundle")!
+        return Bundle(for: DrdshChatSDK.self).path(forResource: "DrdshChatSDK", ofType: "bundle")!
     }
-    @objc public class func presentChat(appSid:String,config: GGiOSSDKConfiguration = GGiOSSDKConfiguration(),animated: Bool = true, completion: ((Bool) -> Void)? = nil) {
+    @objc public class func presentChat(appSid:String,config: DrdshChatSDKConfiguration = DrdshChatSDKConfiguration(),animated: Bool = true, completion: ((Bool) -> Void)? = nil) {
         if let data = UserDefaults.standard.object(forKey: "AllDetails") as? [String :AnyObject]{
-            GGiOSSDK.shared.AllDetails <= data
+            DrdshChatSDK.shared.AllDetails <= data
         }
-        GGiOSSDK.shared.appSid = appSid
-        GGiOSSDK.shared.config = config
-        let vc = UIStoryboard(name: "GGiOSSDK", bundle: Bundle(for: GGiOSSDK.self)).instantiateViewController(withIdentifier: "MainLoadViewController") as! MainLoadViewController
+        DrdshChatSDK.shared.appSid = appSid
+        DrdshChatSDK.shared.config = config
+        let vc = UIStoryboard(name: "DrdshChatSDK", bundle: Bundle(for: DrdshChatSDK.self)).instantiateViewController(withIdentifier: "MainLoadViewController") as! MainLoadViewController
         vc.modalPresentationStyle = .overFullScreen
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .overFullScreen
-        GGiOSSDK.shared.topViewController()?.present(nav, animated: true, completion: {
+        DrdshChatSDK.shared.topViewController()?.present(nav, animated: true, completion: {
             completion?(true)
         })
     }
     @objc public class func dismissChat(animated: Bool = true, completion: ((Bool) -> Void)? = nil) {
-        GGiOSSDK.shared.topViewController()?.dismiss(animated: true, completion: {
+        DrdshChatSDK.shared.topViewController()?.dismiss(animated: true, completion: {
              completion?(true)
         })
     }
@@ -123,7 +123,7 @@ public class GGiOSSDK : NSObject {
 //      task.resume()
 //    }
 }
-public class GGiOSSDKConfiguration : NSObject {
+public class DrdshChatSDKConfiguration : NSObject {
     var backImage:UIImage = UIImage()
     var likeImage:UIImage = UIImage()
     var disLikeImage:UIImage = UIImage()
@@ -134,13 +134,13 @@ public class GGiOSSDKConfiguration : NSObject {
     var sendMessageImage:UIImage = UIImage()
     var userPlaceHolderImage:UIImage = UIImage()
     public override init() {
-        var bundle = Bundle(for: GGiOSSDK.self)
-        if let resourcePath = bundle.path(forResource: "GGiOSSDK", ofType: "bundle") {
+        var bundle = Bundle(for: DrdshChatSDK.self)
+        if let resourcePath = bundle.path(forResource: "DrdshChatSDK", ofType: "bundle") {
             if let resourcesBundle = Bundle(path: resourcePath) {
                 bundle = resourcesBundle
             }
         }
-        likeImage = UIImage(named: "back", in: bundle, compatibleWith: nil)!
+        backImage = UIImage(named: "back", in: bundle, compatibleWith: nil)!
         likeImage = UIImage(named: "like", in: bundle, compatibleWith: nil)!
         disLikeImage = UIImage(named: "dislike", in: bundle, compatibleWith: nil)!
         likeSelctedImage = UIImage(named: "selectedlike", in: bundle, compatibleWith: nil)!

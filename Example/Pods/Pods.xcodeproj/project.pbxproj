@@ -40,7 +40,7 @@
 		3DB462B27D1E4BC63D6529606CD34B86 /* IQKeyboardManagerConstantsInternal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2659FE8A31D44CB2C7723940A08FDD0F /* IQKeyboardManagerConstantsInternal.swift */; };
 		440664AB76F688810AE2AFC231BEFB07 /* SwiftyJSON-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D8E2937C4F978C113112BC0FF0382A6 /* SwiftyJSON-dummy.m */; };
 		479E1DDA26ACDF02C68263C4F3075BAC /* IQUIView+Hierarchy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93CE8048C12AF7C99C45E65B7CD4F1A2 /* IQUIView+Hierarchy.swift */; };
-		4B368CD6C0CA1CFE7D85B510747BD25F /* GGiOSSDK.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = 156579857CEE763B367607EBB6BEEECF /* GGiOSSDK.storyboard */; };
+		4B368CD6C0CA1CFE7D85B510747BD25F /* DrdshChatSDK.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = 156579857CEE763B367607EBB6BEEECF /* DrdshChatSDK.storyboard */; };
 		4BA9BED0AC7DB2DB7A1F2A4E7DC78709 /* RateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5EE3936BF147AC07461136478DE8A8 /* RateViewController.swift */; };
 		4BC3047080BF7FF2424674FEECF4145D /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4EFB80C683B6143A44BB6D90A91A154 /* NSObject+Extension.swift */; };
 		4CAD04496451B475C142D97749B3CC02 /* IQKeyboardManager.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3F639471F4553D1209994E8105CE2BAE /* IQKeyboardManager.bundle */; };
@@ -216,7 +216,7 @@
 		12CE1EF1D64883D176EBC381710A5908 /* Socket.IO-Client-Swift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Socket.IO-Client-Swift-dummy.m"; sourceTree = "<group>"; };
 		145E0B2162DCA5789E9F7CCE5C97A1B1 /* SwiftyJSON.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyJSON.xcconfig; sourceTree = "<group>"; };
 		14A39BFDD91E5B674FA1EA17E0C7E33B /* back@3x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "back@3x.png"; path = "Resources/back@3x.png"; sourceTree = "<group>"; };
-		156579857CEE763B367607EBB6BEEECF /* GGiOSSDK.storyboard */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.storyboard; name = GGiOSSDK.storyboard; path = Source/GGiOSSDK.storyboard; sourceTree = "<group>"; };
+		156579857CEE763B367607EBB6BEEECF /* DrdshChatSDK.storyboard */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.storyboard; name = DrdshChatSDK.storyboard; path = Source/DrdshChatSDK.storyboard; sourceTree = "<group>"; };
 		15980654B715CF8DCFAC3F3CE633A5BC /* MBProgressHUD-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD-umbrella.h"; sourceTree = "<group>"; };
 		17BAE719C80A5AC44FF39982B5AD86E0 /* SSLSecurity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SSLSecurity.swift; path = Source/SocketIO/Util/SSLSecurity.swift; sourceTree = "<group>"; };
 		189DAB8D33F96BEC726AC43AC9FA7414 /* SocketLogger.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketLogger.swift; path = Source/SocketIO/Util/SocketLogger.swift; sourceTree = "<group>"; };
@@ -638,7 +638,7 @@
 		A37ED39F6ED93E727B8B711542E2D80A /* GGiOSSDK */ = {
 			isa = PBXGroup;
 			children = (
-				156579857CEE763B367607EBB6BEEECF /* GGiOSSDK.storyboard */,
+				156579857CEE763B367607EBB6BEEECF /* DrdshChatSDK.storyboard */,
 				7FB70B4024239023008F9CF1 /* ViewController */,
 				7FB70B3F2423900C008F9CF1 /* Helper */,
 				4502E4130059BAB929C979FACE991995 /* Resources */,
@@ -1098,7 +1098,7 @@
 				C55D9C63B8A1CEAB7325D7A4B0745ECE /* ChatViewController.swift in Sources */,
 				3B8B030219471B40C8C75B439DC3F9AF /* GGButton.swift in Sources */,
 				08288029A17B0B5855C222EB18B8FD58 /* GGiOSSDK-dummy.m in Sources */,
-				4B368CD6C0CA1CFE7D85B510747BD25F /* GGiOSSDK.storyboard in Sources */,
+				4B368CD6C0CA1CFE7D85B510747BD25F /* DrdshChatSDK.storyboard in Sources */,
 				7F96884624224F140033C772 /* CommonSocket.swift in Sources */,
 				7FB70B3C24238BA4008F9CF1 /* AGImagePickerController.swift in Sources */,
 				E3D9EEF7EF9317CE534620F50E2E5E2B /* GGiOSSDK.swift in Sources */,
