@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double GGiOSSDKVersionNumber;
-FOUNDATION_EXPORT const unsigned char GGiOSSDKVersionString[];
+FOUNDATION_EXPORT double DrdshChatSDKTestVersionNumber;
+FOUNDATION_EXPORT const unsigned char DrdshChatSDKTestVersionString[];
 

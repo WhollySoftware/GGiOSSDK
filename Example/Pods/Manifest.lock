@@ -1,8 +1,8 @@
 PODS:
-  - GGiOSSDK (0.1.9):
+  - DrdshChatSDKTest (1.0.1):
     - IQKeyboardManagerSwift (= 6.2.1)
     - MBProgressHUD
-    - Socket.IO-Client-Swift
+    - Socket.IO-Client-Swift (= 15.2.0)
     - SwiftyJSON (~> 4.0)
   - IQKeyboardManagerSwift (6.2.1)
   - MBProgressHUD (1.2.0)
@@ -12,7 +12,7 @@ PODS:
   - SwiftyJSON (4.3.0)
 
 DEPENDENCIES:
-  - GGiOSSDK (from `../`)
+  - DrdshChatSDKTest (from `../`)
   - IQKeyboardManagerSwift (= 6.2.1)
   - MBProgressHUD
   - Socket.IO-Client-Swift (= 15.2.0)
@@ -27,17 +27,17 @@ SPEC REPOS:
     - SwiftyJSON
 
 EXTERNAL SOURCES:
-  GGiOSSDK:
+  DrdshChatSDKTest:
     :path: "../"
 
 SPEC CHECKSUMS:
-  GGiOSSDK: a6bb4f34fa8c33be15d014fb98bcbade42b84050
+  DrdshChatSDKTest: 48480564f8200de38155b1ab6db009b79d8ce889
   IQKeyboardManagerSwift: 0f0ae8935360b4003e6ea1ac7c19898f01e2f7c7
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 164b8de6ed4b48d3e0b6e2b236b78517c8e2fdf5
+PODFILE CHECKSUM: ba9e54b28aae403e3f584a8dee0372fc0296110c
 
 COCOAPODS: 1.8.4

@@ -3,7 +3,7 @@
 [![CI Status](https://img.shields.io/travis/gauravgudaliya/DrdshChatSDKTest.svg?style=flat)](https://travis-ci.org/gauravgudaliya/DrdshChatSDKTest)
 [![Version](https://img.shields.io/cocoapods/v/DrdshChatSDKTest.svg?style=flat)](https://cocoapods.org/pods/DrdshChatSDKTest)
 [![License](https://img.shields.io/cocoapods/l/DrdshChatSDKTest.svg?style=flat)](DrdshChatSDKTesthttps://cocoapods.org/pods/DrdshChatSDKTest)
-[![Platform](https://img.shields.io/cocoapods/p/DrdshChatSDKTestsvg?style=flat)](https://cocoapods.org/pods/DrdshChatSDKTest)
+[![Platform](https://img.shields.io/cocoapods/p/DrdshChatSDKTest.svg?style=flat)](https://cocoapods.org/pods/DrdshChatSDKTest)
 
 ## Example
 

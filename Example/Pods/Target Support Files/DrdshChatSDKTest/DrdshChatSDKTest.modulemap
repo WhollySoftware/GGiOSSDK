@@ -1,0 +1,6 @@
+framework module DrdshChatSDKTest {
+  umbrella header "DrdshChatSDKTest-umbrella.h"
+
+  export *
+  module * { export * }
+}

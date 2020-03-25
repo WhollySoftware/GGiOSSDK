@@ -1,6 +1,0 @@
-framework module GGiOSSDK {
-  umbrella header "GGiOSSDK-umbrella.h"
-
-  export *
-  module * { export * }
-}
