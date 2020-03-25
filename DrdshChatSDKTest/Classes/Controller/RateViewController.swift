@@ -30,18 +30,18 @@ class RateViewController: UIViewController {
             self.txtComment.textAlignment = .right
         }
         if self.type == 2{
-            lblTitle.text = "Please input your email address"
+            lblTitle.text = DrdshChatSDKTest.shared.localizedString(stringKey:"Please input your email address")
             txtComment.autocapitalizationType = .none
             txtComment.autocorrectionType = .no
         }else{
-            lblTitle.text = "Rate your chat experience"
+            lblTitle.text = DrdshChatSDKTest.shared.localizedString(stringKey:"Rate your chat experience")
         }
-        lblDiscription.text = "To help us server you better, please provide some information concerning your chat experience."
+        lblDiscription.text = DrdshChatSDKTest.shared.localizedString(stringKey:"To help us server you better, please provide some information concerning your chat experience.")
         txtComment.layer.borderWidth = 1
         txtComment.layer.borderColor = UIColor.lightGray.cgColor
         txtComment.text = ""
         self.btnSend.backgroundColor = DrdshChatSDKTest.shared.config.mainColor
-        btnSend.setImage(DrdshChatSDKTest.shared.config.sendMessageImage, for: .normal)
+       // btnSend.setImage(DrdshChatSDKTest.shared.config.sendMessageImage, for: .normal)
         btnLike.setImage(DrdshChatSDKTest.shared.config.likeImage, for: .normal)
         btnDisLike.setImage(DrdshChatSDKTest.shared.config.disLikeImage, for: .normal)
         btnLike.setImage(DrdshChatSDKTest.shared.config.likeSelctedImage, for: .selected)
@@ -50,13 +50,11 @@ class RateViewController: UIViewController {
         btnSend.action = {
             if self.type == 2{
                 if self.txtComment.text == ""{
-                    let alert = UIAlertController(title: "Error", message: "Please enter email", preferredStyle: UIAlertController.Style.alert)
-                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-                    DrdshChatSDKTest.shared.topViewController()?.present(alert, animated: true, completion: nil)
+                    self.showAlertView(str: "Please enter Email address")
+                    return
                 }else if !self.txtComment.text.isValidEmail{
-                    let alert = UIAlertController(title: "Error", message: "Please enter valid email", preferredStyle: UIAlertController.Style.alert)
-                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-                    DrdshChatSDKTest.shared.topViewController()?.present(alert, animated: true, completion: nil)
+                    self.showAlertView(str: "Please enter valid email")
+                    return
                 }else{
                     CommonSocket.shared.emailChatTranscript(data: [["mid":DrdshChatSDKTest.shared.AllDetails.messageID,"vid":DrdshChatSDKTest.shared.AllDetails.visitorID,"email":self.txtComment.text!]]) { (data) in
                         debugPrint(data)
@@ -103,6 +101,11 @@ class RateViewController: UIViewController {
         btnMail.action = {
             
         }
+    }
+    func showAlertView(str:String){
+        let alert = UIAlertController(title: DrdshChatSDKTest.shared.localizedString(stringKey:"Error"), message: DrdshChatSDKTest.shared.localizedString(stringKey:str), preferredStyle: UIAlertController.Style.alert)
+       alert.addAction(UIAlertAction(title: DrdshChatSDKTest.shared.localizedString(stringKey:"Ok"), style: UIAlertAction.Style.default, handler: nil))
+       DrdshChatSDKTest.shared.topViewController()?.present(alert, animated: true, completion: nil)
     }
 }
 extension String {

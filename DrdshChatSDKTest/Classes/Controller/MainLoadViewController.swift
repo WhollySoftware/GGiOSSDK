@@ -26,7 +26,12 @@ class MainLoadViewController: UIViewController {
         self.txtFullName.text = GGUserSessionDetail.shared.name
         self.txtMobile.text = GGUserSessionDetail.shared.mobile
         self.txtEmailAddress.text = GGUserSessionDetail.shared.email
-        
+        txtFullName.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Full Name")
+        txtMobile.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Mobile")
+        txtEmailAddress.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Email Address")
+        txtTypeYourQuestion.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Type your Question or message")
+        btnStart.setTitle(DrdshChatSDKTest.shared.localizedString(stringKey: "Start Chat"), for: .normal)
+
         if DrdshChatSDKTest.shared.config.local == "ar"{
             self.txtFullName.textAlignment = .right
             self.txtMobile.textAlignment = .right
@@ -143,8 +148,8 @@ class MainLoadViewController: UIViewController {
                             if DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus == 2{
                                 DrdshChatSDKTest.shared.AgentDetail <= data
                                 DrdshChatSDKTest.shared.AllDetails.agentId = data["agent_id"] as! String
-                                 DrdshChatSDKTest.shared.AgentDetail.agent_name = data["name"] as! String
-                                 DrdshChatSDKTest.shared.AgentDetail.visitor_message_id = data["mid"] as! String
+                                DrdshChatSDKTest.shared.AgentDetail.agent_name = data["name"] as! String
+                                DrdshChatSDKTest.shared.AgentDetail.visitor_message_id = data["visitor_message_id"] as! String
                             }
                             debugPrint(data)
                         }
@@ -294,8 +299,8 @@ class MainLoadViewController: UIViewController {
       task.resume()
     }
     func showAlertView(str:String){
-        let alert = UIAlertController(title: "Error", message: str, preferredStyle: UIAlertController.Style.alert)
-       alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+        let alert = UIAlertController(title: DrdshChatSDKTest.shared.localizedString(stringKey:"Error"), message: DrdshChatSDKTest.shared.localizedString(stringKey:str), preferredStyle: UIAlertController.Style.alert)
+       alert.addAction(UIAlertAction(title: DrdshChatSDKTest.shared.localizedString(stringKey:"Ok"), style: UIAlertAction.Style.default, handler: nil))
        DrdshChatSDKTest.shared.topViewController()?.present(alert, animated: true, completion: nil)
     }
     override func viewWillAppear(_ animated: Bool) {

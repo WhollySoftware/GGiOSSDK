@@ -24,8 +24,6 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>This app use camera for profile pic and set service images.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app use camera for profile pic and set service images.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

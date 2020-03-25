@@ -56,112 +56,6 @@ open class AGImagePickerController: NSObject {
         isAllowsEditing = allowsEditing
         setupAlertController()
     }
-    
-    func checkPermission() {
-        switch self.sourceType {
-        case .some(let type):
-            switch type {
-            case .photoLibrary:
-                if PHPhotoLibrary.authorizationStatus() == .authorized {
-                    self.presentPicker(with: type)
-                }
-                else{
-                    self.photosAccessPermission()
-                }
-                
-            default:
-                if AVCaptureDevice.authorizationStatus(for: AVMediaType.video) == .authorized {
-                    self.presentPicker(with: type)
-                }
-                else{
-                    self.cameraAccessPermission()
-                }
-            }
-            break
-            
-        default:
-            if PHPhotoLibrary.authorizationStatus() == .notDetermined {
-                self.photosAccessPermission()
-            }
-            else if AVCaptureDevice.authorizationStatus(for: AVMediaType.video) == .notDetermined {
-                self.cameraAccessPermission()
-            }
-            else{
-                let isPhotosPermision = PHPhotoLibrary.authorizationStatus() == .authorized
-                let isCameraPermision = AVCaptureDevice.authorizationStatus(for: AVMediaType.video) == .authorized
-                
-                if isPhotosPermision && isCameraPermision {
-                    setupAlertController()
-                }
-                else if isPhotosPermision {
-                    self.presentPicker(with: .photoLibrary)
-                }
-                else if isCameraPermision {
-                    self.presentPicker(with: .camera)
-                }
-            }
-        }
-    }
-    
-    func photosAccessPermission() {
-        
-        switch PHPhotoLibrary.authorizationStatus() {
-        case .authorized:
-            checkPermission()
-            break
-            
-        case .notDetermined:
-            PHPhotoLibrary.requestAuthorization({ (status) in
-                if status == .authorized{
-                    self.checkPermission()
-                }
-            })
-            break
-            
-        default:
-            AGAlertBuilder(withAlert: "App Permission Denied", message: "To re-enable, please go to Settings and turn on Photo Library Service for this app.")
-                .addAction(with: "Setting", style: .default, handler: { _ in
-                    if #available(iOS 10.0, *) {
-                        UIApplication.shared.open(URL(string:UIApplicationOpenSettingsURLString)!)
-                    } else {
-                        UIApplication.shared.openURL(URL(string:UIApplicationOpenSettingsURLString)!)
-                    }
-                })
-                .show()
-            break
-        }
-    }
-    
-    func cameraAccessPermission() {
-        let authStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
-        
-        switch authStatus {
-        case .authorized:
-            checkPermission()
-            break
-            
-        case .notDetermined:
-            AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { (granted) in
-                if granted {
-                    self.checkPermission()
-                }
-            })
-            break
-            
-        default:
-            AGAlertBuilder(withAlert: "App Permission Denied", message: "To re-enable, please go to Settings and turn on Photo Library Service for this app.")
-                .addAction(with: "Setting", style: .default, handler: { _ in
-                    if #available(iOS 10.0, *) {
-                        UIApplication.shared.open(URL(string:UIApplicationOpenSettingsURLString)!)
-                    } else {
-                        UIApplication.shared.openURL(URL(string:UIApplicationOpenSettingsURLString)!)
-                    }
-                })
-                .show()
-            break
-        }
-    }
-    
     private func presentPicker(with sourceType: UIImagePickerController.SourceType){
         
         guard UIImagePickerController.isSourceTypeAvailable(sourceType) else {
@@ -178,19 +72,19 @@ open class AGImagePickerController: NSObject {
     }
     
     private func setupAlertController() {
-        let alert = AGAlertBuilder(withActionSheet: "Choose Option", message: "Select an option to pick an image", iPadOpen: .sourceView(iPadSetup))
+        let alert = AGAlertBuilder(withActionSheet: DrdshChatSDKTest.shared.localizedString(stringKey:"Choose Option"), message: DrdshChatSDKTest.shared.localizedString(stringKey:"Select an option to pick an image"), iPadOpen: .sourceView(iPadSetup))
         
         if UIImagePickerController.availableCaptureModes(for: .rear) != nil {
-            alert.defaultAction(with: "Camera", handler: { (alert) in
+            alert.defaultAction(with: DrdshChatSDKTest.shared.localizedString(stringKey:"Camera"), handler: { (alert) in
                 self.presentPicker(with: .camera)
             })
         }
         
-        alert.defaultAction(with: "Photo Library") { (alert) in
+        alert.defaultAction(with: DrdshChatSDKTest.shared.localizedString(stringKey:"Photo Library")) { (alert) in
             self.presentPicker(with: .photoLibrary)
         }
         
-        alert.cancelAction(with: "Cancel")
+        alert.cancelAction(with: DrdshChatSDKTest.shared.localizedString(stringKey:"Cancel"))
         
         alert.show()
     }
@@ -201,7 +95,7 @@ open class AGImagePickerController: NSObject {
         }
         
         //no camera found -- alert the user.
-        AGAlertBuilder(withAlert: "No Camera", message: "Sorry, this device has no camera")
+        AGAlertBuilder(withAlert: DrdshChatSDKTest.shared.localizedString(stringKey:"No Camera"), message: DrdshChatSDKTest.shared.localizedString(stringKey:"Sorry, this device has no camera"))
             .defaultAction(with: "OK")
             .show()
         return false
@@ -339,33 +233,5 @@ class AGAlertBuilder: UIAlertController {
     
     @objc func alertControllerBackgroundTapped(){
         self.dismiss(animated: true, completion: nil)
-    }
-}
-
-//MARK: Image added in alert and Action Sheet
-extension AGAlertBuilder {
-    @discardableResult
-    func addImage(with image: UIImage, width: CGFloat, height: CGFloat) -> Self{
-        
-        let displayImage = UIImageView(image: image)
-        self.view.addSubview(displayImage)
-        displayImage.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addConstraint(NSLayoutConstraint(item: displayImage, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0))
-        self.view.addConstraint(NSLayoutConstraint(item: displayImage, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: 0))
-        self.view.addConstraint(NSLayoutConstraint(item: displayImage, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: width))
-        self.view.addConstraint(NSLayoutConstraint(item: displayImage, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: height))
-        return self
-    }
-}
-
-extension AGAlertBuilder {
-    enum AttributeType: String{
-        case attributedTitle
-        case attributedMessage
-    }
-    
-    func setAttributedTitle(type: AttributeType, attribute: [NSAttributedString.Key: Any]){
-        let titleAttrString = NSMutableAttributedString(string: title ?? "", attributes: attribute)
-        self.setValue(titleAttrString, forKey: type.rawValue)
     }
 }

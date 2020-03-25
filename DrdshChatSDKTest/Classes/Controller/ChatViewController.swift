@@ -30,6 +30,10 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        txtMessage.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "")
+        txtMessage.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "")
+        txtMessage.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "")
+        txtMessage.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "")
         if DrdshChatSDKTest.shared.config.local == "ar"{
             self.lblName.textAlignment = .right
             self.lblTyping.textAlignment = .right
@@ -79,6 +83,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             self.table.reloadData()
         }
         btnSend.action = {
+            if self.txtMessage.text! == ""{return}
             let text = self.txtMessage.text!
             self.txtMessage.text! = ""
             CommonSocket.shared.sendVisitorMessage(data: [["dc_id":DrdshChatSDKTest.shared.AllDetails.companyId,"dc_mid":DrdshChatSDKTest.shared.AllDetails.messageID,"dc_vid":DrdshChatSDKTest.shared.AllDetails.visitorID,"dc_agent_id":DrdshChatSDKTest.shared.AllDetails.agentId,"message":text,"is_attachment":0,"attachment_file":"","file_type":"","file_size":"","send_by": 2,"dc_name":DrdshChatSDKTest.shared.AllDetails.name]]){ data in
@@ -89,6 +94,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                         self.list.append(m)
                         self.table.reloadData()
                         self.table.scroll(to: .bottom, animated: true)
+                        self.txtMessage.becomeFirstResponder()
                     }
                 }
             }
@@ -238,7 +244,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             return cell
         }
         if self.list[indexPath.row].send_by == 2{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "SenderTableViewCell", for: indexPath) as! SenderTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MyTableViewCell", for: indexPath) as! MyTableViewCell
             let strProdile = DrdshChatSDKTest.shared.AttachmentbaseURL+self.list[indexPath.row].agent_image
             cell.imgProfile.setImage(urlString: strProdile)
             cell.lblName.text = GGUserSessionDetail.shared.name
@@ -252,7 +258,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             }
             return cell
         }else{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ReceiverTableViewCell", for: indexPath) as! ReceiverTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "AgentTableViewCell", for: indexPath) as! AgentTableViewCell
             let strProdile = DrdshChatSDKTest.shared.AttachmentbaseURL+self.list[indexPath.row].agent_image
             cell.imgProfile.setImage(urlString: strProdile)
             cell.lblName.text = self.list[indexPath.row].agent_name
@@ -314,7 +320,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
     }
 }
 
-class SenderTableViewCell:UITableViewCell{
+class MyTableViewCell:UITableViewCell{
     @IBOutlet weak var imgProfile: UIImageView!
     @IBOutlet weak var imgAttachment: GGImageViewPopup!
     @IBOutlet weak var lblName: UILabel!
@@ -335,6 +341,9 @@ class SenderTableViewCell:UITableViewCell{
             self.backView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner,.layerMaxXMaxYCorner]
             if DrdshChatSDKTest.shared.config.local == "ar"{
                 self.backView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMaxYCorner,.layerMaxXMaxYCorner]
+                self.lblName.textAlignment = .left
+                self.lblMessage.textAlignment = .left
+                self.lblTime.textAlignment = .left
             }
         } else {
             
@@ -344,7 +353,7 @@ class SenderTableViewCell:UITableViewCell{
        self.lblTime.textColor = UIColor(hexCode:0x666666)
     }
 }
-class ReceiverTableViewCell:UITableViewCell{
+class AgentTableViewCell:UITableViewCell{
     @IBOutlet weak var imgProfile: UIImageView!
     @IBOutlet weak var imgAttachment: GGImageViewPopup!
     @IBOutlet weak var lblName: UILabel!
@@ -367,6 +376,9 @@ class ReceiverTableViewCell:UITableViewCell{
             self.backView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMaxYCorner,.layerMaxXMaxYCorner]
             if DrdshChatSDKTest.shared.config.local == "ar"{
                self.backView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner,.layerMaxXMaxYCorner]
+                self.lblName.textAlignment = .right
+                self.lblMessage.textAlignment = .right
+                self.lblTime.textAlignment = .right
             }
         } else {
             
@@ -513,20 +525,21 @@ extension UITableView {
 }
 extension UIImageView{
     func setImage(urlString:String){
-        self.image = UIImage(named: "user")
-        if urlString == ""{return}
+        self.image = DrdshChatSDKTest.shared.config.userPlaceHolderImage
+        if urlString == "" || urlString == DrdshChatSDKTest.shared.AttachmentbaseURL{return}
         if let cachedImage = imageCache.object(forKey: NSString(string: urlString)) {
               self.image =  cachedImage
         }else{
-              DispatchQueue.global(qos: .background).async {
-                  let url = URL(string:urlString)
-                  let data = try? Data(contentsOf: url!)
-                  let image1: UIImage = UIImage(data: data!)!
-                  DispatchQueue.main.async {
-                      imageCache.setObject(image1, forKey:urlString as NSString)
-                       self.image = image1
-                  }
-              }
+            DispatchQueue.global(qos: .background).async {
+                if let url = URL(string:urlString){
+                    let data = try? Data(contentsOf: url)
+                    let image1: UIImage = UIImage(data: data!)!
+                    DispatchQueue.main.async {
+                        imageCache.setObject(image1, forKey:urlString as NSString)
+                         self.image = image1
+                    }
+                }
+            }
         }
     }
 }

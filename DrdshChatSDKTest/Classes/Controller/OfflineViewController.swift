@@ -28,6 +28,14 @@ class OfflineViewController: UIViewController {
         self.txtFullName.text = GGUserSessionDetail.shared.name
         self.txtMobile.text = GGUserSessionDetail.shared.mobile
         self.txtEmailAddress.text = GGUserSessionDetail.shared.email
+        
+        txtFullName.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Full Name")
+        txtMobile.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Mobile")
+        txtEmailAddress.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Email Address")
+        txtEmailAddress.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Subject")
+        txtTypeYourQuestion.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Type your Question or message")
+        btnStart.setTitle(DrdshChatSDKTest.shared.localizedString(stringKey: "Send Message"), for: .normal)
+        
         if DrdshChatSDKTest.shared.config.local == "ar"{
             self.txtFullName.textAlignment = .right
             self.txtMobile.textAlignment = .right
@@ -60,6 +68,22 @@ class OfflineViewController: UIViewController {
         //self.dismiss(animated: true, completion: nil)
     }
     func SendOfflineMsg() {
+        if self.txtFullName.text == ""{
+            self.showAlertView(str: "Please enter name")
+            return
+        }else if self.txtEmailAddress.text == "" && DrdshChatSDKTest.shared.AllDetails.embeddedChat.emailRequired{
+            self.showAlertView(str: "Please enter Email address")
+            return
+        }else if self.txtMobile.text == "" && DrdshChatSDKTest.shared.AllDetails.embeddedChat.mobileRequired{
+            self.showAlertView(str: "Please enter Mobile")
+            return
+        }else if self.txtSubject.text == "" && DrdshChatSDKTest.shared.AllDetails.embeddedChat.mobileRequired{
+            self.showAlertView(str: "Please enter Subject")
+            return
+        }else if self.txtTypeYourQuestion.text == "" && DrdshChatSDKTest.shared.AllDetails.embeddedChat.messageRequired{
+            self.showAlertView(str: "Please enter Message")
+            return
+        }
      let validateIdentityAPI: String = DrdshChatSDKTest.shared.APIbaseURL + "send/offline/message"
       var todosUrlRequest = URLRequest(url: URL(string: validateIdentityAPI)!)
       todosUrlRequest.httpMethod = "POST"
@@ -127,5 +151,10 @@ class OfflineViewController: UIViewController {
         }
       }
       task.resume()
+    }
+    func showAlertView(str:String){
+        let alert = UIAlertController(title: DrdshChatSDKTest.shared.localizedString(stringKey:"Error"), message: DrdshChatSDKTest.shared.localizedString(stringKey:str), preferredStyle: UIAlertController.Style.alert)
+       alert.addAction(UIAlertAction(title: DrdshChatSDKTest.shared.localizedString(stringKey:"Ok"), style: UIAlertAction.Style.default, handler: nil))
+       DrdshChatSDKTest.shared.topViewController()?.present(alert, animated: true, completion: nil)
     }
 }

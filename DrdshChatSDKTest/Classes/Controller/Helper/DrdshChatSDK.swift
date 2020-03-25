@@ -17,24 +17,29 @@ public class DrdshChatSDKTest : NSObject {
     var AllDetails:ValidateIdentity = ValidateIdentity()
     var AgentDetail:AgentModel = AgentModel()
     var config = DrdshChatSDKConfiguration()
-    @objc public class func DrdshChatSDKBundlePath() -> String {
-        var bundle = Bundle(for: DrdshChatSDKTest.self)
-        if let resourcePath = bundle.path(forResource: "DrdshChatSDKTest", ofType: "bundle") {
-            if let resourcesBundle = Bundle(path: resourcePath) {
-                bundle = resourcesBundle
-            }
-        }
-        
-        return Bundle(for: DrdshChatSDKTest.self).path(forResource: "DrdshChatSDK", ofType: "bundle")!
+    func DrdshChatSDKBundlePath() -> String {
+        return Bundle(for: DrdshChatSDKTest.self).path(forResource: "DrdshChatSDKTest", ofType: "bundle")!
     }
+    func DrdshChatSDKForcedBundlePath() -> String {
+        let path = DrdshChatSDKBundlePath()
+        let name = DrdshChatSDKTest.shared.config.local
+        return Bundle(path: path)!.path(forResource: name, ofType: "lproj")!
+    }
+    func localizedString(stringKey: String) -> String {
+        var path: String
+        let table = "Localizable"
+        path = DrdshChatSDKForcedBundlePath()
+        return Bundle(path: path)!.localizedString(forKey: stringKey, value: stringKey, table: table)
+    }
+    
     @objc public class func presentChat(config: DrdshChatSDKConfiguration,animated: Bool = true, completion: ((Bool) -> Void)? = nil) {
         if let data = UserDefaults.standard.object(forKey: "AllDetails") as? [String :AnyObject]{
             DrdshChatSDKTest.shared.AllDetails <= data
         }
         DrdshChatSDKTest.shared.config = config
         if DrdshChatSDKTest.shared.config.appSid == ""{
-            let alert = UIAlertController(title: "Error", message: "appSid can not be blank", preferredStyle: UIAlertController.Style.alert)
-          alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+            let alert = UIAlertController(title: DrdshChatSDKTest.shared.localizedString(stringKey:"Error"), message: DrdshChatSDKTest.shared.localizedString(stringKey:"appSid can not be blank"), preferredStyle: UIAlertController.Style.alert)
+          alert.addAction(UIAlertAction(title: DrdshChatSDKTest.shared.localizedString(stringKey:"Ok"), style: UIAlertAction.Style.default, handler: nil))
           DrdshChatSDKTest.shared.topViewController()?.present(alert, animated: true, completion: {
              
           })
