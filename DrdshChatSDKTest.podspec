@@ -27,12 +27,12 @@ I am trying to make live tracking sdk for all the developer so the can use easil
   s.author           = { 'WhollySoftware' => 'whollysoftware@gmail.com' }
   s.source           = { :git => 'https://github.com/WhollySoftware/GGiOSSDK.git', :tag => s.version.to_s }
 
-  s.ios.deployment_target = '10.0'
+  s.ios.deployment_target = '11.0'
 
   s.source_files = 'DrdshChatSDKTest/Classes/**/*'
   s.swift_version = '4.0'
   s.platforms = {
-      "ios":"10.0"
+      "ios":"11.0"
   }
   s.dependency 'SwiftyJSON', '~> 4.0'
   s.dependency 'MBProgressHUD'

@@ -56,7 +56,12 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         btnAttachment.setImage(DrdshChatSDKTest.shared.config.attachmentImage, for: .normal)
         imgView.image = DrdshChatSDKTest.shared.config.userPlaceHolderImage
         
-        let barItem = UIBarButtonItem(image: DrdshChatSDKTest.shared.config.backImage, style: .plain, target: self, action: #selector(backAction))
+        var backImage = DrdshChatSDKTest.shared.config.backImage
+        if DrdshChatSDKTest.shared.config.local == "ar"{
+            backImage = backImage.rotate(radians: .pi)
+        }
+        
+        let barItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(backAction))
         navigationItem.leftBarButtonItem = barItem
         self.CloseBarItem = UIBarButtonItem(title: "Chat Close", style: .plain, target: self, action: #selector(dissmissView))
         navigationItem.rightBarButtonItem = self.CloseBarItem
@@ -253,8 +258,12 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             cell.imgAttachment.isHidden = self.list[indexPath.row].is_attachment == 0
             cell.lblMessage.isHidden = self.list[indexPath.row].is_attachment == 1
             if self.list[indexPath.row].is_attachment == 1{
-                let strUrl = DrdshChatSDKTest.shared.AttachmentbaseURL+self.list[indexPath.row].attachment_file
-                cell.imgAttachment.setImage(urlString: strUrl)
+                if self.list[indexPath.row].attachment_file == ""{
+                    cell.imgAttachment.setImage(urlString: self.list[indexPath.row].localUrl)
+                }else{
+                    let strUrl = DrdshChatSDKTest.shared.AttachmentbaseURL+self.list[indexPath.row].attachment_file
+                    cell.imgAttachment.setImage(urlString: strUrl)
+                }
             }
             return cell
         }else{
@@ -267,8 +276,12 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             cell.imgAttachment.isHidden = self.list[indexPath.row].is_attachment == 0
             cell.lblMessage.isHidden = self.list[indexPath.row].is_attachment == 1
             if self.list[indexPath.row].is_attachment == 1{
-                let strUrl = DrdshChatSDKTest.shared.AttachmentbaseURL+self.list[indexPath.row].attachment_file
-                 cell.imgAttachment.setImage(urlString: strUrl)
+                if self.list[indexPath.row].attachment_file == ""{
+                    cell.imgAttachment.setImage(urlString: self.list[indexPath.row].localUrl)
+                }else{
+                    let strUrl = DrdshChatSDKTest.shared.AttachmentbaseURL+self.list[indexPath.row].attachment_file
+                    cell.imgAttachment.setImage(urlString: strUrl)
+                }
             }
             return cell
         }
@@ -291,22 +304,44 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
             if (info[UIImagePickerControllerEditedImage] as? UIImage) != nil {
                 if #available(iOS 11.0, *) {
                     let url = info[UIImagePickerControllerImageURL] as! URL
-                    print("Img size = \((Double(url.fileSize) / 1000.00).rounded()) KB")
-                    debugPrint(url.lastPathComponent)
-                    debugPrint(url.pathExtension)
+                    let v = VisitorIdModel()
+                    v._id = DrdshChatSDKTest.shared.AllDetails.visitorID
+                    v.name = DrdshChatSDKTest.shared.AllDetails.name
+                    v.image = ""
+                    let m = MessageModel()
+                    m.company_id = DrdshChatSDKTest.shared.AllDetails.companyId
+                    m.is_attachment = 1
+                    m.localUrl = url.absoluteString
+                    m.send_by = 2
+                    m.updatedAt = Date().toString(format: .shipmentSendDate)
+                    m.visitor_id = v
+                    m.visitor_message_id = DrdshChatSDKTest.shared.AllDetails.messageID
+                    m.localId = url.lastPathComponent
+                    self.list.append(m)
+                    DispatchQueue.main.async {
+                        self.table.reloadData()
+                        self.table.scroll(to: .bottom, animated: true)
+                    }
+                    
                     if let base64String = try? Data(contentsOf: url).base64EncodedString() {
-                        print(base64String)
-                        CommonSocket.shared.sendVisitorMessage(data: [["dc_id":DrdshChatSDKTest.shared.AllDetails.companyId,"dc_mid":DrdshChatSDKTest.shared.AllDetails.messageID,"dc_vid":DrdshChatSDKTest.shared.AllDetails.visitorID,"dc_agent_id":DrdshChatSDKTest.shared.AllDetails.agentId,"send_by": 2,"message":url.lastPathComponent,"is_attachment":1,"attachment_file":base64String,"file_type":url.pathExtension,"file_size":url.fileSize,"dc_name":DrdshChatSDKTest.shared.AllDetails.name]]){ data in
-                            var m:MessageModel = MessageModel()
+                        CommonSocket.shared.sendVisitorMessage(data: [["dc_id":DrdshChatSDKTest.shared.AllDetails.companyId,"dc_mid":DrdshChatSDKTest.shared.AllDetails.messageID,"dc_vid":DrdshChatSDKTest.shared.AllDetails.visitorID,"dc_agent_id":DrdshChatSDKTest.shared.AllDetails.agentId,"send_by": 2,"message":url.lastPathComponent,"is_attachment":1,"attachment_file":base64String,"file_type":url.pathExtension,"file_size":url.fileSize,"dc_name":DrdshChatSDKTest.shared.AllDetails.name,"localId":"GuaravTestingIOS"]]){ data in
+                            
                             if data.count > 0{
                                 if let t = data[0] as? [String:AnyObject]{
-                                    m <= t
-                                    self.list.append(m)
+                                    var mm:MessageModel = MessageModel()
+                                    mm <= t
+                                    if let indexaPath = self.list.firstIndex(where: { (model) -> Bool in
+                                        model.localId == m.localId
+                                    }){
+                                        self.list.remove(at: indexaPath)
+                                        self.list.insert(mm, at: indexaPath)
+                                    }
+
+//                                    self.list.append(m)
                                     self.table.reloadData()
-                                    self.table.scroll(to: .bottom, animated: true)
+//                                    self.table.scroll(to: .bottom, animated: true)
                                 }
                             }
-                            debugPrint(data)
                         }
                     }
                 } else {
@@ -385,7 +420,7 @@ class AgentTableViewCell:UITableViewCell{
         }
         self.backView.backgroundColor = DrdshChatSDKTest.shared.config.mainColor
         self.lblMessage.textColor = UIColor.white
-        self.lblTime.textColor = UIColor(hexCode:0x666666)
+        self.lblTime.textColor = UIColor.white.withAlphaComponent(0.8)
         
     }
 }

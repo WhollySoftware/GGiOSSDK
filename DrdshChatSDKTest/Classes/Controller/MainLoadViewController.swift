@@ -40,13 +40,16 @@ class MainLoadViewController: UIViewController {
         }
         
         IQKeyboardManager.shared.enable = true
-        IQKeyboardManager.shared.toolbarDoneBarButtonItemText = "Done"
+        IQKeyboardManager.shared.toolbarDoneBarButtonItemText = DrdshChatSDKTest.shared.localizedString(stringKey:"Done")
         btnStart.action = {
             self.startChat()
         }
 
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white,.font : UIFont.init(name: "AvenirLTStd-Black", size: 17.0) ?? UIFont.boldSystemFont(ofSize: 17)]
-        let backImage = DrdshChatSDKTest.shared.config.backImage
+        var backImage = DrdshChatSDKTest.shared.config.backImage
+        if DrdshChatSDKTest.shared.config.local == "ar"{
+            backImage = backImage.rotate(radians: .pi)
+        }
         self.navigationController?.navigationBar.backIndicatorImage = backImage
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
         self.navigationController?.navigationBar.tintColor = UIColor.white
@@ -55,8 +58,9 @@ class MainLoadViewController: UIViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         let barItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(dissmissView))
-        barItem.title = "Chat"
+        barItem.title = DrdshChatSDKTest.shared.localizedString(stringKey:"Chat")
         navigationItem.leftBarButtonItem = barItem
+        
         makePostCall()
     }
     func setupData(){
@@ -101,7 +105,7 @@ class MainLoadViewController: UIViewController {
       }
       todosUrlRequest.setValue("XMLHttpRequest", forHTTPHeaderField: "X-Requested-With")
       todosUrlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-      todosUrlRequest.setValue("en", forHTTPHeaderField: "locale")
+      todosUrlRequest.setValue(DrdshChatSDKTest.shared.config.local, forHTTPHeaderField: "locale")
       let session = URLSession.shared
       GGProgress.shared.showProgress()
       let task = session.dataTask(with: todosUrlRequest) {
@@ -244,7 +248,7 @@ class MainLoadViewController: UIViewController {
       }
       todosUrlRequest.setValue("XMLHttpRequest", forHTTPHeaderField: "X-Requested-With")
       todosUrlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-      todosUrlRequest.setValue("en", forHTTPHeaderField: "locale")
+      todosUrlRequest.setValue(DrdshChatSDKTest.shared.config.local, forHTTPHeaderField: "locale")
       let session = URLSession.shared
       GGProgress.shared.showProgress(isFullLoader:false)
       let task = session.dataTask(with: todosUrlRequest) {
@@ -310,5 +314,27 @@ class MainLoadViewController: UIViewController {
     @objc func dissmissView(){
         CommonSocket.shared.disConnect()
         self.dismiss(animated: true, completion: nil)
+    }
+}
+extension UIImage {
+    func rotate(radians: CGFloat) -> UIImage {
+        let rotatedSize = CGRect(origin: .zero, size: size)
+            .applying(CGAffineTransform(rotationAngle: CGFloat(radians)))
+            .integral.size
+        UIGraphicsBeginImageContext(rotatedSize)
+        if let context = UIGraphicsGetCurrentContext() {
+            let origin = CGPoint(x: rotatedSize.width / 2.0,
+                                 y: rotatedSize.height / 2.0)
+            context.translateBy(x: origin.x, y: origin.y)
+            context.rotate(by: radians)
+            draw(in: CGRect(x: -origin.y, y: -origin.x,
+                            width: size.width, height: size.height))
+            let rotatedImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+
+            return rotatedImage ?? self
+        }
+
+        return self
     }
 }

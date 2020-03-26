@@ -43,7 +43,11 @@ class OfflineViewController: UIViewController {
             self.txtSubject.textAlignment = .right
             self.txtTypeYourQuestion.textAlignment = .right
         }
-        let barItem = UIBarButtonItem(image:  DrdshChatSDKTest.shared.config.backImage, style: .plain, target: self, action: #selector(dissmissView))
+        var backImage = DrdshChatSDKTest.shared.config.backImage
+        if DrdshChatSDKTest.shared.config.local == "ar"{
+            backImage = backImage.rotate(radians: .pi)
+        }
+        let barItem = UIBarButtonItem(image:  backImage, style: .plain, target: self, action: #selector(dissmissView))
         barItem.title = "Chat"
         navigationItem.leftBarButtonItem = barItem
         self.setupData()
@@ -108,7 +112,7 @@ class OfflineViewController: UIViewController {
       }
       todosUrlRequest.setValue("XMLHttpRequest", forHTTPHeaderField: "X-Requested-With")
       todosUrlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-      todosUrlRequest.setValue("en", forHTTPHeaderField: "locale")
+      todosUrlRequest.setValue(DrdshChatSDKTest.shared.config.local, forHTTPHeaderField: "locale")
       let session = URLSession.shared
         GGProgress.shared.showProgress(isFullLoader:false)
       let task = session.dataTask(with: todosUrlRequest) {
