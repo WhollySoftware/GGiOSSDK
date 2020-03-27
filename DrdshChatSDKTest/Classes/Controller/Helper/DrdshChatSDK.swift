@@ -139,6 +139,7 @@ public class DrdshChatSDKConfiguration : NSObject {
     public var appSid:String = ""
     public var local:String = "en"
     public var mainColor:UIColor = UIColor(hexCode:0x322D33)
+    public var secondryColor:UIColor = UIColor.groupTableViewBackground
     public var backImage:UIImage = UIImage()
     public var likeImage:UIImage = UIImage()
     public var disLikeImage:UIImage = UIImage()

@@ -37,11 +37,14 @@ class RateViewController: UIViewController {
             lblTitle.text = DrdshChatSDKTest.shared.localizedString(stringKey:"Rate your chat experience")
         }
         lblDiscription.text = DrdshChatSDKTest.shared.localizedString(stringKey:"To help us server you better, please provide some information concerning your chat experience.")
+        btnSend.setTitle(DrdshChatSDKTest.shared.localizedString(stringKey: "Send"), for: .normal)
+        btnCancel.setTitle(DrdshChatSDKTest.shared.localizedString(stringKey: "Cancel"), for: .normal)
         txtComment.layer.borderWidth = 1
         txtComment.layer.borderColor = UIColor.lightGray.cgColor
         txtComment.text = ""
+        self.btnCancel.backgroundColor = DrdshChatSDKTest.shared.config.secondryColor
         self.btnSend.backgroundColor = DrdshChatSDKTest.shared.config.mainColor
-       // btnSend.setImage(DrdshChatSDKTest.shared.config.sendMessageImage, for: .normal)
+        
         btnLike.setImage(DrdshChatSDKTest.shared.config.likeImage, for: .normal)
         btnDisLike.setImage(DrdshChatSDKTest.shared.config.disLikeImage, for: .normal)
         btnLike.setImage(DrdshChatSDKTest.shared.config.likeSelctedImage, for: .selected)

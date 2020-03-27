@@ -21,7 +21,7 @@ class MainLoadViewController: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Chat"
+        self.title = DrdshChatSDKTest.shared.localizedString(stringKey:"Chat")
         
         self.txtFullName.text = GGUserSessionDetail.shared.name
         self.txtMobile.text = GGUserSessionDetail.shared.mobile
@@ -31,7 +31,6 @@ class MainLoadViewController: UIViewController {
         txtEmailAddress.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Email Address")
         txtTypeYourQuestion.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Type your Question or message")
         btnStart.setTitle(DrdshChatSDKTest.shared.localizedString(stringKey: "Start Chat"), for: .normal)
-
         if DrdshChatSDKTest.shared.config.local == "ar"{
             self.txtFullName.textAlignment = .right
             self.txtMobile.textAlignment = .right
@@ -60,7 +59,7 @@ class MainLoadViewController: UIViewController {
         let barItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(dissmissView))
         barItem.title = DrdshChatSDKTest.shared.localizedString(stringKey:"Chat")
         navigationItem.leftBarButtonItem = barItem
-        
+        self.btnStart.backgroundColor = DrdshChatSDKTest.shared.config.mainColor
         makePostCall()
     }
     func setupData(){
@@ -68,7 +67,6 @@ class MainLoadViewController: UIViewController {
             self.viewEmailAddress.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.emailRequired
             self.viewMobile.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.mobileRequired
             self.viewTypeYourQuestion.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.messageRequired
-         self.btnStart.setTitle(DrdshChatSDKTest.shared.AllDetails.embeddedChat.startChatButtonTxt, for: .normal)
             self.btnStart.backgroundColor = DrdshChatSDKTest.shared.config.mainColor
         }
     }
@@ -127,7 +125,7 @@ class MainLoadViewController: UIViewController {
               print("Could not get JSON from responseData as dictionary")
               return
           }
-            if receivedTodo["message"] as! String == "authorized"{
+            if receivedTodo["message"] as! String == "Authorized"{
                 if let d = receivedTodo["data"] as? [String:AnyObject]{
                     print("Response : " + receivedTodo.description)
                     DrdshChatSDKTest.shared.AllDetails <= d
@@ -270,7 +268,7 @@ class MainLoadViewController: UIViewController {
               print("Could not get JSON from responseData as dictionary")
               return
           }
-            if receivedTodo["message"] as! String == "waiting_for_agent"{
+            if receivedTodo["message"] as! String == "Waiting for agent"{
                 if let d = receivedTodo["data"] as? [String:AnyObject]{
                     print("Response : " + receivedTodo.description)
                     DrdshChatSDKTest.shared.AllDetails.agentOnline = d["agentOnline"] as? Int ?? 0

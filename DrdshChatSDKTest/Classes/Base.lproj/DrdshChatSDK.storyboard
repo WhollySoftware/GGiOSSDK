@@ -604,6 +604,7 @@
                         <outlet property="btnMail" destination="RXG-gf-Yef" id="odZ-ul-5G9"/>
                         <outlet property="btnSend" destination="BvG-9a-Sx2" id="1qv-ZH-vmj"/>
                         <outlet property="imgView" destination="9g4-Ru-vYi" id="tJZ-te-hWp"/>
+                        <outlet property="lblCopyRight" destination="to3-Wl-oWM" id="eAF-nW-OKm"/>
                         <outlet property="lblName" destination="xYV-7Y-hAF" id="Ero-4u-iEl"/>
                         <outlet property="lblTyping" destination="mwv-QI-Vvp" id="ffK-Tz-mOU"/>
                         <outlet property="messageView" destination="TKd-D9-mds" id="YoZ-Fk-1WC"/>

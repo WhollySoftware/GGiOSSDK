@@ -20,20 +20,41 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="o6t-Pc-LmI">
-                                <rect key="frame" x="132.5" y="298.5" width="110" height="70"/>
+                                <rect key="frame" x="78.5" y="238.5" width="218" height="190"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xiw-Bj-E4K">
-                                        <rect key="frame" x="0.0" y="0.0" width="110" height="30"/>
-                                        <state key="normal" title="Start"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="218" height="30"/>
+                                        <state key="normal" title="Start Chat English"/>
                                         <connections>
-                                            <action selector="btnStartAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="KsC-B2-wtl"/>
+                                            <action selector="btnStartENAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="PVe-tB-rgb"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tTM-QE-Oej">
+                                        <rect key="frame" x="0.0" y="40" width="218" height="30"/>
+                                        <state key="normal" title="Start Chat Arabic"/>
+                                        <connections>
+                                            <action selector="btnStartARAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="j2C-lV-vCF"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bz8-hQ-Nfa">
-                                        <rect key="frame" x="0.0" y="40" width="110" height="30"/>
-                                        <state key="normal" title="Start New Color"/>
+                                        <rect key="frame" x="0.0" y="80" width="218" height="30"/>
+                                        <state key="normal" title="Start Chat With Logistiom Color"/>
                                         <connections>
-                                            <action selector="btnStopAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="5Bh-eo-zZp"/>
+                                            <action selector="btnStartWithLogistiomAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="V1e-XK-oTr"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0LW-59-zXX">
+                                        <rect key="frame" x="0.0" y="120" width="218" height="30"/>
+                                        <state key="normal" title="Start Chat With EVIRide Color"/>
+                                        <connections>
+                                            <action selector="btnStartWithEVIRIDEAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="LJK-ov-Scm"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lhd-OF-6Bh">
+                                        <rect key="frame" x="0.0" y="160" width="218" height="30"/>
+                                        <state key="normal" title="Start Chat With Kilowat Color"/>
+                                        <connections>
+                                            <action selector="btnStartWithKilowatAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="b6O-H5-w6h"/>
                                         </connections>
                                     </button>
                                 </subviews>

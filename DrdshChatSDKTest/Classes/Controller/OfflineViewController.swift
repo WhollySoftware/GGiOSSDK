@@ -48,9 +48,12 @@ class OfflineViewController: UIViewController {
             backImage = backImage.rotate(radians: .pi)
         }
         let barItem = UIBarButtonItem(image:  backImage, style: .plain, target: self, action: #selector(dissmissView))
-        barItem.title = "Chat"
+        barItem.title = DrdshChatSDKTest.shared.localizedString(stringKey:"Chat")
         navigationItem.leftBarButtonItem = barItem
         self.setupData()
+        btnStart.action = {
+           self.SendOfflineMsg()
+       }
         // Do any additional setup after loading the view.
     }
     func setupData(){
@@ -58,7 +61,6 @@ class OfflineViewController: UIViewController {
             self.viewEmailAddress.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.emailRequired
             self.viewMobile.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.mobileRequired
             self.viewTypeYourQuestion.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.messageRequired
-         self.btnStart.setTitle(DrdshChatSDKTest.shared.AllDetails.embeddedChat.startChatButtonTxt, for: .normal)
             self.btnStart.backgroundColor = DrdshChatSDKTest.shared.config.mainColor
         }
     }
