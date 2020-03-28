@@ -135,11 +135,19 @@ public class DrdshChatSDKTest : NSObject {
 //      task.resume()
 //    }
 }
-public class DrdshChatSDKConfiguration : NSObject {
+public class DrdshChatSDKConfiguration : GGObject {
     public var appSid:String = ""
     public var local:String = "en"
-    public var mainColor:UIColor = UIColor(hexCode:0x322D33)
-    public var secondryColor:UIColor = UIColor.groupTableViewBackground
+    var secondryColor:UIColor = UIColor.groupTableViewBackground
+    public var bgColor:String  = ""
+    public var buttonBorderColor:String  = ""
+    public var buttonColor:String  = ""
+    public var greetingFontColor:String  = ""
+    public var labelColor:String  = ""
+    public var systemMessageColor:String  = ""
+    public var topBarBgColor:String  = ""
+    public var valueColor:String  = ""
+    
     public var backImage:UIImage = UIImage()
     public var likeImage:UIImage = UIImage()
     public var disLikeImage:UIImage = UIImage()
@@ -149,6 +157,63 @@ public class DrdshChatSDKConfiguration : NSObject {
     public var attachmentImage:UIImage = UIImage()
     public var sendMessageImage:UIImage = UIImage()
     public var userPlaceHolderImage:UIImage = UIImage()
+    public var offlineTxt:String  = "offlineTxt"
+    public var onHoldMsg:String  = "onHoldMsg"
+    public var onlineTxt:String  = "onlineTxt"
+    public var preChatOfflineMessageTxt:String  = "preChatOfflineMessageTxt"
+    public var preChatOnlineMessageTxt:String  = "preChatOnlineMessageTxt"
+    public var sendButtonTxt:String  = "sendButtonTxt"
+    public var startChatButtonTxt:String  = "startChatButtonTxt"
+    public var exitSurveyCloseButtonTxt:String  = "exitSurveyCloseButtonTxt"
+    public var exitSurveyCommentTxt:String  = "exitSurveyCommentTxt"
+    public var exitSurveyHeaderTxt:String  = "exitSurveyHeaderTxt"
+    public var exitSurveyMessageTxt:String  = "exitSurveyMessageTxt"
+    public var exitSurveySendButtonTxt:String  = "exitSurveySendButtonTxt"
+    public var fieldPlaceholderEmail:String  = "fieldPlaceholderEmail"
+    public var fieldPlaceholderMessage:String  = "fieldPlaceholderMessage"
+    public var fieldPlaceholderMobile:String  = "fieldPlaceholderMobile"
+    public var fieldPlaceholderName:String  = "fieldPlaceholderName"
+    public var fieldPlaceholderSubject:String  = "fieldPlaceholderSubject"
+    public var typeHere:String = "typeHere"
+    public var sendMessage:String = "Send Message"
+    public var chatClose:String = "chatClose"
+    public var startTyping:String = "startTyping"
+    public var isTyping:String = "isTyping"
+    public var error:String = "error"
+    public var pleaseEnterName:String = "pleaseEnterName"
+    public var pleaseEnterEmailAddress:String = "pleaseEnterEmailAddress"
+    public var pleaseEnterValidEmail:String = "pleaseEnterValidEmail"
+    public var pleaseEnterMobile:String = "pleaseEnterMobile"
+    public var pleaseEnterSubject:String = "pleaseEnterSubject"
+    public var pleaseEnterMessage:String = "pleaseEnterMessage"
+    public var pleaseInputYourEmailAddress:String = "pleaseInputYourEmailAddress"
+    public var noCamera:String = "noCamera"
+    public var sorryThisDeviceHasNoCamera:String = "sorryThisDeviceHasNoCamera"
+    public var ok:String = "oK"
+    public var cancel:String = "cancel"
+    public var photoLibrary:String = "photoLibrary"
+    public var camera:String = "camera"
+    public var chooseOption:String = "chooseOption"
+    public var selectAnOptionToPickAnImage:String = "selectAnOptionToPickAnImage"
+    public var done:String = "done"
+    public var justnow:String = "justnow"
+    public var second:String = "second"
+    public var seconds:String = "seconds"
+    public var minute:String = "minute"
+    public var minutes:String = "minutes"
+    public var hour:String = "hour"
+    public var hours:String = "hours"
+    public var day:String = "day"
+    public var days:String = "days"
+    public var month:String = "month"
+    public var months:String = "months"
+    public var year:String = "year"
+    public var years:String = "years"
+    public var connecting:String = "connecting..."
+    public var waitingForAgent:String = "waitingForAgent"
+    public var chat:String = "chat"
+    public var offlineMessageRedirectUrl:String  = ""
+
     public override init() {
         var bundle = Bundle(for: DrdshChatSDKTest.self)
         if let resourcePath = bundle.path(forResource: "DrdshChatSDKTest", ofType: "bundle") {
@@ -166,6 +231,27 @@ public class DrdshChatSDKConfiguration : NSObject {
         sendMessageImage = UIImage(named: "send", in: bundle, compatibleWith: nil)!
         userPlaceHolderImage = UIImage(named: "user", in: bundle, compatibleWith: nil)!
     }
+    func mapServerData(to:[String:Any]){
+        for (key,value) in to{
+            if key == "bgColor",bgColor == ""{
+                bgColor = value as! String
+            }else if key == "buttonBorderColor",buttonBorderColor == ""{
+                buttonBorderColor = value as! String
+            }else if key == "buttonColor",buttonColor == ""{
+                buttonColor = value as! String
+            }else if key == "greetingFontColor",greetingFontColor == ""{
+                greetingFontColor = value as! String
+            }else if key == "labelColor",labelColor == ""{
+                labelColor = value as! String
+            }else if key == "systemMessageColor",systemMessageColor == ""{
+                systemMessageColor = value as! String
+            }else if key == "topBarBgColor",topBarBgColor == ""{
+                topBarBgColor = value as! String
+            }else if key == "valueColor",valueColor == ""{
+                valueColor = value as! String
+            }
+        }
+    }
 }
 
 public extension UIColor {
@@ -178,5 +264,30 @@ public extension UIColor {
             alpha: alpha
         )
     }
-}
+    convenience init(hexString: String, alpha: CGFloat = 1.0) {
+        let hexString: String = hexString.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        let scanner = Scanner(string: hexString)
+        if (hexString.hasPrefix("#")) {
+            scanner.scanLocation = 1
+        }
+        var color: UInt32 = 0
+        scanner.scanHexInt32(&color)
+        let mask = 0x000000FF
+        let r = Int(color >> 16) & mask
+        let g = Int(color >> 8) & mask
+        let b = Int(color) & mask
+        let red   = CGFloat(r) / 255.0
+        let green = CGFloat(g) / 255.0
+        let blue  = CGFloat(b) / 255.0
+        self.init(red:red, green:green, blue:blue, alpha:alpha)
+    }
 
+}
+extension String{
+    func Color()->UIColor{
+        return UIColor(hexString: self)
+    }
+    func Local()->String{
+        return DrdshChatSDKTest.shared.localizedString(stringKey:self)
+    }
+}

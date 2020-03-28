@@ -21,16 +21,17 @@ class MainLoadViewController: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = DrdshChatSDKTest.shared.localizedString(stringKey:"Chat")
+    
+        self.title = "Chat".Local()
         
         self.txtFullName.text = GGUserSessionDetail.shared.name
         self.txtMobile.text = GGUserSessionDetail.shared.mobile
         self.txtEmailAddress.text = GGUserSessionDetail.shared.email
-        txtFullName.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Full Name")
-        txtMobile.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Mobile")
-        txtEmailAddress.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Email Address")
-        txtTypeYourQuestion.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Type your Question or message")
-        btnStart.setTitle(DrdshChatSDKTest.shared.localizedString(stringKey: "Start Chat"), for: .normal)
+//        txtFullName.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Full Name")
+//        txtMobile.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Mobile")
+//        txtEmailAddress.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Email Address")
+//        txtTypeYourQuestion.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Type your Question or message")
+//        btnStart.setTitle(DrdshChatSDKTest.shared.localizedString(stringKey: "Start Chat"), for: .normal)
         if DrdshChatSDKTest.shared.config.local == "ar"{
             self.txtFullName.textAlignment = .right
             self.txtMobile.textAlignment = .right
@@ -39,7 +40,7 @@ class MainLoadViewController: UIViewController {
         }
         
         IQKeyboardManager.shared.enable = true
-        IQKeyboardManager.shared.toolbarDoneBarButtonItemText = DrdshChatSDKTest.shared.localizedString(stringKey:"Done")
+        IQKeyboardManager.shared.toolbarDoneBarButtonItemText = DrdshChatSDKTest.shared.config.done.Local()
         btnStart.action = {
             self.startChat()
         }
@@ -52,22 +53,30 @@ class MainLoadViewController: UIViewController {
         self.navigationController?.navigationBar.backIndicatorImage = backImage
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
         self.navigationController?.navigationBar.tintColor = UIColor.white
-        self.navigationController?.navigationBar.barTintColor = DrdshChatSDKTest.shared.config.mainColor
+        self.navigationController?.navigationBar.barTintColor = DrdshChatSDKTest.shared.config.topBarBgColor.Color()
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         let barItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(dissmissView))
         barItem.title = DrdshChatSDKTest.shared.localizedString(stringKey:"Chat")
         navigationItem.leftBarButtonItem = barItem
-        self.btnStart.backgroundColor = DrdshChatSDKTest.shared.config.mainColor
+        self.btnStart.backgroundColor = DrdshChatSDKTest.shared.config.topBarBgColor.Color()
         makePostCall()
     }
     func setupData(){
         DispatchQueue.main.async {
-            self.viewEmailAddress.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.emailRequired
-            self.viewMobile.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.mobileRequired
-            self.viewTypeYourQuestion.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.messageRequired
-            self.btnStart.backgroundColor = DrdshChatSDKTest.shared.config.mainColor
+            
+            self.viewEmailAddress.isHidden = DrdshChatSDKTest.shared.AllDetails.embeddedChat.emailRequired == 0
+            self.viewMobile.isHidden = DrdshChatSDKTest.shared.AllDetails.embeddedChat.mobileRequired == 0
+            self.viewTypeYourQuestion.isHidden = DrdshChatSDKTest.shared.AllDetails.embeddedChat.messageRequired == 0
+            self.txtFullName.placeholder = DrdshChatSDKTest.shared.config.fieldPlaceholderName.Local()
+            self.txtMobile.placeholder = DrdshChatSDKTest.shared.config.fieldPlaceholderMobile.Local()
+            self.txtEmailAddress.placeholder = DrdshChatSDKTest.shared.config.fieldPlaceholderEmail.Local()
+            self.txtTypeYourQuestion.placeholder = DrdshChatSDKTest.shared.config.fieldPlaceholderMessage.Local()
+            self.btnStart.setTitle( DrdshChatSDKTest.shared.config.startChatButtonTxt.Local(), for: .normal)
+            self.view.backgroundColor = DrdshChatSDKTest.shared.config.bgColor.Color()
+             self.navigationController?.navigationBar.barTintColor = DrdshChatSDKTest.shared.config.topBarBgColor.Color()
+            self.btnStart.backgroundColor = DrdshChatSDKTest.shared.config.buttonColor.Color()
         }
     }
     func makePostCall() {
@@ -130,6 +139,8 @@ class MainLoadViewController: UIViewController {
                     print("Response : " + receivedTodo.description)
                     DrdshChatSDKTest.shared.AllDetails <= d
                     var newTodo: [String: Any] =  DrdshChatSDKTest.shared.AllDetails.toDict
+                    DrdshChatSDKTest.shared.config.mapServerData(to: DrdshChatSDKTest.shared.AllDetails.embeddedChat.toDict)
+                    self.setupData()
                     newTodo["embeddedChat"] = DrdshChatSDKTest.shared.AllDetails.embeddedChat.toDict
                     UserDefaults.standard.setValue(newTodo, forKey: "AllDetails")
                     
@@ -137,6 +148,7 @@ class MainLoadViewController: UIViewController {
                         DispatchQueue.main.async {
                             let vc = self.storyboard?.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
                             self.navigationController?.pushViewController(vc, animated: false)
+                            
                         }
                     }
                     CommonSocket.shared.initSocket { (status) in
@@ -146,7 +158,12 @@ class MainLoadViewController: UIViewController {
                         }else{
                             strStatus = "site_visitor"
                         }
-                        CommonSocket.shared.joinVisitorsRoom(data: [["dc_id":DrdshChatSDKTest.shared.AllDetails.companyId,"dc_name":DrdshChatSDKTest.shared.AllDetails.name,"dc_vid":DrdshChatSDKTest.shared.AllDetails.visitorID,"dc_online":strStatus]]){ data in
+                        CommonSocket.shared.joinVisitorsRoom(data: [[
+                            "appSid" : DrdshChatSDKTest.shared.config.appSid,
+                            "dc_id":DrdshChatSDKTest.shared.AllDetails.companyId,
+                            "dc_name":DrdshChatSDKTest.shared.AllDetails.name,
+                            "dc_vid":DrdshChatSDKTest.shared.AllDetails.visitorID,
+                            "dc_online":strStatus]]){ data in
                             if DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus == 2{
                                 DrdshChatSDKTest.shared.AgentDetail <= data
                                 DrdshChatSDKTest.shared.AllDetails.agentId = data["agent_id"] as! String
@@ -156,7 +173,11 @@ class MainLoadViewController: UIViewController {
                             debugPrint(data)
                         }
                     }
-                    self.setupData()
+                    if DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus == 1{
+                        if !DrdshChatSDKTest.shared.AllDetails.embeddedChat.displayForm{
+                            self.startChat(isDirect: true)
+                        }
+                    }
                 }
             }else{
                
@@ -209,19 +230,25 @@ class MainLoadViewController: UIViewController {
         freeifaddrs(ifaddr)
         return addresses
     }
-    func startChat() {
-        if self.txtFullName.text == ""{
-            self.showAlertView(str: "Please enter name")
-            return
-        }else if self.txtEmailAddress.text == "" && DrdshChatSDKTest.shared.AllDetails.embeddedChat.emailRequired{
-            self.showAlertView(str: "Please enter Email address")
-            return
-        }else if self.txtMobile.text == "" && DrdshChatSDKTest.shared.AllDetails.embeddedChat.mobileRequired{
-            self.showAlertView(str: "Please enter Mobile")
-            return
-        }else if self.txtTypeYourQuestion.text == "" && DrdshChatSDKTest.shared.AllDetails.embeddedChat.messageRequired{
-            self.showAlertView(str: "Please enter Message")
-            return
+    func startChat(isDirect:Bool = false) {
+        if !isDirect{
+            if self.txtFullName.text == ""{
+                self.showAlertView(str: DrdshChatSDKTest.shared.config.pleaseEnterName)
+                return
+            }else if self.txtEmailAddress.text == "" && DrdshChatSDKTest.shared.AllDetails.embeddedChat.emailRequired == 2{
+                self.showAlertView(str: DrdshChatSDKTest.shared.config.pleaseEnterEmailAddress)
+                return
+            }else if DrdshChatSDKTest.shared.AllDetails.embeddedChat.emailRequired == 2 && !self.txtEmailAddress.text!.isValidEmail{
+                self.showAlertView(str: DrdshChatSDKTest.shared.config.pleaseEnterValidEmail)
+                return
+            }else if self.txtMobile.text == "" && DrdshChatSDKTest.shared.AllDetails.embeddedChat.mobileRequired == 2{
+                self.showAlertView(str: DrdshChatSDKTest.shared.config.pleaseEnterMobile)
+                return
+            }
+            else if self.txtTypeYourQuestion.text == "" && DrdshChatSDKTest.shared.AllDetails.embeddedChat.mobileRequired == 2{
+                self.showAlertView(str: DrdshChatSDKTest.shared.config.pleaseEnterMessage)
+                return
+            }
         }
      let validateIdentityAPI: String = DrdshChatSDKTest.shared.APIbaseURL + "initiate/chat"
       var todosUrlRequest = URLRequest(url: URL(string: validateIdentityAPI)!)
@@ -230,7 +257,7 @@ class MainLoadViewController: UIViewController {
             "appSid" : DrdshChatSDKTest.shared.config.appSid,
             "locale" : DrdshChatSDKTest.shared.config.local,
             "visitorID":DrdshChatSDKTest.shared.AllDetails.visitorID,
-            "name": self.txtFullName.text!,
+            "name": self.txtFullName.text == "" ? self.txtFullName.text! : "Guest",
             "mobile": self.txtMobile.text!,
             "email": self.txtEmailAddress.text!,
             "message": self.txtTypeYourQuestion.text!
@@ -274,14 +301,17 @@ class MainLoadViewController: UIViewController {
                     DrdshChatSDKTest.shared.AllDetails.agentOnline = d["agentOnline"] as? Int ?? 0
                     DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus = d["visitorConnectedStatus"] as? Int ?? 0
                     DrdshChatSDKTest.shared.AllDetails.messageID = d["messageID"] as? String ?? ""
-                    GGUserSessionDetail.shared.name = self.txtFullName.text!
-                    GGUserSessionDetail.shared.mobile = self.txtMobile.text!
-                    GGUserSessionDetail.shared.email = self.txtEmailAddress.text!
+                   
                     var newTodo: [String: Any] =  DrdshChatSDKTest.shared.AllDetails.toDict
                     newTodo["embeddedChat"] = DrdshChatSDKTest.shared.AllDetails.embeddedChat.toDict
-                    CommonSocket.shared.startChatRequest(data: [["dc_vid":DrdshChatSDKTest.shared.AllDetails.visitorID]])
+                    CommonSocket.shared.startChatRequest(data: [[
+                        "appSid" : DrdshChatSDKTest.shared.config.appSid,
+                        "dc_vid":DrdshChatSDKTest.shared.AllDetails.visitorID]])
                     UserDefaults.standard.setValue(newTodo, forKey: "AllDetails")
                     DispatchQueue.main.async {
+                        GGUserSessionDetail.shared.name = self.txtFullName.text!
+                        GGUserSessionDetail.shared.mobile = self.txtMobile.text!
+                        GGUserSessionDetail.shared.email = self.txtEmailAddress.text!
                         let vc = self.storyboard?.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
                         self.navigationController?.pushViewController(vc, animated: true)
                     }
@@ -301,12 +331,14 @@ class MainLoadViewController: UIViewController {
       task.resume()
     }
     func showAlertView(str:String){
-        let alert = UIAlertController(title: DrdshChatSDKTest.shared.localizedString(stringKey:"Error"), message: DrdshChatSDKTest.shared.localizedString(stringKey:str), preferredStyle: UIAlertController.Style.alert)
-       alert.addAction(UIAlertAction(title: DrdshChatSDKTest.shared.localizedString(stringKey:"Ok"), style: UIAlertAction.Style.default, handler: nil))
+        
+        let alert = UIAlertController(title: DrdshChatSDKTest.shared.config.error.Local(), message: str.Local(), preferredStyle: UIAlertController.Style.alert)
+       alert.addAction(UIAlertAction(title: DrdshChatSDKTest.shared.config.ok.Local(), style: UIAlertAction.Style.default, handler: nil))
        DrdshChatSDKTest.shared.topViewController()?.present(alert, animated: true, completion: nil)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.setupData()
         self.txtTypeYourQuestion.text = ""
     }
     @objc func dissmissView(){

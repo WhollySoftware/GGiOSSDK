@@ -54,7 +54,7 @@
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WZR-Fn-s8I">
                                                 <rect key="frame" x="10" y="0.0" width="354" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
                                             </textField>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -83,7 +83,7 @@
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mobile" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vr1-cZ-6mx">
                                                 <rect key="frame" x="10" y="0.0" width="354" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                             </textField>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -550,15 +550,16 @@
                                                             </button>
                                                         </subviews>
                                                     </stackView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Powered by Drdsh" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="to3-Wl-oWM">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ck9-3y-44P" customClass="GGButton" customModule="DrdshChatSDKTest" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="40" width="374" height="20"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="20" id="Hcj-fl-eZ7"/>
+                                                            <constraint firstAttribute="height" constant="20" id="BH2-px-po3"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                        <state key="normal" title="Powered by Drdsh">
+                                                            <color key="titleColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
+                                                    </button>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
@@ -603,8 +604,8 @@
                         <outlet property="btnLike" destination="b7b-7k-qBq" id="pWj-PX-ftH"/>
                         <outlet property="btnMail" destination="RXG-gf-Yef" id="odZ-ul-5G9"/>
                         <outlet property="btnSend" destination="BvG-9a-Sx2" id="1qv-ZH-vmj"/>
+                        <outlet property="btnWebSite" destination="ck9-3y-44P" id="rzj-nR-FnW"/>
                         <outlet property="imgView" destination="9g4-Ru-vYi" id="tJZ-te-hWp"/>
-                        <outlet property="lblCopyRight" destination="to3-Wl-oWM" id="eAF-nW-OKm"/>
                         <outlet property="lblName" destination="xYV-7Y-hAF" id="Ero-4u-iEl"/>
                         <outlet property="lblTyping" destination="mwv-QI-Vvp" id="ffK-Tz-mOU"/>
                         <outlet property="messageView" destination="TKd-D9-mds" id="YoZ-Fk-1WC"/>
@@ -844,7 +845,7 @@
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="txF-Y8-06U">
                                                 <rect key="frame" x="10" y="0.0" width="354" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="phonePad"/>
                                             </textField>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -873,7 +874,7 @@
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Mobile" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5wh-rR-mKR">
                                                 <rect key="frame" x="10" y="0.0" width="354" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                             </textField>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -1013,7 +1014,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PkM-zz-qZK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="477" y="763"/>
+            <point key="canvasLocation" x="476.81159420289856" y="762.72321428571422"/>
         </scene>
     </scenes>
     <resources>

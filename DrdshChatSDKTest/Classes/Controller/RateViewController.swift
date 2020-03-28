@@ -30,21 +30,23 @@ class RateViewController: UIViewController {
             self.txtComment.textAlignment = .right
         }
         if self.type == 2{
-            lblTitle.text = DrdshChatSDKTest.shared.localizedString(stringKey:"Please input your email address")
+            lblTitle.text = DrdshChatSDKTest.shared.config.pleaseInputYourEmailAddress.Local()
             txtComment.autocapitalizationType = .none
             txtComment.autocorrectionType = .no
         }else{
-            lblTitle.text = DrdshChatSDKTest.shared.localizedString(stringKey:"Rate your chat experience")
+            lblTitle.text = DrdshChatSDKTest.shared.localizedString(stringKey:DrdshChatSDKTest.shared.config.exitSurveyHeaderTxt)
         }
-        lblDiscription.text = DrdshChatSDKTest.shared.localizedString(stringKey:"To help us server you better, please provide some information concerning your chat experience.")
-        btnSend.setTitle(DrdshChatSDKTest.shared.localizedString(stringKey: "Send"), for: .normal)
-        btnCancel.setTitle(DrdshChatSDKTest.shared.localizedString(stringKey: "Cancel"), for: .normal)
+        txtComment.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.postChatPromptComments
+
+        self.btnSend.setTitle( DrdshChatSDKTest.shared.config.exitSurveySendButtonTxt.Local(), for: .normal)
+        self.btnCancel.setTitle( DrdshChatSDKTest.shared.config.exitSurveyCloseButtonTxt.Local(), for: .normal)
+        
+        lblDiscription.text = DrdshChatSDKTest.shared.localizedString(stringKey:DrdshChatSDKTest.shared.config.exitSurveyMessageTxt)
         txtComment.layer.borderWidth = 1
         txtComment.layer.borderColor = UIColor.lightGray.cgColor
         txtComment.text = ""
-        self.btnCancel.backgroundColor = DrdshChatSDKTest.shared.config.secondryColor
-        self.btnSend.backgroundColor = DrdshChatSDKTest.shared.config.mainColor
-        
+        self.btnCancel.backgroundColor = DrdshChatSDKTest.shared.config.buttonColor.Color()
+        self.btnSend.backgroundColor = DrdshChatSDKTest.shared.config.buttonColor.Color()
         btnLike.setImage(DrdshChatSDKTest.shared.config.likeImage, for: .normal)
         btnDisLike.setImage(DrdshChatSDKTest.shared.config.disLikeImage, for: .normal)
         btnLike.setImage(DrdshChatSDKTest.shared.config.likeSelctedImage, for: .selected)
@@ -53,13 +55,17 @@ class RateViewController: UIViewController {
         btnSend.action = {
             if self.type == 2{
                 if self.txtComment.text == ""{
-                    self.showAlertView(str: "Please enter Email address")
+                    self.showAlertView(str: DrdshChatSDKTest.shared.config.pleaseEnterEmailAddress)
                     return
                 }else if !self.txtComment.text.isValidEmail{
-                    self.showAlertView(str: "Please enter valid email")
+                    self.showAlertView(str: DrdshChatSDKTest.shared.config.pleaseEnterValidEmail)
                     return
                 }else{
-                    CommonSocket.shared.emailChatTranscript(data: [["mid":DrdshChatSDKTest.shared.AllDetails.messageID,"vid":DrdshChatSDKTest.shared.AllDetails.visitorID,"email":self.txtComment.text!]]) { (data) in
+                    CommonSocket.shared.emailChatTranscript(data: [[
+                        "appSid" : DrdshChatSDKTest.shared.config.appSid,
+                        "mid":DrdshChatSDKTest.shared.AllDetails.messageID,
+                        "vid":DrdshChatSDKTest.shared.AllDetails.visitorID,
+                        "email":self.txtComment.text!]]) { (data) in
                         debugPrint(data)
                         self.dismiss(animated: false, completion: {
                             self.successHandler?()
@@ -74,7 +80,13 @@ class RateViewController: UIViewController {
                 }else if self.btnDisLike.isSelected{
                     feedback = "bad"
                 }
-                CommonSocket.shared.visitorEndChatSession(data: [["id":DrdshChatSDKTest.shared.AllDetails.messageID,"vid":DrdshChatSDKTest.shared.AllDetails.visitorID,"name":DrdshChatSDKTest.shared.AllDetails.name,"comment":self.txtComment.text!,"feedback":feedback]]) { (data) in
+                CommonSocket.shared.visitorEndChatSession(data: [[
+                    "appSid" : DrdshChatSDKTest.shared.config.appSid,
+                    "id":DrdshChatSDKTest.shared.AllDetails.messageID,
+                    "vid":DrdshChatSDKTest.shared.AllDetails.visitorID,
+                    "name":DrdshChatSDKTest.shared.AllDetails.name,
+                    "comment":self.txtComment.text!,
+                    "feedback":feedback]]) { (data) in
                     debugPrint(data)
                     self.dismiss(animated: false, completion: {
                         self.successHandler?()
@@ -106,9 +118,9 @@ class RateViewController: UIViewController {
         }
     }
     func showAlertView(str:String){
-        let alert = UIAlertController(title: DrdshChatSDKTest.shared.localizedString(stringKey:"Error"), message: DrdshChatSDKTest.shared.localizedString(stringKey:str), preferredStyle: UIAlertController.Style.alert)
-       alert.addAction(UIAlertAction(title: DrdshChatSDKTest.shared.localizedString(stringKey:"Ok"), style: UIAlertAction.Style.default, handler: nil))
-       DrdshChatSDKTest.shared.topViewController()?.present(alert, animated: true, completion: nil)
+       let alert = UIAlertController(title: DrdshChatSDKTest.shared.config.error.Local(), message: str.Local(), preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: DrdshChatSDKTest.shared.config.ok.Local(), style: UIAlertAction.Style.default, handler: nil))
+        DrdshChatSDKTest.shared.topViewController()?.present(alert, animated: true, completion: nil)
     }
 }
 extension String {

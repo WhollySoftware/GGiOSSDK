@@ -24,17 +24,17 @@ class OfflineViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.view.backgroundColor = DrdshChatSDKTest.shared.config.bgColor.Color()
         self.txtFullName.text = GGUserSessionDetail.shared.name
         self.txtMobile.text = GGUserSessionDetail.shared.mobile
         self.txtEmailAddress.text = GGUserSessionDetail.shared.email
         
-        txtFullName.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Full Name")
-        txtMobile.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Mobile")
-        txtEmailAddress.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Email Address")
-        txtEmailAddress.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Subject")
-        txtTypeYourQuestion.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Type your Question or message")
-        btnStart.setTitle(DrdshChatSDKTest.shared.localizedString(stringKey: "Send Message"), for: .normal)
+//        txtFullName.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Full Name")
+//        txtMobile.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Mobile")
+//        txtEmailAddress.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Email Address")
+//        txtEmailAddress.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Subject")
+//        txtTypeYourQuestion.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Type your Question or message")
+//        btnStart.setTitle(DrdshChatSDKTest.shared.localizedString(stringKey: "Send Message"), for: .normal)
         
         if DrdshChatSDKTest.shared.config.local == "ar"{
             self.txtFullName.textAlignment = .right
@@ -58,10 +58,15 @@ class OfflineViewController: UIViewController {
     }
     func setupData(){
         DispatchQueue.main.async {
-            self.viewEmailAddress.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.emailRequired
-            self.viewMobile.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.mobileRequired
-            self.viewTypeYourQuestion.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.messageRequired
-            self.btnStart.backgroundColor = DrdshChatSDKTest.shared.config.mainColor
+            self.viewEmailAddress.isHidden = false
+            self.viewMobile.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.offlineMsgShowMobileBox
+            self.viewSubject.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.offlineMsgShowSubjectBox
+            self.btnStart.backgroundColor = DrdshChatSDKTest.shared.config.topBarBgColor.Color()
+            self.txtFullName.placeholder = DrdshChatSDKTest.shared.config.fieldPlaceholderName.Local()
+            self.txtMobile.placeholder = DrdshChatSDKTest.shared.config.fieldPlaceholderMobile.Local()
+            self.txtEmailAddress.placeholder = DrdshChatSDKTest.shared.config.fieldPlaceholderEmail.Local()
+            self.txtTypeYourQuestion.placeholder = DrdshChatSDKTest.shared.config.fieldPlaceholderMessage.Local()
+            self.btnStart.backgroundColor = DrdshChatSDKTest.shared.config.buttonColor.Color()
         }
     }
     @objc func dissmissView(){
@@ -75,21 +80,25 @@ class OfflineViewController: UIViewController {
     }
     func SendOfflineMsg() {
         if self.txtFullName.text == ""{
-            self.showAlertView(str: "Please enter name")
+            self.showAlertView(str: DrdshChatSDKTest.shared.config.pleaseEnterName)
             return
-        }else if self.txtEmailAddress.text == "" && DrdshChatSDKTest.shared.AllDetails.embeddedChat.emailRequired{
-            self.showAlertView(str: "Please enter Email address")
+        }else if self.txtEmailAddress.text == ""{
+            self.showAlertView(str: DrdshChatSDKTest.shared.config.pleaseEnterEmailAddress)
             return
-        }else if self.txtMobile.text == "" && DrdshChatSDKTest.shared.AllDetails.embeddedChat.mobileRequired{
-            self.showAlertView(str: "Please enter Mobile")
+        }else if !self.txtEmailAddress.text!.isValidEmail{
+            self.showAlertView(str: DrdshChatSDKTest.shared.config.pleaseEnterValidEmail)
             return
-        }else if self.txtSubject.text == "" && DrdshChatSDKTest.shared.AllDetails.embeddedChat.mobileRequired{
-            self.showAlertView(str: "Please enter Subject")
+        }else if self.txtMobile.text == "" && DrdshChatSDKTest.shared.AllDetails.embeddedChat.offlineMsgShowMobileBox{
+            self.showAlertView(str: DrdshChatSDKTest.shared.config.pleaseEnterMobile)
             return
-        }else if self.txtTypeYourQuestion.text == "" && DrdshChatSDKTest.shared.AllDetails.embeddedChat.messageRequired{
-            self.showAlertView(str: "Please enter Message")
+        }else if self.txtSubject.text == "" && DrdshChatSDKTest.shared.AllDetails.embeddedChat.offlineMsgShowSubjectBox{
+            self.showAlertView(str: DrdshChatSDKTest.shared.config.pleaseEnterSubject)
+            return
+        }else if self.txtTypeYourQuestion.text == ""{
+            self.showAlertView(str: DrdshChatSDKTest.shared.config.pleaseEnterMessage)
             return
         }
+        
      let validateIdentityAPI: String = DrdshChatSDKTest.shared.APIbaseURL + "send/offline/message"
       var todosUrlRequest = URLRequest(url: URL(string: validateIdentityAPI)!)
       todosUrlRequest.httpMethod = "POST"
@@ -141,11 +150,15 @@ class OfflineViewController: UIViewController {
             }else{
                
                 DispatchQueue.main.async {
-                    self.dismiss(animated: true) {
-                        let alert = UIAlertController(title: "Error", message: receivedTodo["message"] as? String ?? "", preferredStyle: UIAlertController.Style.alert)
-                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-                        DrdshChatSDKTest.shared.topViewController()?.present(alert, animated: true, completion: nil)
-                    }
+//                    self.dismiss(animated: true) {
+//
+//                    }
+                    self.txtFullName.text = ""
+                    self.txtMobile.text = ""
+                    self.txtEmailAddress.text = ""
+                    self.txtTypeYourQuestion.text = ""
+                    self.txtSubject.text = ""
+                    self.showAlertView(str: receivedTodo["message"] as? String ?? "")
                 }
                 print("Response : " + receivedTodo.description)
             }
@@ -157,8 +170,8 @@ class OfflineViewController: UIViewController {
       task.resume()
     }
     func showAlertView(str:String){
-        let alert = UIAlertController(title: DrdshChatSDKTest.shared.localizedString(stringKey:"Error"), message: DrdshChatSDKTest.shared.localizedString(stringKey:str), preferredStyle: UIAlertController.Style.alert)
-       alert.addAction(UIAlertAction(title: DrdshChatSDKTest.shared.localizedString(stringKey:"Ok"), style: UIAlertAction.Style.default, handler: nil))
-       DrdshChatSDKTest.shared.topViewController()?.present(alert, animated: true, completion: nil)
+         let alert = UIAlertController(title: DrdshChatSDKTest.shared.config.error.Local(), message: str.Local(), preferredStyle: UIAlertController.Style.alert)
+         alert.addAction(UIAlertAction(title: DrdshChatSDKTest.shared.config.ok.Local(), style: UIAlertAction.Style.default, handler: nil))
+         DrdshChatSDKTest.shared.topViewController()?.present(alert, animated: true, completion: nil)
     }
 }

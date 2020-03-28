@@ -15,6 +15,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     @IBOutlet weak var btnDisLike: GGButton!
     @IBOutlet weak var btnMail: GGButton!
     @IBOutlet weak var btnAttachment: GGButton!
+    @IBOutlet weak var btnWebSite: GGButton!
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var agentView: UIView!
@@ -31,10 +32,39 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     var CloseBarItem : UIBarButtonItem?
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.agentView.backgroundColor = DrdshChatSDKTest.shared.config.secondryColor
-        txtMessage.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Type here")
-        lblCopyRight.text = DrdshChatSDKTest.shared.localizedString(stringKey: "Powered by Drdsh")
+        self.view.backgroundColor = DrdshChatSDKTest.shared.config.bgColor.Color()
+        self.btnAttachment.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.showAttachmentButton
+        self.btnMail.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.showSendTranscriptButton
+        self.btnLike.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.showFeedbackButton
+        self.btnDisLike.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.showFeedbackButton
+        self.imgView.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.showTimestampsChatWindow
+        self.imgView.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.showTimestampsChatWindow
         
+        self.agentView.backgroundColor = DrdshChatSDKTest.shared.config.secondryColor
+        self.txtMessage.placeholder = DrdshChatSDKTest.shared.config.typeHere.Local()
+        btnWebSite.setTitle(DrdshChatSDKTest.shared.localizedString(stringKey: "Powered by Drdsh"), for: .normal)
+        if DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus == 1{
+            self.title = DrdshChatSDKTest.shared.config.waitingForAgent.Local()
+            timer = Timer(timeInterval: 120, target: self, selector: #selector(invitationMaxWaitTimeExceeded), userInfo: nil, repeats: false)
+            RunLoop.main.add(timer, forMode: RunLoopMode.commonModes)
+        }
+        
+        CommonSocket.shared.joinVisitorsRoom(data: [[
+            "appSid" : DrdshChatSDKTest.shared.config.appSid,
+            "dc_id":DrdshChatSDKTest.shared.AllDetails.companyId,
+            "dc_name":DrdshChatSDKTest.shared.AllDetails.name,
+            "dc_vid":DrdshChatSDKTest.shared.AllDetails.visitorID,
+            "dc_online":"arrived"]]){ data in
+            if let t = data["embeddedChat"] as? [String:AnyObject]{
+                if let maxWaitTime = t["maxWaitTime"] as? Int{
+                    if DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus == 1{
+                        self.title = DrdshChatSDKTest.shared.config.waitingForAgent.Local()
+                        self.timer = Timer(timeInterval: TimeInterval(maxWaitTime), target: self, selector: #selector(self.invitationMaxWaitTimeExceeded), userInfo: nil, repeats: false)
+                        RunLoop.main.add(self.timer, forMode: RunLoopMode.commonModes)
+                    }
+                }
+            }
+        }
         if DrdshChatSDKTest.shared.config.local == "ar"{
             self.lblName.textAlignment = .right
             self.lblTyping.textAlignment = .right
@@ -42,11 +72,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         }
         self.agentView.isHidden = true
         self.typingView.isHidden = true
-        if DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus == 1{
-            self.title = DrdshChatSDKTest.shared.localizedString(stringKey:"Waiting for Agent....")
-            timer = Timer(timeInterval: 20, target: self, selector: #selector(invitationMaxWaitTimeExceeded), userInfo: nil, repeats: false)
-            RunLoop.main.add(timer, forMode: RunLoopMode.commonModes)
-        }
+        
         self.table.tableFooterView = UIView()
         btnSend.setImage(DrdshChatSDKTest.shared.config.sendMessageImage, for: .normal)
         btnLike.setImage(DrdshChatSDKTest.shared.config.likeImage, for: .normal)
@@ -65,20 +91,27 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         
         let barItem = UIBarButtonItem(image: backImage, style: .plain, target: self, action: #selector(backAction))
         navigationItem.leftBarButtonItem = barItem
-        self.CloseBarItem = UIBarButtonItem(title: DrdshChatSDKTest.shared.localizedString(stringKey:"Chat Close"), style: .plain, target: self, action: #selector(dissmissView))
+        self.CloseBarItem = UIBarButtonItem(title: DrdshChatSDKTest.shared.config.chatClose.Local(), style: .plain, target: self, action: #selector(dissmissView))
         navigationItem.rightBarButtonItem = self.CloseBarItem
         self.navigationItem.rightBarButtonItem = nil
         if DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus != 2{
-            CommonSocket.shared.startChatRequest(data: [["dc_vid":DrdshChatSDKTest.shared.AllDetails.visitorID]])
+            CommonSocket.shared.startChatRequest(data: [[
+                "appSid" : DrdshChatSDKTest.shared.config.appSid,
+                "dc_vid":DrdshChatSDKTest.shared.AllDetails.visitorID]])
         }else if DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus == 2{
             if DrdshChatSDKTest.shared.AgentDetail.agent_id == ""{
-                self.title = DrdshChatSDKTest.shared.localizedString(stringKey:"Connecting...")
+                self.title = DrdshChatSDKTest.shared.config.connecting.Local()
             }else{self.setAgentDetail()}
             
             self.navigationItem.rightBarButtonItem = self.CloseBarItem
-            CommonSocket.shared.visitorJoinAgentRoom(data: [["vid":DrdshChatSDKTest.shared.AllDetails.visitorID,"agent_id":DrdshChatSDKTest.shared.AllDetails.agentId]])
+            CommonSocket.shared.visitorJoinAgentRoom(data: [[
+                "appSid" : DrdshChatSDKTest.shared.config.appSid,
+                "vid":DrdshChatSDKTest.shared.AllDetails.visitorID,
+                "agent_id":DrdshChatSDKTest.shared.AllDetails.agentId]])
         }
-        CommonSocket.shared.visitorLoadChatHistory(data: [["mid":DrdshChatSDKTest.shared.AllDetails.messageID]]) { (data) in
+        CommonSocket.shared.visitorLoadChatHistory(data: [[
+            "appSid" : DrdshChatSDKTest.shared.config.appSid,
+            "mid":DrdshChatSDKTest.shared.AllDetails.messageID]]) { (data) in
             if data.count > 0{
                 if let arrDic = data[0] as? [[String:AnyObject]]{
                     self.list <= arrDic
@@ -92,12 +125,18 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             self.setAgentDetail()
             self.table.reloadData()
         }
+        btnWebSite.action = {
+            UIApplication.shared.open(URL(string: "https://www.drdsh.live")!, options: [:]) { (status) in
+                
+            }
+        }
         btnSend.action = {
             if self.txtMessage.text! == ""{return}
             let text = self.txtMessage.text!
             self.txtMessage.text! = ""
             CommonSocket.shared.sendVisitorMessage(data: [[
-                "dc_id":DrdshChatSDKTest.shared.AllDetails.companyId,
+               "appSid" : DrdshChatSDKTest.shared.config.appSid,
+               "dc_id":DrdshChatSDKTest.shared.AllDetails.companyId,
                "dc_mid":DrdshChatSDKTest.shared.AllDetails.messageID,
                "dc_vid":DrdshChatSDKTest.shared.AllDetails.visitorID,
                "dc_agent_id":DrdshChatSDKTest.shared.AllDetails.agentId,
@@ -122,6 +161,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         }
         btnLike.action = {
             CommonSocket.shared.updateVisitorRating(data: [[
+                "appSid" : DrdshChatSDKTest.shared.config.appSid,
                 "mid":DrdshChatSDKTest.shared.AllDetails.messageID,
                 "vid":DrdshChatSDKTest.shared.AllDetails.visitorID,
                 "feedback":"good"]])
@@ -130,6 +170,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         }
         btnDisLike.action = {
             CommonSocket.shared.updateVisitorRating(data: [[
+                "appSid" : DrdshChatSDKTest.shared.config.appSid,
                 "mid":DrdshChatSDKTest.shared.AllDetails.messageID,
                 "vid":DrdshChatSDKTest.shared.AllDetails.visitorID,
                 "feedback":"bad"]])
@@ -210,16 +251,24 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         }
     }
     func setAgentDetail(){
-        self.title = ""
-        self.timer.invalidate()
-        let strProdile = DrdshChatSDKTest.shared.AgentDetail.agent_image
-        imgView.setImage(urlString: strProdile)
-        self.agentView.isHidden = false
-        self.lblName.text = DrdshChatSDKTest.shared.AgentDetail.agent_name
+        if DrdshChatSDKTest.shared.AgentDetail.agent_id != ""{
+            self.title = ""
+            self.timer.invalidate()
+            
+            let strProdile = DrdshChatSDKTest.shared.AgentDetail.agent_image
+            imgView.setImage(urlString: strProdile)
+            if DrdshChatSDKTest.shared.AllDetails.embeddedChat.showAgentPanel{
+                 self.agentView.isHidden = false
+            }
+            self.lblName.text = DrdshChatSDKTest.shared.AgentDetail.agent_name
+        }
     }
     @objc func invitationMaxWaitTimeExceeded(){
         timer.invalidate()
-        CommonSocket.shared.invitationMaxWaitTimeExceeded(data: [["vid":DrdshChatSDKTest.shared.AllDetails.visitorID,"form":DrdshChatSDKTest.shared.AllDetails.embeddedChat.displayForm]]) { (data) in
+        CommonSocket.shared.invitationMaxWaitTimeExceeded(data: [[
+            "appSid" : DrdshChatSDKTest.shared.config.appSid,
+            "vid":DrdshChatSDKTest.shared.AllDetails.visitorID,
+            "form":DrdshChatSDKTest.shared.AllDetails.embeddedChat.displayForm]]) { (data) in
             debugPrint(data)
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "OfflineViewController") as! OfflineViewController
             self.navigationController?.pushViewController(vc, animated: false)
@@ -237,7 +286,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     @objc func dissmissView(){
         self.timer.invalidate()
-        if DrdshChatSDKTest.shared.AllDetails.embeddedChat.postChatPromptComments{
+        if DrdshChatSDKTest.shared.AllDetails.embeddedChat.showExitSurvey{
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "RateViewController") as! RateViewController
             vc.modalPresentationStyle = .overFullScreen
             vc.successHandler = {
@@ -250,7 +299,11 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                 
             }
         }else{
-            CommonSocket.shared.visitorEndChatSession(data: [["id":DrdshChatSDKTest.shared.AllDetails.companyId,"vid":DrdshChatSDKTest.shared.AllDetails.visitorID,"name":DrdshChatSDKTest.shared.AllDetails.name]]) { (data) in
+            CommonSocket.shared.visitorEndChatSession(data: [[
+                "appSid" : DrdshChatSDKTest.shared.config.appSid,
+                "id":DrdshChatSDKTest.shared.AllDetails.companyId,
+                "vid":DrdshChatSDKTest.shared.AllDetails.visitorID,
+                "name":DrdshChatSDKTest.shared.AllDetails.name]]) { (data) in
                 self.agentView.isHidden = true
                 self.messageView.isHidden = true
                 self.navigationItem.rightBarButtonItem = nil
@@ -283,14 +336,14 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             cell.lblMessage.isHidden = self.list[indexPath.row].is_attachment == 1
             if self.list[indexPath.row].is_attachment == 1{
                 
-//                let strUrl = DrdshChatSDKTest.shared.AttachmentbaseURL+self.list[indexPath.row].attachment_file
-//                cell.imgAttachment.setImage(urlString: strUrl)
-//                if self.list[indexPath.row].attachment_file == ""{
-//                    cell.imgAttachment.setImage(urlString: self.list[indexPath.row].localUrl)
-//                }else{
-//                    let strUrl = DrdshChatSDKTest.shared.AttachmentbaseURL+self.list[indexPath.row].attachment_file
-//                    cell.imgAttachment.setImage(urlString: strUrl)
-//                }
+                let strUrl = DrdshChatSDKTest.shared.AttachmentbaseURL+self.list[indexPath.row].attachment_file
+                cell.imgAttachment.setImage(urlString: strUrl)
+                if self.list[indexPath.row].attachment_file == ""{
+                    cell.imgAttachment.setImage(urlString: self.list[indexPath.row].localUrl)
+                }else{
+                    let strUrl = DrdshChatSDKTest.shared.AttachmentbaseURL+self.list[indexPath.row].attachment_file
+                    cell.imgAttachment.setImage(urlString: strUrl)
+                }
             }
             return cell
         }else{
@@ -303,41 +356,44 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             cell.imgAttachment.isHidden = self.list[indexPath.row].is_attachment == 0
             cell.lblMessage.isHidden = self.list[indexPath.row].is_attachment == 1
             if self.list[indexPath.row].is_attachment == 1{
-//                if self.list[indexPath.row].attachment_file == ""{
-//                    cell.imgAttachment.setImage(urlString: self.list[indexPath.row].localUrl)
-//                }else{
-//                    let strUrl = DrdshChatSDKTest.shared.AttachmentbaseURL+self.list[indexPath.row].attachment_file
-//                    cell.imgAttachment.setImage(urlString: strUrl)
-//                }
+                if self.list[indexPath.row].attachment_file == ""{
+                    cell.imgAttachment.setImage(urlString: self.list[indexPath.row].localUrl)
+                }else{
+                    let strUrl = DrdshChatSDKTest.shared.AttachmentbaseURL+self.list[indexPath.row].attachment_file
+                    cell.imgAttachment.setImage(urlString: strUrl)
+                }
             }
             return cell
         }
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
         CommonSocket.shared.visitorTyping(data: [[
+            "appSid" : DrdshChatSDKTest.shared.config.appSid,
             "vid":DrdshChatSDKTest.shared.AllDetails.visitorID,
               "id":DrdshChatSDKTest.shared.AllDetails.companyId,
               "agent_id":DrdshChatSDKTest.shared.AllDetails.agentId,
               "ts":1,
-              "message":GGUserSessionDetail.shared.name+DrdshChatSDKTest.shared.localizedString(stringKey: " start typing..."),
+              "message":GGUserSessionDetail.shared.name+DrdshChatSDKTest.shared.config.startTyping.Local(),
               "stop":false]])
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
         CommonSocket.shared.visitorTyping(data: [[
+            "appSid" : DrdshChatSDKTest.shared.config.appSid,
             "vid":DrdshChatSDKTest.shared.AllDetails.visitorID,
               "id":DrdshChatSDKTest.shared.AllDetails.companyId,
               "agent_id":DrdshChatSDKTest.shared.AllDetails.agentId,
               "ts":0,
-              "message":GGUserSessionDetail.shared.name+DrdshChatSDKTest.shared.localizedString(stringKey: " is typing..."),
+              "message":GGUserSessionDetail.shared.name+DrdshChatSDKTest.shared.config.isTyping.Local(),
               "stop":true]])
     }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         CommonSocket.shared.visitorTyping(data: [[
+            "appSid" : DrdshChatSDKTest.shared.config.appSid,
             "vid":DrdshChatSDKTest.shared.AllDetails.visitorID,
               "id":DrdshChatSDKTest.shared.AllDetails.companyId,
               "agent_id":DrdshChatSDKTest.shared.AllDetails.agentId,
               "ts":2,
-              "message":GGUserSessionDetail.shared.name+DrdshChatSDKTest.shared.localizedString(stringKey: " is typing..."),
+              "message":GGUserSessionDetail.shared.name+DrdshChatSDKTest.shared.config.isTyping.Local(),
               "stop":false]])
         return true
     }
@@ -346,9 +402,15 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
          picker.dismiss(animated: true) {
-            if (info[UIImagePickerControllerEditedImage] as? UIImage) != nil {
+            if let image = (info[UIImagePickerControllerEditedImage] as? UIImage){
+                 let imageName = "\(NSDate().timeIntervalSince1970 * 1000)"
+                let imagePath = self.getDocumentsDirectory().appendingPathComponent(imageName)
+                
+                if let jpegData = UIImageJPEGRepresentation(image, 0.5) {
+                       try? jpegData.write(to: imagePath)
+                   }
                 if #available(iOS 11.0, *) {
-                    let url = info[UIImagePickerControllerImageURL] as! URL
+                    let url = imagePath
                     let v = VisitorIdModel()
                     v._id = DrdshChatSDKTest.shared.AllDetails.visitorID
                     v.name = DrdshChatSDKTest.shared.AllDetails.name
@@ -369,7 +431,8 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
                     }
                     if let base64String = try? Data(contentsOf: url).base64EncodedString() {
                         CommonSocket.shared.sendVisitorMessage(data: [[
-                            "dc_id":DrdshChatSDKTest.shared.AllDetails.companyId,
+                           "appSid" : DrdshChatSDKTest.shared.config.appSid,
+                           "dc_id":DrdshChatSDKTest.shared.AllDetails.companyId,
                             "dc_mid":DrdshChatSDKTest.shared.AllDetails.messageID,
                             "dc_vid":DrdshChatSDKTest.shared.AllDetails.visitorID,
                             "dc_agent_id":DrdshChatSDKTest.shared.AllDetails.agentId,
@@ -405,6 +468,10 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true) { }
     }
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
+    }
 }
 
 class MyTableViewCell:UITableViewCell{
@@ -415,13 +482,9 @@ class MyTableViewCell:UITableViewCell{
     @IBOutlet weak var lblTime: UILabel!
     @IBOutlet weak var backView: UIView!
     override func awakeFromNib() {
-        var bundle = Bundle(for: DrdshChatSDKTest.self)
-        if let resourcePath = bundle.path(forResource: "DrdshChatSDK", ofType: "bundle") {
-            if let resourcesBundle = Bundle(path: resourcePath) {
-                bundle = resourcesBundle
-            }
-        }
-        imgProfile.image = UIImage(named: "user", in: bundle, compatibleWith: nil)
+     
+        self.lblTime.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.showTimestampsChatWindow
+        imgProfile.image = DrdshChatSDKTest.shared.config.userPlaceHolderImage
         self.backView.layer.cornerRadius = 10
         self.backView.clipsToBounds = true
         if #available(iOS 11.0, *) {
@@ -437,7 +500,7 @@ class MyTableViewCell:UITableViewCell{
         }
        self.backView.backgroundColor = DrdshChatSDKTest.shared.config.secondryColor
        self.lblMessage.textColor = UIColor.black
-        self.lblTime.textColor = UIColor.black
+       self.lblTime.textColor = UIColor.black
     }
 }
 class AgentTableViewCell:UITableViewCell{
@@ -448,16 +511,11 @@ class AgentTableViewCell:UITableViewCell{
     @IBOutlet weak var lblTime: UILabel!
     @IBOutlet weak var backView: UIView!
     override func awakeFromNib() {
-        var bundle = Bundle(for: DrdshChatSDKTest.self)
-        if let resourcePath = bundle.path(forResource: "DrdshChatSDK", ofType: "bundle") {
-            if let resourcesBundle = Bundle(path: resourcePath) {
-                bundle = resourcesBundle
-            }
-        }
-        imgProfile.image = UIImage(named: "user", in: bundle, compatibleWith: nil)
+    
+        imgProfile.image = DrdshChatSDKTest.shared.config.userPlaceHolderImage
         self.backView.layer.cornerRadius = 10
         self.backView.clipsToBounds = true
-       
+        self.lblTime.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.showTimestampsChatWindow
         if #available(iOS 11.0, *) {
            
             self.backView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMaxYCorner,.layerMaxXMaxYCorner]
@@ -470,10 +528,9 @@ class AgentTableViewCell:UITableViewCell{
         } else {
             
         }
-        self.backView.backgroundColor = DrdshChatSDKTest.shared.config.mainColor
+        self.backView.backgroundColor = DrdshChatSDKTest.shared.config.topBarBgColor.Color()
         self.lblMessage.textColor = UIColor.white
         self.lblTime.textColor = UIColor.white
-        
     }
 }
 class systemTableViewCell:UITableViewCell{
