@@ -54,21 +54,21 @@ $ pod install
 
 * For access ``DrdshChatSDKTest`` you need to import Pod to your project 
 
-``swift
+```swift
 
     import DrdshChatSDKTest
     
     class ViewController: UIViewController {
 
     }
-``
+```
 
 
 #### Step 2
 
 * For open the SDK chat support you have required appSid and you need to pass that to like below with ``DrdshChatSDKConfiguration()`` object
 
-``swift
+```swift
 
     let sdkCongig = DrdshChatSDKConfiguration()
     sdkCongig.appSid = "5def86cf64be6d13f55f2034.5d96941bb5507599887b9c71829d5cffcdf55014"
@@ -76,32 +76,32 @@ $ pod install
     @IBAction func btnStartChatAction(_ sender:UIButton){
        DrdshChatSDKTest.presentChat(config: sdkCongig)
     }
-``
+```
 #### Step 3
 
 * For Open SDK you need to call below function with ``DrdshChatSDKConfiguration()`` object 
 
-``swift
+```swift
      DrdshChatSDKTest.presentChat(config: sdkCongig)
-``
+```
 #### Step 4
 
 * Below is the fully code of open SDK with dummy appSid 
 
-``swift
+```swift
 
     @IBAction func btnStartChatAction(_ sender:UIButton){
         let sdkCongig = DrdshChatSDKConfiguration()
         sdkCongig.appSid = "5def86cf64be6d13f55f2034.5d96941bb5507599887b9c71829d5cffcdf55014"
         DrdshChatSDKTest.presentChat(config: sdkCongig)
     }
-``
+```
 
 #### Customize :
 
 * This pod is easily fully customisable using ``DrdshChatSDKConfiguration()`` object  like below :
 
-``swift
+```swift
 
     let sdkCongig = DrdshChatSDKConfiguration()
     
@@ -131,7 +131,7 @@ $ pod install
     sdkCongig.oppositeChatTextColor = "#FFFFFF"
 
     
-``
+```
 
 #### Done
 Thats it, you successfully integrate DrdshChatSDKTest
