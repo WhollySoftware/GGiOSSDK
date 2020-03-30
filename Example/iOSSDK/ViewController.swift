@@ -8,6 +8,8 @@
 
 import UIKit
 import DrdshChatSDKTest
+
+
 class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +31,7 @@ class ViewController: UIViewController {
     }
     @IBAction func btnStartENAction(_ sender:UIButton){
          UIView.appearance().semanticContentAttribute = .forceLeftToRight
-        let sdkCongig = DrdshChatSDKConfiguration()
+       let sdkCongig = DrdshChatSDKConfiguration()
        sdkCongig.appSid = "5def86cf64be6d13f55f2034.5d96941bb5507599887b9c71829d5cffcdf55014"
        DrdshChatSDKTest.presentChat(config: sdkCongig)
     }

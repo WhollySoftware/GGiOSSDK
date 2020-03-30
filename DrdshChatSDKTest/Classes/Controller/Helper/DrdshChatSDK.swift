@@ -139,17 +139,17 @@ public class DrdshChatSDKConfiguration : GGObject {
     public var appSid:String = ""
     public var local:String = "en"
     var secondryColor:UIColor = UIColor.groupTableViewBackground
+    public var bgColor:String  = ""
+    public var topBarBgColor:String  = ""
     public var myChatBubbleColor:String  = "#EEEEEE"
     public var myChatTextColor:String  = "#000000"
     public var oppositeChatBubbleColor:String  = ""
     public var oppositeChatTextColor:String  = "#FFFFFF"
-    public var bgColor:String  = ""
-    public var buttonBorderColor:String  = ""
     public var buttonColor:String  = ""
+    public var buttonBorderColor:String  = ""
     public var greetingFontColor:String  = ""
     public var labelColor:String  = ""
     public var systemMessageColor:String  = ""
-    public var topBarBgColor:String  = ""
     public var valueColor:String  = ""
     
     public var backImage:UIImage = UIImage()
@@ -161,6 +161,7 @@ public class DrdshChatSDKConfiguration : GGObject {
     public var attachmentImage:UIImage = UIImage()
     public var sendMessageImage:UIImage = UIImage()
     public var userPlaceHolderImage:UIImage = UIImage()
+    
     public var offlineTxt:String  = "offlineTxt"
     public var onHoldMsg:String  = "onHoldMsg"
     public var onlineTxt:String  = "onlineTxt"
