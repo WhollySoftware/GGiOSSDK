@@ -9,6 +9,16 @@
 ## Screenshots
 
 <p align="center">
+<a href="https://www.drdsh.live/uploads/m/5e81d0ec8074fc774d9560fe.png">
+<img src="https://www.drdsh.live/uploads/m/5e81d0ec8074fc774d9560fe.png" height="480">
+</a>
+
+<a href="https://www.drdsh.live/uploads/m/5e81d0f48074fc774d9560ff.png">
+<img src="https://www.drdsh.live/uploads/m/5e81d0f48074fc774d9560ff.png" height="480">
+</a>
+</p>
+
+<p align="center">
 <a href="https://www.drdsh.live/uploads/m/5e81d10e8074fc774d956101.png">
 <img src="https://www.drdsh.live/uploads/m/5e81d10e8074fc774d956101.png" height="480">
 </a>
@@ -21,19 +31,6 @@
 
 
 
-<p align="center">
-<a href="https://www.drdsh.live/uploads/m/5e81d0f48074fc774d9560ff.png">
-<img src="https://www.drdsh.live/uploads/m/5e81d0f48074fc774d9560ff.png" height="480">
-</a>
-
-
-
-<a href="https://www.drdsh.live/uploads/m/5e81d0ec8074fc774d9560fe.png">
-<img src="https://www.drdsh.live/uploads/m/5e81d0ec8074fc774d9560fe.png" height="480">
-</a>
-</p>
-
-
 
 ## Features
 
@@ -41,11 +38,11 @@ It includes such features as:
 
 * Make Customers Life Easy
 * Seamless Integration
-* Zero Payment To Get Started With The DRDSH Trial.
 * Satisfy Your Customers
 * Flatter Your Customers
 * Enhance Your Service
 * Save Time And Energy
+* Zero Payment To Get Started With The DRDSH Trial.
 
 ## Requirements
 
