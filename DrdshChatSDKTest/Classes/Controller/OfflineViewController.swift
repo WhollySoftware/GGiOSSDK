@@ -24,6 +24,7 @@ class OfflineViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Offline"
         self.view.backgroundColor = DrdshChatSDKTest.shared.config.bgColor.Color()
         self.txtFullName.text = GGUserSessionDetail.shared.name
         self.txtMobile.text = GGUserSessionDetail.shared.mobile
