@@ -100,12 +100,12 @@ class RateViewController: UIViewController {
             self.btnDisLike.isSelected = false
         }
         btnCancel.action = {
-            self.dismiss(animated: false, completion: {
+            self.dismiss(animated: true, completion: {
                 
             })
         }
         btnCancel1.action = {
-           self.dismiss(animated: false, completion: {
+           self.dismiss(animated: true, completion: {
                
            })
        }

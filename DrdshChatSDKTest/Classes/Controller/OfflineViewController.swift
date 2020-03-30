@@ -153,11 +153,7 @@ class OfflineViewController: UIViewController {
 //                    self.dismiss(animated: true) {
 //
 //                    }
-                    self.txtFullName.text = ""
-                    self.txtMobile.text = ""
-                    self.txtEmailAddress.text = ""
                     self.txtTypeYourQuestion.text = ""
-                    self.txtSubject.text = ""
                     self.showAlertView(str: receivedTodo["message"] as? String ?? "")
                 }
                 print("Response : " + receivedTodo.description)

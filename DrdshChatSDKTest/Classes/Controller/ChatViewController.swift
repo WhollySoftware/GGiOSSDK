@@ -37,9 +37,8 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         self.btnMail.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.showSendTranscriptButton
         self.btnLike.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.showFeedbackButton
         self.btnDisLike.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.showFeedbackButton
-        self.imgView.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.showTimestampsChatWindow
-        self.imgView.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.showTimestampsChatWindow
-        
+        self.imgView.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.showAgentPhoto
+       
         self.agentView.backgroundColor = DrdshChatSDKTest.shared.config.secondryColor
         self.txtMessage.placeholder = DrdshChatSDKTest.shared.config.typeHere.Local()
         btnWebSite.setTitle(DrdshChatSDKTest.shared.localizedString(stringKey: "Powered by Drdsh"), for: .normal)
@@ -332,6 +331,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             cell.lblName.text = GGUserSessionDetail.shared.name
             cell.lblMessage.text = self.list[indexPath.row].message
             cell.lblTime.text = self.list[indexPath.row].updatedAt.toUTCDate(format: .shipmentSendDate)?.timePassed()
+            cell.imgAttachment.image = nil
             cell.imgAttachment.isHidden = self.list[indexPath.row].is_attachment == 0
             cell.lblMessage.isHidden = self.list[indexPath.row].is_attachment == 1
             if self.list[indexPath.row].is_attachment == 1{
@@ -353,6 +353,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             cell.lblName.text = self.list[indexPath.row].agent_name
             cell.lblMessage.text = self.list[indexPath.row].message
              cell.lblTime.text = self.list[indexPath.row].updatedAt.toUTCDate(format: .shipmentSendDate)?.timePassed()
+            cell.imgAttachment.image = nil
             cell.imgAttachment.isHidden = self.list[indexPath.row].is_attachment == 0
             cell.lblMessage.isHidden = self.list[indexPath.row].is_attachment == 1
             if self.list[indexPath.row].is_attachment == 1{
@@ -482,7 +483,8 @@ class MyTableViewCell:UITableViewCell{
     @IBOutlet weak var lblTime: UILabel!
     @IBOutlet weak var backView: UIView!
     override func awakeFromNib() {
-     
+        self.imgAttachment.isHidden = true
+        self.imgAttachment.image = nil
         self.lblTime.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.showTimestampsChatWindow
         imgProfile.image = DrdshChatSDKTest.shared.config.userPlaceHolderImage
         self.backView.layer.cornerRadius = 10
@@ -498,9 +500,9 @@ class MyTableViewCell:UITableViewCell{
         } else {
             
         }
-       self.backView.backgroundColor = DrdshChatSDKTest.shared.config.secondryColor
-       self.lblMessage.textColor = UIColor.black
-       self.lblTime.textColor = UIColor.black
+       self.backView.backgroundColor = DrdshChatSDKTest.shared.config.myChatBubbleColor.Color()
+       self.lblMessage.textColor = DrdshChatSDKTest.shared.config.myChatTextColor.Color()
+       self.lblTime.textColor = DrdshChatSDKTest.shared.config.myChatTextColor.Color()
     }
 }
 class AgentTableViewCell:UITableViewCell{
@@ -511,7 +513,8 @@ class AgentTableViewCell:UITableViewCell{
     @IBOutlet weak var lblTime: UILabel!
     @IBOutlet weak var backView: UIView!
     override func awakeFromNib() {
-    
+        imgAttachment.isHidden = true
+        self.imgAttachment.image = nil
         imgProfile.image = DrdshChatSDKTest.shared.config.userPlaceHolderImage
         self.backView.layer.cornerRadius = 10
         self.backView.clipsToBounds = true
@@ -528,9 +531,9 @@ class AgentTableViewCell:UITableViewCell{
         } else {
             
         }
-        self.backView.backgroundColor = DrdshChatSDKTest.shared.config.topBarBgColor.Color()
-        self.lblMessage.textColor = UIColor.white
-        self.lblTime.textColor = UIColor.white
+        self.backView.backgroundColor = DrdshChatSDKTest.shared.config.oppositeChatBubbleColor.Color()
+        self.lblMessage.textColor = DrdshChatSDKTest.shared.config.oppositeChatTextColor.Color()
+        self.lblTime.textColor = DrdshChatSDKTest.shared.config.oppositeChatTextColor.Color()
     }
 }
 class systemTableViewCell:UITableViewCell{
@@ -675,11 +678,13 @@ extension UIImageView{
         }else{
             DispatchQueue.global(qos: .background).async {
                 if let url = URL(string:urlString){
-                    let data = try? Data(contentsOf: url)
-                    let image1: UIImage = UIImage(data: data!)!
-                    DispatchQueue.main.async {
-                        imageCache.setObject(image1, forKey:urlString as NSString)
-                         self.image = image1
+                    if let data = try? Data(contentsOf: url){
+                        if let image1: UIImage = UIImage(data: data){
+                            DispatchQueue.main.async {
+                                imageCache.setObject(image1, forKey:urlString as NSString)
+                                 self.image = image1
+                            }
+                        }
                     }
                 }
             }

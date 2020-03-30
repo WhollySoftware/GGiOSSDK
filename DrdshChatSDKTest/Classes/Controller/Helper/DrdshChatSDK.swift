@@ -139,6 +139,10 @@ public class DrdshChatSDKConfiguration : GGObject {
     public var appSid:String = ""
     public var local:String = "en"
     var secondryColor:UIColor = UIColor.groupTableViewBackground
+    public var myChatBubbleColor:String  = "#EEEEEE"
+    public var myChatTextColor:String  = "#000000"
+    public var oppositeChatBubbleColor:String  = ""
+    public var oppositeChatTextColor:String  = "#FFFFFF"
     public var bgColor:String  = ""
     public var buttonBorderColor:String  = ""
     public var buttonColor:String  = ""
@@ -249,6 +253,11 @@ public class DrdshChatSDKConfiguration : GGObject {
                 topBarBgColor = value as! String
             }else if key == "valueColor",valueColor == ""{
                 valueColor = value as! String
+            }
+            if key == "topBarBgColor",oppositeChatBubbleColor == ""{
+                oppositeChatBubbleColor = value as! String
+            }else if key == "topBarBgColor",myChatBubbleColor == ""{
+                myChatBubbleColor = value as! String
             }
         }
     }
