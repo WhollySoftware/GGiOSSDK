@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'DrdshChatSDKTest'
-  s.version          = '1.0.8'
-  s.summary          = 'A DrdshChatSDKTest is the testing sdk 1.0.8'
+  s.version          = '1.0.9'
+  s.summary          = 'To Build Excellent Customer Experience, Connect With DRDSH.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-I am trying to make live tracking sdk for all the developer so the can use easily in all project.
+We have influential engagement products and potent customer service with flexibility and reliability for any business.
                        DESC
 
   s.homepage         = 'https://github.com/WhollySoftware/GGiOSSDK'
