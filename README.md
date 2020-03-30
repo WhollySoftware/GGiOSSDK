@@ -17,7 +17,6 @@
 <img src="https://www.drdsh.live/uploads/m/5e81d0f48074fc774d9560ff.png" height="480">
 </a>
 
-<p align="center">
 <a href="https://www.drdsh.live/uploads/m/5e81d1018074fc774d956100.png">
 <img src="https://www.drdsh.live/uploads/m/5e81d1018074fc774d956100.png" height="480">
 </a>
