@@ -6,6 +6,8 @@
 [![Platform](https://img.shields.io/cocoapods/p/DrdshChatSDKTest.svg?style=flat)](https://cocoapods.org/pods/DrdshChatSDKTest)
 
 
+## Screenshots
+
 <p align="center">
 <a href="https://www.drdsh.live/uploads/m/5e81d10e8074fc774d956101.png">
 <img src="https://www.drdsh.live/uploads/m/5e81d10e8074fc774d956101.png" height="480">
@@ -37,11 +39,20 @@
 
 It includes such features as:
 
+* Make Customers Life Easy
+* Seamless Integration
+* Zero Payment To Get Started With The DRDSH Trial.
+* Satisfy Your Customers
+* Flatter Your Customers
+* Enhance Your Service
+* Save Time And Energy
 
 ## Requirements
 
 It includes such requirements as:
 
+* Swift Version : 4.0 
+* Xcode : 11 or more 
 
 ## Installation
 
@@ -49,22 +60,22 @@ It includes such requirements as:
 
 [CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects. You can install it with the following command:
 
-``bash
+```bash
 $ gem install cocoapods
-``
+```
 
 To integrate DrdshChatSDKTest into your Xcode project using CocoaPods, specify it in your ``Podfile`` :
 
-``target '<Your Target Name>' do
+```target '<Your Target Name>' do
 pod 'DrdshChatSDKTest'
 end
-``
+```
 
 Then, run the following command:
 
-``bash
+```bash
 $ pod install
-``
+```
 
 
 ## Usage
