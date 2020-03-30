@@ -7,8 +7,8 @@
 
 
 <p align="center">
-<a href="https://i.imgur.com/e1tKOoW.gif">
-<img src="https://i.imgur.com/e1tKOoW.gif" height="480">
+<a href="https://pasteboard.co/J1tBi0U.png">
+<img src="https://pasteboard.co/J1tBi0U.png" height="480">
 </a>
 </p>
 
@@ -72,10 +72,7 @@ $ pod install
 
     let sdkCongig = DrdshChatSDKConfiguration()
     sdkCongig.appSid = "5def86cf64be6d13f55f2034.5d96941bb5507599887b9c71829d5cffcdf55014"
-
-    @IBAction func btnStartChatAction(_ sender:UIButton){
-       DrdshChatSDKTest.presentChat(config: sdkCongig)
-    }
+    
 ```
 #### Step 3
 
