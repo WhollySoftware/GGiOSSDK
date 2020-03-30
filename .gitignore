@@ -15,9 +15,12 @@ xcuserdata/
 *.xccheckout
 profile
 *.moved-aside
-DerivedData
+
+## Obj-C/Swift specific
 *.hmap
 *.ipa
+*.dSYM.zip
+*.dSYM
 
 # Bundler
 .bundle
@@ -35,3 +38,8 @@ Carthage/Build
 # `pod install` in .travis.yml
 #
 # Pods/
+# Swift Package Manager
+#
+# Add this line if you want to avoid checking in source code from Swift Package Manager dependencies.
+# Packages/
+.build/
