@@ -202,24 +202,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="PpW-5X-K0c">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="239" translatesAutoresizingMaskIntoConstraints="NO" id="PpW-5X-K0c">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X4t-aT-3cO" customClass="GGView" customModule="DrdshChatSDKTest" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="f1W-LA-0wf">
-                                                <rect key="frame" x="10" y="-25" width="100" height="110"/>
+                                                <rect key="frame" x="10" y="-25" width="92" height="40"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9g4-Ru-vYi" customClass="GGImageViewPopup" customModule="DrdshChatSDKTest" customModuleProvider="target">
-                                                        <rect key="frame" x="128" y="35" width="40" height="40"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="40" id="608-aq-gzk"/>
                                                             <constraint firstAttribute="height" constant="40" id="Mww-er-hJB"/>
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xYV-7Y-hAF">
-                                                        <rect key="frame" x="127" y="44" width="42" height="20.5"/>
+                                                        <rect key="frame" x="50" y="0.0" width="42" height="40"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -276,14 +276,14 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="c3r-MA-MUl">
-                                        <rect key="frame" x="0.0" y="60" width="414" height="692"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="c3r-MA-MUl">
+                                        <rect key="frame" x="0.0" y="299" width="414" height="0.0"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="AgentTableViewCell" rowHeight="93" id="eSt-2V-md9" customClass="AgentTableViewCell" customModule="DrdshChatSDKTest" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="414" height="93"/>
                                                 <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eSt-2V-md9" id="QhE-q1-M43">
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eSt-2V-md9" id="QhE-q1-M43">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="93"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
@@ -294,8 +294,8 @@
                                                                 <constraint firstAttribute="height" constant="40" id="gDN-bu-Xfy"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Agent Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hu3-xt-W3d">
-                                                            <rect key="frame" x="60" y="10" width="344" height="17"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Agent Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hu3-xt-W3d">
+                                                            <rect key="frame" x="60" y="5" width="344" height="17"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="17" id="4Uc-U1-lyU"/>
                                                             </constraints>
@@ -303,27 +303,27 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mZA-L2-dbu">
-                                                            <rect key="frame" x="60" y="32" width="220" height="51"/>
+                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mZA-L2-dbu">
+                                                            <rect key="frame" x="60" y="27" width="220" height="61"/>
                                                             <subviews>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="lis-Gr-v2L">
-                                                                    <rect key="frame" x="10" y="5" width="200" height="41"/>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="lis-Gr-v2L">
+                                                                    <rect key="frame" x="10" y="5" width="200" height="51"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Agent Name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u3R-38-v81">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="200" height="24"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Agent Name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u3R-38-v81">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="200" height="34"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MxP-DJ-0fr" customClass="GGImageViewPopup" customModule="DrdshChatSDKTest" customModuleProvider="target">
-                                                                            <rect key="frame" x="0.0" y="24" width="200" height="200"/>
+                                                                            <rect key="frame" x="0.0" y="34" width="200" height="200"/>
                                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="200" id="rLf-LF-VnM"/>
                                                                             </constraints>
                                                                         </imageView>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Agent Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f2H-UB-iFV">
-                                                                            <rect key="frame" x="0.0" y="24" width="200" height="17"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Agent Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f2H-UB-iFV">
+                                                                            <rect key="frame" x="0.0" y="34" width="200" height="17"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="17" id="cGe-IK-mmq"/>
                                                                             </constraints>
@@ -372,19 +372,19 @@
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="MyTableViewCell" rowHeight="93" id="4oh-BT-GXP" customClass="MyTableViewCell" customModule="DrdshChatSDKTest" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="121" width="414" height="93"/>
                                                 <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4oh-BT-GXP" id="wCP-rn-zdc">
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4oh-BT-GXP" id="wCP-rn-zdc">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="93"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZoT-6g-QB1" customClass="GGImageViewPopup" customModule="DrdshChatSDKTest" customModuleProvider="target">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZoT-6g-QB1" customClass="GGImageViewPopup" customModule="DrdshChatSDKTest" customModuleProvider="target">
                                                             <rect key="frame" x="364" y="10" width="40" height="40"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="40" id="Bfq-yz-GkH"/>
                                                                 <constraint firstAttribute="height" constant="40" id="SDp-iT-vOz"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Agent Name" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z0B-BW-PMo">
-                                                            <rect key="frame" x="10" y="10" width="344" height="17"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Agent Name" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z0B-BW-PMo">
+                                                            <rect key="frame" x="10" y="5" width="344" height="17"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="17" id="gGx-Ak-5ap"/>
                                                             </constraints>
@@ -392,27 +392,27 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dWb-d2-xGF">
-                                                            <rect key="frame" x="134" y="32" width="220" height="51"/>
+                                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dWb-d2-xGF">
+                                                            <rect key="frame" x="134" y="27" width="220" height="61"/>
                                                             <subviews>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="2Mz-ES-K5Z">
-                                                                    <rect key="frame" x="10" y="5" width="200" height="41"/>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="2Mz-ES-K5Z">
+                                                                    <rect key="frame" x="10" y="5" width="200" height="51"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Agent Name" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PYi-c0-ZtD">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="200" height="24"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Agent Name" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PYi-c0-ZtD">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="200" height="34"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hAt-nZ-8un" customClass="GGImageViewPopup" customModule="DrdshChatSDKTest" customModuleProvider="target">
-                                                                            <rect key="frame" x="0.0" y="24" width="200" height="200"/>
+                                                                            <rect key="frame" x="0.0" y="34" width="200" height="200"/>
                                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="200" id="5v1-Oh-pBU"/>
                                                                             </constraints>
                                                                         </imageView>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Agent Name" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EY3-DS-cXb">
-                                                                            <rect key="frame" x="0.0" y="24" width="200" height="17"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Agent Name" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EY3-DS-cXb">
+                                                                            <rect key="frame" x="0.0" y="34" width="200" height="17"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="17" id="fCm-J9-ph7"/>
                                                                             </constraints>
@@ -464,7 +464,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="93"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Agent Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5kO-qV-6tI">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Agent Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5kO-qV-6tI">
                                                             <rect key="frame" x="20" y="10" width="374" height="73"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                             <nil key="textColor"/>
@@ -490,8 +490,8 @@
                                             <outlet property="delegate" destination="VNX-Ov-BDt" id="EAa-ta-ns9"/>
                                         </connections>
                                     </tableView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fTi-ZP-ccD">
-                                        <rect key="frame" x="0.0" y="752" width="414" height="30"/>
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fTi-ZP-ccD">
+                                        <rect key="frame" x="0.0" y="538" width="414" height="30"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mwv-QI-Vvp">
                                                 <rect key="frame" x="10" y="3" width="394" height="24"/>
@@ -509,17 +509,17 @@
                                             <constraint firstAttribute="height" constant="30" id="iFX-TQ-fqr"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TKd-D9-mds" customClass="GGView" customModule="DrdshChatSDKTest" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="782" width="414" height="70"/>
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TKd-D9-mds" customClass="GGView" customModule="DrdshChatSDKTest" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="807" width="414" height="11"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="CNo-fJ-pvX">
-                                                <rect key="frame" x="20" y="10" width="374" height="60"/>
+                                                <rect key="frame" x="20" y="10" width="374" height="50"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="k9V-WL-uAJ">
-                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="40"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="50"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="opH-Dt-PXQ" customClass="GGButton" customModule="DrdshChatSDKTest" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="50"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="40" id="VOD-eM-L7I"/>
                                                                     <constraint firstAttribute="width" constant="40" id="kty-LB-Tzu"/>
@@ -527,10 +527,10 @@
                                                                 <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                                             </button>
                                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XSD-wU-YTk" customClass="GGView" customModule="DrdshChatSDKTest" customModuleProvider="target">
-                                                                <rect key="frame" x="50" y="0.0" width="274" height="40"/>
+                                                                <rect key="frame" x="50" y="0.0" width="274" height="50"/>
                                                                 <subviews>
                                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Type here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="H8x-p3-Jqo">
-                                                                        <rect key="frame" x="10" y="0.0" width="254" height="40"/>
+                                                                        <rect key="frame" x="10" y="0.0" width="254" height="50"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits"/>
                                                                         <connections>
@@ -550,7 +550,7 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BvG-9a-Sx2" customClass="GGButton" customModule="DrdshChatSDKTest" customModuleProvider="target">
-                                                                <rect key="frame" x="334" y="0.0" width="40" height="40"/>
+                                                                <rect key="frame" x="334" y="0.0" width="40" height="50"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="40" id="4Rv-ze-CZb"/>
                                                                     <constraint firstAttribute="width" constant="40" id="4Yy-t7-cxd"/>
@@ -558,8 +558,8 @@
                                                             </button>
                                                         </subviews>
                                                     </stackView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ck9-3y-44P" customClass="GGButton" customModule="DrdshChatSDKTest" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="40" width="374" height="20"/>
+                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ck9-3y-44P" customClass="GGButton" customModule="DrdshChatSDKTest" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="BH2-px-po3"/>
                                                         </constraints>
@@ -576,7 +576,7 @@
                                             <constraint firstAttribute="trailing" secondItem="CNo-fJ-pvX" secondAttribute="trailing" constant="20" id="8V2-Xm-iZr"/>
                                             <constraint firstItem="CNo-fJ-pvX" firstAttribute="top" secondItem="TKd-D9-mds" secondAttribute="top" constant="10" id="LlE-Xn-Vk1"/>
                                             <constraint firstItem="CNo-fJ-pvX" firstAttribute="leading" secondItem="TKd-D9-mds" secondAttribute="leading" constant="20" id="X7v-IV-1cK"/>
-                                            <constraint firstAttribute="bottom" secondItem="CNo-fJ-pvX" secondAttribute="bottom" id="bK4-bg-dbW"/>
+                                            <constraint firstAttribute="bottom" secondItem="CNo-fJ-pvX" secondAttribute="bottom" constant="10" id="bK4-bg-dbW"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
@@ -600,8 +600,8 @@
                         <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="PpW-5X-K0c" firstAttribute="top" secondItem="Aqd-uP-dBU" secondAttribute="top" id="0j4-Dw-tff"/>
-                            <constraint firstAttribute="bottom" secondItem="PpW-5X-K0c" secondAttribute="bottom" id="4EQ-hr-vNc"/>
                             <constraint firstItem="PpW-5X-K0c" firstAttribute="leading" secondItem="ESZ-yh-fnJ" secondAttribute="leading" id="MUE-Ko-loD"/>
+                            <constraint firstAttribute="bottom" secondItem="PpW-5X-K0c" secondAttribute="bottom" id="b95-Jv-bbL"/>
                             <constraint firstItem="PpW-5X-K0c" firstAttribute="trailing" secondItem="ESZ-yh-fnJ" secondAttribute="trailing" id="pnM-nN-2ZK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Aqd-uP-dBU"/>

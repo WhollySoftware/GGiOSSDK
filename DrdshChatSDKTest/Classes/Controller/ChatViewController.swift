@@ -7,6 +7,8 @@
 
 import UIKit
 import MobileCoreServices
+import IQKeyboardManagerSwift
+
 let imageCache = NSCache<NSString, UIImage>()
 class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate {
 
@@ -32,6 +34,11 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     var CloseBarItem : UIBarButtonItem?
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if #available(iOS 11.0, *) {
+            let window = UIApplication.shared.keyWindow
+            self.txtMessage.keyboardDistanceFromTextField = -((window?.safeAreaInsets.bottom ?? 00)-10)
+        }
         self.view.backgroundColor = DrdshChatSDKTest.shared.config.bgColor.Color()
         self.btnAttachment.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.showAttachmentButton
         self.btnMail.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.showSendTranscriptButton
