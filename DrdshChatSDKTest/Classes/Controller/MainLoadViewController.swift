@@ -18,20 +18,20 @@ class MainLoadViewController: UIViewController {
     @IBOutlet weak var viewEmailAddress: GGView!
     @IBOutlet weak var viewMobile: GGView!
     @IBOutlet weak var viewTypeYourQuestion: GGView!
-   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         self.title = "Chat".Local()
         
         self.txtFullName.text = GGUserSessionDetail.shared.name
         self.txtMobile.text = GGUserSessionDetail.shared.mobile
         self.txtEmailAddress.text = GGUserSessionDetail.shared.email
-//        txtFullName.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Full Name")
-//        txtMobile.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Mobile")
-//        txtEmailAddress.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Email Address")
-//        txtTypeYourQuestion.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Type your Question or message")
-//        btnStart.setTitle(DrdshChatSDKTest.shared.localizedString(stringKey: "Start Chat"), for: .normal)
+        //        txtFullName.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Full Name")
+        //        txtMobile.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Mobile")
+        //        txtEmailAddress.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Email Address")
+        //        txtTypeYourQuestion.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Type your Question or message")
+        //        btnStart.setTitle(DrdshChatSDKTest.shared.localizedString(stringKey: "Start Chat"), for: .normal)
         if DrdshChatSDKTest.shared.config.local == "ar"{
             self.txtFullName.textAlignment = .right
             self.txtMobile.textAlignment = .right
@@ -44,7 +44,7 @@ class MainLoadViewController: UIViewController {
         btnStart.action = {
             self.startChat()
         }
-
+        
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white,.font : UIFont.init(name: "AvenirLTStd-Black", size: 17.0) ?? UIFont.boldSystemFont(ofSize: 17)]
         var backImage = DrdshChatSDKTest.shared.config.backImage
         if DrdshChatSDKTest.shared.config.local == "ar"{
@@ -62,6 +62,26 @@ class MainLoadViewController: UIViewController {
         navigationItem.leftBarButtonItem = barItem
         self.btnStart.backgroundColor = DrdshChatSDKTest.shared.config.topBarBgColor.Color()
         makePostCall()
+        CommonSocket.shared.inviteVisitorListener { data in
+            DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus = 2
+            DrdshChatSDKTest.shared.AgentDetail <= data
+            DrdshChatSDKTest.shared.AllDetails.agentId = data["agent_id"] as? String ?? ""
+            DrdshChatSDKTest.shared.AgentDetail.agent_name = data["agent_name"] as? String ?? ""
+            DrdshChatSDKTest.shared.AgentDetail.visitor_message_id = data["visitor_message_id"] as? String ?? ""
+            DrdshChatSDKTest.shared.AllDetails.agentOnline = data["agentOnline"] as? Int ?? 0
+            DrdshChatSDKTest.shared.AllDetails.messageID = data["visitor_message_id"] as? String ?? ""
+            
+            var newTodo: [String: Any] =  DrdshChatSDKTest.shared.AllDetails.toDict
+            newTodo["embeddedChat"] = DrdshChatSDKTest.shared.AllDetails.embeddedChat.toDict
+            UserDefaults.standard.setValue(newTodo, forKey: "AllDetails")
+            
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
+            self.navigationController?.pushViewController(vc, animated: true)
+            CommonSocket.shared.joinAgentRoom(data: [["appSid" : DrdshChatSDKTest.shared.config.appSid,
+                                                      "agent_id":DrdshChatSDKTest.shared.AllDetails.agentId]]) { receivedTodo in
+                                                        
+            }
+        }
     }
     func setupData(){
         DispatchQueue.main.async {
@@ -75,15 +95,15 @@ class MainLoadViewController: UIViewController {
             self.txtTypeYourQuestion.placeholder = DrdshChatSDKTest.shared.config.fieldPlaceholderMessage.Local()
             self.btnStart.setTitle( DrdshChatSDKTest.shared.config.startChatButtonTxt.Local(), for: .normal)
             self.view.backgroundColor = DrdshChatSDKTest.shared.config.bgColor.Color()
-             self.navigationController?.navigationBar.barTintColor = DrdshChatSDKTest.shared.config.topBarBgColor.Color()
+            self.navigationController?.navigationBar.barTintColor = DrdshChatSDKTest.shared.config.topBarBgColor.Color()
             self.btnStart.backgroundColor = DrdshChatSDKTest.shared.config.buttonColor.Color()
         }
     }
     func makePostCall() {
-     let validateIdentityAPI: String = DrdshChatSDKTest.shared.APIbaseURL + "validate-identity"
-      var todosUrlRequest = URLRequest(url: URL(string: validateIdentityAPI)!)
-      todosUrlRequest.httpMethod = "POST"
-      var newTodo: [String: Any] = [
+        let validateIdentityAPI: String = DrdshChatSDKTest.shared.APIbaseURL + "validate-identity"
+        var todosUrlRequest = URLRequest(url: URL(string: validateIdentityAPI)!)
+        todosUrlRequest.httpMethod = "POST"
+        var newTodo: [String: Any] = [
             "appSid" : DrdshChatSDKTest.shared.config.appSid,
             "locale" : DrdshChatSDKTest.shared.config.local,
             "expandWidth": self.view.frame.width.description,
@@ -95,125 +115,116 @@ class MainLoadViewController: UIViewController {
         ]
         if DrdshChatSDKTest.shared.AllDetails.visitorID != ""{
             newTodo["visitorID"] = DrdshChatSDKTest.shared.AllDetails.visitorID
-             newTodo["name"] = GGUserSessionDetail.shared.name
-             newTodo["email"] = GGUserSessionDetail.shared.email
-             newTodo["mobile"] = GGUserSessionDetail.shared.mobile
+            newTodo["name"] = GGUserSessionDetail.shared.name
+            newTodo["email"] = GGUserSessionDetail.shared.email
+            newTodo["mobile"] = GGUserSessionDetail.shared.mobile
         }
         if getIFAddresses().count > 0{
             newTodo["ipAddress"] = getIFAddresses()[0]
         }
-      let jsonTodo: Data
-      do {
-        jsonTodo = try JSONSerialization.data(withJSONObject: newTodo, options: [])
-        todosUrlRequest.httpBody = jsonTodo
-      } catch {
-        print("Error: cannot create JSON from todo")
-        return
-      }
-      todosUrlRequest.setValue("XMLHttpRequest", forHTTPHeaderField: "X-Requested-With")
-      todosUrlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-      todosUrlRequest.setValue(DrdshChatSDKTest.shared.config.local, forHTTPHeaderField: "locale")
-      let session = URLSession.shared
-      GGProgress.shared.showProgress()
-      let task = session.dataTask(with: todosUrlRequest) {
-        (data, response, error) in
-        DispatchQueue.main.async {
-            GGProgress.shared.hideProgress()
-        }
-        guard error == nil else {
-          print("error calling POST on /todos/1",error!)
-          return
-        }
-        guard let responseData = data else {
-          print("Error: did not receive data")
-          return
-        }
+        let jsonTodo: Data
         do {
-          guard let receivedTodo = try JSONSerialization.jsonObject(with: responseData,
-            options: []) as? [String: Any] else {
-              print("Could not get JSON from responseData as dictionary")
-              return
-          }
-            if receivedTodo["message"] as! String == "Authorized"{
-                if let d = receivedTodo["data"] as? [String:AnyObject]{
-                    print("Response : " + receivedTodo.description)
-                    DrdshChatSDKTest.shared.AllDetails <= d
-                    var newTodo: [String: Any] =  DrdshChatSDKTest.shared.AllDetails.toDict
-                    DrdshChatSDKTest.shared.config.mapServerData(to: DrdshChatSDKTest.shared.AllDetails.embeddedChat.toDict)
-                    self.setupData()
-                    newTodo["embeddedChat"] = DrdshChatSDKTest.shared.AllDetails.embeddedChat.toDict
-                    UserDefaults.standard.setValue(newTodo, forKey: "AllDetails")
-                    
-                    if DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus == 1 || DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus == 2{
-                        DispatchQueue.main.async {
-                            let vc = self.storyboard?.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
-                            self.navigationController?.pushViewController(vc, animated: false)
-                            
-                        }
-                    }
-                    CommonSocket.shared.initSocket { (status) in
-                        var strStatus = ""
-                        if DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus == 2{
-                            strStatus = "ignore_request"
-                        }else{
-                            strStatus = "site_visitor"
-                        }
-                        CommonSocket.shared.joinVisitorsRoom(data: [[
-                            "appSid" : DrdshChatSDKTest.shared.config.appSid,
-                            "dc_id":DrdshChatSDKTest.shared.AllDetails.companyId,
-                            "dc_name":DrdshChatSDKTest.shared.AllDetails.name,
-                            "dc_vid":DrdshChatSDKTest.shared.AllDetails.visitorID,
-                            "dc_online":strStatus]]){ data in
-                            if DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus == 2{
-                                DrdshChatSDKTest.shared.AgentDetail <= data
-                                DrdshChatSDKTest.shared.AllDetails.agentId = data["agent_id"] as! String
-                                DrdshChatSDKTest.shared.AgentDetail.agent_name = data["name"] as! String
-                                DrdshChatSDKTest.shared.AgentDetail.visitor_message_id = data["visitor_message_id"] as! String
-                            }
-                            debugPrint(data)
-                        }
-                    }
-                    if DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus == 1{
-                        if !DrdshChatSDKTest.shared.AllDetails.embeddedChat.displayForm{
-                            self.startChat(isDirect: true)
-                        }
-                    }
-                }
-            }else{
-               
-                DispatchQueue.main.async {
-                    self.dismiss(animated: true) {
-                        let alert = UIAlertController(title: "Error", message: receivedTodo["message"] as? String ?? "", preferredStyle: UIAlertController.Style.alert)
-                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-                        DrdshChatSDKTest.shared.topViewController()?.present(alert, animated: true, completion: nil)
-                    }
-                }
-                print("Response : " + receivedTodo.description)
-            }
-        } catch  {
-          print("error parsing response from POST on /todos")
-          return
+            jsonTodo = try JSONSerialization.data(withJSONObject: newTodo, options: [])
+            todosUrlRequest.httpBody = jsonTodo
+        } catch {
+            print("Error: cannot create JSON from todo")
+            return
         }
-      }
-      task.resume()
+        todosUrlRequest.setValue("XMLHttpRequest", forHTTPHeaderField: "X-Requested-With")
+        todosUrlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        todosUrlRequest.setValue(DrdshChatSDKTest.shared.config.local, forHTTPHeaderField: "locale")
+        let session = URLSession.shared
+        GGProgress.shared.showProgress()
+        let task = session.dataTask(with: todosUrlRequest) {
+            (data, response, error) in
+            DispatchQueue.main.async {
+                GGProgress.shared.hideProgress()
+            }
+            guard error == nil else {
+                print("error calling POST on /todos/1",error!)
+                return
+            }
+            guard let responseData = data else {
+                print("Error: did not receive data")
+                return
+            }
+            do {
+                guard let receivedTodo = try JSONSerialization.jsonObject(with: responseData,
+                                                                          options: []) as? [String: Any] else {
+                                                                            print("Could not get JSON from responseData as dictionary")
+                                                                            return
+                }
+                if receivedTodo["message"] as! String == "Authorized"{
+                    if let d = receivedTodo["data"] as? [String:AnyObject]{
+                        print("Response : " + receivedTodo.description)
+                        DrdshChatSDKTest.shared.AllDetails <= d
+                        var newTodo: [String: Any] =  DrdshChatSDKTest.shared.AllDetails.toDict
+                        DrdshChatSDKTest.shared.config.mapServerData(to: DrdshChatSDKTest.shared.AllDetails.embeddedChat.toDict)
+                        self.setupData()
+                        newTodo["embeddedChat"] = DrdshChatSDKTest.shared.AllDetails.embeddedChat.toDict
+                        UserDefaults.standard.setValue(newTodo, forKey: "AllDetails")
+                        
+                        if DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus == 1 || DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus == 2{
+                            DispatchQueue.main.async {
+                                let vc = self.storyboard?.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
+                                self.navigationController?.pushViewController(vc, animated: false)
+                                
+                            }
+                        }
+                        CommonSocket.shared.initSocket { (status) in
+                            CommonSocket.shared.joinVisitorsRoom(data: [[
+                                "appSid" : DrdshChatSDKTest.shared.config.appSid,
+                                "dc_vid":DrdshChatSDKTest.shared.AllDetails.visitorID]]){ data in
+                                    if DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus == 2{
+                                        DrdshChatSDKTest.shared.AgentDetail <= data
+                                        DrdshChatSDKTest.shared.AllDetails.agentId = data["agent_id"] as! String
+                                        DrdshChatSDKTest.shared.AgentDetail.agent_name = data["name"] as! String
+                                        DrdshChatSDKTest.shared.AgentDetail.visitor_message_id = data["visitor_message_id"] as! String
+                                    }
+                                    debugPrint(data)
+                            }
+                        }
+                        if DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus == 1{
+                            if !DrdshChatSDKTest.shared.AllDetails.embeddedChat.displayForm{
+                                self.startChat(isDirect: true)
+                            }
+                        }
+                    }
+                }else{
+                    
+                    DispatchQueue.main.async {
+                        self.dismiss(animated: true) {
+                            let alert = UIAlertController(title: "Error", message: receivedTodo["message"] as? String ?? "", preferredStyle: UIAlertController.Style.alert)
+                            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                            DrdshChatSDKTest.shared.topViewController()?.present(alert, animated: true, completion: nil)
+                        }
+                    }
+                    print("Response : " + receivedTodo.description)
+                }
+            } catch  {
+                print("error parsing response from POST on /todos")
+                return
+            }
+        }
+        task.resume()
     }
     func getIFAddresses() -> [String] {
         var addresses = [String]()
-
+        
         // Get list of all interfaces on the local machine:
         var ifaddr : UnsafeMutablePointer<ifaddrs>?
         guard getifaddrs(&ifaddr) == 0 else { return [] }
         guard let firstAddr = ifaddr else { return [] }
-
+        
         // For each interface ...
         for ptr in sequence(first: firstAddr, next: { $0.pointee.ifa_next }) {
             let flags = Int32(ptr.pointee.ifa_flags)
             let addr = ptr.pointee.ifa_addr.pointee
-
+            
             // Check for running IPv4, IPv6 interfaces. Skip the loopback interface.
             if (flags & (IFF_UP|IFF_RUNNING|IFF_LOOPBACK)) == (IFF_UP|IFF_RUNNING) {
                 if addr.sa_family == UInt8(AF_INET) || addr.sa_family == UInt8(AF_INET6) {
-
+                    
                     // Convert interface address to a human readable string:
                     var hostname = [CChar](repeating: 0, count: Int(NI_MAXHOST))
                     if (getnameinfo(ptr.pointee.ifa_addr, socklen_t(addr.sa_len), &hostname, socklen_t(hostname.count),
@@ -226,7 +237,7 @@ class MainLoadViewController: UIViewController {
                 }
             }
         }
-
+        
         freeifaddrs(ifaddr)
         return addresses
     }
@@ -250,91 +261,41 @@ class MainLoadViewController: UIViewController {
                 return
             }
         }
-     let validateIdentityAPI: String = DrdshChatSDKTest.shared.APIbaseURL + "initiate/chat"
-      var todosUrlRequest = URLRequest(url: URL(string: validateIdentityAPI)!)
-      todosUrlRequest.httpMethod = "POST"
-      let newTodo: [String: Any] = [
+        let newTodo: [String: Any] = [
             "appSid" : DrdshChatSDKTest.shared.config.appSid,
             "locale" : DrdshChatSDKTest.shared.config.local,
-            "visitorID":DrdshChatSDKTest.shared.AllDetails.visitorID,
+            "_id":DrdshChatSDKTest.shared.AllDetails.visitorID,
             "name": self.txtFullName.text == "" ? self.txtFullName.text! : "Guest",
             "mobile": self.txtMobile.text!,
             "email": self.txtEmailAddress.text!,
             "message": self.txtTypeYourQuestion.text!
         ]
-    
-      let jsonTodo: Data
-      do {
-        jsonTodo = try JSONSerialization.data(withJSONObject: newTodo, options: [])
-        todosUrlRequest.httpBody = jsonTodo
-      } catch {
-        print("Error: cannot create JSON from todo")
-        return
-      }
-      todosUrlRequest.setValue("XMLHttpRequest", forHTTPHeaderField: "X-Requested-With")
-      todosUrlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-      todosUrlRequest.setValue(DrdshChatSDKTest.shared.config.local, forHTTPHeaderField: "locale")
-      let session = URLSession.shared
-      GGProgress.shared.showProgress(isFullLoader:false)
-      let task = session.dataTask(with: todosUrlRequest) {
-        (data, response, error) in
-        DispatchQueue.main.async {
-            GGProgress.shared.hideProgress()
-        }
-        guard error == nil else {
-          print("error calling POST on /todos/1",error!)
-          return
-        }
-        guard let responseData = data else {
-          print("Error: did not receive data")
-          return
-        }
-        do {
-          guard let receivedTodo = try JSONSerialization.jsonObject(with: responseData,
-            options: []) as? [String: Any] else {
-              print("Could not get JSON from responseData as dictionary")
-              return
-          }
-            if receivedTodo["message"] as! String == "Waiting for agent"{
-                if let d = receivedTodo["data"] as? [String:AnyObject]{
-                    print("Response : " + receivedTodo.description)
-                    DrdshChatSDKTest.shared.AllDetails.agentOnline = d["agentOnline"] as? Int ?? 0
-                    DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus = d["visitorConnectedStatus"] as? Int ?? 0
-                    DrdshChatSDKTest.shared.AllDetails.messageID = d["messageID"] as? String ?? ""
-                   
-                    var newTodo: [String: Any] =  DrdshChatSDKTest.shared.AllDetails.toDict
-                    newTodo["embeddedChat"] = DrdshChatSDKTest.shared.AllDetails.embeddedChat.toDict
-                    CommonSocket.shared.startChatRequest(data: [[
-                        "appSid" : DrdshChatSDKTest.shared.config.appSid,
-                        "dc_vid":DrdshChatSDKTest.shared.AllDetails.visitorID]])
-                    UserDefaults.standard.setValue(newTodo, forKey: "AllDetails")
-                    DispatchQueue.main.async {
-                        GGUserSessionDetail.shared.name = self.txtFullName.text!
-                        GGUserSessionDetail.shared.mobile = self.txtMobile.text!
-                        GGUserSessionDetail.shared.email = self.txtEmailAddress.text!
-                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
-                        self.navigationController?.pushViewController(vc, animated: true)
-                    }
-                }
-            }else{
-               
-                DispatchQueue.main.async {
-                     self.showAlertView(str: receivedTodo["message"] as? String ?? "")
-                }
-                print("Response : " + receivedTodo.description)
+        CommonSocket.shared.inviteChat(data: [newTodo]) { receivedTodo in
+            print("Response : " + receivedTodo.description)
+            DrdshChatSDKTest.shared.AllDetails.agentOnline = receivedTodo["agentOnline"] as? Int ?? 0
+            DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus = 2
+            DrdshChatSDKTest.shared.AllDetails.messageID = receivedTodo["visitor_message_id"] as? String ?? ""
+            
+            var newTodo: [String: Any] =  DrdshChatSDKTest.shared.AllDetails.toDict
+            newTodo["embeddedChat"] = DrdshChatSDKTest.shared.AllDetails.embeddedChat.toDict
+            CommonSocket.shared.startChatRequest(data: [[
+                "appSid" : DrdshChatSDKTest.shared.config.appSid,
+                "dc_vid":DrdshChatSDKTest.shared.AllDetails.visitorID]])
+            UserDefaults.standard.setValue(newTodo, forKey: "AllDetails")
+            DispatchQueue.main.async {
+                GGUserSessionDetail.shared.name = self.txtFullName.text!
+                GGUserSessionDetail.shared.mobile = self.txtMobile.text!
+                GGUserSessionDetail.shared.email = self.txtEmailAddress.text!
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
+                self.navigationController?.pushViewController(vc, animated: true)
             }
-        } catch  {
-          print("error parsing response from POST on /todos")
-          return
         }
-      }
-      task.resume()
     }
     func showAlertView(str:String){
         
         let alert = UIAlertController(title: DrdshChatSDKTest.shared.config.error.Local(), message: str.Local(), preferredStyle: UIAlertController.Style.alert)
-       alert.addAction(UIAlertAction(title: DrdshChatSDKTest.shared.config.ok.Local(), style: UIAlertAction.Style.default, handler: nil))
-       DrdshChatSDKTest.shared.topViewController()?.present(alert, animated: true, completion: nil)
+        alert.addAction(UIAlertAction(title: DrdshChatSDKTest.shared.config.ok.Local(), style: UIAlertAction.Style.default, handler: nil))
+        DrdshChatSDKTest.shared.topViewController()?.present(alert, animated: true, completion: nil)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -361,10 +322,10 @@ extension UIImage {
                             width: size.width, height: size.height))
             let rotatedImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
-
+            
             return rotatedImage ?? self
         }
-
+        
         return self
     }
 }

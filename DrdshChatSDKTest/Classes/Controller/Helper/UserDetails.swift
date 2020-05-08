@@ -103,6 +103,7 @@ class EmbeddedChat:GGObject{
     var systemMessageColor:String  = ""
     var topBarBgColor:String  = ""
     var valueColor:String  = ""
+    var maxWaitTime:Int  = 0
 }
 class MessageModel:GGObject{
     var __v:Int  = 0

@@ -32,6 +32,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     var list:[MessageModel] = []
     var agentName = "Agent"
     var CloseBarItem : UIBarButtonItem?
+    var userdata : [String:AnyObject] = [:]
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,24 +52,18 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         btnWebSite.setTitle(DrdshChatSDKTest.shared.localizedString(stringKey: "Powered by Drdsh"), for: .normal)
         if DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus == 1{
             self.title = DrdshChatSDKTest.shared.config.waitingForAgent.Local()
-            timer = Timer(timeInterval: 120, target: self, selector: #selector(invitationMaxWaitTimeExceeded), userInfo: nil, repeats: false)
+            timer = Timer(timeInterval: TimeInterval(DrdshChatSDKTest.shared.AllDetails.embeddedChat.maxWaitTime), target: self, selector: #selector(invitationMaxWaitTimeExceeded), userInfo: nil, repeats: false)
             RunLoop.main.add(timer, forMode: RunLoopMode.commonModes)
         }
         
         CommonSocket.shared.joinVisitorsRoom(data: [[
             "appSid" : DrdshChatSDKTest.shared.config.appSid,
-            "dc_id":DrdshChatSDKTest.shared.AllDetails.companyId,
-            "dc_name":DrdshChatSDKTest.shared.AllDetails.name,
-            "dc_vid":DrdshChatSDKTest.shared.AllDetails.visitorID,
-            "dc_online":"arrived"]]){ data in
-            if let t = data["embeddedChat"] as? [String:AnyObject]{
-                if let maxWaitTime = t["maxWaitTime"] as? Int{
-                    if DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus == 1{
-                        self.title = DrdshChatSDKTest.shared.config.waitingForAgent.Local()
-                        self.timer = Timer(timeInterval: TimeInterval(maxWaitTime), target: self, selector: #selector(self.invitationMaxWaitTimeExceeded), userInfo: nil, repeats: false)
-                        RunLoop.main.add(self.timer, forMode: RunLoopMode.commonModes)
-                    }
-                }
+            "dc_vid":DrdshChatSDKTest.shared.AllDetails.visitorID]]){ data in
+            self.userdata = data
+            if DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus == 2{
+                var dic = self.userdata
+                dic["appSid"] = DrdshChatSDKTest.shared.config.appSid as AnyObject
+                CommonSocket.shared.visitorJoinAgentRoom(data: [dic])
             }
         }
         if DrdshChatSDKTest.shared.config.local == "ar"{
@@ -108,12 +103,8 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             if DrdshChatSDKTest.shared.AgentDetail.agent_id == ""{
                 self.title = DrdshChatSDKTest.shared.config.connecting.Local()
             }else{self.setAgentDetail()}
-            
             self.navigationItem.rightBarButtonItem = self.CloseBarItem
-            CommonSocket.shared.visitorJoinAgentRoom(data: [[
-                "appSid" : DrdshChatSDKTest.shared.config.appSid,
-                "vid":DrdshChatSDKTest.shared.AllDetails.visitorID,
-                "agent_id":DrdshChatSDKTest.shared.AllDetails.agentId]])
+            
         }
         CommonSocket.shared.visitorLoadChatHistory(data: [[
             "appSid" : DrdshChatSDKTest.shared.config.appSid,

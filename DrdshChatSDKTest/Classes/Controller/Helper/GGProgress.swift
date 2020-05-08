@@ -23,13 +23,12 @@ class GGProgress: NSObject {
             self.hub.label.text = title
             self.hub.contentColor = UIColor.white
             if isFullLoader{
-                if #available(iOS 13.0, *) {
-                    self.hub.backgroundView.blurEffectStyle = .systemUltraThinMaterialDark
-                } else {
-                    self.hub.backgroundView.blurEffectStyle = .regular
-                }
                 self.hub.backgroundColor = UIColor.white
                 self.hub.bezelView.color = UIColor.black
+                self.hub.bezelView.style = .solidColor
+            }else{
+                self.hub.bezelView.color = UIColor.black
+                self.hub.bezelView.style = .solidColor
             }
         }
     }

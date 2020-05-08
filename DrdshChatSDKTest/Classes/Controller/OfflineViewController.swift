@@ -29,14 +29,7 @@ class OfflineViewController: UIViewController {
         self.txtFullName.text = GGUserSessionDetail.shared.name
         self.txtMobile.text = GGUserSessionDetail.shared.mobile
         self.txtEmailAddress.text = GGUserSessionDetail.shared.email
-        
-//        txtFullName.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Full Name")
-//        txtMobile.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Mobile")
-//        txtEmailAddress.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Email Address")
-//        txtEmailAddress.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Subject")
-//        txtTypeYourQuestion.placeholder = DrdshChatSDKTest.shared.localizedString(stringKey: "Type your Question or message")
-//        btnStart.setTitle(DrdshChatSDKTest.shared.localizedString(stringKey: "Send Message"), for: .normal)
-        
+    
         if DrdshChatSDKTest.shared.config.local == "ar"{
             self.txtFullName.textAlignment = .right
             self.txtMobile.textAlignment = .right
@@ -100,74 +93,23 @@ class OfflineViewController: UIViewController {
             return
         }
         
-     let validateIdentityAPI: String = DrdshChatSDKTest.shared.APIbaseURL + "send/offline/message"
-      var todosUrlRequest = URLRequest(url: URL(string: validateIdentityAPI)!)
-      todosUrlRequest.httpMethod = "POST"
       let newTodo: [String: Any] = [
             "appSid" : DrdshChatSDKTest.shared.config.appSid,
             "locale" : DrdshChatSDKTest.shared.config.local,
-            "visitorID":DrdshChatSDKTest.shared.AllDetails.visitorID,
+            "_id":DrdshChatSDKTest.shared.AllDetails.visitorID,
             "subject" : self.txtSubject.text!,
             "name": self.txtFullName.text!,
             "mobile": self.txtMobile.text!,
             "email": self.txtEmailAddress.text!,
             "message": self.txtTypeYourQuestion.text!
         ]
-    
-      let jsonTodo: Data
-      do {
-        jsonTodo = try JSONSerialization.data(withJSONObject: newTodo, options: [])
-        todosUrlRequest.httpBody = jsonTodo
-      } catch {
-        print("Error: cannot create JSON from todo")
-        return
-      }
-      todosUrlRequest.setValue("XMLHttpRequest", forHTTPHeaderField: "X-Requested-With")
-      todosUrlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-      todosUrlRequest.setValue(DrdshChatSDKTest.shared.config.local, forHTTPHeaderField: "locale")
-      let session = URLSession.shared
-        GGProgress.shared.showProgress(isFullLoader:false)
-      let task = session.dataTask(with: todosUrlRequest) {
-        (data, response, error) in
-        DispatchQueue.main.async {
-            GGProgress.shared.hideProgress()
+        CommonSocket.shared.submitOfflineMessage(data: [newTodo]) { receivedTodo in
+            self.txtTypeYourQuestion.text = ""
+            self.showAlertView(str: receivedTodo["message"] as? String ?? "")
         }
-        guard error == nil else {
-          print("error calling POST on /todos/1",error!)
-          return
-        }
-        guard let responseData = data else {
-          print("Error: did not receive data")
-          return
-        }
-        do {
-          guard let receivedTodo = try JSONSerialization.jsonObject(with: responseData,
-            options: []) as? [String: Any] else {
-              print("Could not get JSON from responseData as dictionary")
-              return
-          }
-            if receivedTodo["message"] as! String == "authorized"{
-                 print("Response : " + receivedTodo.description)
-            }else{
-               
-                DispatchQueue.main.async {
-//                    self.dismiss(animated: true) {
-//
-//                    }
-                    self.txtTypeYourQuestion.text = ""
-                    self.showAlertView(str: receivedTodo["message"] as? String ?? "")
-                }
-                print("Response : " + receivedTodo.description)
-            }
-        } catch  {
-          print("error parsing response from POST on /todos")
-          return
-        }
-      }
-      task.resume()
     }
     func showAlertView(str:String){
-         let alert = UIAlertController(title: DrdshChatSDKTest.shared.config.error.Local(), message: str.Local(), preferredStyle: UIAlertController.Style.alert)
+         let alert = UIAlertController(title: nil, message: str.Local(), preferredStyle: UIAlertController.Style.alert)
          alert.addAction(UIAlertAction(title: DrdshChatSDKTest.shared.config.ok.Local(), style: UIAlertAction.Style.default, handler: nil))
          DrdshChatSDKTest.shared.topViewController()?.present(alert, animated: true, completion: nil)
     }
