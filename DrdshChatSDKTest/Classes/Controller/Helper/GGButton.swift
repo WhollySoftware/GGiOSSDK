@@ -123,7 +123,7 @@ class GGButton: UIButton {
     @objc private func performAction() {
         
         if let vc = self.parentViewController {
-            vc.view.endEditing(true)
+           // vc.view.endEditing(true)
         }
 
         guard let action = action else {

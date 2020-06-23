@@ -9,6 +9,44 @@
 import UIKit
 import SocketIO
 
+enum GGSokcetEmitKey {
+    
+    case joinVisitorsRoom
+    case visitorJoinAgentRoom
+    case invitationMaxWaitTimeExceeded
+    case visitorLoadChatHistory
+    case visitorTyping
+    case emailChatTranscript
+    case sendVisitorMessage
+    case visitorEndChatSession
+    case updateVisitorRating
+    case inviteChat
+    case submitOfflineMessage
+    case joinAgentRoom
+
+
+    var relative: String {
+        return self.value
+    }
+    
+    private var value: String {
+        switch self {
+        case .joinVisitorsRoom : return "joinVisitorsRoom"
+        case .visitorJoinAgentRoom : return "visitorJoinAgentRoom"
+        case .invitationMaxWaitTimeExceeded : return "invitationMaxWaitTimeExceeded"
+        case .visitorLoadChatHistory : return "visitorLoadChatHistory"
+        case .visitorTyping : return "visitorTyping"
+        case .emailChatTranscript : return "emailChatTranscript"
+        case .sendVisitorMessage : return "sendVisitorMessage"
+        case .visitorEndChatSession : return "visitorEndChatSession"
+        case .updateVisitorRating : return "updateVisitorRating"
+        case .inviteChat : return "inviteChat"
+        case .submitOfflineMessage : return "submitOfflineMessage"
+        case .joinAgentRoom : return "joinAgentRoom"
+        }
+    }
+}
+
 class CommonSocket: NSObject {
 
     static let shared = CommonSocket()
@@ -27,14 +65,6 @@ class CommonSocket: NSObject {
         manager.defaultSocket.on(clientEvent: .disconnect) {data, ack in
             print("socket disconnected \(data)")
             self.manager.defaultSocket.connect()
-        }
-        manager.defaultSocket.on(clientEvent: .connect) {data, ack in
-            if ack.expected {
-                print("connect inside \(data) ack")
-            }else{
-                print("connect inside without ack \(data) ")
-            }
-            completion(true)
         }
         manager.defaultSocket.on(clientEvent: .reconnect) {data, ack in
             if ack.expected {
@@ -61,6 +91,40 @@ class CommonSocket: NSObject {
         return
         //manager.defaultSocket.disconnect()
         //socket = SocketManager(socketURL: URL(string: "https://www.drdsh.live")!, config: [.log(true), .compress]).defaultSocket
+    }
+    func CommanEmitSokect(command:GGSokcetEmitKey,data: [Any], completion: @escaping([String:AnyObject]) -> Void)
+    {
+        var t:[String:Any] = [:]
+        t = data[0] as? [String:Any] ?? [:]
+        t["appSid"] = DrdshChatSDKTest.shared.config.appSid
+        t["device"] = "ios"
+        
+        if isConnected()
+        {
+            manager.defaultSocket.emitWithAck(command.relative, with: [t]).timingOut(after: 0) {resp in
+                print(resp)
+                if resp.count > 1{
+                    if (resp[0] as? Int ?? 0) == 200{
+                        completion(resp[1] as? [String:AnyObject] ?? [:])
+                    }
+                }else{
+                    completion(resp[0] as? [String:AnyObject] ?? [:])
+                }
+            }
+        }else{
+            initSocket(completion: { (result) in
+                self.manager.defaultSocket.emitWithAck(command.relative, with: [t]).timingOut(after: 0) {resp in
+                    print(resp)
+                    if resp.count > 1{
+                        if (resp[0] as? Int ?? 0) == 200{
+                            completion(resp[1] as? [String:AnyObject] ?? [:])
+                        }
+                    }else{
+                        completion(resp[0] as? [String:AnyObject] ?? [:])
+                    }
+                }
+            })
+        }
     }
     func ipBlocked(completion: @escaping([String:AnyObject]) -> Void)
     {
@@ -134,94 +198,7 @@ class CommonSocket: NSObject {
             }
         }
     }
-    func joinVisitorsRoom(data: [Any], completion: @escaping([String:AnyObject]) -> Void)
-    {
-        if !isConnected()
-        {
-            initSocket(completion: { (result) in
-                self.manager.defaultSocket.emitWithAck("joinVisitorsRoom", with: data).timingOut(after: 0) {resp in
-                    print(resp)
-                    if let t = resp[0] as? [String:AnyObject]{
-                        self.agentDetail?(t)
-                        completion(t)
-                    }
-                }
-            })
-            return
-        }
-        manager.defaultSocket.emitWithAck("joinVisitorsRoom", with: data).timingOut(after: 0) {resp in
-            print(resp)
-             print(resp)
-            if let t = resp[0] as? [String:AnyObject]{
-                self.agentDetail?(t)
-                completion(t)
-            }
-        }
-    }
-    func startChatRequest(data: [Any])
-    {
-        if !isConnected()
-        {
-            initSocket(completion: { (result) in
-                self.manager.defaultSocket.emitWithAck("startChatRequest", with: data).timingOut(after: 0) {resp in
-                    print(resp)
-                }
-            })
-            return
-        }
-        manager.defaultSocket.emitWithAck("startChatRequest", with: data).timingOut(after: 0) {resp in
-            print(resp)
-             print(resp)
-        }
-    }
-    func joinAgentRoom(data: [Any])
-    {
-        if !isConnected()
-        {
-            initSocket(completion: { (result) in
-                self.manager.defaultSocket.emitWithAck("joinAgentRoom", with: data).timingOut(after: 0) {resp in
-                    print(resp)
-                }
-            })
-            return
-        }
-        manager.defaultSocket.emitWithAck("joinAgentRoom", with: data).timingOut(after: 0) {resp in
-            print(resp)
-             print(resp)
-        }
-    }
-    func visitorJoinAgentRoom(data: [Any])
-    {
-        if !isConnected()
-        {
-            initSocket(completion: { (result) in
-                self.manager.defaultSocket.emitWithAck("visitorJoinAgentRoom", with: data).timingOut(after: 0) {resp in
-                    print(resp)
-                }
-            })
-            return
-        }
-        manager.defaultSocket.emitWithAck("visitorJoinAgentRoom", with: data).timingOut(after: 0) {resp in
-            print(resp)
-        }
-    }
-    func invitationMaxWaitTimeExceeded(data: [Any], completion: @escaping([Any]) -> Void)
-    {
-        if !isConnected()
-        {
-            initSocket(completion: { (result) in
-                self.manager.defaultSocket.emitWithAck("invitationMaxWaitTimeExceeded", with: data).timingOut(after: 0) {resp in
-                    print(resp)
-                    completion(resp)
-                }
-            })
-            return
-        }
-        manager.defaultSocket.emitWithAck("invitationMaxWaitTimeExceeded", with: data).timingOut(after: 0) {resp in
-            print(resp)
-            completion(resp)
-        }
-    }
+    
     func visitorLoadChatHistory(data: [Any], completion: @escaping([Any]) -> Void)
     {
         if !isConnected()
@@ -237,145 +214,6 @@ class CommonSocket: NSObject {
         manager.defaultSocket.emitWithAck("visitorLoadChatHistory", with: data).timingOut(after: 0) {resp in
             print(resp)
             completion(resp)
-        }
-    }
-    func inviteChat(data: [Any], completion: @escaping([String:AnyObject]) -> Void)
-    {
-        if !isConnected()
-        {
-            initSocket(completion: { (result) in
-                self.manager.defaultSocket.emitWithAck("inviteChat", with: data).timingOut(after: 0) {resp in
-                   if let t = resp[1] as? [String:AnyObject]{
-                        completion(t)
-                    }
-                }
-            })
-            return
-        }
-        manager.defaultSocket.emitWithAck("inviteChat", with: data).timingOut(after: 0) {resp in
-            print(resp)
-           if let t = resp[1] as? [String:AnyObject]{
-                completion(t)
-            }
-        }
-    }
-    func submitOfflineMessage(data: [Any], completion: @escaping([String:AnyObject]) -> Void)
-    {
-        if !isConnected()
-        {
-            initSocket(completion: { (result) in
-                self.manager.defaultSocket.emitWithAck("submitOfflineMessage", with: data).timingOut(after: 0) {resp in
-                    print(resp)
-                    if let t = resp[1] as? [String:AnyObject]{
-                        completion(t)
-                    }
-                }
-            })
-            return
-        }
-        manager.defaultSocket.emitWithAck("submitOfflineMessage", with: data).timingOut(after: 0) {resp in
-            print(resp)
-            if let t = resp[1] as? [String:AnyObject]{
-                completion(t)
-            }
-        }
-    }
-    func joinAgentRoom(data: [Any], completion: @escaping([Any]) -> Void)
-    {
-        if !isConnected()
-        {
-            initSocket(completion: { (result) in
-                self.manager.defaultSocket.emitWithAck("joinAgentRoom", with: data).timingOut(after: 0) {resp in
-                    print(resp)
-                    completion(resp)
-                }
-            })
-            return
-        }
-        manager.defaultSocket.emitWithAck("joinAgentRoom", with: data).timingOut(after: 0) {resp in
-            print(resp)
-            completion(resp)
-        }
-    }
-    func visitorTyping(data: [Any])
-    {
-        if !isConnected()
-        {
-            initSocket(completion: { (result) in
-                self.manager.defaultSocket.emitWithAck("visitorTyping", with: data).timingOut(after: 0) {resp in
-                    print(resp)
-                }
-            })
-            return
-        }
-        manager.defaultSocket.emitWithAck("visitorTyping", with: data).timingOut(after: 0) {resp in
-            print(resp)
-        }
-    }
-    func emailChatTranscript(data: [Any], completion: @escaping([Any]) -> Void)
-    {
-        if !isConnected()
-        {
-            initSocket(completion: { (result) in
-                self.manager.defaultSocket.emitWithAck("emailChatTranscript", with: data).timingOut(after: 0) {resp in
-                    print(resp)
-                    completion(resp)
-                }
-            })
-            return
-        }
-        manager.defaultSocket.emitWithAck("emailChatTranscript", with: data).timingOut(after: 0) {resp in
-            print(resp)
-            completion(resp)
-        }
-    }
-    func sendVisitorMessage(data: [Any], completion: @escaping([Any]) -> Void)
-    {
-        if !isConnected()
-        {
-            initSocket(completion: { (result) in
-                self.manager.defaultSocket.emitWithAck("sendVisitorMessage", with: data).timingOut(after: 0) {resp in
-                    print(resp)
-                    completion(resp)
-                }
-            })
-            return
-        }
-        manager.defaultSocket.emitWithAck("sendVisitorMessage", with: data).timingOut(after: 0) {resp in
-            print(resp)
-            completion(resp)
-        }
-    }
-    func visitorEndChatSession(data: [Any], completion: @escaping([Any]) -> Void)
-    {
-        if !isConnected()
-        {
-            initSocket(completion: { (result) in
-                self.manager.defaultSocket.emitWithAck("visitorEndChatSession", with: data).timingOut(after: 0) {resp in
-                    print(resp)
-                    completion(resp)
-                }
-            })
-            return
-        }
-        manager.defaultSocket.emitWithAck("visitorEndChatSession", with: data).timingOut(after: 0) {resp in
-            print(resp)
-            completion(resp)
-        }
-    }
-    func updateVisitorRating(data: [Any])
-    {
-        if !isConnected()
-        {
-            initSocket(completion: { (result) in
-                self.manager.defaultSocket.emitWithAck("updateVisitorRating", with: data).timingOut(after: 0) {resp in
-                    print(resp)
-                }
-            })
-            return
-        }
-        manager.defaultSocket.emitWithAck("updateVisitorRating", with: data).timingOut(after: 0) {resp in
-            print(resp)
         }
     }
 }

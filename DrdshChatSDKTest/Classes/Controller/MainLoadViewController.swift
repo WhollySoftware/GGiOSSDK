@@ -41,6 +41,7 @@ class MainLoadViewController: UIViewController {
         
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.toolbarDoneBarButtonItemText = DrdshChatSDKTest.shared.config.done.Local()
+        IQKeyboardManager.shared.disabledToolbarClasses = [ChatViewController.self]
         btnStart.action = {
             self.startChat()
         }
@@ -77,7 +78,7 @@ class MainLoadViewController: UIViewController {
             
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
             self.navigationController?.pushViewController(vc, animated: true)
-            CommonSocket.shared.joinAgentRoom(data: [["appSid" : DrdshChatSDKTest.shared.config.appSid,
+            CommonSocket.shared.CommanEmitSokect(command: .joinAgentRoom,data: [[
                                                       "agent_id":DrdshChatSDKTest.shared.AllDetails.agentId]]) { receivedTodo in
                                                         
             }
@@ -103,6 +104,8 @@ class MainLoadViewController: UIViewController {
         let validateIdentityAPI: String = DrdshChatSDKTest.shared.APIbaseURL + "validate-identity"
         var todosUrlRequest = URLRequest(url: URL(string: validateIdentityAPI)!)
         todosUrlRequest.httpMethod = "POST"
+        
+        let browser = Bundle.main.bundleIdentifier!+",AppVersion:"+"\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "")"+",BuildVersion:"+"\(Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as? String ?? "")"
         var newTodo: [String: Any] = [
             "appSid" : DrdshChatSDKTest.shared.config.appSid,
             "locale" : DrdshChatSDKTest.shared.config.local,
@@ -110,8 +113,13 @@ class MainLoadViewController: UIViewController {
             "expendHeight": self.view.frame.height.description,
             "deviceID": UIDevice.current.identifierForVendor?.uuidString ?? "",
             "ipAddress": "192.168.1.2",
-            "browser": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:73.0)",
-            "domain": "drdsh.live"
+            "device": "ios",
+            "timeZone" : TimeZone.current.identifier,
+            "browser": browser,
+            "name":self.txtFullName.text!,
+            "email":self.txtEmailAddress.text!,
+            "mobile":self.txtMobile.text!,
+            "domain": "www.drdsh.live"
         ]
         if DrdshChatSDKTest.shared.AllDetails.visitorID != ""{
             newTodo["visitorID"] = DrdshChatSDKTest.shared.AllDetails.visitorID
@@ -165,28 +173,26 @@ class MainLoadViewController: UIViewController {
                         UserDefaults.standard.setValue(newTodo, forKey: "AllDetails")
                         
                         if DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus == 1 || DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus == 2{
+                            if DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus == 1{
+                                if !DrdshChatSDKTest.shared.AllDetails.embeddedChat.displayForm{
+                                    self.startChat(isDirect: true)
+                                    return
+                                }
+                            }
                             DispatchQueue.main.async {
                                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
                                 self.navigationController?.pushViewController(vc, animated: false)
-                                
                             }
                         }
                         CommonSocket.shared.initSocket { (status) in
-                            CommonSocket.shared.joinVisitorsRoom(data: [[
-                                "appSid" : DrdshChatSDKTest.shared.config.appSid,
-                                "dc_vid":DrdshChatSDKTest.shared.AllDetails.visitorID]]){ data in
+                            CommonSocket.shared.CommanEmitSokect(command: .joinVisitorsRoom,data:[["dc_vid":DrdshChatSDKTest.shared.AllDetails.visitorID]]){ data in
                                     if DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus == 2{
                                         DrdshChatSDKTest.shared.AgentDetail <= data
-                                        DrdshChatSDKTest.shared.AllDetails.agentId = data["agent_id"] as! String
+                                        DrdshChatSDKTest.shared.AllDetails.agentId = data["agent_id"] as? String ?? ""
                                         DrdshChatSDKTest.shared.AgentDetail.agent_name = data["name"] as! String
                                         DrdshChatSDKTest.shared.AgentDetail.visitor_message_id = data["visitor_message_id"] as! String
                                     }
                                     debugPrint(data)
-                            }
-                        }
-                        if DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus == 1{
-                            if !DrdshChatSDKTest.shared.AllDetails.embeddedChat.displayForm{
-                                self.startChat(isDirect: true)
                             }
                         }
                     }
@@ -262,7 +268,6 @@ class MainLoadViewController: UIViewController {
             }
         }
         let newTodo: [String: Any] = [
-            "appSid" : DrdshChatSDKTest.shared.config.appSid,
             "locale" : DrdshChatSDKTest.shared.config.local,
             "_id":DrdshChatSDKTest.shared.AllDetails.visitorID,
             "name": self.txtFullName.text == "" ? self.txtFullName.text! : "Guest",
@@ -270,7 +275,7 @@ class MainLoadViewController: UIViewController {
             "email": self.txtEmailAddress.text!,
             "message": self.txtTypeYourQuestion.text!
         ]
-        CommonSocket.shared.inviteChat(data: [newTodo]) { receivedTodo in
+        CommonSocket.shared.CommanEmitSokect(command: .inviteChat,data: [newTodo]) { receivedTodo in
             print("Response : " + receivedTodo.description)
             DrdshChatSDKTest.shared.AllDetails.agentOnline = receivedTodo["agentOnline"] as? Int ?? 0
             DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus = 2
@@ -278,9 +283,6 @@ class MainLoadViewController: UIViewController {
             
             var newTodo: [String: Any] =  DrdshChatSDKTest.shared.AllDetails.toDict
             newTodo["embeddedChat"] = DrdshChatSDKTest.shared.AllDetails.embeddedChat.toDict
-            CommonSocket.shared.startChatRequest(data: [[
-                "appSid" : DrdshChatSDKTest.shared.config.appSid,
-                "dc_vid":DrdshChatSDKTest.shared.AllDetails.visitorID]])
             UserDefaults.standard.setValue(newTodo, forKey: "AllDetails")
             DispatchQueue.main.async {
                 GGUserSessionDetail.shared.name = self.txtFullName.text!

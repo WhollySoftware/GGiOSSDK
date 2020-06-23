@@ -37,7 +37,7 @@ We have influential engagement products and potent customer service with flexibi
   s.dependency 'SwiftyJSON', '~> 4.0'
   s.dependency 'MBProgressHUD'
   s.dependency 'IQKeyboardManagerSwift', '6.2.1'
-  s.dependency 'Socket.IO-Client-Swift', '15.2.0'
+  s.dependency 'Socket.IO-Client-Swift'
    s.resource_bundles = {
      'DrdshChatSDKTest' => ['DrdshChatSDKTest/Assets/**/*']
    }

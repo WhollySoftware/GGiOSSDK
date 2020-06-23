@@ -103,7 +103,7 @@ class OfflineViewController: UIViewController {
             "email": self.txtEmailAddress.text!,
             "message": self.txtTypeYourQuestion.text!
         ]
-        CommonSocket.shared.submitOfflineMessage(data: [newTodo]) { receivedTodo in
+        CommonSocket.shared.CommanEmitSokect(command: .submitOfflineMessage,data: [newTodo]) { receivedTodo in
             self.txtTypeYourQuestion.text = ""
             self.showAlertView(str: receivedTodo["message"] as? String ?? "")
         }

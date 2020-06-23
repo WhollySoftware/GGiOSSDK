@@ -444,8 +444,8 @@
 		0591E0CECF7A891E43457ECAD58A8DDA /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				EB873BE6413F83D825BC9D26D4B39DC7 /* ChatViewController.swift */,
 				72E29F058A720873F70FF4AEB86EB74D /* MainLoadViewController.swift */,
+				EB873BE6413F83D825BC9D26D4B39DC7 /* ChatViewController.swift */,
 				AD0F1757A873FAE6BBC783425CD2A3D2 /* OfflineViewController.swift */,
 				264AD3D6D18757C0CD978414384F9326 /* RateViewController.swift */,
 				C621F87BC63A3F777716B2DD194694B1 /* Helper */,

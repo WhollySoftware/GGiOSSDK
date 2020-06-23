@@ -30,6 +30,7 @@ class RateViewController: UIViewController {
             self.txtComment.textAlignment = .right
         }
         if self.type == 2{
+            txtComment.text = GGUserSessionDetail.shared.email
             lblTitle.text = DrdshChatSDKTest.shared.config.pleaseInputYourEmailAddress.Local()
             txtComment.autocapitalizationType = .none
             txtComment.autocorrectionType = .no
@@ -61,7 +62,7 @@ class RateViewController: UIViewController {
                     self.showAlertView(str: DrdshChatSDKTest.shared.config.pleaseEnterValidEmail)
                     return
                 }else{
-                    CommonSocket.shared.emailChatTranscript(data: [[
+                    CommonSocket.shared.CommanEmitSokect(command: .emailChatTranscript,data: [[
                         "appSid" : DrdshChatSDKTest.shared.config.appSid,
                         "mid":DrdshChatSDKTest.shared.AllDetails.messageID,
                         "vid":DrdshChatSDKTest.shared.AllDetails.visitorID,
@@ -80,7 +81,7 @@ class RateViewController: UIViewController {
                 }else if self.btnDisLike.isSelected{
                     feedback = "bad"
                 }
-                CommonSocket.shared.visitorEndChatSession(data: [[
+                CommonSocket.shared.CommanEmitSokect(command: .visitorEndChatSession, data: [[
                     "appSid" : DrdshChatSDKTest.shared.config.appSid,
                     "id":DrdshChatSDKTest.shared.AllDetails.messageID,
                     "vid":DrdshChatSDKTest.shared.AllDetails.visitorID,
