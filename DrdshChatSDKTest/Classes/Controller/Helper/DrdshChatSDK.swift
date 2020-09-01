@@ -161,6 +161,7 @@ public class DrdshChatSDKConfiguration : GGObject {
     public var attachmentImage:UIImage = UIImage()
     public var sendMessageImage:UIImage = UIImage()
     public var userPlaceHolderImage:UIImage = UIImage()
+    public var attachmentPlaceHolderImage:UIImage = UIImage()
     
     public var offlineTxt:String  = "offlineTxt"
     public var onHoldMsg:String  = "onHoldMsg"
@@ -214,11 +215,12 @@ public class DrdshChatSDKConfiguration : GGObject {
     public var months:String = "months"
     public var year:String = "year"
     public var years:String = "years"
-    public var connecting:String = "connecting..."
+    public var connecting:String = "connecting"
     public var waitingForAgent:String = "waitingForAgent"
     public var chat:String = "chat"
     public var offlineMessageRedirectUrl:String  = ""
-
+    public var watingMsg:String = "watingMsg"
+    
     public override init() {
         var bundle = Bundle(for: DrdshChatSDKTest.self)
         if let resourcePath = bundle.path(forResource: "DrdshChatSDKTest", ofType: "bundle") {
@@ -235,6 +237,7 @@ public class DrdshChatSDKConfiguration : GGObject {
         attachmentImage = UIImage(named: "attchment", in: bundle, compatibleWith: nil)!
         sendMessageImage = UIImage(named: "send", in: bundle, compatibleWith: nil)!
         userPlaceHolderImage = UIImage(named: "user", in: bundle, compatibleWith: nil)!
+        attachmentPlaceHolderImage = UIImage(named: "products_placeholder", in: bundle, compatibleWith: nil)!
     }
     func mapServerData(to:[String:Any]){
         for (key,value) in to{

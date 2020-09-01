@@ -72,19 +72,19 @@ open class AGImagePickerController: NSObject {
     }
     
     private func setupAlertController() {
-        let alert = AGAlertBuilder(withActionSheet: DrdshChatSDKTest.shared.localizedString(stringKey:"Choose Option"), message: DrdshChatSDKTest.shared.localizedString(stringKey:"Select an option to pick an image"), iPadOpen: .sourceView(iPadSetup))
+        let alert = AGAlertBuilder(withActionSheet: DrdshChatSDKTest.shared.localizedString(stringKey:"chooseOption"), message: DrdshChatSDKTest.shared.localizedString(stringKey:"selectAnOptionToPickAnImage"), iPadOpen: .sourceView(iPadSetup))
         
         if UIImagePickerController.availableCaptureModes(for: .rear) != nil {
-            alert.defaultAction(with: DrdshChatSDKTest.shared.localizedString(stringKey:"Camera"), handler: { (alert) in
+            alert.defaultAction(with: DrdshChatSDKTest.shared.localizedString(stringKey:"camera"), handler: { (alert) in
                 self.presentPicker(with: .camera)
             })
         }
         
-        alert.defaultAction(with: DrdshChatSDKTest.shared.localizedString(stringKey:"Photo Library")) { (alert) in
+        alert.defaultAction(with: DrdshChatSDKTest.shared.localizedString(stringKey:"photoLibrary")) { (alert) in
             self.presentPicker(with: .photoLibrary)
         }
         
-        alert.cancelAction(with: DrdshChatSDKTest.shared.localizedString(stringKey:"Cancel"))
+        alert.cancelAction(with: DrdshChatSDKTest.shared.localizedString(stringKey:"cancel"))
         
         alert.show()
     }
@@ -95,8 +95,8 @@ open class AGImagePickerController: NSObject {
         }
         
         //no camera found -- alert the user.
-        AGAlertBuilder(withAlert: DrdshChatSDKTest.shared.localizedString(stringKey:"No Camera"), message: DrdshChatSDKTest.shared.localizedString(stringKey:"Sorry, this device has no camera"))
-            .defaultAction(with: "OK")
+        AGAlertBuilder(withAlert: DrdshChatSDKTest.shared.localizedString(stringKey:"noCamera"), message: DrdshChatSDKTest.shared.localizedString(stringKey:"sorryThisDeviceHasNoCamera"))
+            .defaultAction(with: "oK")
             .show()
         return false
     }

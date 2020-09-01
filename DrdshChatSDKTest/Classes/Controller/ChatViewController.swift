@@ -35,11 +35,15 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     var userdata : [String:AnyObject] = [:]
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.txtMessage.delegate = self
         if #available(iOS 11.0, *) {
             let window = UIApplication.shared.keyWindow
             self.txtMessage.keyboardDistanceFromTextField = -((window?.safeAreaInsets.bottom ?? 00)-10)
         }
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+        IQKeyboardManager.shared.disabledToolbarClasses = [ChatViewController.self]
+        self.table.keyboardDismissMode = .onDrag
         table.transform = CGAffineTransform(scaleX: 1, y: -1)
         self.view.backgroundColor = DrdshChatSDKTest.shared.config.bgColor.Color()
         self.btnAttachment.isHidden = !DrdshChatSDKTest.shared.AllDetails.embeddedChat.showAttachmentButton
@@ -97,13 +101,14 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         self.navigationItem.rightBarButtonItem = nil
         
         if DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus != 2{
-    
+             self.navigationItem.rightBarButtonItem = nil
         }else if DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus == 2{
             if DrdshChatSDKTest.shared.AgentDetail.agent_id == ""{
-                self.title = DrdshChatSDKTest.shared.config.connecting.Local()
-            }else{self.setAgentDetail()}
-            self.navigationItem.rightBarButtonItem = self.CloseBarItem
-            
+                self.title = DrdshChatSDKTest.shared.config.watingMsg.Local()
+            }else{
+                self.setAgentDetail()
+                
+            }
         }
         CommonSocket.shared.visitorLoadChatHistory(data: [[
             "appSid" : DrdshChatSDKTest.shared.config.appSid,
@@ -223,7 +228,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             self.messageView.isHidden = true
         }
         CommonSocket.shared.agentTypingListener { data in
-            if (data["ts"] as! Int) == 2{
+            if (data["stop"] as! Bool){
                 self.typingView.isHidden = true
             }else{
                  self.lblTyping.text = data["message"] as? String ?? ""
@@ -243,6 +248,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     func setAgentDetail(){
         if DrdshChatSDKTest.shared.AgentDetail.agent_id != ""{
             self.title = ""
+            self.navigationItem.rightBarButtonItem = self.CloseBarItem
             self.timer.invalidate()
             
             let strProdile = DrdshChatSDKTest.shared.AgentDetail.agent_image
@@ -265,7 +271,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     @objc func backAction(){
         if DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus == 2{
-            CommonSocket.shared.disConnect()
+            //CommonSocket.shared.disConnect()
             self.dismiss(animated: true, completion: nil)
         }else{
             self.timer.invalidate()
@@ -297,7 +303,6 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                 self.navigationItem.rightBarButtonItem = nil
             }
         }
-        
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.list.count
@@ -325,12 +330,12 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             cell.lblMessage.isHidden = self.list[indexPath.row].is_attachment == 1
             if self.list[indexPath.row].is_attachment == 1{
                 let strUrl = DrdshChatSDKTest.shared.AttachmentbaseURL+self.list[indexPath.row].attachment_file
-                cell.imgAttachment.setImage(urlString: strUrl)
+                cell.imgAttachment.setImage(urlString: strUrl,placeHolder: DrdshChatSDKTest.shared.config.attachmentPlaceHolderImage)
                 if self.list[indexPath.row].attachment_file == ""{
-                    cell.imgAttachment.setImage(urlString: self.list[indexPath.row].localUrl)
+                    cell.imgAttachment.setImage(urlString: self.list[indexPath.row].localUrl,placeHolder: DrdshChatSDKTest.shared.config.attachmentPlaceHolderImage)
                 }else{
                     let strUrl = DrdshChatSDKTest.shared.AttachmentbaseURL+self.list[indexPath.row].attachment_file
-                    cell.imgAttachment.setImage(urlString: strUrl)
+                    cell.imgAttachment.setImage(urlString: strUrl,placeHolder: DrdshChatSDKTest.shared.config.attachmentPlaceHolderImage)
                 }
             }
             return cell
@@ -346,10 +351,10 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             cell.lblMessage.isHidden = self.list[indexPath.row].is_attachment == 1
             if self.list[indexPath.row].is_attachment == 1{
                 if self.list[indexPath.row].attachment_file == ""{
-                    cell.imgAttachment.setImage(urlString: self.list[indexPath.row].localUrl)
+                    cell.imgAttachment.setImage(urlString: self.list[indexPath.row].localUrl,placeHolder: DrdshChatSDKTest.shared.config.attachmentPlaceHolderImage)
                 }else{
                     let strUrl = DrdshChatSDKTest.shared.AttachmentbaseURL+self.list[indexPath.row].attachment_file
-                    cell.imgAttachment.setImage(urlString: strUrl)
+                    cell.imgAttachment.setImage(urlString: strUrl,placeHolder: DrdshChatSDKTest.shared.config.attachmentPlaceHolderImage)
                 }
             }
             return cell
@@ -517,6 +522,10 @@ class AgentTableViewCell:UITableViewCell{
         self.lblMessage.textColor = DrdshChatSDKTest.shared.config.oppositeChatTextColor.Color()
         self.lblTime.textColor = DrdshChatSDKTest.shared.config.oppositeChatTextColor.Color()
     }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
 class systemTableViewCell:UITableViewCell{
     override func awakeFromNib() {
@@ -619,7 +628,7 @@ extension Date {
             components.second == 1 ? (str = DrdshChatSDKTest.shared.localizedString(stringKey:"second")) : (str = DrdshChatSDKTest.shared.localizedString(stringKey:"seconds"))
             return String(format: components.second!.description+" "+str, components.second!.description)
         } else {
-            return DrdshChatSDKTest.shared.localizedString(stringKey:"JustNow")
+            return DrdshChatSDKTest.shared.localizedString(stringKey:"justnow")
         }
     }
     func toAge() -> Int {
@@ -655,8 +664,8 @@ extension UITableView {
     }
 }
 extension UIImageView{
-    func setImage(urlString:String){
-        self.image = DrdshChatSDKTest.shared.config.userPlaceHolderImage
+    func setImage(urlString:String,placeHolder:UIImage = DrdshChatSDKTest.shared.config.userPlaceHolderImage){
+        self.image = placeHolder
         if urlString == "" || urlString == DrdshChatSDKTest.shared.AttachmentbaseURL{return}
         if let cachedImage = imageCache.object(forKey: NSString(string: urlString)) {
               self.image =  cachedImage

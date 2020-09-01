@@ -22,7 +22,7 @@ class MainLoadViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Chat".Local()
+        self.title = "chat".Local()
         
         self.txtFullName.text = GGUserSessionDetail.shared.name
         self.txtMobile.text = GGUserSessionDetail.shared.mobile
@@ -79,8 +79,8 @@ class MainLoadViewController: UIViewController {
             let vc = self.storyboard?.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
             self.navigationController?.pushViewController(vc, animated: true)
             CommonSocket.shared.CommanEmitSokect(command: .joinAgentRoom,data: [[
-                                                      "agent_id":DrdshChatSDKTest.shared.AllDetails.agentId]]) { receivedTodo in
-                                                        
+                "agent_id":DrdshChatSDKTest.shared.AllDetails.agentId]]) { receivedTodo in
+                    
             }
         }
     }
@@ -186,13 +186,13 @@ class MainLoadViewController: UIViewController {
                         }
                         CommonSocket.shared.initSocket { (status) in
                             CommonSocket.shared.CommanEmitSokect(command: .joinVisitorsRoom,data:[["dc_vid":DrdshChatSDKTest.shared.AllDetails.visitorID]]){ data in
-                                    if DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus == 2{
-                                        DrdshChatSDKTest.shared.AgentDetail <= data
-                                        DrdshChatSDKTest.shared.AllDetails.agentId = data["agent_id"] as? String ?? ""
-                                        DrdshChatSDKTest.shared.AgentDetail.agent_name = data["name"] as! String
-                                        DrdshChatSDKTest.shared.AgentDetail.visitor_message_id = data["visitor_message_id"] as! String
-                                    }
-                                    debugPrint(data)
+                                if DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus == 2{
+                                    DrdshChatSDKTest.shared.AgentDetail <= data
+                                    DrdshChatSDKTest.shared.AllDetails.agentId = data["agent_id"] as? String ?? ""
+                                    DrdshChatSDKTest.shared.AgentDetail.agent_name = data["name"] as! String
+                                    DrdshChatSDKTest.shared.AgentDetail.visitor_message_id = data["visitor_message_id"] as! String
+                                }
+                                debugPrint(data)
                             }
                         }
                     }
@@ -270,7 +270,7 @@ class MainLoadViewController: UIViewController {
         let newTodo: [String: Any] = [
             "locale" : DrdshChatSDKTest.shared.config.local,
             "_id":DrdshChatSDKTest.shared.AllDetails.visitorID,
-            "name": self.txtFullName.text == "" ? self.txtFullName.text! : "Guest",
+            "name": self.txtFullName.text != "" ? self.txtFullName.text! : "Guest",
             "mobile": self.txtMobile.text!,
             "email": self.txtEmailAddress.text!,
             "message": self.txtTypeYourQuestion.text!

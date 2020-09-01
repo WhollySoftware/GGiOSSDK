@@ -24,7 +24,7 @@ class OfflineViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Offline"
+        self.title = DrdshChatSDKTest.shared.localizedString(stringKey:"offline")
         self.view.backgroundColor = DrdshChatSDKTest.shared.config.bgColor.Color()
         self.txtFullName.text = GGUserSessionDetail.shared.name
         self.txtMobile.text = GGUserSessionDetail.shared.mobile
@@ -37,12 +37,12 @@ class OfflineViewController: UIViewController {
             self.txtSubject.textAlignment = .right
             self.txtTypeYourQuestion.textAlignment = .right
         }
+        self.btnStart.setTitle(DrdshChatSDKTest.shared.localizedString(stringKey:"sendMessage"), for: .normal)
         var backImage = DrdshChatSDKTest.shared.config.backImage
         if DrdshChatSDKTest.shared.config.local == "ar"{
             backImage = backImage.rotate(radians: .pi)
         }
         let barItem = UIBarButtonItem(image:  backImage, style: .plain, target: self, action: #selector(dissmissView))
-        barItem.title = DrdshChatSDKTest.shared.localizedString(stringKey:"Chat")
         navigationItem.leftBarButtonItem = barItem
         self.setupData()
         btnStart.action = {
