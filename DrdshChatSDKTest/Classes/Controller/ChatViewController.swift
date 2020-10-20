@@ -411,6 +411,11 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                     cell.imgAttachment.setImage(urlString: strUrl,placeHolder: DrdshChatSDKTest.shared.config.attachmentPlaceHolderImage)
                 }
             }
+            if self.list[indexPath.row].message.isSingleEmoji{
+                cell.lblMessage.font = UIFont.boldSystemFont(ofSize: 40)
+            }else{
+                 cell.lblMessage.font = UIFont.systemFont(ofSize: 13)
+            }
             return cell
         }else{
             if self.list[indexPath.row].readAt == ""{
@@ -438,6 +443,11 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                     let strUrl = DrdshChatSDKTest.shared.AttachmentbaseURL+self.list[indexPath.row].attachment_file
                     cell.imgAttachment.setImage(urlString: strUrl,placeHolder: DrdshChatSDKTest.shared.config.attachmentPlaceHolderImage)
                 }
+            }
+            if self.list[indexPath.row].message.isSingleEmoji{
+                cell.lblMessage.font = UIFont.boldSystemFont(ofSize: 40)
+            }else{
+                 cell.lblMessage.font = UIFont.systemFont(ofSize: 13)
             }
             return cell
         }
@@ -841,4 +851,30 @@ class GGImageViewPopup: UIImageView {
         }
         return nil
     }
+}
+extension Character {
+    /// A simple emoji is one scalar and presented to the user as an Emoji
+    var isSimpleEmoji: Bool {
+        guard let firstScalar = unicodeScalars.first else { return false }
+        return firstScalar.properties.isEmoji && firstScalar.value > 0x238C
+    }
+
+    /// Checks if the scalars will be merged into an emoji
+    var isCombinedIntoEmoji: Bool { unicodeScalars.count > 1 && unicodeScalars.first?.properties.isEmoji ?? false }
+
+    var isEmoji: Bool { isSimpleEmoji || isCombinedIntoEmoji }
+}
+
+extension String {
+    var isSingleEmoji: Bool { count == 1 && containsEmoji }
+
+    var containsEmoji: Bool { contains { $0.isEmoji } }
+
+    var containsOnlyEmoji: Bool { !isEmpty && !contains { !$0.isEmoji } }
+
+    var emojiString: String { emojis.map { String($0) }.reduce("", +) }
+
+    var emojis: [Character] { filter { $0.isEmoji } }
+
+    var emojiScalars: [UnicodeScalar] { filter { $0.isEmoji }.flatMap { $0.unicodeScalars } }
 }
