@@ -162,6 +162,9 @@ public class DrdshChatSDKConfiguration : GGObject {
     public var sendMessageImage:UIImage = UIImage()
     public var userPlaceHolderImage:UIImage = UIImage()
     public var attachmentPlaceHolderImage:UIImage = UIImage()
+    public var readImage:UIImage = UIImage()
+    public var sentImage:UIImage = UIImage()
+    public var deliveredImage:UIImage = UIImage()
     
     public var offlineTxt:String  = "offlineTxt"
     public var onHoldMsg:String  = "onHoldMsg"
@@ -238,6 +241,11 @@ public class DrdshChatSDKConfiguration : GGObject {
         sendMessageImage = UIImage(named: "send", in: bundle, compatibleWith: nil)!
         userPlaceHolderImage = UIImage(named: "user", in: bundle, compatibleWith: nil)!
         attachmentPlaceHolderImage = UIImage(named: "products_placeholder", in: bundle, compatibleWith: nil)!
+        
+        readImage = UIImage(named: "read", in: bundle, compatibleWith: nil)!
+        sentImage = UIImage(named: "send", in: bundle, compatibleWith: nil)!
+        deliveredImage = UIImage(named: "delivered", in: bundle, compatibleWith: nil)!
+        
     }
     func mapServerData(to:[String:Any]){
         for (key,value) in to{

@@ -23,7 +23,10 @@ enum GGSokcetEmitKey {
     case inviteChat
     case submitOfflineMessage
     case joinAgentRoom
-
+    case isDelivered
+    case isDeliveredListener
+    case isRead
+    case isReadListener
 
     var relative: String {
         return self.value
@@ -43,6 +46,10 @@ enum GGSokcetEmitKey {
         case .inviteChat : return "inviteChat"
         case .submitOfflineMessage : return "submitOfflineMessage"
         case .joinAgentRoom : return "joinAgentRoom"
+        case .isDelivered: return "isDelivered"
+        case .isDeliveredListener: return "isDeliveredListener"
+        case .isRead: return "isRead"
+        case .isReadListener: return "isReadListener"
         }
     }
 }
@@ -98,11 +105,11 @@ class CommonSocket: NSObject {
         t = data[0] as? [String:Any] ?? [:]
         t["appSid"] = DrdshChatSDKTest.shared.config.appSid
         t["device"] = "ios"
-        
+        debugPrint("command",command.relative)
         if isConnected()
         {
             manager.defaultSocket.emitWithAck(command.relative, with: [t]).timingOut(after: 0) {resp in
-                print(resp)
+                print(command.relative,resp)
                 if resp.count > 1{
                     if (resp[0] as? Int ?? 0) == 200{
                         completion(resp[1] as? [String:AnyObject] ?? [:])
@@ -114,7 +121,7 @@ class CommonSocket: NSObject {
         }else{
             initSocket(completion: { (result) in
                 self.manager.defaultSocket.emitWithAck(command.relative, with: [t]).timingOut(after: 0) {resp in
-                    print(resp)
+                    print(command.relative,resp)
                     if resp.count > 1{
                         if (resp[0] as? Int ?? 0) == 200{
                             completion(resp[1] as? [String:AnyObject] ?? [:])
@@ -129,6 +136,24 @@ class CommonSocket: NSObject {
     func ipBlocked(completion: @escaping([String:AnyObject]) -> Void)
     {
         self.manager.defaultSocket.on("ipBlocked") { (resp, emitter) in
+            print(resp)
+            if let t = resp[0] as? [String:AnyObject]{
+                completion(t)
+            }
+        }
+    }
+    func isReadListener(completion: @escaping([String:AnyObject]) -> Void)
+    {
+        self.manager.defaultSocket.on("isReadListener") { (resp, emitter) in
+            print(resp)
+            if let t = resp[0] as? [String:AnyObject]{
+                completion(t)
+            }
+        }
+    }
+    func isDeliveredListener(completion: @escaping([String:AnyObject]) -> Void)
+    {
+        self.manager.defaultSocket.on("isDeliveredListener") { (resp, emitter) in
             print(resp)
             if let t = resp[0] as? [String:AnyObject]{
                 completion(t)

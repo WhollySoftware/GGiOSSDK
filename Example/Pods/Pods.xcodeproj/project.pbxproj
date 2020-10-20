@@ -63,6 +63,9 @@
 		7B4C82CBAFBE391B8D5441D973CFD198 /* IQBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4751C045A70E73AC6DFDB5F14335FF2A /* IQBarButtonItem.swift */; };
 		7C9D0F204E73506C3950568381E51A18 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1F4F4E0D5D403535103F3B67AEE4F9 /* SwiftyJSON.framework */; };
 		7E8BA41BD2C176113F68A323E3660F75 /* back@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A3B31726481C717F55A17242E7C1C63 /* back@3x.png */; };
+		7FFF5AB9253AAF4600919E7D /* delivered.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FFF5AB6253AAF4500919E7D /* delivered.png */; };
+		7FFF5ABA253AAF4600919E7D /* sent.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FFF5AB7253AAF4500919E7D /* sent.png */; };
+		7FFF5ABB253AAF4600919E7D /* read.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FFF5AB8253AAF4600919E7D /* read.png */; };
 		7FFFA3AB24FE77E100369ED8 /* products_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FFFA3A924FE679200369ED8 /* products_placeholder.png */; };
 		832039E06C158D41BF08F4F8C49B1813 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EE5F0E567DA4FC3D75B61AD54B883CD /* WebSocket.swift */; };
 		85C9C162B8DF8E541D42825CB4DED406 /* DrdshChatSDK.storyboard in Sources */ = {isa = PBXBuildFile; fileRef = F127487A143DFBA23A0E99117C53080A /* DrdshChatSDK.storyboard */; };
@@ -282,6 +285,9 @@
 		7D47C22D348E85007D96A7C96138A29E /* SwiftyJSON-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-prefix.pch"; sourceTree = "<group>"; };
 		7DE19CD0358C0A1DCD3F39ACC678D131 /* IQUIView+IQKeyboardToolbar.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "IQUIView+IQKeyboardToolbar.swift"; path = "IQKeyboardManagerSwift/IQToolbar/IQUIView+IQKeyboardToolbar.swift"; sourceTree = "<group>"; };
 		7F7D41AA6B6909D208D5927E375DF7B6 /* SocketManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketManager.swift; path = Source/SocketIO/Manager/SocketManager.swift; sourceTree = "<group>"; };
+		7FFF5AB6253AAF4500919E7D /* delivered.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = delivered.png; path = DrdshChatSDKTest/Assets/delivered.png; sourceTree = "<group>"; };
+		7FFF5AB7253AAF4500919E7D /* sent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sent.png; path = DrdshChatSDKTest/Assets/sent.png; sourceTree = "<group>"; };
+		7FFF5AB8253AAF4600919E7D /* read.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = read.png; path = DrdshChatSDKTest/Assets/read.png; sourceTree = "<group>"; };
 		7FFFA3A924FE679200369ED8 /* products_placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = products_placeholder.png; path = DrdshChatSDKTest/Assets/products_placeholder.png; sourceTree = "<group>"; };
 		8072D0E94C1D91C6593D7CC929453848 /* send.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = send.png; path = DrdshChatSDKTest/Assets/send.png; sourceTree = "<group>"; };
 		8247F3B4B0B3EF96194705BE7AB19A37 /* Socket.IO-Client-Swift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Socket.IO-Client-Swift-umbrella.h"; sourceTree = "<group>"; };
@@ -610,6 +616,9 @@
 		A2574D4524607EE980D70CE3C2FC1021 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7FFF5AB6253AAF4500919E7D /* delivered.png */,
+				7FFF5AB8253AAF4600919E7D /* read.png */,
+				7FFF5AB7253AAF4500919E7D /* sent.png */,
 				7FFFA3A924FE679200369ED8 /* products_placeholder.png */,
 				5F83D85FE407B0A6BC9B02E0124BE055 /* attchment.png */,
 				11B0AE7F188A5154E1D2DEA3A5A74797 /* back@2x.png */,
@@ -1067,8 +1076,11 @@
 				7FFFA3AB24FE77E100369ED8 /* products_placeholder.png in Resources */,
 				1D849FCD4435A0C486D999704BCB0046 /* Localizable.strings in Resources */,
 				E423AC9022C357C30E53854D1C770C56 /* mail.png in Resources */,
+				7FFF5AB9253AAF4600919E7D /* delivered.png in Resources */,
 				4AE47EBE93526581263814D63EFE2B88 /* selecteddislike.png in Resources */,
 				3618778788D07099CCD1D860087071FC /* selectedlike.png in Resources */,
+				7FFF5ABB253AAF4600919E7D /* read.png in Resources */,
+				7FFF5ABA253AAF4600919E7D /* sent.png in Resources */,
 				F91116A3C83CE2AB8BFE75EF6DA17F6B /* send.png in Resources */,
 				1054C942B35B1A6C5735A8917CE3CF8E /* user.png in Resources */,
 			);

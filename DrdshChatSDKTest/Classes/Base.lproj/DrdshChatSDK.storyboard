@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -28,7 +29,7 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="pji-b6-ZBV" secondAttribute="bottom" id="DRl-sF-b5d"/>
                                             <constraint firstAttribute="trailing" secondItem="pji-b6-ZBV" secondAttribute="trailing" constant="10" id="jIo-Kr-Txq"/>
@@ -57,7 +58,7 @@
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
                                             </textField>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="WZR-Fn-s8I" firstAttribute="leading" secondItem="H5m-zx-P6A" secondAttribute="leading" constant="10" id="SKf-qY-YWZ"/>
                                             <constraint firstItem="WZR-Fn-s8I" firstAttribute="top" secondItem="H5m-zx-P6A" secondAttribute="top" id="XAr-Tw-DsD"/>
@@ -86,7 +87,7 @@
                                                 <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                             </textField>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="vr1-cZ-6mx" secondAttribute="trailing" constant="10" id="4rr-C4-LCD"/>
                                             <constraint firstItem="vr1-cZ-6mx" firstAttribute="top" secondItem="yUf-D3-ecT" secondAttribute="top" id="QgE-CT-qLc"/>
@@ -115,7 +116,7 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="9Nz-L9-POY"/>
                                             <constraint firstAttribute="trailing" secondItem="x2J-bg-Hyl" secondAttribute="trailing" constant="10" id="DnK-Fu-KCG"/>
@@ -138,7 +139,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sCf-bT-XlS">
                                         <rect key="frame" x="0.0" y="310" width="374" height="50"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6cd-NN-wBy" customClass="GGButton" customModule="DrdshChatSDKTest" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6cd-NN-wBy" customClass="GGButton" customModule="DrdshChatSDKTest" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="50"/>
                                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
@@ -158,7 +159,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="6cd-NN-wBy" firstAttribute="leading" secondItem="sCf-bT-XlS" secondAttribute="leading" id="AhI-Qk-V9B"/>
                                             <constraint firstAttribute="trailing" secondItem="6cd-NN-wBy" secondAttribute="trailing" id="CSI-D0-Z3H"/>
@@ -170,13 +171,13 @@
                                 </subviews>
                             </stackView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="EXI-7Z-g82"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="zOY-tl-IKu" firstAttribute="top" secondItem="EXI-7Z-g82" secondAttribute="top" constant="20" id="OmC-9K-7qe"/>
                             <constraint firstItem="zOY-tl-IKu" firstAttribute="leading" secondItem="SIH-Gl-XUR" secondAttribute="leading" constant="20" id="ZNf-V0-gxT"/>
                             <constraint firstAttribute="trailing" secondItem="zOY-tl-IKu" secondAttribute="trailing" constant="20" id="qZZ-pi-And"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="EXI-7Z-g82"/>
                     </view>
                     <connections>
                         <outlet property="btnStart" destination="6cd-NN-wBy" id="5ZS-Sa-GN0"/>
@@ -203,13 +204,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="PpW-5X-K0c">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X4t-aT-3cO" customClass="GGView" customModule="DrdshChatSDKTest" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="f1W-LA-0wf">
-                                                <rect key="frame" x="10" y="10" width="92" height="40"/>
+                                                <rect key="frame" x="10" y="10" width="91.5" height="40"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9g4-Ru-vYi" customClass="GGImageViewPopup" customModule="DrdshChatSDKTest" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
@@ -219,7 +220,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xYV-7Y-hAF">
-                                                        <rect key="frame" x="50" y="0.0" width="42" height="40"/>
+                                                        <rect key="frame" x="50" y="0.0" width="41.5" height="40"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -253,7 +254,7 @@
                                                 </subviews>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="f1W-LA-0wf" firstAttribute="centerY" secondItem="X4t-aT-3cO" secondAttribute="centerY" id="akK-Pi-UVo"/>
                                             <constraint firstAttribute="height" constant="60" id="foH-Jb-VrH"/>
@@ -277,7 +278,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="c3r-MA-MUl">
-                                        <rect key="frame" x="0.0" y="70" width="414" height="682"/>
+                                        <rect key="frame" x="0.0" y="70" width="414" height="648"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="AgentTableViewCell" rowHeight="93" id="eSt-2V-md9" customClass="AgentTableViewCell" customModule="DrdshChatSDKTest" customModuleProvider="target">
@@ -411,15 +412,28 @@
                                                                                 <constraint firstAttribute="height" constant="200" id="5v1-Oh-pBU"/>
                                                                             </constraints>
                                                                         </imageView>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Agent Name" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EY3-DS-cXb">
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="TWi-Dy-0hj">
                                                                             <rect key="frame" x="0.0" y="34" width="200" height="17"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="height" constant="17" id="fCm-J9-ph7"/>
-                                                                            </constraints>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                                                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                        </label>
+                                                                            <subviews>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Agent Name" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EY3-DS-cXb">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="178" height="17"/>
+                                                                                    <constraints>
+                                                                                        <constraint firstAttribute="height" constant="17" id="fCm-J9-ph7"/>
+                                                                                    </constraints>
+                                                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                                                    <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sent" translatesAutoresizingMaskIntoConstraints="NO" id="lrM-zb-gVg" customClass="GGImageViewPopup" customModule="DRDSH" customModuleProvider="target">
+                                                                                    <rect key="frame" x="183" y="0.0" width="17" height="17"/>
+                                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                    <constraints>
+                                                                                        <constraint firstAttribute="height" constant="17" id="OWi-us-FXl"/>
+                                                                                        <constraint firstAttribute="width" constant="17" id="lN1-bC-Gww"/>
+                                                                                    </constraints>
+                                                                                </imageView>
+                                                                            </subviews>
+                                                                        </stackView>
                                                                     </subviews>
                                                                 </stackView>
                                                             </subviews>
@@ -452,6 +466,7 @@
                                                     <outlet property="backView" destination="dWb-d2-xGF" id="ErY-wV-xKc"/>
                                                     <outlet property="imgAttachment" destination="hAt-nZ-8un" id="pt8-nU-7FQ"/>
                                                     <outlet property="imgProfile" destination="ZoT-6g-QB1" id="5Ek-yJ-MXA"/>
+                                                    <outlet property="imgStatus" destination="lrM-zb-gVg" id="B5x-pQ-A06"/>
                                                     <outlet property="lblMessage" destination="PYi-c0-ZtD" id="mjV-se-82C"/>
                                                     <outlet property="lblName" destination="z0B-BW-PMo" id="215-4i-p1c"/>
                                                     <outlet property="lblTime" destination="EY3-DS-cXb" id="Vo9-Rt-F6u"/>
@@ -491,7 +506,7 @@
                                         </connections>
                                     </tableView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fTi-ZP-ccD">
-                                        <rect key="frame" x="0.0" y="762" width="414" height="20"/>
+                                        <rect key="frame" x="0.0" y="728" width="414" height="20"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mwv-QI-Vvp">
                                                 <rect key="frame" x="5" y="3" width="404" height="14"/>
@@ -510,10 +525,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TKd-D9-mds" customClass="GGView" customModule="DrdshChatSDKTest" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="792" width="414" height="60"/>
+                                        <rect key="frame" x="0.0" y="758" width="414" height="60"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ky8-jt-dOd">
-                                                <rect key="frame" x="186" y="19" width="42" height="21"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="0.5"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="0.5" id="hod-wW-NV5"/>
@@ -548,7 +563,7 @@
                                                                         </connections>
                                                                     </textField>
                                                                 </subviews>
-                                                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="trailing" secondItem="H8x-p3-Jqo" secondAttribute="trailing" constant="10" id="D4S-Te-nZO"/>
                                                                     <constraint firstItem="H8x-p3-Jqo" firstAttribute="leading" secondItem="XSD-wU-YTk" secondAttribute="leading" constant="10" id="szv-k2-mp2"/>
@@ -568,7 +583,7 @@
                                                             </button>
                                                         </subviews>
                                                     </stackView>
-                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ck9-3y-44P" customClass="GGButton" customModule="DrdshChatSDKTest" customModuleProvider="target">
+                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ck9-3y-44P" customClass="GGButton" customModule="DrdshChatSDKTest" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="20"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="20" id="BH2-px-po3"/>
@@ -609,14 +624,14 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="Aqd-uP-dBU"/>
+                        <color key="backgroundColor" systemColor="systemGreenColor"/>
                         <constraints>
                             <constraint firstItem="PpW-5X-K0c" firstAttribute="top" secondItem="Aqd-uP-dBU" secondAttribute="top" id="0j4-Dw-tff"/>
                             <constraint firstItem="PpW-5X-K0c" firstAttribute="leading" secondItem="ESZ-yh-fnJ" secondAttribute="leading" id="MUE-Ko-loD"/>
                             <constraint firstItem="Aqd-uP-dBU" firstAttribute="bottom" secondItem="PpW-5X-K0c" secondAttribute="bottom" id="b95-Jv-bbL"/>
                             <constraint firstItem="PpW-5X-K0c" firstAttribute="trailing" secondItem="ESZ-yh-fnJ" secondAttribute="trailing" id="pnM-nN-2ZK"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Aqd-uP-dBU"/>
                     </view>
                     <connections>
                         <outlet property="agentView" destination="X4t-aT-3cO" id="s5C-Jj-NHN"/>
@@ -651,7 +666,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aoo-Hf-WFQ" customClass="GGButton" customModule="DrdshChatSDKTest" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aoo-Hf-WFQ" customClass="GGButton" customModule="DrdshChatSDKTest" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <state key="normal" title="Button"/>
                             </button>
@@ -694,7 +709,7 @@
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstItem="EKi-5c-vNe" firstAttribute="top" secondItem="Mtw-mV-5jw" secondAttribute="top" id="TDr-LJ-hks"/>
                                                     <constraint firstAttribute="bottom" secondItem="EKi-5c-vNe" secondAttribute="bottom" id="qZr-1O-qZ7"/>
@@ -715,13 +730,13 @@
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="n87-nC-DNf">
                                                 <rect key="frame" x="0.0" y="135" width="294" height="70"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="70" id="42P-mC-FDg"/>
                                                 </constraints>
                                                 <inset key="scrollIndicatorInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <color key="textColor" systemColor="labelColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
@@ -731,9 +746,9 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="fW3-IQ-zh5">
                                                         <rect key="frame" x="50" y="0.0" width="194" height="50"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PM4-dI-Aze" customClass="GGButton" customModule="DrdshChatSDKTest" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PM4-dI-Aze" customClass="GGButton" customModule="DrdshChatSDKTest" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="92" height="50"/>
-                                                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="50" id="mqu-vv-aFk"/>
                                                                 </constraints>
@@ -747,7 +762,7 @@
                                                                     </userDefinedRuntimeAttribute>
                                                                 </userDefinedRuntimeAttributes>
                                                             </button>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zXw-SD-igq" customClass="GGButton" customModule="DrdshChatSDKTest" customModuleProvider="target">
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zXw-SD-igq" customClass="GGButton" customModule="DrdshChatSDKTest" customModuleProvider="target">
                                                                 <rect key="frame" x="102" y="0.0" width="92" height="50"/>
                                                                 <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
@@ -766,7 +781,7 @@
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstItem="fW3-IQ-zh5" firstAttribute="top" secondItem="Os1-9n-QMf" secondAttribute="top" id="Ycm-rW-iEk"/>
                                                     <constraint firstAttribute="trailing" secondItem="fW3-IQ-zh5" secondAttribute="trailing" constant="50" id="dlK-vw-TX5"/>
@@ -777,7 +792,7 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="FPn-q2-ad4" secondAttribute="bottom" constant="20" id="6DU-mk-8KZ"/>
                                     <constraint firstAttribute="trailing" secondItem="FPn-q2-ad4" secondAttribute="trailing" constant="30" id="Cm2-CB-gAr"/>
@@ -791,6 +806,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="pwi-aA-wmj"/>
                         <color key="backgroundColor" white="0.0" alpha="0.24697666952054795" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="pwi-aA-wmj" firstAttribute="trailing" secondItem="Aoo-Hf-WFQ" secondAttribute="trailing" id="CdS-L0-2FB"/>
@@ -802,7 +818,6 @@
                             <constraint firstItem="Aoo-Hf-WFQ" firstAttribute="top" secondItem="CL5-ex-uEE" secondAttribute="top" id="sEK-hx-4FK"/>
                             <constraint firstAttribute="trailing" secondItem="z54-px-3Rq" secondAttribute="trailing" constant="30" id="uo1-tW-Lm0"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="pwi-aA-wmj"/>
                     </view>
                     <connections>
                         <outlet property="btnCancel" destination="PM4-dI-Aze" id="QvE-UI-qsX"/>
@@ -840,7 +855,7 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="JpR-uq-EbO"/>
                                             <constraint firstAttribute="bottom" secondItem="97o-2a-xG9" secondAttribute="bottom" id="keN-6c-Fkr"/>
@@ -869,7 +884,7 @@
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="phonePad"/>
                                             </textField>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="txF-Y8-06U" secondAttribute="bottom" id="Ppu-Wz-Ecp"/>
                                             <constraint firstAttribute="trailing" secondItem="txF-Y8-06U" secondAttribute="trailing" constant="10" id="ZKK-a7-6f1"/>
@@ -898,7 +913,7 @@
                                                 <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                             </textField>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="5wh-rR-mKR" firstAttribute="leading" secondItem="bwI-mV-ph3" secondAttribute="leading" constant="10" id="782-UQ-sDx"/>
                                             <constraint firstAttribute="trailing" secondItem="5wh-rR-mKR" secondAttribute="trailing" constant="10" id="Sql-J8-KWJ"/>
@@ -927,7 +942,7 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="Hnt-Me-IaD" firstAttribute="leading" secondItem="w5o-25-O3y" secondAttribute="leading" constant="10" id="3ee-iW-6Pj"/>
                                             <constraint firstAttribute="trailing" secondItem="Hnt-Me-IaD" secondAttribute="trailing" constant="10" id="7Eg-2X-SQ0"/>
@@ -956,7 +971,7 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="deM-Qw-Hgm" secondAttribute="bottom" id="R66-4p-xXf"/>
                                             <constraint firstItem="deM-Qw-Hgm" firstAttribute="top" secondItem="UG5-3v-w6j" secondAttribute="top" id="RAj-Cp-OBP"/>
@@ -979,7 +994,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k56-im-5jL">
                                         <rect key="frame" x="0.0" y="375" width="374" height="50"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="elK-0H-UNQ" customClass="GGButton" customModule="DrdshChatSDKTest" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="elK-0H-UNQ" customClass="GGButton" customModule="DrdshChatSDKTest" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="50"/>
                                                 <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
@@ -999,7 +1014,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="elK-0H-UNQ" firstAttribute="leading" secondItem="k56-im-5jL" secondAttribute="leading" id="Kng-IZ-eyq"/>
                                             <constraint firstAttribute="height" constant="50" id="T3y-C1-oEz"/>
@@ -1011,13 +1026,13 @@
                                 </subviews>
                             </stackView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="90T-yr-X0K"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="3k9-oe-W5u" firstAttribute="top" secondItem="90T-yr-X0K" secondAttribute="top" constant="20" id="6Rr-z4-aSv"/>
                             <constraint firstItem="3k9-oe-W5u" firstAttribute="leading" secondItem="vup-vU-ZMq" secondAttribute="leading" constant="20" id="8KT-eS-JAL"/>
                             <constraint firstAttribute="trailing" secondItem="3k9-oe-W5u" secondAttribute="trailing" constant="20" id="ftz-jK-ZTE"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="90T-yr-X0K"/>
                     </view>
                     <connections>
                         <outlet property="btnStart" destination="elK-0H-UNQ" id="ndU-M0-IsD"/>
@@ -1042,5 +1057,24 @@
         <image name="dislike.png" width="120" height="120"/>
         <image name="like.png" width="120" height="120"/>
         <image name="mail.png" width="120" height="120"/>
+        <image name="sent" width="15" height="15"/>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

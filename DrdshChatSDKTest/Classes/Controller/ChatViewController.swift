@@ -64,6 +64,11 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         CommonSocket.shared.CommanEmitSokect(command: .joinVisitorsRoom,data: [[
             "dc_vid":DrdshChatSDKTest.shared.AllDetails.visitorID]]){ data in
             self.userdata = data
+            DrdshChatSDKTest.shared.AgentDetail <= data
+            DrdshChatSDKTest.shared.AllDetails.agentId = data["agent_id"] as? String ?? ""
+            DrdshChatSDKTest.shared.AgentDetail.agent_name = data["agent_name"] as! String
+            DrdshChatSDKTest.shared.AgentDetail.visitor_message_id = data["visitor_message_id"] as! String
+            self.setAgentDetail()
             if DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus == 2{
                 CommonSocket.shared.CommanEmitSokect(command: .visitorJoinAgentRoom,data:[self.userdata]){ data in
                     
@@ -107,7 +112,6 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                 self.title = DrdshChatSDKTest.shared.config.watingMsg.Local()
             }else{
                 self.setAgentDetail()
-                
             }
         }
         CommonSocket.shared.visitorLoadChatHistory(data: [[
@@ -119,6 +123,9 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                     self.list = self.list.reversed()
                     self.table.reloadData()
                     self.table.scroll(to: .top, animated: false)
+                    CommonSocket.shared.CommanEmitSokect(command: .isRead,data: [[
+                        "_id":DrdshChatSDKTest.shared.AllDetails.visitorID]]) { (data) in
+                    }
                 }
             }
             debugPrint(data)
@@ -211,6 +218,16 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         CommonSocket.shared.agentSendNewMessage { data in
             var m:MessageModel = MessageModel()
             m <= data
+            if m.visitor_message_id != DrdshChatSDKTest.shared.AgentDetail.visitor_message_id{
+                return
+            }
+            if m._id != "" && m.deliveredAt == ""{
+                var param : [String:Any] = [:]
+                param["_id"] = m._id
+                CommonSocket.shared.CommanEmitSokect(command: .isDelivered, data: [param]) { data in
+                }
+            }
+            
             if self.list.first(where: { (model) -> Bool in
                 model._id == m._id
             }) == nil{
@@ -236,6 +253,34 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             }
             self.lblTyping.text = data["message"] as? String ?? ""
         }
+        CommonSocket.shared.isDeliveredListener { data in
+            var m:MessageModel = MessageModel()
+            m <= data
+            m.isDelivered = true
+            m.deliveredAt = "temp"
+            if let index = self.list.firstIndex(where: { (model) -> Bool in
+                m._id == model._id
+            }){
+                self.list.remove(at: index)
+                self.list.insert(m, at: index)
+                self.table.reloadData()
+            }
+        }
+        CommonSocket.shared.isReadListener { data in
+            var m:MessageModel = MessageModel()
+            m <= data
+            m.isDelivered = true
+            m.isRead = true
+            m.readAt = "temp"
+            if let index = self.list.firstIndex(where: { (model) -> Bool in
+                m._id == model._id
+            }){
+                self.list.remove(at: index)
+                self.list.insert(m, at: index)
+                self.table.reloadData()
+            }
+        }
+        
         CommonSocket.shared.newAgentAcceptedChatRequest { data in
             DrdshChatSDKTest.shared.AllDetails.agentId = data["agent_id"] as! String
             DrdshChatSDKTest.shared.AgentDetail <= data
@@ -310,6 +355,15 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if self.list[indexPath.row].isSystem == 1 || self.list[indexPath.row].isWelcome == 1 || self.list[indexPath.row].isDeleted == 1 || self.list[indexPath.row].isTransfer == 1{
+            if self.list[indexPath.row].readAt == ""{
+                var param : [String:Any] = [:]
+                param["_id"] = self.list[indexPath.row]._id
+                self.list[indexPath.row].readAt = "temp"
+                self.list[indexPath.row].isRead = true
+                self.list[indexPath.row].isDelivered = true
+                CommonSocket.shared.CommanEmitSokect(command: .isRead, data: [param]) { data in
+                }
+            }
             let cell = tableView.dequeueReusableCell(withIdentifier: "systemTableViewCell", for: indexPath) as! systemTableViewCell
             cell.lblMessage.text = self.list[indexPath.row].message
             cell.lblMessage.textAlignment = .left
@@ -320,6 +374,15 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         }
         if self.list[indexPath.row].send_by == 2{
             let cell = tableView.dequeueReusableCell(withIdentifier: "MyTableViewCell", for: indexPath) as! MyTableViewCell
+            
+            if self.list[indexPath.row].readAt != ""{
+                cell.imgStatus.image = DrdshChatSDKTest.shared.config.readImage
+            }else if self.list[indexPath.row].deliveredAt != "nil"{
+                cell.imgStatus.image = DrdshChatSDKTest.shared.config.deliveredImage
+            }else{
+                cell.imgStatus.image = DrdshChatSDKTest.shared.config.sentImage
+            }
+            
             let strProdile = DrdshChatSDKTest.shared.AttachmentbaseURL+self.list[indexPath.row].agent_image
             cell.imgProfile.setImage(urlString: strProdile)
             cell.lblName.text = GGUserSessionDetail.shared.name
@@ -340,6 +403,15 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             }
             return cell
         }else{
+            if self.list[indexPath.row].readAt == ""{
+                var param : [String:Any] = [:]
+                param["_id"] = self.list[indexPath.row]._id
+                self.list[indexPath.row].readAt = "temp"
+                self.list[indexPath.row].isRead = true
+                self.list[indexPath.row].isDelivered = true
+                CommonSocket.shared.CommanEmitSokect(command: .isRead, data: [param]) { data in
+                }
+            }
             let cell = tableView.dequeueReusableCell(withIdentifier: "AgentTableViewCell", for: indexPath) as! AgentTableViewCell
             let strProdile = DrdshChatSDKTest.shared.AttachmentbaseURL+self.list[indexPath.row].agent_image
             cell.imgProfile.setImage(urlString: strProdile)
@@ -463,6 +535,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
 class MyTableViewCell:UITableViewCell{
     @IBOutlet weak var imgProfile: UIImageView!
     @IBOutlet weak var imgAttachment: GGImageViewPopup!
+    @IBOutlet weak var imgStatus: UIImageView!
     @IBOutlet weak var lblName: UILabel!
     @IBOutlet weak var lblMessage: UILabel!
     @IBOutlet weak var lblTime: UILabel!

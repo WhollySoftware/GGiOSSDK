@@ -131,6 +131,10 @@ class MessageModel:GGObject{
     var updatedAt:String  = ""
     var visitor_id:VisitorIdModel  = VisitorIdModel()
     var visitor_message_id:String  = ""
+    var isDelivered:Bool = true
+    var isRead:Bool = true
+    var deliveredAt:String  = ""
+    var readAt:String  = ""
 }
 
 class VisitorIdModel:GGObject{

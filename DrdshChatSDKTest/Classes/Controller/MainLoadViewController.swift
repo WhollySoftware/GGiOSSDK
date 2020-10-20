@@ -189,7 +189,7 @@ class MainLoadViewController: UIViewController {
                                 if DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus == 2{
                                     DrdshChatSDKTest.shared.AgentDetail <= data
                                     DrdshChatSDKTest.shared.AllDetails.agentId = data["agent_id"] as? String ?? ""
-                                    DrdshChatSDKTest.shared.AgentDetail.agent_name = data["name"] as! String
+                                    DrdshChatSDKTest.shared.AgentDetail.agent_name = data["agent_name"] as! String
                                     DrdshChatSDKTest.shared.AgentDetail.visitor_message_id = data["visitor_message_id"] as! String
                                 }
                                 debugPrint(data)
