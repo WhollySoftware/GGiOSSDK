@@ -243,7 +243,7 @@ public class DrdshChatSDKConfiguration : GGObject {
         attachmentPlaceHolderImage = UIImage(named: "products_placeholder", in: bundle, compatibleWith: nil)!
         
         readImage = UIImage(named: "read", in: bundle, compatibleWith: nil)!
-        sentImage = UIImage(named: "send", in: bundle, compatibleWith: nil)!
+        sentImage = UIImage(named: "sent", in: bundle, compatibleWith: nil)!
         deliveredImage = UIImage(named: "delivered", in: bundle, compatibleWith: nil)!
         
     }
