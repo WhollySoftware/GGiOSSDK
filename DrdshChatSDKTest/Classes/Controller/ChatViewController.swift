@@ -387,7 +387,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             
             if self.list[indexPath.row].readAt != ""{
                 cell.imgStatus.image = DrdshChatSDKTest.shared.config.readImage
-            }else if self.list[indexPath.row].deliveredAt != "nil"{
+            }else if self.list[indexPath.row].deliveredAt != ""{
                 cell.imgStatus.image = DrdshChatSDKTest.shared.config.deliveredImage
             }else{
                 cell.imgStatus.image = DrdshChatSDKTest.shared.config.sentImage
