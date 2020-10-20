@@ -66,10 +66,10 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             self.userdata = data
             DrdshChatSDKTest.shared.AgentDetail <= data
             DrdshChatSDKTest.shared.AllDetails.agentId = data["agent_id"] as? String ?? ""
-            DrdshChatSDKTest.shared.AgentDetail.agent_name = data["agent_name"] as! String
+            DrdshChatSDKTest.shared.AgentDetail.agent_name = data["agent_name"] as? String ?? ""
             DrdshChatSDKTest.shared.AgentDetail.visitor_message_id = data["visitor_message_id"] as! String
             self.setAgentDetail()
-            if DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus == 2{
+            if DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus == 1{
                 CommonSocket.shared.CommanEmitSokect(command: .visitorJoinAgentRoom,data:[self.userdata]){ data in
                     
                 }
@@ -252,6 +252,12 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                 self.typingView.isHidden = false
             }
             self.lblTyping.text = data["message"] as? String ?? ""
+            self.timer.invalidate()
+            self.timer = Timer.scheduledTimer(timeInterval: 2.0,
+                                              target: self,
+                                              selector: #selector(self.stoptypeing),
+                                              userInfo: nil,
+                                              repeats: false)
         }
         CommonSocket.shared.isDeliveredListener { data in
             var m:MessageModel = MessageModel()
@@ -303,6 +309,10 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             }
             self.lblName.text = DrdshChatSDKTest.shared.AgentDetail.agent_name
         }
+    }
+    @objc func stoptypeing(){
+        self.timer.invalidate()
+        self.typingView.isHidden = true
     }
     @objc func invitationMaxWaitTimeExceeded(){
         timer.invalidate()
@@ -433,14 +443,15 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         }
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        CommonSocket.shared.CommanEmitSokect(command: .visitorTyping,data: [[
-            "vid":DrdshChatSDKTest.shared.AllDetails.visitorID,
-              "id":DrdshChatSDKTest.shared.AllDetails.companyId,
-              "agent_id":DrdshChatSDKTest.shared.AllDetails.agentId,
-              "ts":1,
-              "message":GGUserSessionDetail.shared.name+DrdshChatSDKTest.shared.config.startTyping.Local(),
-              "stop":false]]){data in}
+//        CommonSocket.shared.CommanEmitSokect(command: .visitorTyping,data: [[
+//            "vid":DrdshChatSDKTest.shared.AllDetails.visitorID,
+//              "id":DrdshChatSDKTest.shared.AllDetails.companyId,
+//              "agent_id":DrdshChatSDKTest.shared.AllDetails.agentId,
+//              "ts":1,
+//              "message":GGUserSessionDetail.shared.name+DrdshChatSDKTest.shared.config.startTyping.Local(),
+//              "stop":false]]){data in}
     }
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         CommonSocket.shared.CommanEmitSokect(command: .visitorTyping,data: [[
             "vid":DrdshChatSDKTest.shared.AllDetails.visitorID,

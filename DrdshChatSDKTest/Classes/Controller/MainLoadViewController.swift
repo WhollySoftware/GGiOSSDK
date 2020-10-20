@@ -173,15 +173,17 @@ class MainLoadViewController: UIViewController {
                         UserDefaults.standard.setValue(newTodo, forKey: "AllDetails")
                         
                         if DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus == 1 || DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus == 2{
-                            if DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus == 1{
-                                if !DrdshChatSDKTest.shared.AllDetails.embeddedChat.displayForm{
-                                    self.startChat(isDirect: true)
-                                    return
-                                }
-                            }
+//                            if DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus == 1{
+//
+//                            }
                             DispatchQueue.main.async {
                                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "ChatViewController") as! ChatViewController
                                 self.navigationController?.pushViewController(vc, animated: false)
+                            }
+                        }else{
+                            if !DrdshChatSDKTest.shared.AllDetails.embeddedChat.displayForm{
+                                self.startChat(isDirect: true)
+                                return
                             }
                         }
                         CommonSocket.shared.initSocket { (status) in
