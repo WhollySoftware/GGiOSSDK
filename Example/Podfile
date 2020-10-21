@@ -6,4 +6,6 @@ target 'iOSSDK_Example' do
   pod 'MBProgressHUD'
   pod 'IQKeyboardManagerSwift', '6.2.1'
   pod 'Socket.IO-Client-Swift'
+  pod 'Firebase/Messaging'
+  pod 'FirebaseCrashlytics'
 end

@@ -33,12 +33,16 @@ class ViewController: UIViewController {
          UIView.appearance().semanticContentAttribute = .forceLeftToRight
        let sdkCongig = DrdshChatSDKConfiguration()
        sdkCongig.appSid = "5def86cf64be6d13f55f2034.5d96941bb5507599887b9c71829d5cffcdf55014"
+        sdkCongig.FCM_Token = AppDelegate.shared.token
+        sdkCongig.FCM_Auth_Key = AppDelegate.shared.Auth_key
        DrdshChatSDKTest.presentChat(config: sdkCongig)
     }
     @IBAction func btnStartARAction(_ sender:UIButton){
          UIView.appearance().semanticContentAttribute = .forceRightToLeft
         let sdkCongig = DrdshChatSDKConfiguration()
        sdkCongig.appSid = "5def86cf64be6d13f55f2034.5d96941bb5507599887b9c71829d5cffcdf55014"
+        sdkCongig.FCM_Token = AppDelegate.shared.token
+        sdkCongig.FCM_Auth_Key = AppDelegate.shared.Auth_key
        sdkCongig.local = "ar"
        DrdshChatSDKTest.presentChat(config: sdkCongig)
     }
@@ -46,6 +50,8 @@ class ViewController: UIViewController {
         UIView.appearance().semanticContentAttribute = .forceLeftToRight
         let sdkCongig = DrdshChatSDKConfiguration()
         sdkCongig.appSid = "5def86cf64be6d13f55f2034.5d96941bb5507599887b9c71829d5cffcdf55014"
+        sdkCongig.FCM_Token = AppDelegate.shared.token
+        sdkCongig.FCM_Auth_Key = AppDelegate.shared.Auth_key
         sdkCongig.topBarBgColor = "#383033"
         DrdshChatSDKTest.presentChat(config: sdkCongig)
     }
@@ -53,6 +59,8 @@ class ViewController: UIViewController {
         UIView.appearance().semanticContentAttribute = .forceLeftToRight
         let sdkCongig = DrdshChatSDKConfiguration()
         sdkCongig.appSid = "5def86cf64be6d13f55f2034.5d96941bb5507599887b9c71829d5cffcdf55014"
+        sdkCongig.FCM_Token = AppDelegate.shared.token
+        sdkCongig.FCM_Auth_Key = AppDelegate.shared.Auth_key
         sdkCongig.topBarBgColor = "#FA4D8F"
         DrdshChatSDKTest.presentChat(config: sdkCongig)
     }
@@ -60,6 +68,8 @@ class ViewController: UIViewController {
         UIView.appearance().semanticContentAttribute = .forceLeftToRight
         let sdkCongig = DrdshChatSDKConfiguration()
         sdkCongig.appSid = "5def86cf64be6d13f55f2034.5d96941bb5507599887b9c71829d5cffcdf55014"
+        sdkCongig.FCM_Token = AppDelegate.shared.token
+        sdkCongig.FCM_Auth_Key = AppDelegate.shared.Auth_key
         sdkCongig.topBarBgColor = "#255D9F"
         DrdshChatSDKTest.presentChat(config: sdkCongig)
     }

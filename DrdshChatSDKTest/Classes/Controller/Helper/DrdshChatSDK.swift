@@ -43,8 +43,21 @@ public class DrdshChatSDKTest : NSObject {
           DrdshChatSDKTest.shared.topViewController()?.present(alert, animated: true, completion: {
              
           })
-           
-        }else{
+        }
+//        else if DrdshChatSDKTest.shared.config.FCM_Token == ""{
+//            let alert = UIAlertController(title: DrdshChatSDKTest.shared.localizedString(stringKey:"Error"), message: DrdshChatSDKTest.shared.localizedString(stringKey:"FCM Token can not be blank"), preferredStyle: UIAlertController.Style.alert)
+//          alert.addAction(UIAlertAction(title: DrdshChatSDKTest.shared.localizedString(stringKey:"Ok"), style: UIAlertAction.Style.default, handler: nil))
+//          DrdshChatSDKTest.shared.topViewController()?.present(alert, animated: true, completion: {
+//             
+//          })
+//        }else if DrdshChatSDKTest.shared.config.FCM_Auth_Key == ""{
+//            let alert = UIAlertController(title: DrdshChatSDKTest.shared.localizedString(stringKey:"Error"), message: DrdshChatSDKTest.shared.localizedString(stringKey:"FCM Auth Key can not be blank"), preferredStyle: UIAlertController.Style.alert)
+//          alert.addAction(UIAlertAction(title: DrdshChatSDKTest.shared.localizedString(stringKey:"Ok"), style: UIAlertAction.Style.default, handler: nil))
+//          DrdshChatSDKTest.shared.topViewController()?.present(alert, animated: true, completion: {
+//             
+//          })
+//        }
+        else{
             let vc = UIStoryboard(name: "DrdshChatSDK", bundle: Bundle(for: DrdshChatSDKTest.self)).instantiateViewController(withIdentifier: "MainLoadViewController") as! MainLoadViewController
             vc.modalPresentationStyle = .overFullScreen
             let nav = UINavigationController(rootViewController: vc)
@@ -137,6 +150,8 @@ public class DrdshChatSDKTest : NSObject {
 }
 public class DrdshChatSDKConfiguration : GGObject {
     public var appSid:String = ""
+    public var FCM_Token:String = ""
+    public var FCM_Auth_Key:String = ""
     public var local:String = "en"
     var secondryColor:UIColor = UIColor.groupTableViewBackground
     public var bgColor:String  = ""
