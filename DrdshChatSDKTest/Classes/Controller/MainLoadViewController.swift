@@ -119,6 +119,8 @@ class MainLoadViewController: UIViewController {
             "name":self.txtFullName.text!,
             "email":self.txtEmailAddress.text!,
             "mobile":self.txtMobile.text!,
+            "fcmKey":DrdshChatSDKTest.shared.config.FCM_Token,
+            "legacyServerKey":DrdshChatSDKTest.shared.config.FCM_Auth_Key,
             "domain": "www.drdsh.live"
         ]
         if DrdshChatSDKTest.shared.AllDetails.visitorID != ""{
@@ -191,7 +193,7 @@ class MainLoadViewController: UIViewController {
                                 if DrdshChatSDKTest.shared.AllDetails.visitorConnectedStatus == 2{
                                     DrdshChatSDKTest.shared.AgentDetail <= data
                                     DrdshChatSDKTest.shared.AllDetails.agentId = data["agent_id"] as? String ?? ""
-                                    DrdshChatSDKTest.shared.AgentDetail.agent_name = data["agent_name"] as! String
+                                    DrdshChatSDKTest.shared.AgentDetail.agent_name = data["agent_name"] as? String ?? ""
                                     DrdshChatSDKTest.shared.AgentDetail.visitor_message_id = data["visitor_message_id"] as! String
                                 }
                                 debugPrint(data)

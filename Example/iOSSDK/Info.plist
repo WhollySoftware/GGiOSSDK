@@ -26,6 +26,11 @@
 	<string>This app use camera for profile pic and set service images.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app use photo for send attchment</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
