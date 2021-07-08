@@ -147,6 +147,14 @@ class MainLoadViewController: UIViewController {
         GGProgress.shared.showProgress()
         let task = session.dataTask(with: todosUrlRequest) {
             (data, response, error) in
+            guard let httpResponse = response as? HTTPURLResponse else {
+                DispatchQueue.main.async {
+                    self.dismiss(animated: true) {
+                        
+                    }
+                }
+                return
+            }
             DispatchQueue.main.async {
                 GGProgress.shared.hideProgress()
             }
@@ -164,7 +172,7 @@ class MainLoadViewController: UIViewController {
                                                                             print("Could not get JSON from responseData as dictionary")
                                                                             return
                 }
-                if receivedTodo["message"] as! String == "Authorized"{
+                if httpResponse.statusCode == 200{
                     if let d = receivedTodo["data"] as? [String:AnyObject]{
                         print("Response : " + receivedTodo.description)
                         DrdshChatSDKTest.shared.AllDetails <= d
