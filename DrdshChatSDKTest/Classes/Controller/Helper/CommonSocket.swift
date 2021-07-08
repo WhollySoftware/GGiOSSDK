@@ -230,14 +230,14 @@ class CommonSocket: NSObject {
         if !isConnected()
         {
             initSocket(completion: { (result) in
-                self.manager.defaultSocket.emitWithAck("visitorLoadChatHistory", with: data).timingOut(after: 0) {resp in
+                self.manager.defaultSocket.emitWithAck("visitorLoadChatHistory", with: data as? [[String:Any]] ?? []).timingOut(after: 0) {resp in
                     print(resp)
                     completion(resp)
                 }
             })
             return
         }
-        manager.defaultSocket.emitWithAck("visitorLoadChatHistory", with: data).timingOut(after: 0) {resp in
+        manager.defaultSocket.emitWithAck("visitorLoadChatHistory", with: data as? [[String:Any]] ?? []).timingOut(after: 0) {resp in
             print(resp)
             completion(resp)
         }
