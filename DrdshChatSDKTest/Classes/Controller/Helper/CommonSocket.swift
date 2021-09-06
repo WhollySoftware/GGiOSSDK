@@ -59,7 +59,7 @@ class CommonSocket: NSObject {
     static let shared = CommonSocket()
     
     var agentDetail:(([String:AnyObject])->Void)?
-    var manager = SocketManager(socketURL: URL(string: "https://www.drdsh.live")!, config: [.log(false), .compress])
+    var manager = SocketManager(socketURL: URL(string: "https://www.drdsh.live")!, config: [.log(false), .compress,.path("/dc/socket-connect/io/socket.io")])
     
     func initSocket(completion: @escaping(Bool) -> Void) {
         manager.defaultSocket.on(clientEvent: .connect) { data, ack in
