@@ -3,12 +3,18 @@
 import UIKit
 import UserNotifications
 import Firebase
-import FirebaseInstanceID
 import FirebaseMessaging
 
 // [START ios_10_message_handling]
 @available(iOS 10, *)
-extension AppDelegate : UNUserNotificationCenterDelegate {
+extension AppDelegate : UNUserNotificationCenterDelegate,MessagingDelegate {
+    
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        if let token = fcmToken{
+            debugPrint("FCM ID:",token)
+            self.token = token
+        }
+    }
     
 //    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
 //
@@ -33,23 +39,11 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
                 }
         })
         application.registerForRemoteNotifications()
-        NotificationCenter.default.addObserver(self, selector: #selector(self.tokenRefreshNotification), name: NSNotification.Name.InstanceIDTokenRefresh, object: nil)
     }
 //    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
 //        completionHandler([.alert, .sound])
 //    }
 //
-    @objc func tokenRefreshNotification(_ notification: Notification) {
-        print(#function)
-        InstanceID.instanceID().instanceID { (result, error) in
-            if let error = error {
-                print("Error fetching remote instance ID: \(error)")
-            } else if let result = result {
-                print("Remote instance ID token: \(result.token)")
-                self.token = result.token
-            }
-        }
-    }
 //    func application(application: UIApplication,
 //                     didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data)
 //    {

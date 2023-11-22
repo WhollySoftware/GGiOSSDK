@@ -1,9 +1,9 @@
-# DrdshChatSDKTest
+# DrdshChatSDK
 
-[![CI Status](https://img.shields.io/travis/gauravgudaliya/DrdshChatSDKTest.svg?style=flat)](https://travis-ci.org/gauravgudaliya/DrdshChatSDKTest)
-[![Version](https://img.shields.io/cocoapods/v/DrdshChatSDKTest.svg?style=flat)](https://cocoapods.org/pods/DrdshChatSDKTest)
-[![License](https://img.shields.io/cocoapods/l/DrdshChatSDKTest.svg?style=flat)](https://cocoapods.org/pods/DrdshChatSDKTest)
-[![Platform](https://img.shields.io/cocoapods/p/DrdshChatSDKTest.svg?style=flat)](https://cocoapods.org/pods/DrdshChatSDKTest)
+[![CI Status](https://img.shields.io/travis/gauravgudaliya/DrdshChatSDK.svg?style=flat)](https://travis-ci.org/gauravgudaliya/DrdshChatSDK)
+[![Version](https://img.shields.io/cocoapods/v/DrdshChatSDK.svg?style=flat)](https://cocoapods.org/pods/DrdshChatSDK)
+[![License](https://img.shields.io/cocoapods/l/DrdshChatSDK.svg?style=flat)](https://cocoapods.org/pods/DrdshChatSDK)
+[![Platform](https://img.shields.io/cocoapods/p/DrdshChatSDK.svg?style=flat)](https://cocoapods.org/pods/DrdshChatSDK)
 
 
 ## Screenshots
@@ -69,10 +69,10 @@ It includes such requirements as:
 $ gem install cocoapods
 ```
 
-To integrate DrdshChatSDKTest into your Xcode project using CocoaPods, specify it in your ``Podfile`` :
+To integrate DrdshChatSDK into your Xcode project using CocoaPods, specify it in your ``Podfile`` :
 
 ```target '<Your Target Name>' do
-pod 'DrdshChatSDKTest'
+pod 'DrdshChatSDK'
 end
 ```
 
@@ -87,11 +87,11 @@ $ pod install
 
 #### Step 1
 
-* For access ``DrdshChatSDKTest`` you need to import Pod to your project 
+* For access ``DrdshChatSDK`` you need to import Pod to your project 
 
 ```swift
 
-    import DrdshChatSDKTest
+    import DrdshChatSDK
     
     class ViewController: UIViewController {
 
@@ -114,7 +114,7 @@ $ pod install
 * For Open SDK you need to call below function with ``DrdshChatSDKConfiguration()`` object 
 
 ```swift
-     DrdshChatSDKTest.presentChat(config: sdkCongig)
+     DrdshChatSDK.presentChat(config: sdkCongig)
 ```
 #### Step 4
 
@@ -125,7 +125,7 @@ $ pod install
     @IBAction func btnStartChatAction(_ sender:UIButton){
         let sdkCongig = DrdshChatSDKConfiguration()
         sdkCongig.appSid = "5def86cf64be6d13f55f2034.5d96941bb5507599887b9c71829d5cffcdf55014"
-        DrdshChatSDKTest.presentChat(config: sdkCongig)
+        DrdshChatSDK.presentChat(config: sdkCongig)
     }
 ```
 
@@ -166,7 +166,7 @@ $ pod install
 ```
 
 #### Done
-Thats it, you successfully integrate DrdshChatSDKTest
+Thats it, you successfully integrate DrdshChatSDK
 
 
 
@@ -177,7 +177,7 @@ HTF, cto@htf.sa
 
 ### Issues
 
-If you find an issue, please [create an issue](https://github.com/WhollySoftware/GGiOSSDK/issues).
+If you find an issue, please [create an issue](https://github.com/cto-htfsa/drdsh-sdk-ios/issues).
 
 
 

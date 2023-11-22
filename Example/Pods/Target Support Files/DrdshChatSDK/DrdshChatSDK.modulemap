@@ -1,0 +1,6 @@
+framework module DrdshChatSDK {
+  umbrella header "DrdshChatSDK-umbrella.h"
+
+  export *
+  module * { export * }
+}
